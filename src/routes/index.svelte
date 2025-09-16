@@ -36,6 +36,10 @@
       <a href="https://github.com/fsargent">Felix Sargent</a>.
       It is non-partisan and has received no outside funding.
     </p>
+
+    <p>
+      For more information, see the <a href="/about">about page</a>.
+    </p>
   </div>
 
   <div class="rightCol">

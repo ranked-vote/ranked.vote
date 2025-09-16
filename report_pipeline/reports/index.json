@@ -7,269 +7,270 @@
       "date": "2025-06-24",
       "contests": [
         {
-            "name": "DEM Mayor",
-            "numCandidates": 12,
-            "numRounds": 2,
-            "office": "mayor",
-            "officeName": "DEM Mayor",
-            "winner": "Zohran Kwame Mamdani"
+          "name": "DEM Mayor",
+          "numCandidates": 12,
+          "numRounds": 2,
+          "office": "mayor",
+          "officeName": "DEM Mayor",
+          "winner": "Zohran Kwame Mamdani"
         },
         {
-            "name": "DEM Comptroller",
-            "numCandidates": 5,
-            "numRounds": 2,
-            "office": "comptroller",
-            "officeName": "DEM Comptroller",
-            "winner": "Justin Brannan"
+          "name": "DEM Comptroller",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "office": "comptroller",
+          "officeName": "DEM Comptroller",
+          "winner": "Justin Brannan"
         },
         {
-            "name": "DEM Public Advocate",
-            "numCandidates": 4,
-            "numRounds": 2,
-            "office": "public-advocate",
-            "officeName": "DEM Public Advocate",
-            "winner": "Jumaane D. Williams"
+          "name": "DEM Public Advocate",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "office": "public-advocate",
+          "officeName": "DEM Public Advocate",
+          "winner": "Jumaane D. Williams"
         },
         {
-            "name": "DEM Borough President - Bronx",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "borough-president-bronx",
-            "officeName": "DEM Borough President - Bronx",
-            "winner": "Vanessa L. Gibson"
+          "name": "DEM Borough President - Bronx",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "borough-president-bronx",
+          "officeName": "DEM Borough President - Bronx",
+          "winner": "Vanessa L. Gibson"
         },
         {
-            "name": "DEM Borough President - Kings",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "borough-president-brooklyn",
-            "officeName": "DEM Borough President - Kings",
-            "winner": "Antonio Reynoso"
+          "name": "DEM Borough President - Kings",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "borough-president-brooklyn",
+          "officeName": "DEM Borough President - Kings",
+          "winner": "Antonio Reynoso"
         },
         {
-            "name": "DEM Borough President - New York",
-            "numCandidates": 4,
-            "numRounds": 2,
-            "office": "borough-president-manhattan",
-            "officeName": "DEM Borough President - New York",
-            "winner": "Brad Hoylman-Sigal"
+          "name": "DEM Borough President - New York",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "office": "borough-president-manhattan",
+          "officeName": "DEM Borough President - New York",
+          "winner": "Brad Hoylman-Sigal"
         },
         {
-            "name": "DEM Council Member - 1st Council District",
-            "numCandidates": 5,
-            "numRounds": 3,
-            "office": "council-member-1st-council-district",
-            "officeName": "DEM Council Member - 1st Council District",
-            "winner": "Christopher Marte"
+          "name": "DEM Council Member - 1st Council District",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "office": "council-member-1st-council-district",
+          "officeName": "DEM Council Member - 1st Council District",
+          "winner": "Christopher Marte"
         },
         {
-            "name": "DEM Council Member - 2nd Council District",
-            "numCandidates": 6,
-            "numRounds": 3,
-            "office": "council-member-2nd-council-district",
-            "officeName": "DEM Council Member - 2nd Council District",
-            "winner": "Harvey D. Epstein"
+          "name": "DEM Council Member - 2nd Council District",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "office": "council-member-2nd-council-district",
+          "officeName": "DEM Council Member - 2nd Council District",
+          "winner": "Harvey D. Epstein"
         },
         {
-            "name": "DEM Council Member - 4th Council District",
-            "numCandidates": 7,
-            "numRounds": 4,
-            "office": "council-member-4th-council-district",
-            "officeName": "DEM Council Member - 4th Council District",
-            "winner": "Virginia Maloney"
+          "name": "DEM Council Member - 3rd Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-3rd-council-district",
+          "officeName": "DEM Council Member - 3rd Council District",
+          "winner": "Erik D. Bottcher"
         },
         {
-            "name": "DEM Council Member - 5th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-5th-council-district",
-            "officeName": "DEM Council Member - 5th Council District",
-            "winner": "Julie Menin"
+          "name": "DEM Council Member - 4th Council District",
+          "numCandidates": 7,
+          "numRounds": 4,
+          "office": "council-member-4th-council-district",
+          "officeName": "DEM Council Member - 4th Council District",
+          "winner": "Virginia Maloney"
         },
         {
-            "name": "DEM Council Member - 7th Council District",
-            "numCandidates": 4,
-            "numRounds": 2,
-            "office": "council-member-7th-council-district",
-            "officeName": "DEM Council Member - 7th Council District",
-            "winner": "Shaun Abreu"
+          "name": "DEM Council Member - 5th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-5th-council-district",
+          "officeName": "DEM Council Member - 5th Council District",
+          "winner": "Julie Menin"
         },
         {
-            "name": "DEM Council Member - 8th Council District",
-            "numCandidates": 8,
-            "numRounds": 7,
-            "office": "council-member-8th-council-district",
-            "officeName": "DEM Council Member - 8th Council District",
-            "winner": "Elsie Encarnacion"
+          "name": "DEM Council Member - 7th Council District",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "office": "council-member-7th-council-district",
+          "officeName": "DEM Council Member - 7th Council District",
+          "winner": "Shaun Abreu"
         },
         {
-            "name": "DEM Council Member - 10th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-10th-council-district",
-            "officeName": "DEM Council Member - 10th Council District",
-            "winner": "Carmen N. De La Rosa"
+          "name": "DEM Council Member - 8th Council District",
+          "numCandidates": 8,
+          "numRounds": 7,
+          "office": "council-member-8th-council-district",
+          "officeName": "DEM Council Member - 8th Council District",
+          "winner": "Elsie Encarnacion"
         },
         {
-            "name": "DEM Council Member - 11th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-11th-council-district",
-            "officeName": "DEM Council Member - 11th Council District",
-            "winner": "Eric Dinowitz"
+          "name": "DEM Council Member - 10th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-10th-council-district",
+          "officeName": "DEM Council Member - 10th Council District",
+          "winner": "Carmen N. De La Rosa"
         },
         {
-            "name": "DEM Council Member - 12th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-12th-council-district",
-            "officeName": "DEM Council Member - 12th Council District",
-            "winner": "Kevin C. Riley"
+          "name": "DEM Council Member - 11th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-11th-council-district",
+          "officeName": "DEM Council Member - 11th Council District",
+          "winner": "Eric Dinowitz"
         },
         {
-            "name": "DEM Council Member - 13th Council District",
-            "numCandidates": 7,
-            "numRounds": 5,
-            "office": "council-member-13th-council-district",
-            "officeName": "DEM Council Member - 13th Council District",
-            "winner": "Shirley Aldebol"
+          "name": "DEM Council Member - 12th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-12th-council-district",
+          "officeName": "DEM Council Member - 12th Council District",
+          "winner": "Kevin C. Riley"
         },
         {
-            "name": "DEM Council Member - 14th Council District",
-            "numCandidates": 4,
-            "numRounds": 2,
-            "office": "council-member-14th-council-district",
-            "officeName": "DEM Council Member - 14th Council District",
-            "winner": "Pierina A. Sanchez"
+          "name": "DEM Council Member - 13th Council District",
+          "numCandidates": 7,
+          "numRounds": 5,
+          "office": "council-member-13th-council-district",
+          "officeName": "DEM Council Member - 13th Council District",
+          "winner": "Shirley Aldebol"
         },
         {
-            "name": "DEM Council Member - 16th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-16th-council-district",
-            "officeName": "DEM Council Member - 16th Council District",
-            "winner": "Althea V. Stevens"
+          "name": "DEM Council Member - 14th Council District",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "office": "council-member-14th-council-district",
+          "officeName": "DEM Council Member - 14th Council District",
+          "winner": "Pierina A. Sanchez"
         },
         {
-            "name": "DEM Council Member - 17th Council District",
-            "numCandidates": 5,
-            "numRounds": 3,
-            "office": "council-member-17th-council-district",
-            "officeName": "DEM Council Member - 17th Council District",
-            "winner": "Justin E. Sanchez"
+          "name": "DEM Council Member - 16th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-16th-council-district",
+          "officeName": "DEM Council Member - 16th Council District",
+          "winner": "Althea V. Stevens"
         },
         {
-            "name": "DEM Council Member - 19th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-19th-council-district",
-            "officeName": "DEM Council Member - 19th Council District",
-            "winner": "Benjamin Chou "
-        },
-       
-        {
-            "name": "DEM Council Member - 21st Council District",
-            "numCandidates": 5,
-            "numRounds": 3,
-            "office": "council-member-21st-council-district",
-            "officeName": "DEM Council Member - 21st Council District",
-            "winner": "Shanel Thomas-Henry"
+          "name": "DEM Council Member - 17th Council District",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "office": "council-member-17th-council-district",
+          "officeName": "DEM Council Member - 17th Council District",
+          "winner": "Justin E. Sanchez"
         },
         {
-            "name": "DEM Council Member - 25th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-25th-council-district",
-            "officeName": "DEM Council Member - 25th Council District",
-            "winner": "Shekar Krishnan"
+          "name": "DEM Council Member - 19th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-19th-council-district",
+          "officeName": "DEM Council Member - 19th Council District",
+          "winner": "Benjamin Chou "
+        },
+
+        {
+          "name": "DEM Council Member - 21st Council District",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "office": "council-member-21st-council-district",
+          "officeName": "DEM Council Member - 21st Council District",
+          "winner": "Shanel Thomas-Henry"
         },
         {
-            "name": "DEM Council Member - 28th Council District",
-            "numCandidates": 6,
-            "numRounds": 4,
-            "office": "council-member-28th-council-district",
-            "officeName": "DEM Council Member - 28th Council District",
-            "winner": "Ty Hankerson"
+          "name": "DEM Council Member - 25th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-25th-council-district",
+          "officeName": "DEM Council Member - 25th Council District",
+          "winner": "Shekar Krishnan"
         },
         {
-            "name": "DEM Council Member - 30th Council District",
-            "numCandidates": 4,
-            "numRounds": 3,
-            "office": "council-member-30th-council-district",
-            "officeName": "DEM Council Member - 30th Council District",
-            "winner": "Phil Wong"
+          "name": "DEM Council Member - 28th Council District",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "office": "council-member-28th-council-district",
+          "officeName": "DEM Council Member - 28th Council District",
+          "winner": "Ty Hankerson"
         },
         {
-            "name": "DEM Council Member - 33rd Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-33rd-council-district",
-            "officeName": "DEM Council Member - 33rd Council District",
-            "winner": "Lincoln Restler"
+          "name": "DEM Council Member - 30th Council District",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "office": "council-member-30th-council-district",
+          "officeName": "DEM Council Member - 30th Council District",
+          "winner": "Phil Wong"
         },
         {
-            "name": "DEM Council Member - 35th Council District",
-            "numCandidates": 5,
-            "numRounds": 2,
-            "office": "council-member-35th-council-district",
-            "officeName": "DEM Council Member - 35th Council District",
-            "winner": "Crystal Hudson"
+          "name": "DEM Council Member - 33rd Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-33rd-council-district",
+          "officeName": "DEM Council Member - 33rd Council District",
+          "winner": "Lincoln Restler"
         },
         {
-            "name": "DEM Council Member - 36th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-36th-council-district",
-            "officeName": "DEM Council Member - 36th Council District",
-            "winner": "Chi Ajani Osse"
+          "name": "DEM Council Member - 35th Council District",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "office": "council-member-35th-council-district",
+          "officeName": "DEM Council Member - 35th Council District",
+          "winner": "Crystal Hudson"
         },
         {
-            "name": "DEM Council Member - 38th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-38th-council-district",
-            "officeName": "DEM Council Member - 38th Council District",
-            "winner": "Alexa Aviles"
+          "name": "DEM Council Member - 36th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-36th-council-district",
+          "officeName": "DEM Council Member - 36th Council District",
+          "winner": "Chi Ajani Osse"
         },
         {
-            "name": "DEM Council Member - 39th Council District",
-            "numCandidates": 4,
-            "numRounds": 2,
-            "office": "council-member-39th-council-district",
-            "officeName": "DEM Council Member - 39th Council District",
-            "winner": "Shahana K. Hanif"
+          "name": "DEM Council Member - 38th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-38th-council-district",
+          "officeName": "DEM Council Member - 38th Council District",
+          "winner": "Alexa Aviles"
         },
         {
-            "name": "DEM Council Member - 3rd Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-3rd-council-district",
-            "officeName": "DEM Council Member - 3rd Council District",
-            "winner": "Erik D. Bottcher"
+          "name": "DEM Council Member - 39th Council District",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "office": "council-member-39th-council-district",
+          "officeName": "DEM Council Member - 39th Council District",
+          "winner": "Shahana K. Hanif"
+        },
+
+        {
+          "name": "DEM Council Member - 41st Council District",
+          "numCandidates": 9,
+          "numRounds": 6,
+          "office": "council-member-41st-council-district",
+          "officeName": "DEM Council Member - 41st Council District",
+          "winner": "Darlene Mealy"
         },
         {
-            "name": "DEM Council Member - 41st Council District",
-            "numCandidates": 9,
-            "numRounds": 6,
-            "office": "council-member-41st-council-district",
-            "officeName": "DEM Council Member - 41st Council District",
-            "winner": "Darlene Mealy"
+          "name": "DEM Council Member - 46th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-46th-council-district",
+          "officeName": "DEM Council Member - 46th Council District",
+          "winner": "Mercedes Narcisse"
         },
         {
-            "name": "DEM Council Member - 46th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-46th-council-district",
-            "officeName": "DEM Council Member - 46th Council District",
-            "winner": "Mercedes Narcisse"
-        },
-        {
-            "name": "DEM Council Member - 47th Council District",
-            "numCandidates": 3,
-            "numRounds": 2,
-            "office": "council-member-47th-council-district",
-            "officeName": "DEM Council Member - 47th Council District",
-            "winner": "Kayla Santosuosso"
+          "name": "DEM Council Member - 47th Council District",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "office": "council-member-47th-council-district",
+          "officeName": "DEM Council Member - 47th Council District",
+          "winner": "Kayla Santosuosso"
         }
       ]
     },

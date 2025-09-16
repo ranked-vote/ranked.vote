@@ -37,7 +37,8 @@
       public y: number,
       private allocatee: Allocatee,
       private votes: number,
-      private round: number
+      private round: number,
+      private totalRoundVotes?: number
     ) {}
 
     isExhausted(): boolean {
@@ -49,15 +50,19 @@
     }
 
     tooltip(): string {
+      const percentage = this.totalRoundVotes ?
+        Math.round((this.votes / this.totalRoundVotes) * 1000) / 10 : null;
+      const percentageText = percentage ? ` (${percentage}%)` : '';
+
       if (this.isExhausted()) {
         return `
-        <strong>${this.votes.toLocaleString()}</strong> votes
+        <strong>${this.votes.toLocaleString()}</strong> votes${percentageText}
         were exhausted
         in round <strong>${this.round}</strong>`;
       } else {
         return `
         <strong>${getCandidate(this.allocatee).name}</strong> received
-        <strong>${this.votes.toLocaleString()}</strong> votes
+        <strong>${this.votes.toLocaleString()}</strong> votes${percentageText}
         in round <strong>${this.round}</strong>`;
       }
     }
@@ -73,7 +78,8 @@
       private r2x: number,
       private width: number,
       private r1y: number,
-      private r2y: number
+      private r2y: number,
+      private sourceVotes?: number
     ) {}
 
     toPath(): string {
@@ -94,6 +100,10 @@
     }
 
     tooltip(): string {
+      const percentage = this.sourceVotes ?
+        Math.round((this.votes / this.sourceVotes) * 1000) / 10 : null;
+      const percentageText = percentage ? ` (${percentage}%)` : '';
+
       if (this.fromCandidate === EXHAUSTED) {
         return `<strong>${this.votes.toLocaleString()}</strong> exhausted votes
         carried over into round <strong>${this.round}</strong>`;
@@ -106,7 +116,7 @@
         for <strong>${getCandidate(this.toCandidate).name}</strong>
         carried over into round <strong>${this.round}</strong>`;
       } else {
-        return `<strong>${this.votes.toLocaleString()}</strong> votes
+        return `<strong>${this.votes.toLocaleString()}</strong> votes${percentageText}
         for <strong>${getCandidate(this.fromCandidate).name}</strong>
         were transferred to <strong>${
           getCandidate(this.toCandidate).name
@@ -134,6 +144,9 @@
     let numCandidates = round.allocations.length - 1;
     let offset =
       (firstRoundNumCandidates - numCandidates) * (candidateMargin / 2);
+
+    // Calculate total votes for this round
+    const totalRoundVotes = round.allocations.reduce((sum, allocation) => sum + allocation.votes, 0);
     for (let allocation of round.allocations) {
       let width = voteScale * allocation.votes;
       voteBlocks.push(
@@ -143,7 +156,8 @@
           i * roundHeight,
           allocation.allocatee,
           allocation.votes,
-          i + 1
+          i + 1,
+          totalRoundVotes
         )
       );
 
@@ -160,7 +174,8 @@
             allocation.allocatee === "X" ? offset + width - last.width : offset,
             last.width,
             (i - 1) * roundHeight + voteBlockHeight,
-            i * roundHeight
+            i * roundHeight,
+            last.votes
           )
         );
 
@@ -198,7 +213,8 @@
           cur.xOffset + cur.accountedIn,
           width,
           (i - 1) * roundHeight + voteBlockHeight,
-          i * roundHeight
+          i * roundHeight,
+          last.votes
         )
       );
 
