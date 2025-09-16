@@ -290,7 +290,7 @@ pub fn smith_set(
 /// Generate a `ContestReport` from preprocessed election data.
 pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
     let ballots = &election.ballots.ballots;
-    let rounds = tabulate(ballots);
+    let rounds = tabulate(ballots, &election.info.tabulation_options);
     let winner = winner(&rounds);
     let num_candidates = election
         .ballots

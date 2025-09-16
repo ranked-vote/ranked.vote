@@ -51,11 +51,15 @@ pub struct ElectionMetadata {
 #[serde(rename_all = "camelCase")]
 pub struct TabulationOptions {
     pub eager: Option<bool>,
+    pub nyc_style: Option<bool>,
 }
 
 impl Default for TabulationOptions {
     fn default() -> Self {
-        TabulationOptions { eager: Some(true) }
+        TabulationOptions {
+            eager: Some(true),
+            nyc_style: Some(false),
+        }
     }
 }
 

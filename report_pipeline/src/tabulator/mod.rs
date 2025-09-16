@@ -1,6 +1,7 @@
 mod schema;
 
 use crate::model::election::{CandidateId, Choice, NormalizedBallot};
+use crate::model::metadata::TabulationOptions;
 pub use crate::tabulator::schema::{Allocatee, TabulatorAllocation, TabulatorRound, Transfer};
 use std::collections::{BTreeMap, BTreeSet, HashSet};
 
@@ -70,8 +71,12 @@ impl TabulatorState {
     /// Obtain the `TabulatorRound` representation of a `TabulatorState`.
     /// The `TabulatorRound` representation is the one that is serialized
     /// into the report.
-    pub fn as_round(&self) -> TabulatorRound {
-        let allocations = self.allocations();
+    pub fn as_round(
+        &self,
+        tabulation_options: &TabulationOptions,
+        round_number: usize,
+    ) -> TabulatorRound {
+        let allocations = self.allocations(tabulation_options, round_number);
         let undervote = self
             .candidate_ballots
             .get(&Choice::Undervote)
@@ -111,14 +116,32 @@ impl TabulatorState {
 
     /// Count the ballots attributed to each candidate at this round, as well as the
     /// number of exhausted ballots.
-    pub fn allocations(&self) -> Allocations {
+    pub fn allocations(
+        &self,
+        tabulation_options: &TabulationOptions,
+        round_number: usize,
+    ) -> Allocations {
         let mut alloc: BTreeMap<CandidateId, u32> = BTreeMap::new();
         let mut exhausted: u32 = 0;
         for (choice, ballots) in &self.candidate_ballots {
             let count = ballots.len() as u32;
             match choice {
-                Choice::Undervote => exhausted += count,
-                Choice::Overvote => exhausted += count,
+                Choice::Undervote => {
+                    // In NYC-style tabulation, undervotes in the first round are not counted as exhausted
+                    if tabulation_options.nyc_style.unwrap_or(false) && round_number == 0 {
+                        // Don't count undervotes as exhausted in first round
+                    } else {
+                        exhausted += count;
+                    }
+                }
+                Choice::Overvote => {
+                    // In NYC-style tabulation, overvotes in the first round are not counted as exhausted
+                    if tabulation_options.nyc_style.unwrap_or(false) && round_number == 0 {
+                        // Don't count overvotes as exhausted in first round
+                    } else {
+                        exhausted += count;
+                    }
+                }
                 Choice::Vote(c) => {
                     alloc.insert(*c, count);
                 }
@@ -130,8 +153,12 @@ impl TabulatorState {
         Allocations::new(votes, exhausted)
     }
 
-    pub fn do_elimination(self) -> TabulatorState {
-        let allocations = self.allocations();
+    pub fn do_elimination(
+        self,
+        tabulation_options: &TabulationOptions,
+        round_number: usize,
+    ) -> TabulatorState {
+        let allocations = self.allocations(tabulation_options, round_number);
 
         // Determine which candidates to eliminate.
         let candidates_to_eliminate: BTreeSet<CandidateId> = {
@@ -222,19 +249,24 @@ impl TabulatorState {
     }
 }
 
-pub fn tabulate(ballots: &[NormalizedBallot]) -> Vec<TabulatorRound> {
+pub fn tabulate(
+    ballots: &[NormalizedBallot],
+    tabulation_options: &TabulationOptions,
+) -> Vec<TabulatorRound> {
     let mut state = TabulatorState::new(ballots);
     let mut rounds = Vec::new();
+    let mut round_number = 0;
 
     loop {
-        let allocations = state.allocations();
-        rounds.push(state.as_round());
+        let allocations = state.allocations(tabulation_options, round_number);
+        rounds.push(state.as_round(tabulation_options, round_number));
 
         if allocations.votes.len() <= 2 {
             break;
         }
 
-        state = state.do_elimination();
+        state = state.do_elimination(tabulation_options, round_number);
+        round_number += 1;
     }
 
     rounds

@@ -1,10 +1,10 @@
 use crate::formats::common::{normalize_name, CandidateMap};
 use crate::model::election::{Ballot, Candidate, CandidateType, Choice, Election};
-use calamine::{open_workbook_auto, DataType, Reader};
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::BTreeMap;
 use std::path::Path;
+use xl::{ExcelValue, Workbook};
 
 struct ReaderOptions {
     files: Vec<String>,
@@ -47,18 +47,7 @@ pub fn parse_choice(candidate: &str, candidate_map: &mut CandidateMap<String>) -
     }
 }
 
-pub fn read_ballot(row: &[DataType], candidate_map: &mut CandidateMap<String>) -> Ballot {
-    let id = row.get(0).unwrap().get_float().unwrap() as u32;
-
-    let mut choices = Vec::new();
-    for vote in &row[3..] {
-        let cand = vote.get_string().unwrap();
-        let choice = parse_choice(cand, candidate_map);
-        choices.push(choice);
-    }
-
-    Ballot::new(id.to_string(), choices)
-}
+// Inline ballot processing to avoid private type issues
 
 pub fn maine_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Election {
     let options = ReaderOptions::from_params(params);
@@ -67,14 +56,33 @@ pub fn maine_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Ele
 
     for file in options.files {
         eprintln!("Reading: {}", file);
-        let mut workbook = open_workbook_auto(path.join(file)).unwrap();
-        let first_sheet = workbook.sheet_names().first().unwrap().clone();
-        let sheet = workbook.worksheet_range(&first_sheet).unwrap().unwrap();
+        let mut workbook = Workbook::open(path.join(file).to_str().unwrap()).unwrap();
+        let sheets = workbook.sheets();
+        let sheet = sheets.get(1).unwrap(); // Get the first sheet by position (1-based indexing)
 
-        let mut rows = sheet.rows();
-        rows.next();
+        let mut rows = sheet.rows(&mut workbook);
+        rows.next(); // Skip header row
         for row in rows {
-            let ballot = read_ballot(row, &mut candidate_map);
+            let id = if let ExcelValue::Number(id_val) = row[0].value {
+                id_val as u32
+            } else {
+                panic!("Expected number for ballot ID");
+            };
+
+            let mut choices = Vec::new();
+            // Process columns 3 onwards (assuming ballot ID is in column 0, and some other data in 1-2)
+            for i in 3..10 {
+                // Use a reasonable upper bound
+                let cand = if let ExcelValue::String(candidate) = &row[i as u16].value {
+                    candidate.as_ref()
+                } else {
+                    "undervote" // Default to undervote if no string value
+                };
+                let choice = parse_choice(cand, &mut candidate_map);
+                choices.push(choice);
+            }
+
+            let ballot = Ballot::new(id.to_string(), choices);
             ballots.push(ballot);
         }
     }
