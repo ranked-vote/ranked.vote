@@ -1,22 +1,38 @@
 body {
-    border-top: none;
+  border-top: none;
+  margin: 0;
+  padding: 0;
 }
 
 .card {
-    border-top: 10px solid #aa0d0d;
+  border-top: 10px solid #aa0d0d;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h3 {
-    padding: 30px;
-    font-size: 30pt;
-    margin-bottom: 20px;
+  padding: 30px;
+  font-size: 30pt;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.card-content {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  padding: 0 30px 30px 30px;
 }
 
 .segment {
-    float: left;
-    width: 49%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .segment svg {
-    max-height: 550px;
+  flex: 1;
+  max-height: none;
 }

@@ -2,7 +2,7 @@ name: Deploy rcv.report to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -24,34 +24,22 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: npm
           cache-dependency-path: package-lock.json
-
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-        id: setup-chrome
 
       - name: Install dependencies
         run: |
           npm ci
           npm install -g wait-on
 
-      - name: Generate share images and build
+      - name: Validate reports and build
         env:
           RANKED_VOTE_REPORTS: ${{ github.workspace }}/report_pipeline/reports
-          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: |
-          # Start the dev server in the background
-          ./dev.sh &
-          # Wait for dev server to be ready (timeout after 30 seconds)
-          wait-on -t 30000 http://localhost:3000
-          # Generate share images
-          npm run generate-share-images
-          # Kill the dev server
-          kill $(lsof -t -i:3000) || true
+          # Validate that all reports have corresponding card images
+          echo "Validating report card images..."
+          npm run validate-cards
           # Build and export the site
           npm run build
           npm run export

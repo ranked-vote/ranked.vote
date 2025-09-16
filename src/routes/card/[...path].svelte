@@ -44,11 +44,13 @@
       </h3>
     </div>
 
-    <div class="segment">
-      <Sankey rounds={report.rounds} />
-    </div>
+    <div class="card-content">
+      <div class="segment">
+        <Sankey rounds={report.rounds} />
+      </div>
 
-    <div class="segment">
-        <VoteCounts candidateVotes={report.totalVotes} />
+      <div class="segment">
+          <VoteCounts candidateVotes={report.totalVotes} />
+      </div>
     </div>
 </div>
