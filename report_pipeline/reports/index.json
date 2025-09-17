@@ -286,7 +286,9 @@
           "name": "At-large Congressional District",
           "winner": "Peltola, Mary S.",
           "numCandidates": 3,
-          "numRounds": 2
+          "numRounds": 2,
+          "condorcetWinner": "Begich, Nick",
+          "hasNonCondorcetWinner": true
         }
       ]
     },

@@ -89,7 +89,7 @@
         {#if report.winner == report.condorcet}
           <strong>{getCandidate(report.winner).name}</strong> was also the <a href="https://en.wikipedia.org/wiki/Condorcet_method">Condorcet winner</a>.
         {:else}
-          <strong>{getCandidate(report.condorcet).name}</strong> was the <a href="https://en.wikipedia.org/wiki/Condorcet_method">Condorcet winner</a>.
+          <strong>{getCandidate(report.condorcet).name}</strong> was the <a href="https://en.wikipedia.org/wiki/Condorcet_method">Condorcet winner</a>, meaning that they would have won in a head-to-head matchup against <strong>{getCandidate(report.winner).name}</strong>.
         {/if}
       </p>
     {:else}

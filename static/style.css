@@ -181,3 +181,30 @@ hr {
   border: none;
   border-bottom: 1px dotted #ddd;
 }
+
+/* Non-Condorcet Winner Highlighting */
+.race.non-condorcet {
+  border-left: 4px solid #aa0d0d;
+  background-color: #fdf2f2;
+  margin-left: -5px;
+  padding-left: 5px;
+}
+
+.non-condorcet-badge {
+  display: inline-block;
+  background-color: #aa0d0d;
+  color: white;
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.condorcet-info {
+  display: block;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+  margin-top: 2px;
+}

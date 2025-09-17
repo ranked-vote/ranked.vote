@@ -27,6 +27,8 @@ pub struct ContestIndexEntry {
     pub winner: String,
     pub num_candidates: u32,
     pub num_rounds: u32,
+    pub condorcet_winner: Option<String>,
+    pub has_non_condorcet_winner: bool,
 }
 
 #[derive(Serialize, Deserialize)]

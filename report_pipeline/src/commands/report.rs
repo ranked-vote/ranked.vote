@@ -96,6 +96,11 @@ pub fn report(
                     winner: report.winner().name.clone(),
                     num_candidates: report.num_candidates,
                     num_rounds: report.rounds.len() as u32,
+                    condorcet_winner: report
+                        .condorcet
+                        .map(|c| report.candidates[c.0 as usize].name.clone()),
+                    has_non_condorcet_winner: report.condorcet.is_some()
+                        && report.condorcet != Some(report.winner),
                 })
             }
 

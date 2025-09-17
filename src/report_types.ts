@@ -1,101 +1,103 @@
-export type CandidateId = number
-export type Allocatee = CandidateId | 'X'
+export type CandidateId = number;
+export type Allocatee = CandidateId | "X";
 
 // index.json
 
 export interface IReportIndex {
-    elections: IElectionIndexEntry[]
+  elections: IElectionIndexEntry[];
 }
 
 export interface IElectionIndexEntry {
-    path: string
-    jurisdictionName: string
-    electionName: string
-    date: string
-    contests: IContestIndexEntry[]
+  path: string;
+  jurisdictionName: string;
+  electionName: string;
+  date: string;
+  contests: IContestIndexEntry[];
 }
 
 export interface IContestIndexEntry {
-    office: string
-    officeName: string
-    name: string
-    winner: string
-    numCandidates: number
-    numRounds: number
+  office: string;
+  officeName: string;
+  name: string;
+  winner: string;
+  numCandidates: number;
+  numRounds: number;
+  condorcetWinner?: string;
+  hasNonCondorcetWinner: boolean;
 }
 
 // report.json
 
 export interface IContestReport {
-    info: IElectionInfo
-    ballotCount: number
-    candidates: ICandidate[]
-    rounds: ITabulatorRound[]
-    winner: CandidateId
-    condorcet?: CandidateId
-    smithSet: CandidateId[]
-    numCandidates: number
-    totalVotes: ICandidateVotes[]
-    pairwisePreferences: ICandidatePairTable
-    firstAlternate: ICandidatePairTable
-    firstFinal: ICandidatePairTable
+  info: IElectionInfo;
+  ballotCount: number;
+  candidates: ICandidate[];
+  rounds: ITabulatorRound[];
+  winner: CandidateId;
+  condorcet?: CandidateId;
+  smithSet: CandidateId[];
+  numCandidates: number;
+  totalVotes: ICandidateVotes[];
+  pairwisePreferences: ICandidatePairTable;
+  firstAlternate: ICandidatePairTable;
+  firstFinal: ICandidatePairTable;
 }
 
 export interface ICandidatePairTable {
-    rows: Allocatee[]
-    cols: Allocatee[]
-    entries: ICandidatePairEntry[][]
+  rows: Allocatee[];
+  cols: Allocatee[];
+  entries: ICandidatePairEntry[][];
 }
 
 export interface ICandidatePairEntry {
-    frac: number
-    numerator: number
-    denominator: number
+  frac: number;
+  numerator: number;
+  denominator: number;
 }
 
 export interface ICandidateVotes {
-    candidate: CandidateId
-    firstRoundVotes: number
-    transferVotes: number
-    roundEliminated?: number
+  candidate: CandidateId;
+  firstRoundVotes: number;
+  transferVotes: number;
+  roundEliminated?: number;
 }
 
 export interface IElectionInfo {
-    name: string
-    date: string
-    dataFormat: string
-    tabulation: string
-    jurisdictionPath: string
-    electionPath: string
-    office: string
-    loaderParams?: {[param: string]: string}
-    jurisdictionName: string
-    officeName: string
-    electionName: string
-    website?: string
+  name: string;
+  date: string;
+  dataFormat: string;
+  tabulation: string;
+  jurisdictionPath: string;
+  electionPath: string;
+  office: string;
+  loaderParams?: { [param: string]: string };
+  jurisdictionName: string;
+  officeName: string;
+  electionName: string;
+  website?: string;
 }
 
 export interface ICandidate {
-    name: string
-    writeIn?: boolean
-    candidate_type?: string
+  name: string;
+  writeIn?: boolean;
+  candidate_type?: string;
 }
 
 export interface ITabulatorRound {
-    allocations: ITabulatorAllocation[]
-    undervote: number
-    overvote: number
-    continuingBallots: number
-    transfers: Transfer[]
+  allocations: ITabulatorAllocation[];
+  undervote: number;
+  overvote: number;
+  continuingBallots: number;
+  transfers: Transfer[];
 }
 
 export interface ITabulatorAllocation {
-    allocatee: Allocatee
-    votes: number
+  allocatee: Allocatee;
+  votes: number;
 }
 
 export interface Transfer {
-    from: CandidateId
-    to: Allocatee
-    count: number
+  from: CandidateId;
+  to: Allocatee;
+  count: number;
 }

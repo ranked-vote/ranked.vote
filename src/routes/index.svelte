@@ -30,6 +30,13 @@
     </p>
 
     <p>
+      Some elections are highlighted with a warning badge when the RCV winner 
+      differs from the Condorcet winner—the candidate who would beat all others 
+      in head-to-head matchups. These cases reveal interesting dynamics in voter 
+      preferences and can indicate strategic voting or complex preference patterns.
+    </p>
+
+    <p>
       rcv.report is a fork of ranked.vote which was created by
       <a href="https://paulbutler.org">Paul Butler</a>.
       rcv.report is maintained by
