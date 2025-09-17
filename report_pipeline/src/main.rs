@@ -7,7 +7,7 @@ mod report;
 mod tabulator;
 mod util;
 
-use crate::commands::{info, report, sync};
+use crate::commands::{extract, info, report, sync};
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
@@ -28,6 +28,11 @@ enum Command {
     Sync {
         /// Metadata directory
         meta_dir: PathBuf,
+        /// Raw data directory
+        raw_data_dir: PathBuf,
+    },
+    /// Extract raw data to SQLite databases
+    Extract {
         /// Raw data directory
         raw_data_dir: PathBuf,
     },
@@ -59,6 +64,9 @@ fn main() {
             raw_data_dir,
         } => {
             sync(&meta_dir, &raw_data_dir);
+        }
+        Command::Extract { raw_data_dir } => {
+            extract(&raw_data_dir);
         }
         Command::Report {
             meta_dir,

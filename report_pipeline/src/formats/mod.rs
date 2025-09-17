@@ -1,6 +1,6 @@
-mod common;
+pub mod common;
 mod dominion_rcr;
-mod nist_sp_1500;
+pub mod nist_sp_1500;
 mod simple_json;
 mod us_ca_sfo;
 mod us_me;

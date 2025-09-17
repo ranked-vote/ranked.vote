@@ -13,7 +13,14 @@ use std::path::Path;
 /// if the file path ends in `.gz`.
 pub fn read_serialized<T: DeserializeOwned>(path: &Path) -> T {
     eprintln!("Reading {}", path.to_str().unwrap().bright_blue());
-    let file = File::open(path).unwrap();
+    let file = match File::open(path) {
+        Ok(file) => file,
+        Err(e) => {
+            eprintln!("Warning: Could not open file {}: {}", path.display(), e);
+            eprintln!("Skipping this file due to I/O error.");
+            panic!("File I/O error: {}", e);
+        }
+    };
 
     if path.extension() == Some(&OsString::from("gz")) {
         // For some reason, reading from a BufReader fails so we instead
@@ -22,11 +29,44 @@ pub fn read_serialized<T: DeserializeOwned>(path: &Path) -> T {
         // https://github.com/serde-rs/json/issues/160
         let mut gzfile = GzDecoder::new(file);
         let mut contents = String::new();
-        gzfile.read_to_string(&mut contents).unwrap();
-        serde_json::from_str(&contents).unwrap()
+        match gzfile.read_to_string(&mut contents) {
+            Ok(_) => {}
+            Err(e) => {
+                eprintln!(
+                    "Warning: Could not decompress gzip file {}: {}",
+                    path.display(),
+                    e
+                );
+                eprintln!("This file may be corrupted. Skipping this file.");
+                panic!("Gzip decompression error: {}", e);
+            }
+        }
+        match serde_json::from_str(&contents) {
+            Ok(data) => data,
+            Err(e) => {
+                eprintln!(
+                    "Warning: Could not parse JSON from file {}: {}",
+                    path.display(),
+                    e
+                );
+                eprintln!("This file may be corrupted. Skipping this file.");
+                panic!("JSON parsing error: {}", e);
+            }
+        }
     } else {
         let reader = BufReader::new(file);
-        serde_json::from_reader(reader).unwrap()
+        match serde_json::from_reader(reader) {
+            Ok(data) => data,
+            Err(e) => {
+                eprintln!(
+                    "Warning: Could not parse JSON from file {}: {}",
+                    path.display(),
+                    e
+                );
+                eprintln!("This file may be corrupted. Skipping this file.");
+                panic!("JSON parsing error: {}", e);
+            }
+        }
     }
 }
 

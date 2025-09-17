@@ -18,3 +18,4 @@ lazy_static = "1.4.0"
 nom = "7.1"
 xl = "0.1.7"
 rayon = "1.8"
+rusqlite = { version = "0.31", features = ["bundled"] }

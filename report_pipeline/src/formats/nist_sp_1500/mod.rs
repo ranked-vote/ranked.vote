@@ -7,7 +7,7 @@ use colored::*;
 use itertools::Itertools;
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::io::BufReader;
+use std::io::{BufReader, Read};
 
 use std::path::Path;
 
@@ -75,7 +75,7 @@ fn get_candidates(
     (map, write_in_external_id)
 }
 
-fn get_ballots(
+pub fn get_ballots(
     cvr: &CvrExport,
     contest_id: u32,
     map: &CandidateMap<u32>,
@@ -122,6 +122,12 @@ pub fn nist_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
     let options = ReaderOptions::from_params(params);
 
     let cvr_path = path.join(&options.cvr);
+    eprintln!(
+        "Opening zip file: {} (contest: {})",
+        cvr_path.display().to_string().yellow(),
+        options.contest
+    );
+
     let file = match File::open(&cvr_path) {
         Ok(file) => file,
         Err(e) => {

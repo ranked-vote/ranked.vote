@@ -71,7 +71,7 @@ pub enum Choice {
     Overvote,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Ballot {
     pub id: String,
     pub choices: Vec<Choice>,
