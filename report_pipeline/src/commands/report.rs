@@ -94,6 +94,79 @@ fn process_contest(
     }
 }
 
+/// Process a single election and return its election index entry
+fn process_election(
+    election_path: &str,
+    election: &ElectionMetadata,
+    jurisdiction: &Jurisdiction,
+    raw_base: &Path,
+    report_dir: &Path,
+    preprocessed_dir: &Path,
+    force_preprocess: bool,
+    force_report: bool,
+) -> ElectionIndexEntry {
+    eprintln!("Election: {}", election_path.red());
+
+    // Process contests in parallel
+    let contest_index_entries: Vec<ContestIndexEntry> = election
+        .contests
+        .par_iter()
+        .map(|contest| {
+            process_contest(
+                contest,
+                election,
+                election_path,
+                jurisdiction,
+                raw_base,
+                report_dir,
+                preprocessed_dir,
+                force_preprocess,
+                force_report,
+            )
+        })
+        .collect();
+
+    ElectionIndexEntry {
+        path: format!("{}/{}", jurisdiction.path, election_path),
+        jurisdiction_name: jurisdiction.name.clone(),
+        election_name: election.name.clone(),
+        date: election.date.clone(),
+        contests: contest_index_entries,
+    }
+}
+
+/// Process a single jurisdiction and return its election index entries
+fn process_jurisdiction(
+    jurisdiction: &Jurisdiction,
+    raw_path: &Path,
+    report_dir: &Path,
+    preprocessed_dir: &Path,
+    force_preprocess: bool,
+    force_report: bool,
+) -> Vec<ElectionIndexEntry> {
+    let raw_base = raw_path.join(jurisdiction.path.clone());
+
+    // Process elections in parallel within the jurisdiction
+    let election_results: Vec<ElectionIndexEntry> = jurisdiction
+        .elections
+        .par_iter()
+        .map(|(election_path, election)| {
+            process_election(
+                election_path,
+                election,
+                jurisdiction,
+                &raw_base,
+                report_dir,
+                preprocessed_dir,
+                force_preprocess,
+                force_report,
+            )
+        })
+        .collect();
+
+    election_results
+}
+
 pub fn report(
     meta_dir: &Path,
     raw_dir: &Path,
@@ -103,42 +176,28 @@ pub fn report(
     force_report: bool,
 ) {
     let raw_path = Path::new(raw_dir);
-    let mut election_index_entries: Vec<ElectionIndexEntry> = Vec::new();
 
-    for (_, jurisdiction) in read_meta(meta_dir) {
-        let raw_base = raw_path.join(jurisdiction.path.clone());
+    // Collect all jurisdictions first
+    let jurisdictions: Vec<_> = read_meta(meta_dir).collect();
 
-        for (election_path, election) in &jurisdiction.elections {
-            eprintln!("Election: {}", election_path.red());
+    // Process jurisdictions in parallel
+    let jurisdiction_results: Vec<Vec<ElectionIndexEntry>> = jurisdictions
+        .par_iter()
+        .map(|(_, jurisdiction)| {
+            process_jurisdiction(
+                jurisdiction,
+                &raw_path,
+                report_dir,
+                preprocessed_dir,
+                force_preprocess,
+                force_report,
+            )
+        })
+        .collect();
 
-            // Process contests in parallel
-            let contest_index_entries: Vec<ContestIndexEntry> = election
-                .contests
-                .par_iter()
-                .map(|contest| {
-                    process_contest(
-                        contest,
-                        election,
-                        election_path,
-                        &jurisdiction,
-                        &raw_base,
-                        report_dir,
-                        preprocessed_dir,
-                        force_preprocess,
-                        force_report,
-                    )
-                })
-                .collect();
-
-            election_index_entries.push(ElectionIndexEntry {
-                path: format!("{}/{}", jurisdiction.path, election_path),
-                jurisdiction_name: jurisdiction.name.clone(),
-                election_name: election.name.clone(),
-                date: election.date.clone(),
-                contests: contest_index_entries,
-            })
-        }
-    }
+    // Flatten results from all jurisdictions
+    let mut election_index_entries: Vec<ElectionIndexEntry> =
+        jurisdiction_results.into_iter().flatten().collect();
 
     election_index_entries.sort_by(|a, b| (&b.date, &b.path).cmp(&(&a.date, &a.path)));
     let report_index = ReportIndex {

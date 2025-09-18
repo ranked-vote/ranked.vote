@@ -152,21 +152,34 @@ pub fn nist_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
     let mut ballots: Vec<Ballot> = Default::default();
     let filenames: Vec<String> = archive.file_names().map(|d| d.to_string()).collect();
 
-    for filename in filenames {
-        if filename.starts_with("CvrExport") {
+    let cvr_files: Vec<String> = filenames
+        .into_iter()
+        .filter(|f| f.starts_with("CvrExport"))
+        .collect();
+
+    let file_count = cvr_files.len();
+
+    // Only log if there are many files to reduce noise
+    if file_count > 10 {
+        eprintln!("Reading {} CVR files...", file_count);
+    }
+
+    for filename in cvr_files {
+        // Only log individual files if there are few files
+        if file_count <= 10 {
             eprintln!("Reading CVR file: {}", filename.green());
-            let file = archive.by_name(&filename).unwrap();
-            let reader = BufReader::new(file);
-            let cvr = serde_json::from_reader(reader).unwrap();
-            let extra_ballots = get_ballots(
-                &cvr,
-                options.contest,
-                &candidates,
-                &filename,
-                dropped_write_in,
-            );
-            ballots.extend(extra_ballots);
         }
+        let file = archive.by_name(&filename).unwrap();
+        let reader = BufReader::new(file);
+        let cvr = serde_json::from_reader(reader).unwrap();
+        let extra_ballots = get_ballots(
+            &cvr,
+            options.contest,
+            &candidates,
+            &filename,
+            dropped_write_in,
+        );
+        ballots.extend(extra_ballots);
     }
 
     eprintln!("Read {} ballots", ballots.len().to_string().blue());

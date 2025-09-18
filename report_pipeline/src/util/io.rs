@@ -12,7 +12,10 @@ use std::path::Path;
 /// Read a JSON-serialized file into an object. Applies GZ decompression
 /// if the file path ends in `.gz`.
 pub fn read_serialized<T: DeserializeOwned>(path: &Path) -> T {
-    eprintln!("Reading {}", path.to_str().unwrap().bright_blue());
+    // Only log for non-preprocessed files to reduce noise
+    if !path.to_string_lossy().contains("normalized.json.gz") {
+        eprintln!("Reading {}", path.to_str().unwrap().bright_blue());
+    }
     let file = File::open(path).unwrap();
 
     if path.extension() == Some(&OsString::from("gz")) {
@@ -34,7 +37,10 @@ pub fn read_serialized<T: DeserializeOwned>(path: &Path) -> T {
 /// path ends in `.gz`. Creates the file if it doesn't exist, otherwise
 /// overwrites it.
 pub fn write_serialized<T: Serialize>(path: &Path, value: &T) {
-    eprintln!("Writing {}", path.to_str().unwrap().bright_blue());
+    // Only log for non-preprocessed files to reduce noise
+    if !path.to_string_lossy().contains("normalized.json.gz") {
+        eprintln!("Writing {}", path.to_str().unwrap().bright_blue());
+    }
 
     let file = OpenOptions::new()
         .write(true)

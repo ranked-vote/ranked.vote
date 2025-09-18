@@ -32,7 +32,6 @@ impl<ExternalCandidateId: Eq + Hash + Clone + Debug> CandidateMap<ExternalCandid
         candidate: Candidate,
     ) -> Choice {
         if !self.id_to_index.contains_key(&external_candidate_id) {
-            eprintln!("New candidate: {:?}", external_candidate_id);
             self.add(external_candidate_id.clone(), candidate);
         }
 
@@ -50,5 +49,18 @@ impl<ExternalCandidateId: Eq + Hash + Clone + Debug> CandidateMap<ExternalCandid
 
     pub fn into_vec(self) -> Vec<Candidate> {
         self.candidates
+    }
+
+    pub fn merge(&mut self, other: CandidateMap<ExternalCandidateId>) {
+        for (external_id, candidate_id) in other.id_to_index {
+            if !self.id_to_index.contains_key(&external_id) {
+                self.id_to_index.insert(
+                    external_id.clone(),
+                    CandidateId(self.candidates.len() as u32),
+                );
+                self.candidates
+                    .push(other.candidates[candidate_id.0 as usize].clone());
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 use crate::formats::common::CandidateMap;
 use crate::model::election::{Ballot, Candidate, CandidateType, Choice, Election};
 use lazy_static::lazy_static;
+use rayon::prelude::*;
 use regex::Regex;
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::read_dir;
@@ -83,111 +84,150 @@ fn scan_worksheets_for_race(
 
     let file_rx = Regex::new(&format!("^{}$", cvr_pattern)).unwrap();
 
-    for file in read_dir(path).unwrap() {
-        if !file_rx.is_match(file.as_ref().unwrap().file_name().to_str().unwrap()) {
-            continue;
-        }
-
-        let file_path = file.unwrap().path();
-        eprintln!("Attempting to open file: {:?}", file_path);
-        let mut workbook = match Workbook::open(file_path.to_str().unwrap()) {
-            Ok(wb) => wb,
-            Err(e) => {
-                eprintln!("Failed to open workbook: {}", e);
-                continue;
+    // Collect all matching files first
+    let matching_files: Vec<_> = read_dir(path)
+        .unwrap()
+        .filter_map(|file| {
+            let file = file.ok()?;
+            let file_name = file.file_name();
+            let file_name_str = file_name.to_str()?;
+            if file_rx.is_match(file_name_str) {
+                Some(file.path())
+            } else {
+                None
             }
-        };
-        // Use our helper function since sheets() doesn't work with NYC files
-        let worksheet = create_nyc_worksheet();
-        let mut rows = worksheet.rows(&mut workbook);
-        let first_row = rows.next().unwrap();
+        })
+        .collect();
 
-        let mut rank_to_col: BTreeMap<u32, usize> = BTreeMap::new();
-        let mut cvr_id_col: Option<usize> = None;
-        let mut precinct_col: Option<usize> = None;
+    // Only log if there are many files
+    if matching_files.len() > 5 {
+        eprintln!("Processing {} Excel files...", matching_files.len());
+    }
 
-        // Find the precinct column, CVR ID column, and council district columns
-        for (i, col) in first_row.0.iter().enumerate() {
-            if let ExcelValue::String(colname) = &col.value {
-                if colname == "Cast Vote Record" || colname == "\u{feff}Cast Vote Record" {
-                    cvr_id_col = Some(i);
-                } else if colname == "Precinct" {
-                    precinct_col = Some(i);
-                } else if let Some(caps) = COLUMN_RX.captures(&colname) {
-                    if caps.get(1).unwrap().as_str() != office_name {
-                        continue;
+    // Process files in parallel
+    let file_results: Vec<_> = matching_files
+        .par_iter()
+        .map(|file_path| {
+            // Only log individual file attempts if there are few files
+            if matching_files.len() <= 5 {
+                eprintln!("Attempting to open file: {:?}", file_path);
+            }
+            let mut workbook = match Workbook::open(file_path.to_str().unwrap()) {
+                Ok(wb) => wb,
+                Err(e) => {
+                    eprintln!("Failed to open workbook: {}", e);
+                    return None;
+                }
+            };
+            // Use our helper function since sheets() doesn't work with NYC files
+            let worksheet = create_nyc_worksheet();
+            let mut rows = worksheet.rows(&mut workbook);
+            let first_row = rows.next().unwrap();
+
+            let mut rank_to_col: BTreeMap<u32, usize> = BTreeMap::new();
+            let mut cvr_id_col: Option<usize> = None;
+            let mut precinct_col: Option<usize> = None;
+
+            // Find the precinct column, CVR ID column, and council district columns
+            for (i, col) in first_row.0.iter().enumerate() {
+                if let ExcelValue::String(colname) = &col.value {
+                    if colname == "Cast Vote Record" || colname == "\u{feff}Cast Vote Record" {
+                        cvr_id_col = Some(i);
+                    } else if colname == "Precinct" {
+                        precinct_col = Some(i);
+                    } else if let Some(caps) = COLUMN_RX.captures(&colname) {
+                        if caps.get(1).unwrap().as_str() != office_name {
+                            continue;
+                        }
+                        if caps.get(4).unwrap().as_str() != jurisdiction_name {
+                            continue;
+                        }
+                        let rank: u32 = caps.get(2).unwrap().as_str().parse().unwrap();
+                        assert!((1..=5).contains(&rank));
+                        rank_to_col.insert(rank, i);
                     }
-                    if caps.get(4).unwrap().as_str() != jurisdiction_name {
-                        continue;
-                    }
-                    let rank: u32 = caps.get(2).unwrap().as_str().parse().unwrap();
-                    assert!((1..=5).contains(&rank));
-                    rank_to_col.insert(rank, i);
                 }
             }
-        }
 
-        // Process all rows in a single pass
-        for row in rows {
-            let mut votes: Vec<Choice> = Vec::new();
-            let ballot_id = if let ExcelValue::String(id) = &row[cvr_id_col.unwrap() as u16].value {
-                id.to_string()
-            } else {
-                continue; // Skip if ballot ID is not a string
-            };
+            let mut file_ballots: Vec<Ballot> = Vec::new();
+            let mut file_precincts: HashSet<String> = HashSet::new();
+            let mut file_candidate_ids: CandidateMap<u32> = CandidateMap::new();
 
-            // Check if this ballot is from an eligible precinct and collect votes
-            let mut has_votes = false;
-            if let Some(precinct_col_idx) = precinct_col {
-                if let ExcelValue::String(precinct) = &row[precinct_col_idx as u16].value {
-                    // Check if this ballot has any votes for this council district
-                    for col in rank_to_col.values() {
-                        if let ExcelValue::String(value) = &row[*col as u16].value {
-                            if value != "undervote" && value != "overvote" && !value.is_empty() {
-                                eligible_precincts.insert(precinct.to_string());
-                                has_votes = true;
-                                break;
+            // Process all rows in a single pass
+            for row in rows {
+                let mut votes: Vec<Choice> = Vec::new();
+                let ballot_id =
+                    if let ExcelValue::String(id) = &row[cvr_id_col.unwrap() as u16].value {
+                        id.to_string()
+                    } else {
+                        continue; // Skip if ballot ID is not a string
+                    };
+
+                // Check if this ballot is from an eligible precinct and collect votes
+                let mut has_votes = false;
+                if let Some(precinct_col_idx) = precinct_col {
+                    if let ExcelValue::String(precinct) = &row[precinct_col_idx as u16].value {
+                        // Check if this ballot has any votes for this council district
+                        for col in rank_to_col.values() {
+                            if let ExcelValue::String(value) = &row[*col as u16].value {
+                                if value != "undervote" && value != "overvote" && !value.is_empty()
+                                {
+                                    file_precincts.insert(precinct.to_string());
+                                    has_votes = true;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    // Only process ballots from eligible precincts
-                    if !has_votes {
-                        continue;
-                    }
-                }
-            }
-
-            // Process votes for this ballot
-            for col in rank_to_col.values() {
-                let choice = match &row[*col as u16].value {
-                    ExcelValue::String(value) => {
-                        if value == "undervote" {
-                            Choice::Undervote
-                        } else if value == "overvote" {
-                            Choice::Overvote
-                        } else if value == "Write-in" {
-                            candidate_ids.add_id_to_choice(
-                                0,
-                                Candidate::new("Write-in".to_string(), CandidateType::WriteIn),
-                            )
-                        } else {
-                            let ext_id: u32 = value.parse().unwrap();
-                            let candidate_name = candidates.get(&ext_id).unwrap();
-                            candidate_ids.add_id_to_choice(
-                                ext_id,
-                                Candidate::new(candidate_name.clone(), CandidateType::Regular),
-                            )
+                        // Only process ballots from eligible precincts
+                        if !has_votes {
+                            continue;
                         }
                     }
-                    _ => Choice::Undervote, // Default to undervote for non-string values
-                };
+                }
 
-                votes.push(choice);
+                // Process votes for this ballot
+                for col in rank_to_col.values() {
+                    let choice = match &row[*col as u16].value {
+                        ExcelValue::String(value) => {
+                            if value == "undervote" {
+                                Choice::Undervote
+                            } else if value == "overvote" {
+                                Choice::Overvote
+                            } else if value == "Write-in" {
+                                file_candidate_ids.add_id_to_choice(
+                                    0,
+                                    Candidate::new("Write-in".to_string(), CandidateType::WriteIn),
+                                )
+                            } else {
+                                let ext_id: u32 = value.parse().unwrap();
+                                let candidate_name = candidates.get(&ext_id).unwrap();
+                                file_candidate_ids.add_id_to_choice(
+                                    ext_id,
+                                    Candidate::new(candidate_name.clone(), CandidateType::Regular),
+                                )
+                            }
+                        }
+                        _ => Choice::Undervote, // Default to undervote for non-string values
+                    };
+
+                    votes.push(choice);
+                }
+
+                let ballot = Ballot::new(ballot_id, votes);
+                file_ballots.push(ballot);
             }
 
-            let ballot = Ballot::new(ballot_id, votes);
-            ballots.push(ballot);
+            Some((file_ballots, file_precincts, file_candidate_ids))
+        })
+        .collect();
+
+    // Combine results from parallel processing
+    for result in file_results {
+        if let Some((file_ballots, file_precincts, file_candidate_ids)) = result {
+            ballots.extend(file_ballots);
+            eligible_precincts.extend(file_precincts);
+            candidate_ids.merge(file_candidate_ids);
         }
     }
 
