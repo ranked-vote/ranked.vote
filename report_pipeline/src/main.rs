@@ -44,6 +44,9 @@ enum Command {
         /// Whether to force preprocessing even if preprocessed files exist
         force_preprocess: bool,
         force_report: bool,
+        /// Optional jurisdiction filter (e.g., "us/ca/alameda")
+        #[clap(long)]
+        jurisdiction: Option<String>,
     },
 }
 
@@ -67,6 +70,7 @@ fn main() {
             report_dir,
             force_preprocess,
             force_report,
+            jurisdiction,
         } => {
             report(
                 &meta_dir,
@@ -75,6 +79,7 @@ fn main() {
                 &preprocessed_dir,
                 force_preprocess,
                 force_report,
+                jurisdiction.as_deref(),
             );
         }
     }

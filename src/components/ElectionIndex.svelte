@@ -2,23 +2,35 @@
   import type { IElectionIndexEntry } from "../report_types";
 
   export let elections: IElectionIndexEntry[];
+  export let hideSimpleRaces: boolean = false;
 
-  let electionsByYear = new Map<string, IElectionIndexEntry[]>();
+  $: filteredElections = (() => {
+    const filtered = (elections || []).map(e => ({
+      ...e,
+      // Always filter out races with 1-2 candidates (not meaningful RCV races)
+      contests: e.contests.filter(c => c.numCandidates > 2 && (!hideSimpleRaces || c.numRounds > 2))
+    })).filter(e => e.contests.length > 0);
+    return filtered;
+  })();
 
-  elections.forEach((e) => {
-    let year = e.date.substr(0, 4);
-    if (!electionsByYear.has(year)) {
-      electionsByYear.set(year, []);
-    }
-    electionsByYear.get(year).push(e);
-  });
+  $: electionsByYear = (() => {
+    let map = new Map<string, IElectionIndexEntry[]>();
+    filteredElections.forEach((e) => {
+      let year = e.date.substr(0, 4);
+      if (!map.has(year)) {
+        map.set(year, []);
+      }
+      map.get(year).push(e);
+    });
+    return map;
+  })();
 </script>
 
-{#each [...electionsByYear] as [year, elections]}
+{#each [...electionsByYear] as [year, yearElections]}
   <div class="yearSection">
     <h2>{year}</h2>
     <div class="electionSection">
-      {#each elections as election}
+      {#each yearElections as election}
         <div class="electionHeader">
           <h3>
             <strong>{election.jurisdictionName}</strong>

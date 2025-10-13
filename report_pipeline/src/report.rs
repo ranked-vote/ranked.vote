@@ -1,6 +1,6 @@
 use crate::formats::read_election;
 use crate::model::election::{
-    CandidateId, CandidateType, ElectionInfo, ElectionPreprocessed, NormalizedBallot,
+    CandidateId, CandidateType, Election, ElectionInfo, ElectionPreprocessed, NormalizedBallot,
 };
 use crate::model::metadata::{Contest, ElectionMetadata, Jurisdiction};
 use crate::model::report::{CandidatePairEntry, CandidatePairTable, CandidateVotes, ContestReport};
@@ -316,6 +316,7 @@ pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
         };
     }
 
+    eprintln!("  - Tabulating rounds...");
     let rounds = tabulate(ballots, &election.info.tabulation_options);
     let winner = winner(&rounds);
     let num_candidates = election
@@ -325,15 +326,24 @@ pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
         .filter(|d| d.candidate_type != CandidateType::WriteIn)
         .count() as u32;
 
+    eprintln!("  - Calculating total votes...");
     let total_votes = total_votes(&rounds);
     let candidates: Vec<CandidateId> = total_votes.iter().map(|d| d.candidate).collect();
+    eprintln!("  - Found {} candidates", candidates.len());
 
+    eprintln!("  - Generating pairwise counts...");
     let pairwise_counts: HashMap<(CandidateId, CandidateId), u32> =
         generate_pairwise_counts(&candidates, ballots);
 
+    eprintln!("  - Generating pairwise preferences...");
     let pairwise_preferences = generate_pairwise_preferences(&candidates, &pairwise_counts);
+
+    eprintln!("  - Building preference graph...");
     let graph = graph(&candidates, &pairwise_counts);
+
+    eprintln!("  - Finding Smith set...");
     let smith_set = smith_set(&candidates, &graph);
+
     let condorcet = if smith_set.len() == 1 {
         smith_set.iter().next().copied()
     } else {
@@ -344,8 +354,10 @@ pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
         eprintln!("{}", "Non-condorcet!".purple());
     }
 
+    eprintln!("  - Generating first alternate matrix...");
     let first_alternate = generate_first_alternate(&candidates, ballots);
 
+    eprintln!("  - Determining final round candidates...");
     let final_round_candidates: HashSet<CandidateId> = rounds
         .last()
         .map(|round| {
@@ -357,7 +369,10 @@ pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
         })
         .unwrap_or_default();
 
+    eprintln!("  - Generating first-final matrix...");
     let first_final = generate_first_final(&candidates, ballots, &final_round_candidates);
+
+    eprintln!("  - Building final report structure...");
 
     ContestReport {
         info: election.info.clone(),
@@ -404,6 +419,37 @@ pub fn preprocess_election(
             jurisdiction_path: ec.path.clone(),
             election_path: election_path.to_string(),
             jurisdiction_name: ec.name.clone(),
+            office_name: office.name.clone(),
+            election_name: metadata.name.clone(),
+            website: metadata.website.clone(),
+        },
+        ballots: normalized_election,
+    }
+}
+
+/// Preprocess an election from already-loaded election data
+/// This is used for batch processing where elections are loaded once and reused
+pub fn preprocess_election_from_data(
+    election: Election,
+    metadata: &ElectionMetadata,
+    jurisdiction: &Jurisdiction,
+    contest: &Contest,
+    election_path: &str,
+) -> ElectionPreprocessed {
+    let normalized_election = normalize_election(&metadata.normalization, election);
+    let office = jurisdiction.offices.get(&contest.office).unwrap();
+
+    ElectionPreprocessed {
+        info: ElectionInfo {
+            name: office.name.clone(),
+            office: contest.office.clone(),
+            date: metadata.date.clone(),
+            data_format: metadata.data_format.clone(),
+            tabulation_options: metadata.tabulation_options.clone().unwrap_or_default(),
+            loader_params: contest.loader_params.clone(),
+            jurisdiction_path: jurisdiction.path.clone(),
+            election_path: election_path.to_string(),
+            jurisdiction_name: jurisdiction.name.clone(),
             office_name: office.name.clone(),
             election_name: metadata.name.clone(),
             website: metadata.website.clone(),

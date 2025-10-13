@@ -21,6 +21,17 @@
   tabulation of the results that can be reproduced using published source code.
 </p>
 
+<h2>Featured Elections</h2>
+
+<p>
+  We feature elections where the ranked-choice voting process was meaningful—specifically,
+  races that required three or more rounds of tabulation. Elections decided in one or two
+  rounds are excluded because they represent cases where a candidate won with a clear
+  majority from the start, making the instant-runoff mechanism less relevant. By focusing
+  on elections with multiple rounds of elimination and vote transfers, we highlight cases
+  where ranked-choice voting had a substantial impact on determining the winner.
+</p>
+
 <p>
   rcv.report is a fork of ranked.vote which was created by
   <a href="https://paulbutler.org">Paul Butler</a>.

@@ -172,7 +172,20 @@ impl TabulatorState {
                 }
             }
 
-            ai.map(|d| d.0).collect()
+            let to_eliminate: BTreeSet<CandidateId> = ai.map(|d| d.0).collect();
+
+            // If no candidates would be eliminated (e.g., all tied), eliminate the last one
+            if to_eliminate.is_empty() && !allocations.votes.is_empty() {
+                // Eliminate the candidate with the fewest votes (last in sorted list)
+                allocations
+                    .votes
+                    .last()
+                    .map(|(id, _)| *id)
+                    .into_iter()
+                    .collect()
+            } else {
+                to_eliminate
+            }
         };
 
         let mut transfers: BTreeSet<Transfer> = BTreeSet::new();
@@ -256,12 +269,27 @@ pub fn tabulate(
     let mut state = TabulatorState::new(ballots);
     let mut rounds = Vec::new();
     let mut round_number = 0;
+    let max_rounds = 1000; // Safety limit to prevent infinite loops
 
     loop {
         let allocations = state.allocations(tabulation_options, round_number);
         rounds.push(state.as_round(tabulation_options, round_number));
 
+        eprintln!(
+            "    Round {}: {} candidates remaining",
+            round_number + 1,
+            allocations.votes.len()
+        );
+
         if allocations.votes.len() <= 2 {
+            break;
+        }
+
+        if round_number >= max_rounds {
+            eprintln!(
+                "WARNING: Hit maximum round limit of {} - stopping tabulation",
+                max_rounds
+            );
             break;
         }
 

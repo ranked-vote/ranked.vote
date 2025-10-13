@@ -103,7 +103,47 @@ pub struct Card {
 #[serde(rename_all = "PascalCase")]
 pub struct ContestMarks {
     pub id: u32,
+    #[serde(deserialize_with = "deserialize_marks")]
     pub marks: Vec<Mark>,
+}
+
+fn deserialize_marks<'de, D>(deserializer: D) -> Result<Vec<Mark>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    use serde::de::{Error, Visitor};
+    use std::fmt;
+
+    struct MarksVisitor;
+
+    impl<'de> Visitor<'de> for MarksVisitor {
+        type Value = Vec<Mark>;
+
+        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+            formatter.write_str("array of marks or redacted string")
+        }
+
+        fn visit_str<E>(self, _value: &str) -> Result<Self::Value, E>
+        where
+            E: Error,
+        {
+            // Handle "*** REDACTED ***" or any other string as empty marks
+            Ok(Vec::new())
+        }
+
+        fn visit_seq<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+        where
+            A: serde::de::SeqAccess<'de>,
+        {
+            let mut marks = Vec::new();
+            while let Some(mark) = seq.next_element()? {
+                marks.push(mark);
+            }
+            Ok(marks)
+        }
+    }
+
+    deserializer.deserialize_any(MarksVisitor)
 }
 
 #[derive(Serialize, Deserialize, Clone)]
