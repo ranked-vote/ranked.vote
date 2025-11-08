@@ -36,13 +36,31 @@
   rcv.report is a fork of ranked.vote which was created by
   <a href="https://paulbutler.org">Paul Butler</a>.
   rcv.report is maintained by
-  <a href="https://github.com/fsargent">Felix Sargent</a>.
+  <a href="https://felixsargent.com">Felix Sargent</a>.
   It is non-partisan and has received no outside funding.
 </p>
 
 <p>If you enjoy alternate voting systems, you may also enjoy
   <a href="https://approval.vote">approval.vote</a>,
   which is a similar project for approval voting elections.
+</p>
+
+<h2>Learning More</h2>
+
+<p>
+  To learn more about social choice theory and voting methods, check out
+  <a href="https://ncase.me/ballot">Nicky Case's "Build a Better Ballot"</a>,
+  an interactive guide to voting methods, and the
+  <a href="https://electionscience.org">Center for Election Science</a>,
+  which promotes evidence-based voting methods.
+</p>
+
+<h2>Contributing</h2>
+
+<p>
+  Contributions are welcome! The project is open source and available on
+  <a href="https://github.com/fsargent/rcv.report">GitHub</a>. Please feel free to
+  open issues, submit pull requests, or reach out with questions.
 </p>
 
 <h2>License</h2>

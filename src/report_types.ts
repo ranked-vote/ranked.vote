@@ -24,6 +24,7 @@ export interface IContestIndexEntry {
   numRounds: number;
   condorcetWinner?: string;
   hasNonCondorcetWinner: boolean;
+  hasWriteInByName: boolean;
 }
 
 // report.json

@@ -10,6 +10,12 @@ use std::collections::HashMap;
 use std::fs::{create_dir_all, read_dir};
 use std::path::{Path, PathBuf};
 
+/// Check if a candidate name is a write-in (handles "Write-in", "Write in", etc.)
+fn is_write_in_by_name(name: &str) -> bool {
+    let normalized = name.to_lowercase();
+    normalized == "write-in" || normalized == "write in"
+}
+
 /// Process a single contest and return the ContestIndexEntry
 fn process_contest(
     contest: &Contest,
@@ -85,6 +91,11 @@ fn process_contest(
             contest_report
         };
 
+    // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
+    let has_write_in_by_name = report.candidates.iter().any(|c| {
+        is_write_in_by_name(&c.name)
+    });
+
     // Extract just the index data we need
     let index_entry = ContestIndexEntry {
         office: report.info.office.clone(),
@@ -100,6 +111,7 @@ fn process_contest(
             .condorcet
             .map(|c| report.candidates[c.0 as usize].name.clone()),
         has_non_condorcet_winner: report.condorcet.is_some() && report.condorcet != report.winner,
+        has_write_in_by_name,
     };
 
     // Drop the full report to free memory
@@ -198,6 +210,11 @@ fn process_nyc_election_batch(
                 read_serialized(&report_path)
             };
 
+            // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
+            let has_write_in_by_name = report.candidates.iter().any(|c| {
+                is_write_in_by_name(&c.name)
+            });
+
             // Build index entry matching the existing format
             let index_entry = ContestIndexEntry {
                 office: report.info.office.clone(),
@@ -214,6 +231,7 @@ fn process_nyc_election_batch(
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
                 has_non_condorcet_winner: report.condorcet.is_some()
                     && report.condorcet != report.winner,
+                has_write_in_by_name,
             };
 
             drop(report);
@@ -326,6 +344,11 @@ fn process_nist_election_batch(
                 read_serialized(&report_path)
             };
 
+            // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
+            let has_write_in_by_name = report.candidates.iter().any(|c| {
+                is_write_in_by_name(&c.name)
+            });
+
             // Build index entry matching the existing format
             let index_entry = ContestIndexEntry {
                 office: report.info.office.clone(),
@@ -342,6 +365,7 @@ fn process_nist_election_batch(
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
                 has_non_condorcet_winner: report.condorcet.is_some()
                     && report.condorcet != report.winner,
+                has_write_in_by_name,
             };
 
             drop(report);
@@ -636,6 +660,11 @@ pub fn rebuild_index(report_dir: &Path) {
                 format!("{}/{}", report.info.jurisdiction_path, report.info.election_path)
             });
             
+            // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
+            let has_write_in_by_name = report.candidates.iter().any(|c| {
+                is_write_in_by_name(&c.name)
+            });
+
             let contest_entry = ContestIndexEntry {
                 office: report.info.office.clone(),
                 office_name: report.info.office_name.clone(),
@@ -653,6 +682,7 @@ pub fn rebuild_index(report_dir: &Path) {
                     }),
                 has_non_condorcet_winner: report.condorcet.is_some()
                     && report.condorcet != report.winner,
+                has_write_in_by_name,
             };
             
             // Get or create election entry

@@ -28,15 +28,7 @@
       "candidate_type": "Regular"
     },
     {
-      "name": "Andrew Yang",
-      "candidate_type": "Regular"
-    },
-    {
-      "name": "Joycelyn Taylor",
-      "candidate_type": "Regular"
-    },
-    {
-      "name": "Raymond J. McGuire",
+      "name": "Scott M. Stringer",
       "candidate_type": "Regular"
     },
     {
@@ -48,23 +40,19 @@
       "candidate_type": "Regular"
     },
     {
-      "name": "Scott M. Stringer",
-      "candidate_type": "Regular"
+      "name": "Write-in",
+      "candidate_type": "WriteIn"
     },
     {
       "name": "Shaun Donovan",
       "candidate_type": "Regular"
     },
     {
-      "name": "Dianne Morales",
+      "name": "Maya D. Wiley",
       "candidate_type": "Regular"
     },
     {
-      "name": "Write-in",
-      "candidate_type": "WriteIn"
-    },
-    {
-      "name": "Maya D. Wiley",
+      "name": "Eric L. Adams",
       "candidate_type": "Regular"
     },
     {
@@ -72,11 +60,23 @@
       "candidate_type": "Regular"
     },
     {
-      "name": "Isaac Wright Jr.",
+      "name": "Raymond J. McGuire",
       "candidate_type": "Regular"
     },
     {
-      "name": "Eric L. Adams",
+      "name": "Dianne Morales",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Andrew Yang",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Joycelyn Taylor",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Isaac Wright Jr.",
       "candidate_type": "Regular"
     }
   ],

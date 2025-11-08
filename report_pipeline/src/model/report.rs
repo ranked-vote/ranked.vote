@@ -30,6 +30,7 @@ pub struct ContestIndexEntry {
     pub num_rounds: u32,
     pub condorcet_winner: Option<String>,
     pub has_non_condorcet_winner: bool,
+    pub has_write_in_by_name: bool,
 }
 
 #[derive(Serialize, Deserialize)]

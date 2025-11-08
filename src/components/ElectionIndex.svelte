@@ -50,8 +50,17 @@
   $: filteredElections = (() => {
     const filtered = (elections || []).map(e => {
       // Filter out contests with 2 or fewer candidates (show only 3+)
+      // Also filter out races with 3 candidates where one is "Write-in" (effectively 2 candidates)
       const filteredContests = e.contests.filter(c => {
-        return c.numCandidates > 2;
+        if (c.numCandidates <= 2) {
+          return false;
+        }
+        // Hide races with 3 candidates where one is named "Write-in"
+        // Note: hasWriteInByName may be missing in older index.json files - regenerate index to fix
+        if (c.numCandidates === 3 && c.hasWriteInByName === true) {
+          return false;
+        }
+        return true;
       });
       // Sort contests using natural sort to handle ordinals correctly
       const sortedContests = [...filteredContests].sort((a, b) => 

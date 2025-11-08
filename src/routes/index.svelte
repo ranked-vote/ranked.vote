@@ -40,8 +40,13 @@
       rcv.report is a fork of ranked.vote which was created by
       <a href="https://paulbutler.org">Paul Butler</a>.
       rcv.report is maintained by
-      <a href="https://github.com/fsargent">Felix Sargent</a>.
+      <a href="https://felixsargent.com">Felix Sargent</a>.
       It is non-partisan and has received no outside funding.
+    </p>
+
+    <p>If you enjoy alternate voting systems, you may also enjoy
+      <a href="https://approval.vote">approval.vote</a>,
+      which is a similar project for approval voting elections.
     </p>
 
     <p>
