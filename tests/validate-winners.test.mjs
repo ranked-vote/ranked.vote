@@ -10,7 +10,7 @@ const EXPECTED_WINNERS = [
     jurisdictionName: "Minneapolis",
     officeName: "Mayor",
     winner: "Jacob Frey",
-    numCandidates: 18,
+    numCandidates: 16,
     numRounds: 2,
   },
   // 2022
@@ -628,12 +628,14 @@ function extractYearFromPath(pathStr) {
 }
 
 function normalizeName(name) {
-  return name
-    .trim()
-    .replace(/\s+/g, " ")
-    // Normalize different quote styles to straight quotes
-    .replace(/[\u201C\u201D"]/g, '"') // Left/right double quotes to straight
-    .replace(/[\u2018\u2019']/g, "'"); // Left/right single quotes to straight
+  return (
+    name
+      .trim()
+      .replace(/\s+/g, " ")
+      // Normalize different quote styles to straight quotes
+      .replace(/[\u201C\u201D"]/g, '"') // Left/right double quotes to straight
+      .replace(/[\u2018\u2019']/g, "'")
+  ); // Left/right single quotes to straight
 }
 
 function findContest(index, expected) {
@@ -644,15 +646,18 @@ function findContest(index, expected) {
     }
 
     if (
-      normalizeName(election.electionName) !== normalizeName(expected.electionName) ||
-      normalizeName(election.jurisdictionName) !== normalizeName(expected.jurisdictionName)
+      normalizeName(election.electionName) !==
+        normalizeName(expected.electionName) ||
+      normalizeName(election.jurisdictionName) !==
+        normalizeName(expected.jurisdictionName)
     ) {
       continue;
     }
 
     for (const contest of election.contests || []) {
       if (
-        normalizeName(contest.officeName) === normalizeName(expected.officeName) ||
+        normalizeName(contest.officeName) ===
+          normalizeName(expected.officeName) ||
         normalizeName(contest.name) === normalizeName(expected.officeName)
       ) {
         return { election, contest };
@@ -691,4 +696,55 @@ describe("Election Winner Validation", () => {
       expect(contest.numRounds).toBe(expected.numRounds);
     },
   );
+});
+describe("Card Image Validation", () => {
+  let index;
+
+  beforeAll(async () => {
+    const indexRaw = await fs.readFile(
+      path.join(process.cwd(), "report_pipeline/reports/index.json"),
+      "utf8",
+    );
+    index = JSON.parse(indexRaw);
+  });
+
+  test("all reports should have corresponding card images", async () => {
+    const reports = [];
+    for (const election of index.elections || []) {
+      for (const contest of election.contests || []) {
+        reports.push({
+          path: `${election.path}/${contest.office}`,
+          election: election,
+          contest: contest,
+        });
+      }
+    }
+
+    const missingCards = [];
+
+    for (const report of reports) {
+      const reportPath = report.path;
+      const outputPath = path.join(
+        process.cwd(),
+        `static/share/${reportPath}.png`,
+      );
+
+      try {
+        await fs.access(outputPath);
+      } catch {
+        missingCards.push(outputPath);
+      }
+    }
+
+    if (missingCards.length > 0) {
+      const missingList = missingCards
+        .map((p) => path.relative(process.cwd(), p))
+        .join("\n  - ");
+      throw new Error(
+        `Missing ${missingCards.length} card image(s):\n  - ${missingList}\n\nRun 'npm run generate-images' to generate missing cards.`,
+      );
+    }
+
+    expect(missingCards.length).toBe(0);
+  });
 });

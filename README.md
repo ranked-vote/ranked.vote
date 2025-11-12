@@ -2,7 +2,7 @@
 
 A static site and data pipeline for publishing ranked-choice voting (RCV) election reports.
 
-- Web UI: Sapper (Svelte) app in `src/` that renders published reports
+- Web UI: SvelteKit (Svelte 5) app in `src/` that renders published reports
 - Data pipeline: Rust project in `report_pipeline/` that normalizes raw data and generates `report.json`
 
 ## Prerequisites
@@ -46,19 +46,16 @@ npm run report:extract
 ### 3. Install and Run
 
 ```bash
-# Return to project root
-cd ..
-
 # Install dependencies
 npm install
 
 # Start dev server
-./dev.sh
+npm run dev
 
 # Open http://localhost:3000
 ```
 
-The app reads report data from `report_pipeline/reports` via the `RANKED_VOTE_REPORTS` environment variable (set by `dev.sh`).
+The app reads report data from `report_pipeline/reports` via the `RANKED_VOTE_REPORTS` environment variable (set automatically in the dev script).
 
 ## Quick Start (without election data)
 
@@ -66,18 +63,17 @@ If you only want to view existing reports without raw data:
 
 ```bash
 npm install
-./dev.sh
+npm run dev
 # open http://localhost:3000
 ```
 
 ## Scripts
 
 ### Web Development
-- `npm run dev`: start Sapper dev server
-- `npm run build`: build the app (legacy enabled)
-- `npm run export`: export a static site to `__sapper__/export`
-- `./dev.sh`: run dev with `RANKED_VOTE_REPORTS="report_pipeline/reports"`
-- `./build.sh`: export with `RANKED_VOTE_REPORTS` set (for local static output)
+- `npm run dev`: start SvelteKit dev server (with `RANKED_VOTE_REPORTS` set automatically)
+- `npm run build`: build static site to `build/` directory
+- `npm run preview`: preview the built site locally
+- `npm run check`: run Svelte type checking
 
 ### Report Generation
 - `npm run report`: generate reports (automatically generates card images after reports are created)
@@ -85,24 +81,26 @@ npm install
 - `npm run report:extract`: extract election data from archives to raw-data directory
 
 ### Card Image Generation
-- `npm run generate-images`: generate card images (starts dev server, generates images, stops server)
-- `npm run generate-share-images`: generate Twitter/Facebook share images (requires dev server running)
-- `npm run validate-cards`: validate that all reports have corresponding card images
+- `npm run generate-images`: generate share images (automatically starts/stops dev server if needed)
+  - Processes images in parallel (default: 5 concurrent, set `CONCURRENCY` env var to adjust)
+  - Skips unchanged images (only regenerates if report.json is newer than PNG)
+- Card image validation is included in the test suite (`npm test`)
 
-## Build and export
+## Build
 
 ```bash
 npm install
-RANKED_VOTE_REPORTS="report_pipeline/reports" npm run build
-RANKED_VOTE_REPORTS="report_pipeline/reports" npm run export
-# output: __sapper__/export
+npm run build
+# output: build/
 ```
+
+The build script automatically sets `RANKED_VOTE_REPORTS` to `report_pipeline/reports`.
 
 ## Deployment
 
 Deploys are handled by GitHub Pages via `.github/workflows/deploy-rcv-report.yml`:
 
-- On push to `main`/`master`, CI installs dependencies, builds, exports, and publishes `__sapper__/export` to Pages
+- On push to `main`/`master`, CI installs dependencies, builds, and publishes `build/` to Pages
 - CI sets `RANKED_VOTE_REPORTS` to `${{ github.workspace }}/report_pipeline/reports`
 
 ## Working with Election Data
@@ -135,12 +133,12 @@ report_pipeline/
    ```bash
    # From project root (recommended):
    npm run report
-   
+
    # Or from report_pipeline directory:
    cd report_pipeline
    ./report.sh  # See report_pipeline/README.md for details
    ```
-   
+
    Note: `npm run report` automatically generates card images after reports are created.
 
 3. **Compress for git**
@@ -163,14 +161,15 @@ See [DATA-WORKFLOW.md](report_pipeline/DATA-WORKFLOW.md) for complete documentat
 
 ## Project Structure
 
-- `src/`: Sapper app (Svelte components, routes, API endpoints)
-- `static/`: static assets copied to export
+- `src/`: SvelteKit app (Svelte 5 components, routes, API endpoints)
+- `static/`: static assets copied to build
   - `static/share/`: Generated card images for social media sharing (committed)
 - `report_pipeline/`: Rust data processing and report generation
   - `archives/`: Compressed election data (git LFS, committed)
   - `raw-data/`: Uncompressed working data (gitignored)
   - `reports/`: Generated JSON reports (committed)
-- `__sapper__/export`: export output (gitignored)
+- `build/`: static site build output (gitignored)
+- `.svelte-kit/`: SvelteKit build cache (gitignored)
 
 ## Documentation
 
@@ -185,13 +184,16 @@ See [DATA-WORKFLOW.md](report_pipeline/DATA-WORKFLOW.md) for complete documentat
 npm run report:extract
 
 # View reports in browser
-npm install && ./dev.sh
+npm install && npm run dev
 
 # Generate reports and card images
 npm run report
 
-# Validate card images exist
-npm run validate-cards
+# Generate/update share images
+npm run generate-images
+
+# Run tests (includes card image validation)
+npm test
 
 # Add new election data
 cd report_pipeline
@@ -206,6 +208,7 @@ git add archives/ reports/ static/share/
 cd report_pipeline
 npm run report:sync  # Sync metadata
 npm run report       # Regenerate reports and images
+npm run generate-images  # Regenerate share images
 ./compress-to-archives.sh  # Detects changes and recompresses
 git add archives/ reports/ static/share/
 ```
@@ -217,7 +220,7 @@ git add archives/ reports/ static/share/
 - Pull LFS files: `git lfs pull`
 
 **"No such file" in raw-data/:**
-- Extract archives: `cd report_pipeline && ./extract-from-archives.sh`
+- Extract archives: `npm run report:extract`
 
 **Slow clone:**
 - Archives are large (~360 MB). Be patient or use: `GIT_LFS_SKIP_SMUDGE=1 git clone ...`
