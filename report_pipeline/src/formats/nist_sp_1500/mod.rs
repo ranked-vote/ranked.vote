@@ -78,7 +78,12 @@ fn get_candidates(
 pub fn nist_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Election {
     let options = ReaderOptions::from_params(params);
 
-    let mut cvr_path = path.join(&options.cvr);
+    // Handle "." as current directory
+    let mut cvr_path = if options.cvr == "." {
+        path.to_path_buf()
+    } else {
+        path.join(&options.cvr)
+    };
 
     // If the path ends with .zip but the file doesn't exist, try the directory name without .zip
     // This handles cases where ZIP files were extracted but metadata still references the ZIP
@@ -89,13 +94,39 @@ pub fn nist_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
         }
     }
 
+    // If the CVR path doesn't exist, try using the base path directly
+    // This handles cases where metadata references a CVR name but files are in the base directory
+    if !cvr_path.exists() && !cvr_path.is_dir() {
+        // Check if the base path itself is a directory with CvrExport files
+        if path.is_dir() {
+            let test_file = path.join("CvrExport.json");
+            if test_file.exists() || path.join("CandidateManifest.json").exists() {
+                // Files are in the base directory, use that instead
+                cvr_path = path.to_path_buf();
+            }
+        }
+    }
+
     // Check if cvr_path is a directory or a ZIP file
     if cvr_path.is_dir() {
         // Handle raw directory format
         read_from_directory(&cvr_path, &options)
-    } else {
+    } else if cvr_path.exists() {
         // Handle ZIP archive format
         read_from_zip(&cvr_path, &options)
+    } else {
+        // Fallback: try reading from the base path
+        crate::log_warn!(
+            "CVR path {} does not exist, trying base path {}",
+            cvr_path.display(),
+            path.display()
+        );
+        if path.is_dir() {
+            read_from_directory(path, &options)
+        } else {
+            crate::log_warn!("Base path is not a directory, returning empty election");
+            Election::new(vec![], vec![])
+        }
     }
 }
 
@@ -554,7 +585,12 @@ pub fn nist_batch_reader(
         .expect("nist_sp_1500 elections should have cvr parameter.")
         .clone();
 
-    let mut cvr_path = path.join(&cvr_name);
+    // Handle "." as current directory
+    let mut cvr_path = if cvr_name == "." {
+        path.to_path_buf()
+    } else {
+        path.join(&cvr_name)
+    };
 
     // If the path ends with .zip but the file doesn't exist, try the directory name without .zip
     // This handles cases where ZIP files were extracted but metadata still references the ZIP
@@ -562,6 +598,19 @@ pub fn nist_batch_reader(
         let dir_path = cvr_path.with_extension("");
         if dir_path.is_dir() {
             cvr_path = dir_path;
+        }
+    }
+
+    // If the CVR path doesn't exist, try using the base path directly
+    // This handles cases where metadata references a CVR name but files are in the base directory
+    if !cvr_path.exists() || !cvr_path.is_dir() {
+        // Check if the base path itself is a directory with CvrExport files
+        if path.is_dir() {
+            let test_file = path.join("CvrExport.json");
+            if test_file.exists() || path.join("CandidateManifest.json").exists() {
+                // Files are in the base directory, use that instead
+                cvr_path = path.to_path_buf();
+            }
         }
     }
 

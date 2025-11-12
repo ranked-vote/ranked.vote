@@ -207,7 +207,7 @@
           "loaderParams": {
             "candidatesFile": "Primary Election 2025 - 06-24-2025_CandidacyID_To_Name.xlsx",
             "cvrPattern": "2025P\\d?V.+\\.xlsx",
-            "jurisdictionName": "Brooklyn",
+            "jurisdictionName": "Kings",
             "officeName": "DEM Borough President"
           }
         },
@@ -216,7 +216,7 @@
           "loaderParams": {
             "candidatesFile": "Primary Election 2025 - 06-24-2025_CandidacyID_To_Name.xlsx",
             "cvrPattern": "2025P\\d?V.+\\.xlsx",
-            "jurisdictionName": "Manhattan",
+            "jurisdictionName": "New York",
             "officeName": "DEM Borough President"
           }
         },

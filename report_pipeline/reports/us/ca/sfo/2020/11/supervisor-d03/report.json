@@ -4,7 +4,8 @@
     "date": "2020-11-03",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true
+      "eager": true,
+      "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
     "electionPath": "2020/11",
@@ -391,6 +392,47 @@
         }
       ]
     ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 6840,
+      "2": 3405,
+      "3": 3117,
+      "4": 15531
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 4864,
+        "2": 1834,
+        "3": 1284,
+        "4": 7430
+      },
+      "1": {
+        "1": 1785,
+        "2": 1412,
+        "3": 1463,
+        "4": 5893
+      },
+      "2": {
+        "1": 120,
+        "2": 123,
+        "3": 239,
+        "4": 1008
+      },
+      "3": {
+        "1": 71,
+        "2": 36,
+        "3": 131,
+        "4": 1200
+      }
+    },
+    "totalBallots": 28893,
+    "candidateTotals": {
+      "0": 15412,
+      "1": 10553,
+      "2": 1490,
+      "3": 1438
+    }
   },
   "smithSet": [
     0

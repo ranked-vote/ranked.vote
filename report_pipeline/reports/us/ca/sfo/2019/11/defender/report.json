@@ -4,7 +4,8 @@
     "date": "2019-11-05",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true
+      "eager": true,
+      "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
     "electionPath": "2019/11",
@@ -94,6 +95,20 @@
       "X"
     ],
     "entries": []
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 161109
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 161109
+      }
+    },
+    "totalBallots": 161109,
+    "candidateTotals": {
+      "0": 161109
+    }
   },
   "smithSet": [
     0

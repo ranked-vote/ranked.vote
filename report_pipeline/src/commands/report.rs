@@ -221,6 +221,20 @@ fn process_nyc_election_batch(
                 read_serialized(&report_path)
             };
 
+            // Skip empty reports (no ballots, candidates, or rounds)
+            if report.ballot_count == 0
+                || report.num_candidates == 0
+                || report.rounds.is_empty()
+            {
+                log_debug!(
+                    "Skipping empty report: {}",
+                    report.info.office
+                );
+                drop(report);
+                drop(preprocessed);
+                return None;
+            }
+
             // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
             let has_write_in_by_name = report.candidates.iter().any(|c| {
                 is_write_in_by_name(&c.name)
@@ -358,6 +372,20 @@ fn process_nist_election_batch(
             } else {
                 read_serialized(&report_path)
             };
+
+            // Skip empty reports (no ballots, candidates, or rounds)
+            if report.ballot_count == 0
+                || report.num_candidates == 0
+                || report.rounds.is_empty()
+            {
+                log_debug!(
+                    "Skipping empty report: {}",
+                    report.info.office
+                );
+                drop(report);
+                drop(preprocessed);
+                return None;
+            }
 
             // Check if any candidate is named "Write-in" or "Write in" (case-insensitive)
             let has_write_in_by_name = report.candidates.iter().any(|c| {
@@ -688,15 +716,15 @@ pub fn report(
 
     // Always write index.json, even if there were errors
     let index_path = Path::new(report_dir).join("index.json");
-    match std::fs::create_dir_all(report_dir) {
-        Ok(_) => {
-            write_serialized(&index_path, &report_index);
-            log_info!("Index written: {} elections", report_index.elections.len());
-        }
-        Err(e) => {
-            log_warn!("Failed to create report directory: {}", e);
-        }
+
+    // Ensure the report directory exists
+    if let Err(e) = std::fs::create_dir_all(report_dir) {
+        log_warn!("Failed to create report directory {}: {}", report_dir.display(), e);
+        return;
     }
+
+    write_serialized(&index_path, &report_index);
+    log_info!("Index written: {} elections", report_index.elections.len());
 
     // Print summary
     log_info!("=== Report Generation Summary ===");
@@ -750,6 +778,18 @@ pub fn rebuild_index(report_dir: &Path) {
         });
 
         if let Ok(report) = report {
+            // Skip empty reports (no ballots, candidates, or rounds)
+            if report.ballot_count == 0
+                || report.num_candidates == 0
+                || report.rounds.is_empty()
+            {
+                log_debug!(
+                    "Skipping empty report: {}",
+                    report_path.display()
+                );
+                continue;
+            }
+
             reports_processed += 1;
 
             // Use the election path from the report if available, otherwise construct from file path
@@ -809,6 +849,12 @@ pub fn rebuild_index(report_dir: &Path) {
     let report_index = ReportIndex {
         elections: election_index_entries,
     };
+
+    // Ensure the report directory exists before writing
+    if let Err(e) = std::fs::create_dir_all(report_dir) {
+        log_warn!("Failed to create report directory {}: {}", report_dir.display(), e);
+        return;
+    }
 
     let index_path = report_dir.join("index.json");
     write_serialized(&index_path, &report_index);
