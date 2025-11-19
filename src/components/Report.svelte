@@ -66,7 +66,7 @@
   <p class="description"></p>
   <div class="electionHeader">
     <h3>
-      <a href="/">rcv.report</a>
+      <a href="/">ranked.vote</a>
       //
       <strong>{report.info.jurisdictionName}</strong>
       {report.info.officeName}

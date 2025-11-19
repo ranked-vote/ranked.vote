@@ -1,5 +1,5 @@
 {
-  "name": "rcv.report",
+  "name": "ranked.vote",
   "description": "Detailed reports on ranked-choice elections",
   "version": "0.0.1",
   "type": "module",

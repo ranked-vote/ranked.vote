@@ -1,4 +1,4 @@
-name: Deploy rcv.report to GitHub Pages
+name: Deploy ranked.vote to GitHub Pages
 
 on:
   push:

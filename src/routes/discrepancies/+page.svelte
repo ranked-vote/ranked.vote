@@ -1,14 +1,14 @@
 <svelte:head>
-	<title>rcv.report: Understanding Discrepancies</title>
+	<title>ranked.vote: Understanding Discrepancies</title>
 </svelte:head>
 
 <div class="container">
 <div class="description">
-  <h1><a href="/">rcv.report</a>: Understanding Discrepancies</h1>
+  <h1><a href="/">ranked.vote</a>: Understanding Discrepancies</h1>
 </div>
 
 <p>
-  All of the analysis that goes into rcv.report reports is based only
+  All of the analysis that goes into ranked.vote reports is based only
   on ballot-level data. This includes the IRV tabulation, which backs
   the "Runoff Rounds" section.
 </p>

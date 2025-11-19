@@ -1,10 +1,10 @@
 <svelte:head>
-	<title>About rcv.report</title>
+	<title>About ranked.vote</title>
 </svelte:head>
 
 <div class="container">
 <div class="description">
-  <h1>About <a href="/">rcv.report</a></h1>
+  <h1>About <a href="/">ranked.vote</a></h1>
 </div>
 
 <p>
@@ -13,7 +13,7 @@
   </a>
   produce a lot of data about voter preferences. Typically, this information is
   made available by election boards in specialized file formats and requires
-  processing to interpret. The purpose of rcv.report is to increase transparency into these
+  processing to interpret. The purpose of ranked.vote is to increase transparency into these
   elections by creating detailed and intuitive reports about them.
 </p>
 
@@ -35,9 +35,8 @@
 </p>
 
 <p>
-  rcv.report is a fork of ranked.vote which was created by
-  <a href="https://paulbutler.org">Paul Butler</a>.
-  rcv.report is maintained by
+  ranked.vote was created by
+  <a href="https://paulbutler.org">Paul Butler</a> and
   <a href="https://felixsargent.com">Felix Sargent</a>.
   It is non-partisan and has received no outside funding.
 </p>
@@ -61,7 +60,7 @@
 
 <p>
   Contributions are welcome! The project is open source and available on
-  <a href="https://github.com/fsargent/rcv.report">GitHub</a>. Please feel free to
+  <a href="https://github.com/fsargent/ranked.vote">GitHub</a>. Please feel free to
   open issues, submit pull requests, or reach out with questions.
 </p>
 
@@ -69,7 +68,7 @@
 
 <p>
   This website and the data pipeline behind it (including the tabulator) are
-  <a href="https://github.com/fsargent/rcv.report">open source</a> and liberally licensed. Website content and generated reports may
+  <a href="https://github.com/fsargent/ranked.vote">open source</a> and liberally licensed. Website content and generated reports may
   be freely distributed with attribution under the <a href="https://creativecommons.org/licenses/by/2.0/">CC-BY</a> license.
 </p>
 

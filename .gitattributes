@@ -1,4 +1,4 @@
-# Git LFS configuration for rcv.report
+# Git LFS configuration for ranked.vote
 
 # Archive files (compressed election data)
 # These are our source of truth, committed to git via LFS

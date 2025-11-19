@@ -1,4 +1,4 @@
-# rcv.report
+# ranked.vote
 
 A static site and data pipeline for publishing ranked-choice voting (RCV) election reports.
 
@@ -33,8 +33,8 @@ See [GIT-LFS-SETUP.md](GIT-LFS-SETUP.md) for detailed instructions.
 
 ```bash
 # Clone repository (Git LFS will automatically download archives)
-git clone https://github.com/fsargent/rcv.report.git
-cd rcv.report
+git clone https://github.com/ranked-vote/ranked.vote.git
+cd ranked.vote
 
 # Extract election data archives to working directory
 npm run report:extract
