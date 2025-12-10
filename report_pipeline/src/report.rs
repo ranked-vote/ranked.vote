@@ -3,7 +3,9 @@ use crate::model::election::{
     CandidateId, CandidateType, Election, ElectionInfo, ElectionPreprocessed, NormalizedBallot,
 };
 use crate::model::metadata::{Contest, ElectionMetadata, Jurisdiction};
-use crate::model::report::{CandidatePairEntry, CandidatePairTable, CandidateVotes, ContestReport, RankingDistribution};
+use crate::model::report::{
+    CandidatePairEntry, CandidatePairTable, CandidateVotes, ContestReport, RankingDistribution,
+};
 use crate::normalizers::normalize_election;
 use crate::tabulator::{tabulate, Allocatee, TabulatorRound};
 use std::collections::{BTreeMap, HashMap, HashSet};
@@ -267,9 +269,7 @@ pub fn generate_ranking_distribution(
         // Update candidate-specific distributions
         if let Some(first_choice) = choices.first() {
             *candidate_totals.entry(*first_choice).or_insert(0) += 1;
-            let candidate_dist = candidate_distributions
-                .entry(*first_choice)
-                .or_insert_with(BTreeMap::new);
+            let candidate_dist = candidate_distributions.entry(*first_choice).or_default();
             *candidate_dist.entry(rank_count).or_insert(0) += 1;
         }
     }
@@ -429,7 +429,7 @@ pub fn generate_report(election: &ElectionPreprocessed) -> ContestReport {
     // Sort vectors for consistent JSON output
     let mut sorted_smith_set: Vec<CandidateId> = smith_set.into_iter().collect();
     sorted_smith_set.sort();
-    
+
     let mut sorted_total_votes = total_votes;
     sorted_total_votes.sort_by_key(|v| v.candidate);
 
@@ -461,7 +461,7 @@ pub fn preprocess_election(
 ) -> ElectionPreprocessed {
     let election = read_election(
         &metadata.data_format,
-        &raw_base.join(&election_path),
+        &raw_base.join(election_path),
         contest.loader_params.clone().unwrap_or_default(),
     );
     let office = ec.offices.get(&contest.office).unwrap();

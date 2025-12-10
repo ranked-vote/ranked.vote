@@ -1,7 +1,6 @@
 use crate::formats::common::{normalize_name, CandidateMap};
 use crate::model::election::{Ballot, Candidate, CandidateType, Choice, Election};
 use crate::util::UnicodeString;
-use itertools::Itertools;
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -104,17 +103,17 @@ fn read_ballots(
 ) -> Vec<Ballot> {
     let mut ballots = Vec::new();
 
-    for (id, votes) in reader
+    let mut records: Vec<_> = reader
         .lines()
-        .into_iter()
         .map(|v| BallotRecord::parse(&v.unwrap()))
         .filter(|v| v.contest_id == contest)
-        .group_by(|v| v.pref_voter_id)
-        .into_iter()
-    {
+        .collect();
+    records.sort_by_key(|v| v.pref_voter_id);
+    for votes in records.chunk_by(|a, b| a.pref_voter_id == b.pref_voter_id) {
+        let id = votes[0].pref_voter_id;
         let mut choices = Vec::new();
 
-        for (i, ballot_record) in votes.enumerate() {
+        for (i, ballot_record) in votes.iter().enumerate() {
             if ballot_record.vote_rank != (i + 1) as u32 {
                 panic!("Got record out of order.")
             }

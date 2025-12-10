@@ -102,10 +102,7 @@ impl TabulatorState {
         let mut allocations: BTreeMap<Choice, Vec<NormalizedBallot>> = BTreeMap::new();
         for ballot in ballots {
             let choice = ballot.top_vote();
-            allocations
-                .entry(choice)
-                .or_insert_with(Vec::new)
-                .push(ballot.clone());
+            allocations.entry(choice).or_default().push(ballot.clone());
         }
         TabulatorState {
             candidate_ballots: allocations,
@@ -222,7 +219,7 @@ impl TabulatorState {
 
                 candidate_ballots
                     .entry(new_choice)
-                    .or_insert_with(Vec::new)
+                    .or_default()
                     .push(ballot.clone());
 
                 *transfer_map

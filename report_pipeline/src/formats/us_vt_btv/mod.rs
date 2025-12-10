@@ -50,7 +50,7 @@ pub fn btv_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elect
 
     // Try multiple path variations to handle archive extraction
     let mut ballots_path = path.join(&options.ballots);
-    
+
     // If the file doesn't exist and we have an archive parameter, try prepending the archive directory name
     if !ballots_path.exists() {
         if let Some(ref archive) = options.archive {
@@ -75,7 +75,7 @@ pub fn btv_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elect
             }
         }
     }
-    
+
     let file = match File::open(&ballots_path) {
         Ok(file) => file,
         Err(e) => {

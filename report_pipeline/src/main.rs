@@ -48,10 +48,10 @@ enum Command {
         #[clap(long)]
         use_cache_report: bool,
         /// Whether to force preprocessing even if preprocessed files exist (deprecated: use --use-cache-preprocess=false)
-        #[clap(long, hidden = true)]
+        #[clap(long, hide = true)]
         force_preprocess: bool,
         /// Whether to force report generation even if report files exist (deprecated: use --use-cache-report=false)
-        #[clap(long, hidden = true)]
+        #[clap(long, hide = true)]
         force_report: bool,
         /// Optional jurisdiction filter (e.g., "us/ca/alameda")
         #[clap(long)]
@@ -90,15 +90,23 @@ fn main() {
         } => {
             // Support deprecated flags for backward compatibility
             // If old flags are used, convert them to new cache flags
-            let use_cache_preprocess = if force_preprocess { false } else { use_cache_preprocess };
-            let use_cache_report = if force_report { false } else { use_cache_report };
-            
+            let use_cache_preprocess = if force_preprocess {
+                false
+            } else {
+                use_cache_preprocess
+            };
+            let use_cache_report = if force_report {
+                false
+            } else {
+                use_cache_report
+            };
+
             // By default (when flags are false), regenerate everything
             // Only use cache if explicitly requested
             // If regenerating reports, also regenerate preprocessing
             let force_preprocess_final = !use_cache_preprocess || !use_cache_report;
             let force_report_final = !use_cache_report;
-            
+
             report(
                 &meta_dir,
                 &raw_data_dir,

@@ -20,12 +20,13 @@ let currentLogLevel = logLevels.INFO;
 function log(level, message, data = null) {
   if (level < currentLogLevel) return;
 
-  const prefix = {
-    [logLevels.DEBUG]: "🔍",
-    [logLevels.INFO]: "ℹ️",
-    [logLevels.WARN]: "⚠️",
-    [logLevels.ERROR]: "❌",
-  }[level] || "ℹ️";
+  const prefix =
+    {
+      [logLevels.DEBUG]: "🔍",
+      [logLevels.INFO]: "ℹ️",
+      [logLevels.WARN]: "⚠️",
+      [logLevels.ERROR]: "❌",
+    }[level] || "ℹ️";
 
   const timestamp = new Date().toISOString().split("T")[1].slice(0, -1);
   if (data) {
@@ -40,7 +41,9 @@ function logProgress(current, total, prefix = "Processing") {
   const barLength = 30;
   const filled = Math.floor((current / total) * barLength);
   const bar = "█".repeat(filled) + "░".repeat(barLength - filled);
-  process.stdout.write(`\r${prefix}: [${bar}] ${current}/${total} (${percent}%)`);
+  process.stdout.write(
+    `\r${prefix}: [${bar}] ${current}/${total} (${percent}%)`,
+  );
   if (current === total) {
     process.stdout.write("\n");
   }
@@ -77,7 +80,12 @@ async function setupPage(page) {
 }
 
 // Process reports in parallel with concurrency limit
-async function processBatch(reports, browser, concurrency = 5, onProgress = null) {
+async function processBatch(
+  reports,
+  browser,
+  concurrency = 5,
+  onProgress = null,
+) {
   const results = [];
   const total = reports.length;
   let processed = 0;
@@ -86,7 +94,10 @@ async function processBatch(reports, browser, concurrency = 5, onProgress = null
     const batch = reports.slice(i, i + concurrency);
     const batchStartTime = Date.now();
 
-    log(logLevels.DEBUG, `Starting batch ${Math.floor(i / concurrency) + 1} (${batch.length} reports)`);
+    log(
+      logLevels.DEBUG,
+      `Starting batch ${Math.floor(i / concurrency) + 1} (${batch.length} reports)`,
+    );
 
     const batchResults = await Promise.all(
       batch.map(async (report) => {
@@ -96,17 +107,21 @@ async function processBatch(reports, browser, concurrency = 5, onProgress = null
           onProgress(processed, total);
         }
         return result;
-      })
+      }),
     );
 
     const batchTime = Date.now() - batchStartTime;
-    const batchSuccess = batchResults.filter((r) => r.success && !r.skipped).length;
-    const batchSkipped = batchResults.filter((r) => r.success && r.skipped).length;
+    const batchSuccess = batchResults.filter(
+      (r) => r.success && !r.skipped,
+    ).length;
+    const batchSkipped = batchResults.filter(
+      (r) => r.success && r.skipped,
+    ).length;
     const batchFailed = batchResults.filter((r) => !r.success).length;
 
     log(
       logLevels.DEBUG,
-      `Batch complete: ${batchSuccess} generated, ${batchSkipped} skipped, ${batchFailed} failed (${batchTime}ms)`
+      `Batch complete: ${batchSuccess} generated, ${batchSkipped} skipped, ${batchFailed} failed (${batchTime}ms)`,
     );
 
     results.push(...batchResults);
@@ -146,7 +161,7 @@ async function processReport(report, browser, retries = 1) {
       }
     } catch (error) {
       // If file doesn't exist, skip it (shouldn't happen since we check earlier, but handle gracefully)
-      if (error.code === 'ENOENT') {
+      if (error.code === "ENOENT") {
         return {
           success: true,
           skipped: true,
@@ -359,9 +374,13 @@ async function generateShareImages() {
       });
     }
     if (skippedMissing.length > 0) {
-      log(logLevels.INFO, `Skipped ${skippedMissing.length} missing report files:`, {
-        reports: skippedMissing,
-      });
+      log(
+        logLevels.INFO,
+        `Skipped ${skippedMissing.length} missing report files:`,
+        {
+          reports: skippedMissing,
+        },
+      );
     }
     log(logLevels.INFO, `Found ${reports.length} reports to process`);
 
@@ -406,11 +425,16 @@ async function generateShareImages() {
       const loadTimes = processedResults.map((r) => r.loadTime || 0);
 
       const avgTime = times.reduce((sum, t) => sum + t, 0) / times.length;
-      const avgLoadTime = loadTimes.reduce((sum, t) => sum + t, 0) / loadTimes.length;
+      const avgLoadTime =
+        loadTimes.reduce((sum, t) => sum + t, 0) / loadTimes.length;
       const minTime = Math.min(...times);
       const maxTime = Math.max(...times);
-      const p50Time = times.sort((a, b) => a - b)[Math.floor(times.length * 0.5)];
-      const p95Time = times.sort((a, b) => a - b)[Math.floor(times.length * 0.95)];
+      const p50Time = times.sort((a, b) => a - b)[
+        Math.floor(times.length * 0.5)
+      ];
+      const p95Time = times.sort((a, b) => a - b)[
+        Math.floor(times.length * 0.95)
+      ];
 
       log(logLevels.INFO, "\nTiming Statistics:");
       log(logLevels.INFO, `  Average load time: ${avgLoadTime.toFixed(1)}ms`);
@@ -475,7 +499,10 @@ async function checkDevServer() {
 async function startDevServer() {
   log(logLevels.INFO, "Starting dev server...");
 
-  const env = { ...process.env, RANKED_VOTE_REPORTS: "report_pipeline/reports" };
+  const env = {
+    ...process.env,
+    RANKED_VOTE_REPORTS: "report_pipeline/reports",
+  };
 
   // Use spawn without shell to avoid security warning
   devServerProcess = spawn("bun", ["run", "dev"], {
@@ -485,7 +512,9 @@ async function startDevServer() {
   });
 
   devServerProcess.on("error", (error) => {
-    log(logLevels.ERROR, "Failed to start dev server", { error: error.message });
+    log(logLevels.ERROR, "Failed to start dev server", {
+      error: error.message,
+    });
   });
 
   // Wait for server to be ready
@@ -566,7 +595,10 @@ process.on("SIGTERM", () => {
         'find static/share -name "*.png" 2>/dev/null | wc -l',
         { encoding: "utf8" },
       ).trim();
-      log(logLevels.INFO, `\n📊 Total share images in static/share: ${imageCount}`);
+      log(
+        logLevels.INFO,
+        `\n📊 Total share images in static/share: ${imageCount}`,
+      );
     } catch {
       // Ignore if find fails
     }

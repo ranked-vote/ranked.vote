@@ -4,12 +4,13 @@ use crate::formats::common::{normalize_name, CandidateMap};
 use crate::formats::nist_sp_1500::model::{CandidateManifest, CandidateType, CvrExport, Mark};
 use crate::model::election::{self, Ballot, Candidate, Choice, Election};
 use csv::ReaderBuilder;
-use itertools::Itertools;
 use std::collections::{BTreeMap, HashMap};
 use std::fs::{self, File};
 use std::io::{BufReader, Read};
 
 use std::path::Path;
+
+type ContestData = HashMap<u32, (CandidateMap<u32>, Option<u32>, Vec<Ballot>)>;
 
 struct ReaderOptions {
     cvr: String,
@@ -152,8 +153,11 @@ fn stream_process_cvr_file<R: Read>(
         for contest in &session.contests() {
             if contest.id == contest_id {
                 let mut choices: Vec<Choice> = Vec::new();
-                for (_, marks) in &contest.marks.iter().group_by(|x| x.rank) {
-                    let marks: Vec<&Mark> = marks.filter(|d| !d.is_ambiguous).collect();
+                let mut sorted_marks: Vec<_> = contest.marks.iter().collect();
+                sorted_marks.sort_by_key(|x| x.rank);
+                for marks in sorted_marks.chunk_by(|a, b| a.rank == b.rank) {
+                    let marks: Vec<&Mark> =
+                        marks.iter().filter(|d| !d.is_ambiguous).copied().collect();
 
                     let choice = match marks.as_slice() {
                         [v] if Some(v.candidate_id) == dropped_write_in => Choice::Undervote,
@@ -203,7 +207,8 @@ fn stream_process_csv_cvr_file<R: Read>(
     let mut header_buffer = csv::StringRecord::new();
     let mut rows = Vec::new();
     for _ in 0..4 {
-        if !rdr.read_record(&mut header_buffer)
+        if !rdr
+            .read_record(&mut header_buffer)
             .map_err(|e| format!("CSV parse error: {}", e))?
         {
             break;
@@ -238,29 +243,22 @@ fn stream_process_csv_cvr_file<R: Read>(
                 // Parse candidate name and rank from format like "CANDIDATE(1)" or "CANDIDATE(2)"
                 if let Some(open_paren) = candidate_str.rfind('(') {
                     if let Some(close_paren) = candidate_str.rfind(')') {
-                        if let Ok(rank) = candidate_str[open_paren + 1..close_paren].parse::<u32>() {
+                        if let Ok(rank) = candidate_str[open_paren + 1..close_paren].parse::<u32>()
+                        {
                             let candidate_name = candidate_str[..open_paren].trim().to_string();
                             // Map candidate name to candidate ID
-                            if let Some(_candidate) = candidate_manifest
-                                .list
-                                .iter()
-                                .find(|c| {
-                                    c.contest_id == contest_id
-                                        && normalize_name(&c.description, false)
-                                            == normalize_name(&candidate_name, false)
-                                })
-                            {
+                            if let Some(_candidate) = candidate_manifest.list.iter().find(|c| {
+                                c.contest_id == contest_id
+                                    && normalize_name(&c.description, false)
+                                        == normalize_name(&candidate_name, false)
+                            }) {
                                 contest_columns.push((col_idx, candidate_name, rank));
                             } else if candidate_name == "Write-in" {
                                 // Handle write-in candidates
-                                if candidate_manifest
-                                    .list
-                                    .iter()
-                                    .any(|c| {
-                                        c.contest_id == contest_id
-                                            && matches!(c.candidate_type, CandidateType::WriteIn)
-                                    })
-                                {
+                                if candidate_manifest.list.iter().any(|c| {
+                                    c.contest_id == contest_id
+                                        && matches!(c.candidate_type, CandidateType::WriteIn)
+                                }) {
                                     contest_columns.push((col_idx, candidate_name, rank));
                                 }
                             }
@@ -281,17 +279,13 @@ fn stream_process_csv_cvr_file<R: Read>(
     // Group columns by rank and candidate
     let mut rank_candidate_map: HashMap<u32, HashMap<u32, usize>> = HashMap::new(); // rank -> candidate_id -> column_index
     for (col_idx, candidate_name, rank) in &contest_columns {
-        if let Some(candidate) = candidate_manifest
-            .list
-            .iter()
-            .find(|c| {
-                c.contest_id == contest_id
-                    && normalize_name(&c.description, false) == normalize_name(candidate_name, false)
-            })
-        {
+        if let Some(candidate) = candidate_manifest.list.iter().find(|c| {
+            c.contest_id == contest_id
+                && normalize_name(&c.description, false) == normalize_name(candidate_name, false)
+        }) {
             rank_candidate_map
                 .entry(*rank)
-                .or_insert_with(HashMap::new)
+                .or_default()
                 .insert(candidate.id, *col_idx);
         }
     }
@@ -307,7 +301,10 @@ fn stream_process_csv_cvr_file<R: Read>(
 
     // Process ballot rows with buffering for large files
     let mut buffer = csv::StringRecord::new();
-    while rdr.read_record(&mut buffer).map_err(|e| format!("CSV parse error: {}", e))? {
+    while rdr
+        .read_record(&mut buffer)
+        .map_err(|e| format!("CSV parse error: {}", e))?
+    {
         if buffer.len() < contest_columns[0].0 {
             continue;
         }
@@ -355,8 +352,11 @@ fn stream_process_csv_cvr_file<R: Read>(
         sorted_marks.sort_by_key(|(_, rank)| *rank);
 
         let mut choices: Vec<Choice> = Vec::new();
-        for (_, rank_group) in &sorted_marks.iter().group_by(|(_, r)| *r) {
-            let marks_at_rank: Vec<u32> = rank_group.map(|(candidate_id, _)| *candidate_id).collect();
+        for rank_group in sorted_marks.chunk_by(|a, b| a.1 == b.1) {
+            let marks_at_rank: Vec<u32> = rank_group
+                .iter()
+                .map(|(candidate_id, _)| *candidate_id)
+                .collect();
             let choice = match marks_at_rank.as_slice() {
                 [] => Choice::Undervote,
                 [candidate_id] => candidates.id_to_choice(*candidate_id),
@@ -366,10 +366,7 @@ fn stream_process_csv_cvr_file<R: Read>(
         }
 
         if !choices.is_empty() {
-            ballots.push(Ballot::new(
-                format!("{}:{}", filename, record_id),
-                choices,
-            ));
+            ballots.push(Ballot::new(format!("{}:{}", filename, record_id), choices));
             count += 1;
         }
     }
@@ -408,15 +405,13 @@ fn read_from_directory(dir_path: &Path, options: &ReaderOptions) -> Election {
     // Find all CvrExport files in the directory
     let mut cvr_files: Vec<String> = Vec::new();
     if let Ok(entries) = fs::read_dir(dir_path) {
-        for entry in entries {
-            if let Ok(entry) = entry {
-                let filename = entry.file_name().to_string_lossy().to_string();
-                // Support both JSON and CSV formats (CSV files may use CVR_Export prefix)
-                if (filename.starts_with("CvrExport") && filename.ends_with(".json"))
-                    || (filename.starts_with("CVR_Export") && filename.ends_with(".csv"))
-                {
-                    cvr_files.push(filename);
-                }
+        for entry in entries.flatten() {
+            let filename = entry.file_name().to_string_lossy().to_string();
+            // Support both JSON and CSV formats (CSV files may use CVR_Export prefix)
+            if (filename.starts_with("CvrExport") && filename.ends_with(".json"))
+                || (filename.starts_with("CVR_Export") && filename.ends_with(".csv"))
+            {
+                cvr_files.push(filename);
             }
         }
     }
@@ -641,8 +636,7 @@ pub fn nist_batch_reader(
     };
 
     // Set up candidate maps and ballot buckets for each contest
-    let mut contest_data: HashMap<u32, (CandidateMap<u32>, Option<u32>, Vec<Ballot>)> =
-        HashMap::new();
+    let mut contest_data: ContestData = HashMap::new();
 
     for (contest_id, params) in &contests {
         let drop_unqualified_write_in: bool = params
@@ -659,15 +653,13 @@ pub fn nist_batch_reader(
     // Find all CVR files
     let mut cvr_files: Vec<String> = Vec::new();
     if let Ok(entries) = fs::read_dir(&cvr_path) {
-        for entry in entries {
-            if let Ok(entry) = entry {
-                let filename = entry.file_name().to_string_lossy().to_string();
-                // Support both JSON and CSV formats (CSV files may use CVR_Export prefix)
-                if (filename.starts_with("CvrExport") && filename.ends_with(".json"))
-                    || (filename.starts_with("CVR_Export") && filename.ends_with(".csv"))
-                {
-                    cvr_files.push(filename);
-                }
+        for entry in entries.flatten() {
+            let filename = entry.file_name().to_string_lossy().to_string();
+            // Support both JSON and CSV formats (CSV files may use CVR_Export prefix)
+            if (filename.starts_with("CvrExport") && filename.ends_with(".json"))
+                || (filename.starts_with("CVR_Export") && filename.ends_with(".csv"))
+            {
+                cvr_files.push(filename);
             }
         }
     }
@@ -712,8 +704,11 @@ pub fn nist_batch_reader(
                     contest_data.get_mut(&contest.id)
                 {
                     let mut choices: Vec<Choice> = Vec::new();
-                    for (_, marks) in &contest.marks.iter().group_by(|x| x.rank) {
-                        let marks: Vec<&Mark> = marks.filter(|d| !d.is_ambiguous).collect();
+                    let mut sorted_marks: Vec<_> = contest.marks.iter().collect();
+                    sorted_marks.sort_by_key(|x| x.rank);
+                    for marks in sorted_marks.chunk_by(|a, b| a.rank == b.rank) {
+                        let marks: Vec<&Mark> =
+                            marks.iter().filter(|d| !d.is_ambiguous).copied().collect();
 
                         let choice = match marks.as_slice() {
                             [v] if Some(v.candidate_id) == *dropped_write_in => Choice::Undervote,
@@ -746,11 +741,7 @@ pub fn nist_batch_reader(
     // Convert to Election objects
     let mut results = HashMap::new();
     for (contest_id, (candidates, _dropped_write_in, ballots)) in contest_data {
-        crate::log_debug!(
-            "  Contest {}: {} ballots",
-            contest_id,
-            ballots.len()
-        );
+        crate::log_debug!("  Contest {}: {} ballots", contest_id, ballots.len());
         results.insert(contest_id, Election::new(candidates.into_vec(), ballots));
     }
 

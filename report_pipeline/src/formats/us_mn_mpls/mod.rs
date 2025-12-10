@@ -50,7 +50,7 @@ pub fn mpls_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
     let mut rdr = ReaderBuilder::new()
         .has_headers(true)
         .from_path(&file_path)
-        .expect(&format!("Failed to open CSV file: {}", file_path.display()));
+        .unwrap_or_else(|_| panic!("Failed to open CSV file: {}", file_path.display()));
 
     let mut candidate_map = CandidateMap::new();
     let mut ballots: Vec<Ballot> = Vec::new();
@@ -78,7 +78,8 @@ pub fn mpls_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
         // If so, mark the entire ballot as overvoted
         if choice1.eq_ignore_ascii_case("overvote")
             || choice2.eq_ignore_ascii_case("overvote")
-            || choice3.eq_ignore_ascii_case("overvote") {
+            || choice3.eq_ignore_ascii_case("overvote")
+        {
             choices.push(Choice::Overvote);
         } else {
             // Process first choice
@@ -106,14 +107,10 @@ pub fn mpls_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Elec
         // Create ballots based on count
         for _ in 0..count {
             ballot_id += 1;
-            let ballot = Ballot::new(
-                format!("{}:{}", precinct, ballot_id),
-                choices.clone(),
-            );
+            let ballot = Ballot::new(format!("{}:{}", precinct, ballot_id), choices.clone());
             ballots.push(ballot);
         }
     }
 
     Election::new(candidate_map.into_vec(), ballots)
 }
-

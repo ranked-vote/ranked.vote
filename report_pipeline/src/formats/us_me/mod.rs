@@ -1,10 +1,10 @@
 use crate::formats::common::{normalize_name, CandidateMap};
 use crate::model::election::{Ballot, Candidate, CandidateType, Choice, Election};
+use calamine::{open_workbook_auto, Data, Reader};
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::BTreeMap;
 use std::path::Path;
-use xl::{ExcelValue, Workbook};
 
 struct ReaderOptions {
     files: Vec<String>,
@@ -56,17 +56,20 @@ pub fn maine_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Ele
 
     for file in options.files {
         crate::log_debug!("Reading: {}", file);
-        let mut workbook = Workbook::open(path.join(file).to_str().unwrap()).unwrap();
-        let sheets = workbook.sheets();
-        let sheet = sheets.get(1).unwrap(); // Get the first sheet by position (1-based indexing)
+        let file_path = path.join(&file);
+        let mut workbook = open_workbook_auto(&file_path).unwrap();
 
-        let mut rows = sheet.rows(&mut workbook);
+        // Get the first sheet by name or index
+        let sheet_name = workbook.sheet_names().first().unwrap().clone();
+        let range = workbook.worksheet_range(&sheet_name).unwrap();
+
+        let mut rows = range.rows();
         rows.next(); // Skip header row
         for row in rows {
-            let id = if let ExcelValue::Number(id_val) = row[0].value {
-                id_val as u32
-            } else {
-                panic!("Expected number for ballot ID");
+            let id = match row.first() {
+                Some(Data::Int(id_val)) => *id_val as u32,
+                Some(Data::Float(id_val)) => *id_val as u32,
+                _ => panic!("Expected number for ballot ID"),
             };
 
             let mut choices = Vec::new();
@@ -74,12 +77,10 @@ pub fn maine_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> Ele
             // Use a reasonable upper bound, but be safe about bounds
             for i in 3..10 {
                 // Try to access the cell safely
-                let cand = if i < 6 {
-                    // Conservative bound - only process columns 3, 4, 5
-                    if let ExcelValue::String(candidate) = &row[i as u16].value {
-                        candidate.as_ref()
-                    } else {
-                        "undervote"
+                let cand = if i < row.len() {
+                    match row.get(i) {
+                        Some(Data::String(candidate)) => candidate.as_str(),
+                        _ => "undervote",
                     }
                 } else {
                     "undervote"

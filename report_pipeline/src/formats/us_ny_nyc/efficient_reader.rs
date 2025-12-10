@@ -251,7 +251,7 @@ fn read_candidate_ids_optimized(candidates_path: &Path) -> HashMap<u32, String> 
     let rows = range.rows().skip(1);
 
     for row in rows {
-        if let (Some(id_cell), Some(name_cell)) = (row.get(0), row.get(1)) {
+        if let (Some(id_cell), Some(name_cell)) = (row.first(), row.get(1)) {
             let id_opt = match id_cell {
                 Data::Float(f) => Some(*f as u32),
                 Data::Int(i) => Some(*i as u32),
@@ -322,10 +322,7 @@ fn process_files_with_race_discovery(
                         ballots_by_race.insert(race_key.clone(), Vec::new());
                     }
 
-                    file_race_columns
-                        .entry(race_key)
-                        .or_insert_with(Vec::new)
-                        .push(col_idx);
+                    file_race_columns.entry(race_key).or_default().push(col_idx);
                 }
             }
         }
@@ -339,125 +336,123 @@ fn process_files_with_race_discovery(
         let mut processed_count = 0;
 
         for row in range.rows().skip(1) {
-            if let Some(ballot_id_cell) = row.get(cvr_col) {
-                if let Data::String(ballot_id) = ballot_id_cell {
-                    // Process each race for this ballot
-                    for (race_key, race_columns) in &file_race_columns {
-                        if races.contains_key(race_key) {
-                            let mut choices = Vec::with_capacity(race_columns.len());
-                            let mut has_votes = false;
+            if let Some(Data::String(ballot_id)) = row.get(cvr_col) {
+                // Process each race for this ballot
+                for (race_key, race_columns) in &file_race_columns {
+                    if races.contains_key(race_key) {
+                        let mut choices = Vec::with_capacity(race_columns.len());
+                        let mut has_votes = false;
 
-                            // Inline cell processing for maximum speed
-                            for &col_idx in race_columns {
-                                let choice = match row.get(col_idx) {
-                                    Some(cell) => match cell {
-                                        Data::String(s) => match s.as_str() {
-                                            "undervote" => Choice::Undervote,
-                                            "overvote" => {
-                                                has_votes = true;
-                                                Choice::Overvote
-                                            }
-                                            "Write-in" => {
-                                                has_votes = true;
-                                                race_candidate_maps
-                                                    .get_mut(race_key)
-                                                    .unwrap()
-                                                    .add_id_to_choice(
-                                                        0,
-                                                        Candidate::new(
-                                                            "Write-in".to_string(),
-                                                            CandidateType::WriteIn,
-                                                        ),
-                                                    )
-                                            }
-                                            _ => {
-                                                if let Ok(ext_id) = s.parse::<u32>() {
-                                                    if let Some(candidate_name) =
-                                                        candidates.get(&ext_id)
-                                                    {
-                                                        has_votes = true;
-                                                        race_candidate_maps
-                                                            .get_mut(race_key)
-                                                            .unwrap()
-                                                            .add_id_to_choice(
-                                                                ext_id,
-                                                                Candidate::new(
-                                                                    candidate_name.clone(),
-                                                                    CandidateType::Regular,
-                                                                ),
-                                                            )
-                                                    } else {
-                                                        Choice::Undervote
-                                                    }
+                        // Inline cell processing for maximum speed
+                        for &col_idx in race_columns {
+                            let choice = match row.get(col_idx) {
+                                Some(cell) => match cell {
+                                    Data::String(s) => match s.as_str() {
+                                        "undervote" => Choice::Undervote,
+                                        "overvote" => {
+                                            has_votes = true;
+                                            Choice::Overvote
+                                        }
+                                        "Write-in" => {
+                                            has_votes = true;
+                                            race_candidate_maps
+                                                .get_mut(race_key)
+                                                .unwrap()
+                                                .add_id_to_choice(
+                                                    0,
+                                                    Candidate::new(
+                                                        "Write-in".to_string(),
+                                                        CandidateType::WriteIn,
+                                                    ),
+                                                )
+                                        }
+                                        _ => {
+                                            if let Ok(ext_id) = s.parse::<u32>() {
+                                                if let Some(candidate_name) =
+                                                    candidates.get(&ext_id)
+                                                {
+                                                    has_votes = true;
+                                                    race_candidate_maps
+                                                        .get_mut(race_key)
+                                                        .unwrap()
+                                                        .add_id_to_choice(
+                                                            ext_id,
+                                                            Candidate::new(
+                                                                candidate_name.clone(),
+                                                                CandidateType::Regular,
+                                                            ),
+                                                        )
                                                 } else {
                                                     Choice::Undervote
                                                 }
-                                            }
-                                        },
-                                        Data::Float(f) => {
-                                            let ext_id = *f as u32;
-                                            if let Some(candidate_name) = candidates.get(&ext_id) {
-                                                has_votes = true;
-                                                race_candidate_maps
-                                                    .get_mut(race_key)
-                                                    .unwrap()
-                                                    .add_id_to_choice(
-                                                        ext_id,
-                                                        Candidate::new(
-                                                            candidate_name.clone(),
-                                                            CandidateType::Regular,
-                                                        ),
-                                                    )
                                             } else {
                                                 Choice::Undervote
                                             }
                                         }
-                                        Data::Int(i) => {
-                                            let ext_id = *i as u32;
-                                            if let Some(candidate_name) = candidates.get(&ext_id) {
-                                                has_votes = true;
-                                                race_candidate_maps
-                                                    .get_mut(race_key)
-                                                    .unwrap()
-                                                    .add_id_to_choice(
-                                                        ext_id,
-                                                        Candidate::new(
-                                                            candidate_name.clone(),
-                                                            CandidateType::Regular,
-                                                        ),
-                                                    )
-                                            } else {
-                                                Choice::Undervote
-                                            }
-                                        }
-                                        _ => Choice::Undervote,
                                     },
-                                    None => Choice::Undervote,
-                                };
-                                choices.push(choice);
-                            }
+                                    Data::Float(f) => {
+                                        let ext_id = *f as u32;
+                                        if let Some(candidate_name) = candidates.get(&ext_id) {
+                                            has_votes = true;
+                                            race_candidate_maps
+                                                .get_mut(race_key)
+                                                .unwrap()
+                                                .add_id_to_choice(
+                                                    ext_id,
+                                                    Candidate::new(
+                                                        candidate_name.clone(),
+                                                        CandidateType::Regular,
+                                                    ),
+                                                )
+                                        } else {
+                                            Choice::Undervote
+                                        }
+                                    }
+                                    Data::Int(i) => {
+                                        let ext_id = *i as u32;
+                                        if let Some(candidate_name) = candidates.get(&ext_id) {
+                                            has_votes = true;
+                                            race_candidate_maps
+                                                .get_mut(race_key)
+                                                .unwrap()
+                                                .add_id_to_choice(
+                                                    ext_id,
+                                                    Candidate::new(
+                                                        candidate_name.clone(),
+                                                        CandidateType::Regular,
+                                                    ),
+                                                )
+                                        } else {
+                                            Choice::Undervote
+                                        }
+                                    }
+                                    _ => Choice::Undervote,
+                                },
+                                None => Choice::Undervote,
+                            };
+                            choices.push(choice);
+                        }
 
-                            // Only store ballots with actual votes
-                            if has_votes {
-                                let ballot_index = ballots.len();
-                                ballots.push(RaceBallotVote {
-                                    ballot_id: ballot_id.to_string(),
-                                    race_key: race_key.clone(),
-                                    choices,
-                                });
+                        // Only store ballots with actual votes
+                        if has_votes {
+                            let ballot_index = ballots.len();
+                            ballots.push(RaceBallotVote {
+                                ballot_id: ballot_id.to_string(),
+                                race_key: race_key.clone(),
+                                choices,
+                            });
 
-                                ballots_by_race
-                                    .get_mut(race_key)
-                                    .unwrap()
-                                    .push(ballot_index);
-                            }
+                            ballots_by_race
+                                .get_mut(race_key)
+                                .unwrap()
+                                .push(ballot_index);
                         }
                     }
+                }
 
-                    processed_count += 1;
-                    if processed_count % 25000 == 0 {
-                        crate::log_trace!("\r    ⏳ {} rows...", processed_count);
-                    }
+                processed_count += 1;
+                if processed_count % 25000 == 0 {
+                    crate::log_trace!("\r    ⏳ {} rows...", processed_count);
                 }
             }
         }

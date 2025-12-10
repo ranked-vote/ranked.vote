@@ -28,7 +28,9 @@ pub fn get_reader_for_format(format: &str) -> &'static BallotReader {
         "us_mn_mpls" => &us_mn_mpls::mpls_ballot_reader,
         "simple_json" => &simple_json::json_reader,
         // NYC format uses batch reader exclusively - see process_election() in commands/report.rs
-        "us_ny_nyc" => panic!("NYC format must use batch reader (nyc_batch_reader), not single-contest reader"),
+        "us_ny_nyc" => {
+            panic!("NYC format must use batch reader (nyc_batch_reader), not single-contest reader")
+        }
         _ => panic!("The format {} is not implemented.", format),
     }
 }

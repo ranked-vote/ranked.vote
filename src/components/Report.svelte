@@ -121,8 +121,7 @@
         <p>
           No Condorcet winner exists; multiple candidates form a
           <a href="https://en.wikipedia.org/wiki/Condorcet_paradox">Condorcet cycle</a>:
-          {report.smithSet.map(getCandidateNameById).join(", ")}
-          . This means that among these candidates, each one would beat some others in head-to-head matchups, but no single candidate beats all others. In this situation, the winner depends on the order of eliminations in the ranked-choice voting process, rather than a clear preference.
+          {report.smithSet.map(getCandidateNameById).join(", ")}. This means that among these candidates, each one would beat some others in head-to-head matchups, but no single candidate beats all others. In this situation, the winner depends on the order of eliminations in the ranked-choice voting process, rather than a clear preference.
         </p>
       {/if}
     {/if}
