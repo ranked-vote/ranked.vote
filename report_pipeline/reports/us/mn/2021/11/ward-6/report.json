@@ -1,0 +1,305 @@
+{
+  "info": {
+    "name": "City Council Ward 6",
+    "date": "2021-11-02",
+    "dataFormat": "us_mn_mpls",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": false
+    },
+    "jurisdictionPath": "us/mn",
+    "electionPath": "2021/11",
+    "office": "ward-6",
+    "officeName": "City Council Ward 6",
+    "jurisdictionName": "Minneapolis",
+    "electionName": "Municipal Election",
+    "loaderParams": {
+      "file": "2021-Ward-6-Cast-Vote-Record.csv"
+    },
+    "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/"
+  },
+  "ballotCount": 6871,
+  "candidates": [
+    {
+      "name": "Jamal Osman",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "A. Bihi",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Undeclared Write-ins",
+      "candidate_type": "WriteIn"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 0,
+          "votes": 3747
+        },
+        {
+          "allocatee": 1,
+          "votes": 2482
+        },
+        {
+          "allocatee": 2,
+          "votes": 76
+        },
+        {
+          "allocatee": "X",
+          "votes": 566
+        }
+      ],
+      "undervote": 558,
+      "overvote": 8,
+      "continuingBallots": 6305,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 0,
+          "votes": 3753
+        },
+        {
+          "allocatee": 1,
+          "votes": 2489
+        },
+        {
+          "allocatee": "X",
+          "votes": 629
+        }
+      ],
+      "undervote": 621,
+      "overvote": 8,
+      "continuingBallots": 6242,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 0,
+          "count": 6
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "count": 7
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 63
+        }
+      ]
+    }
+  ],
+  "winner": 0,
+  "condorcet": 0,
+  "numCandidates": 2,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 3747,
+      "transferVotes": 6,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 2482,
+      "transferVotes": 7,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 76,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.6012496,
+          "numerator": 3753,
+          "denominator": 6242
+        },
+        {
+          "frac": 0.97868997,
+          "numerator": 4363,
+          "denominator": 4458
+        }
+      ],
+      [
+        {
+          "frac": 0.3987504,
+          "numerator": 2489,
+          "denominator": 6242
+        },
+        null,
+        {
+          "frac": 0.9730705,
+          "numerator": 3505,
+          "denominator": 3602
+        }
+      ],
+      [
+        {
+          "frac": 0.021310005,
+          "numerator": 95,
+          "denominator": 4458
+        },
+        {
+          "frac": 0.026929483,
+          "numerator": 97,
+          "denominator": 3602
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      "X"
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.27301842,
+          "numerator": 1023,
+          "denominator": 3747
+        },
+        {
+          "frac": 0.0056044837,
+          "numerator": 21,
+          "denominator": 3747
+        },
+        {
+          "frac": 0.7213771,
+          "numerator": 2703,
+          "denominator": 3747
+        }
+      ],
+      [
+        {
+          "frac": 0.24818695,
+          "numerator": 616,
+          "denominator": 2482
+        },
+        null,
+        {
+          "frac": 0.0076551167,
+          "numerator": 19,
+          "denominator": 2482
+        },
+        {
+          "frac": 0.7441579,
+          "numerator": 1847,
+          "denominator": 2482
+        }
+      ],
+      [
+        {
+          "frac": 0.078947365,
+          "numerator": 6,
+          "denominator": 76
+        },
+        {
+          "frac": 0.09210526,
+          "numerator": 7,
+          "denominator": 76
+        },
+        null,
+        {
+          "frac": 0.82894737,
+          "numerator": 63,
+          "denominator": 76
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
+    "entries": [
+      [
+        {
+          "frac": 0.078947365,
+          "numerator": 6,
+          "denominator": 76
+        },
+        {
+          "frac": 0.09210526,
+          "numerator": 7,
+          "denominator": 76
+        },
+        {
+          "frac": 0.82894737,
+          "numerator": 63,
+          "denominator": 76
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 4613,
+      "2": 1610,
+      "3": 82
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 2703,
+        "2": 999,
+        "3": 45
+      },
+      "1": {
+        "1": 1847,
+        "2": 605,
+        "3": 30
+      },
+      "2": {
+        "1": 63,
+        "2": 6,
+        "3": 7
+      }
+    },
+    "totalBallots": 6305,
+    "candidateTotals": {
+      "0": 3747,
+      "1": 2482,
+      "2": 76
+    }
+  },
+  "smithSet": [
+    0
+  ]
+}

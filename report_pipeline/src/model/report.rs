@@ -3,13 +3,13 @@ use crate::tabulator::{Allocatee, TabulatorRound};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReportIndex {
     pub elections: Vec<ElectionIndexEntry>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ElectionIndexEntry {
     pub path: String,
@@ -19,7 +19,7 @@ pub struct ElectionIndexEntry {
     pub contests: Vec<ContestIndexEntry>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ContestIndexEntry {
     pub office: String,
@@ -29,7 +29,9 @@ pub struct ContestIndexEntry {
     pub num_candidates: u32,
     pub num_rounds: u32,
     pub condorcet_winner: Option<String>,
+    #[serde(default)]
     pub has_non_condorcet_winner: bool,
+    #[serde(default)]
     pub has_write_in_by_name: bool,
 }
 

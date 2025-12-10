@@ -1,0 +1,577 @@
+{
+  "info": {
+    "name": "City Council Ward 3",
+    "date": "2021-11-02",
+    "dataFormat": "us_mn_mpls",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": false
+    },
+    "jurisdictionPath": "us/mn",
+    "electionPath": "2021/11",
+    "office": "ward-3",
+    "officeName": "City Council Ward 3",
+    "jurisdictionName": "Minneapolis",
+    "electionName": "Municipal Election",
+    "loaderParams": {
+      "file": "2021-Ward-3-Cast-Vote-Record.csv"
+    },
+    "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/"
+  },
+  "ballotCount": 14438,
+  "candidates": [
+    {
+      "name": "Steve Fletcher",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Michael Rainville",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Merv Moorhead",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Hope Hennessey",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Undeclared Write-ins",
+      "candidate_type": "WriteIn"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 6022
+        },
+        {
+          "allocatee": 0,
+          "votes": 5224
+        },
+        {
+          "allocatee": 2,
+          "votes": 1161
+        },
+        {
+          "allocatee": 3,
+          "votes": 885
+        },
+        {
+          "allocatee": 4,
+          "votes": 43
+        },
+        {
+          "allocatee": "X",
+          "votes": 1103
+        }
+      ],
+      "undervote": 1078,
+      "overvote": 25,
+      "continuingBallots": 13335,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 6902
+        },
+        {
+          "allocatee": 0,
+          "votes": 5652
+        },
+        {
+          "allocatee": "X",
+          "votes": 1884
+        }
+      ],
+      "undervote": 1859,
+      "overvote": 25,
+      "continuingBallots": 12554,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 1,
+          "count": 665
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "count": 212
+        },
+        {
+          "from": 4,
+          "to": 1,
+          "count": 3
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 240
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "count": 187
+        },
+        {
+          "from": 4,
+          "to": 0,
+          "count": 1
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 256
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 486
+        },
+        {
+          "from": 4,
+          "to": "X",
+          "count": 39
+        }
+      ]
+    }
+  ],
+  "winner": 1,
+  "condorcet": 1,
+  "numCandidates": 4,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 5224,
+      "transferVotes": 428,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 6022,
+      "transferVotes": 880,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 1161,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    },
+    {
+      "candidate": 3,
+      "firstRoundVotes": 885,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    },
+    {
+      "candidate": 4,
+      "firstRoundVotes": 43,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.45021507,
+          "numerator": 5652,
+          "denominator": 12554
+        },
+        {
+          "frac": 0.6443032,
+          "numerator": 6588,
+          "denominator": 10225
+        },
+        {
+          "frac": 0.7936347,
+          "numerator": 7057,
+          "denominator": 8892
+        },
+        {
+          "frac": 0.9806324,
+          "numerator": 7443,
+          "denominator": 7590
+        }
+      ],
+      [
+        {
+          "frac": 0.54978496,
+          "numerator": 6902,
+          "denominator": 12554
+        },
+        null,
+        {
+          "frac": 0.79379046,
+          "numerator": 7849,
+          "denominator": 9888
+        },
+        {
+          "frac": 0.85573316,
+          "numerator": 8672,
+          "denominator": 10134
+        },
+        {
+          "frac": 0.98546165,
+          "numerator": 9083,
+          "denominator": 9217
+        }
+      ],
+      [
+        {
+          "frac": 0.35569683,
+          "numerator": 3637,
+          "denominator": 10225
+        },
+        {
+          "frac": 0.20620954,
+          "numerator": 2039,
+          "denominator": 9888
+        },
+        null,
+        {
+          "frac": 0.73401004,
+          "numerator": 5279,
+          "denominator": 7192
+        },
+        {
+          "frac": 0.9717927,
+          "numerator": 5719,
+          "denominator": 5885
+        }
+      ],
+      [
+        {
+          "frac": 0.20636527,
+          "numerator": 1835,
+          "denominator": 8892
+        },
+        {
+          "frac": 0.14426683,
+          "numerator": 1462,
+          "denominator": 10134
+        },
+        {
+          "frac": 0.26599,
+          "numerator": 1913,
+          "denominator": 7192
+        },
+        null,
+        {
+          "frac": 0.93835616,
+          "numerator": 2603,
+          "denominator": 2774
+        }
+      ],
+      [
+        {
+          "frac": 0.019367589,
+          "numerator": 147,
+          "denominator": 7590
+        },
+        {
+          "frac": 0.014538353,
+          "numerator": 134,
+          "denominator": 9217
+        },
+        {
+          "frac": 0.028207306,
+          "numerator": 166,
+          "denominator": 5885
+        },
+        {
+          "frac": 0.061643835,
+          "numerator": 171,
+          "denominator": 2774
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      "X"
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.28522205,
+          "numerator": 1490,
+          "denominator": 5224
+        },
+        {
+          "frac": 0.12155437,
+          "numerator": 635,
+          "denominator": 5224
+        },
+        {
+          "frac": 0.074464016,
+          "numerator": 389,
+          "denominator": 5224
+        },
+        {
+          "frac": 0.0072741196,
+          "numerator": 38,
+          "denominator": 5224
+        },
+        {
+          "frac": 0.51148546,
+          "numerator": 2672,
+          "denominator": 5224
+        }
+      ],
+      [
+        {
+          "frac": 0.17004317,
+          "numerator": 1024,
+          "denominator": 6022
+        },
+        null,
+        {
+          "frac": 0.36183992,
+          "numerator": 2179,
+          "denominator": 6022
+        },
+        {
+          "frac": 0.05994686,
+          "numerator": 361,
+          "denominator": 6022
+        },
+        {
+          "frac": 0.0038193292,
+          "numerator": 23,
+          "denominator": 6022
+        },
+        {
+          "frac": 0.40435073,
+          "numerator": 2435,
+          "denominator": 6022
+        }
+      ],
+      [
+        {
+          "frac": 0.18432386,
+          "numerator": 214,
+          "denominator": 1161
+        },
+        {
+          "frac": 0.5503876,
+          "numerator": 639,
+          "denominator": 1161
+        },
+        null,
+        {
+          "frac": 0.064599484,
+          "numerator": 75,
+          "denominator": 1161
+        },
+        {
+          "frac": 0.0017226529,
+          "numerator": 2,
+          "denominator": 1161
+        },
+        {
+          "frac": 0.19896641,
+          "numerator": 231,
+          "denominator": 1161
+        }
+      ],
+      [
+        {
+          "frac": 0.1841808,
+          "numerator": 163,
+          "denominator": 885
+        },
+        {
+          "frac": 0.1740113,
+          "numerator": 154,
+          "denominator": 885
+        },
+        {
+          "frac": 0.1039548,
+          "numerator": 92,
+          "denominator": 885
+        },
+        null,
+        {
+          "frac": 0.028248588,
+          "numerator": 25,
+          "denominator": 885
+        },
+        {
+          "frac": 0.5096045,
+          "numerator": 451,
+          "denominator": 885
+        }
+      ],
+      [
+        {
+          "frac": 0.023255814,
+          "numerator": 1,
+          "denominator": 43
+        },
+        {
+          "frac": 0.069767445,
+          "numerator": 3,
+          "denominator": 43
+        },
+        null,
+        {
+          "frac": 0.046511628,
+          "numerator": 2,
+          "denominator": 43
+        },
+        null,
+        {
+          "frac": 0.8604651,
+          "numerator": 37,
+          "denominator": 43
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [
+      2,
+      3,
+      4
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
+    "entries": [
+      [
+        {
+          "frac": 0.20671834,
+          "numerator": 240,
+          "denominator": 1161
+        },
+        {
+          "frac": 0.5727821,
+          "numerator": 665,
+          "denominator": 1161
+        },
+        {
+          "frac": 0.22049958,
+          "numerator": 256,
+          "denominator": 1161
+        }
+      ],
+      [
+        {
+          "frac": 0.21129943,
+          "numerator": 187,
+          "denominator": 885
+        },
+        {
+          "frac": 0.23954803,
+          "numerator": 212,
+          "denominator": 885
+        },
+        {
+          "frac": 0.54915255,
+          "numerator": 486,
+          "denominator": 885
+        }
+      ],
+      [
+        {
+          "frac": 0.023255814,
+          "numerator": 1,
+          "denominator": 43
+        },
+        {
+          "frac": 0.069767445,
+          "numerator": 3,
+          "denominator": 43
+        },
+        {
+          "frac": 0.90697676,
+          "numerator": 39,
+          "denominator": 43
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 5826,
+      "2": 3267,
+      "3": 4242
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 2672,
+        "2": 933,
+        "3": 1619
+      },
+      "1": {
+        "1": 2435,
+        "2": 1831,
+        "3": 1756
+      },
+      "2": {
+        "1": 231,
+        "2": 403,
+        "3": 527
+      },
+      "3": {
+        "1": 451,
+        "2": 96,
+        "3": 338
+      },
+      "4": {
+        "1": 37,
+        "2": 4,
+        "3": 2
+      }
+    },
+    "totalBallots": 13335,
+    "candidateTotals": {
+      "0": 5224,
+      "1": 6022,
+      "2": 1161,
+      "3": 885,
+      "4": 43
+    }
+  },
+  "smithSet": [
+    1
+  ]
+}

@@ -117,7 +117,7 @@ fn process_contest(
         condorcet_winner: report
             .condorcet
             .map(|c| report.candidates[c.0 as usize].name.clone()),
-        has_non_condorcet_winner: report.condorcet.is_some() && report.condorcet != report.winner,
+        has_non_condorcet_winner: report.condorcet != report.winner,
         has_write_in_by_name,
     };
 
@@ -710,8 +710,54 @@ pub fn report(
     }
 
     election_index_entries.sort_by(|a, b| (&b.date, &b.path).cmp(&(&a.date, &a.path)));
+    
+    // If a jurisdiction filter is provided, merge with existing index
+    let mut final_election_index_entries = election_index_entries;
+    if let Some(filtered_jurisdiction) = jurisdiction_filter {
+        let index_path = Path::new(report_dir).join("index.json");
+        
+        // Try to read existing index
+        if index_path.exists() {
+            log_info!("Merging with existing index.json...");
+            match std::panic::catch_unwind(|| {
+                read_serialized::<ReportIndex>(&index_path)
+            }) {
+                Ok(existing_index) => {
+                    let existing_count = existing_index.elections.len();
+                    let new_entries_count = final_election_index_entries.len();
+                    
+                    // Remove entries that belong to the filtered jurisdiction
+                    let mut merged_entries: Vec<ElectionIndexEntry> = existing_index
+                        .elections
+                        .into_iter()
+                        .filter(|entry| !entry.path.starts_with(filtered_jurisdiction))
+                        .collect();
+                    
+                    let kept_existing_count = merged_entries.len();
+                    let removed_count = existing_count - kept_existing_count;
+                    
+                    // Add the new entries
+                    merged_entries.extend(final_election_index_entries);
+                    
+                    // Sort merged entries
+                    merged_entries.sort_by(|a, b| (&b.date, &b.path).cmp(&(&a.date, &a.path)));
+                    
+                    final_election_index_entries = merged_entries;
+                    log_info!("Merged index: {} elections (kept {} existing, removed {} from filtered jurisdiction, added {} new)", 
+                        final_election_index_entries.len(),
+                        kept_existing_count,
+                        removed_count,
+                        new_entries_count);
+                }
+                Err(_) => {
+                    log_warn!("Failed to read existing index.json, will overwrite");
+                }
+            }
+        }
+    }
+    
     let report_index = ReportIndex {
-        elections: election_index_entries,
+        elections: final_election_index_entries,
     };
 
     // Always write index.json, even if there were errors

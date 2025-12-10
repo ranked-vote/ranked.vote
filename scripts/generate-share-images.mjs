@@ -145,6 +145,16 @@ async function processReport(report, browser, retries = 1) {
         };
       }
     } catch (error) {
+      // If file doesn't exist, skip it (shouldn't happen since we check earlier, but handle gracefully)
+      if (error.code === 'ENOENT') {
+        return {
+          success: true,
+          skipped: true,
+          path: reportPath,
+          time: Date.now() - reportStartTime,
+          reason: "report file not found",
+        };
+      }
       return {
         success: false,
         skipped: false,
@@ -308,9 +318,10 @@ async function generateShareImages() {
     const indexLoadTime = Date.now() - indexStartTime;
     log(logLevels.DEBUG, `Index loaded in ${indexLoadTime}ms`);
 
-    // Flatten all contests from all elections, filtering out empty reports
+    // Flatten all contests from all elections, filtering out empty reports and missing files
     const reports = [];
     const skippedEmpty = [];
+    const skippedMissing = [];
     for (const election of index.elections || []) {
       for (const contest of election.contests || []) {
         // Skip empty reports (no candidates, no rounds, or no ballots)
@@ -323,8 +334,19 @@ async function generateShareImages() {
           continue;
         }
 
+        const reportPath = `${election.path}/${contest.office}`;
+        const reportJsonPath = `report_pipeline/reports/${reportPath}/report.json`;
+
+        // Skip if report file doesn't exist
+        try {
+          await stat(reportJsonPath);
+        } catch {
+          skippedMissing.push(reportPath);
+          continue;
+        }
+
         reports.push({
-          path: `${election.path}/${contest.office}`,
+          path: reportPath,
           election: election,
           contest: contest,
         });
@@ -334,6 +356,11 @@ async function generateShareImages() {
     if (skippedEmpty.length > 0) {
       log(logLevels.INFO, `Skipped ${skippedEmpty.length} empty reports:`, {
         reports: skippedEmpty,
+      });
+    }
+    if (skippedMissing.length > 0) {
+      log(logLevels.INFO, `Skipped ${skippedMissing.length} missing report files:`, {
+        reports: skippedMissing,
       });
     }
     log(logLevels.INFO, `Found ${reports.length} reports to process`);

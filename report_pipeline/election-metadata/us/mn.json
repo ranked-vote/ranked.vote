@@ -268,16 +268,100 @@
       "normalization": "simple",
       "contests": [
         {
+          "office": "ward-1",
+          "loaderParams": {
+            "file": "2021-Ward-1-Cast-Vote-Record.csv"
+          }
+        },
+        {
           "office": "ward-2",
           "loaderParams": {
             "file": "2021-Ward-2-Cast-Vote-Record.csv"
           }
+        },
+        {
+          "office": "ward-3",
+          "loaderParams": {
+            "file": "2021-Ward-3-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-4",
+          "loaderParams": {
+            "file": "2021-Ward-4-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-5",
+          "loaderParams": {
+            "file": "2021-Ward-5-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-6",
+          "loaderParams": {
+            "file": "2021-Ward-6-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-7",
+          "loaderParams": {
+            "file": "2021-Ward-7-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-8",
+          "loaderParams": {
+            "file": "2021-Ward-8-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-9",
+          "loaderParams": {
+            "file": "2021-Ward-9-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-10",
+          "loaderParams": {
+            "file": "2021-Ward-10-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-11",
+          "loaderParams": {
+            "file": "2021-Ward-11-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-12",
+          "loaderParams": {
+            "file": "2021-Ward-12-Cast-Vote-Record.csv"
+          }
+        },
+        {
+          "office": "ward-13",
+          "loaderParams": {
+            "file": "2021-Ward-13-Cast-Vote-Record.csv"
+          }
         }
       ],
       "files": {
-        "2021-Ward-2-Cast-Vote-Record.csv": "a9565b16d687ce1d837226563020f7392bab4f36"
+        "2021-Ward-1-Cast-Vote-Record.csv": "f59d6784015486d0e10b0bbb15dcff4fe411d3c7",
+        "2021-Ward-2-Cast-Vote-Record.csv": "a9565b16d687ce1d837226563020f7392bab4f36",
+        "2021-Ward-3-Cast-Vote-Record.csv": "c4b8488f7031865631f0c727200e72a8e22b496b",
+        "2021-Ward-4-Cast-Vote-Record.csv": "054843b4cb7f9a606ef93510e460e39244898229",
+        "2021-Ward-5-Cast-Vote-Record.csv": "dd1d798ad66de3653eea32407e6d7c77e3278ccc",
+        "2021-Ward-6-Cast-Vote-Record.csv": "8f17ab2da4c10b75abc8c7d7c7cd8bbdc16ecd9b",
+        "2021-Ward-7-Cast-Vote-Record.csv": "bca8f6f4ed0b998b57585283f5edd44be983da72",
+        "2021-Ward-8-Cast-Vote-Record.csv": "34a1fc466db1e4a6099112c769d7f9a9ad884bc1",
+        "2021-Ward-9-Cast-Vote-Record.csv": "f1b5a6d80b123ac67a41da7f92f2c5afdf389a6f",
+        "2021-Ward-10-Cast-Vote-Record.csv": "7412814e0fdacc57dec1cbdc938a1b45427812be",
+        "2021-Ward-11-Cast-Vote-Record.csv": "fbcad548a903163a0eb90b29d5e3744baa2d8c21",
+        "2021-Ward-12-Cast-Vote-Record.csv": "f9002d4282f3e805d084ecb777ddf0ad09b7293b",
+        "2021-Ward-13-Cast-Vote-Record.csv": "8a5591554e1b88f2e7645ecd74750b53998665d9"
       },
-      "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/council-ward-2/"
+      "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/"
     }
   }
 }

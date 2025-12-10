@@ -1,0 +1,305 @@
+{
+  "info": {
+    "name": "City Council Ward 8",
+    "date": "2021-11-02",
+    "dataFormat": "us_mn_mpls",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": false
+    },
+    "jurisdictionPath": "us/mn",
+    "electionPath": "2021/11",
+    "office": "ward-8",
+    "officeName": "City Council Ward 8",
+    "jurisdictionName": "Minneapolis",
+    "electionName": "Municipal Election",
+    "loaderParams": {
+      "file": "2021-Ward-8-Cast-Vote-Record.csv"
+    },
+    "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/"
+  },
+  "ballotCount": 11326,
+  "candidates": [
+    {
+      "name": "Andrea Jenkins",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Robert \"Bob\" Sullentrop",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Undeclared Write-ins",
+      "candidate_type": "WriteIn"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 0,
+          "votes": 9036
+        },
+        {
+          "allocatee": 1,
+          "votes": 1469
+        },
+        {
+          "allocatee": 2,
+          "votes": 133
+        },
+        {
+          "allocatee": "X",
+          "votes": 688
+        }
+      ],
+      "undervote": 678,
+      "overvote": 10,
+      "continuingBallots": 10638,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 0,
+          "votes": 9066
+        },
+        {
+          "allocatee": 1,
+          "votes": 1478
+        },
+        {
+          "allocatee": "X",
+          "votes": 782
+        }
+      ],
+      "undervote": 772,
+      "overvote": 10,
+      "continuingBallots": 10544,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 0,
+          "count": 30
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "count": 9
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 94
+        }
+      ]
+    }
+  ],
+  "winner": 0,
+  "condorcet": 0,
+  "numCandidates": 2,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 9036,
+      "transferVotes": 30,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 1469,
+      "transferVotes": 9,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 133,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.8598255,
+          "numerator": 9066,
+          "denominator": 10544
+        },
+        {
+          "frac": 0.97547626,
+          "numerator": 9268,
+          "denominator": 9501
+        }
+      ],
+      [
+        {
+          "frac": 0.14017451,
+          "numerator": 1478,
+          "denominator": 10544
+        },
+        null,
+        {
+          "frac": 0.8404534,
+          "numerator": 1928,
+          "denominator": 2294
+        }
+      ],
+      [
+        {
+          "frac": 0.024523735,
+          "numerator": 233,
+          "denominator": 9501
+        },
+        {
+          "frac": 0.15954664,
+          "numerator": 366,
+          "denominator": 2294
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      "X"
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.050796814,
+          "numerator": 459,
+          "denominator": 9036
+        },
+        {
+          "frac": 0.025785746,
+          "numerator": 233,
+          "denominator": 9036
+        },
+        {
+          "frac": 0.92341745,
+          "numerator": 8344,
+          "denominator": 9036
+        }
+      ],
+      [
+        {
+          "frac": 0.15793057,
+          "numerator": 232,
+          "denominator": 1469
+        },
+        null,
+        {
+          "frac": 0.06807352,
+          "numerator": 100,
+          "denominator": 1469
+        },
+        {
+          "frac": 0.77399594,
+          "numerator": 1137,
+          "denominator": 1469
+        }
+      ],
+      [
+        {
+          "frac": 0.22556391,
+          "numerator": 30,
+          "denominator": 133
+        },
+        {
+          "frac": 0.067669176,
+          "numerator": 9,
+          "denominator": 133
+        },
+        null,
+        {
+          "frac": 0.7067669,
+          "numerator": 94,
+          "denominator": 133
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
+    "entries": [
+      [
+        {
+          "frac": 0.22556391,
+          "numerator": 30,
+          "denominator": 133
+        },
+        {
+          "frac": 0.067669176,
+          "numerator": 9,
+          "denominator": 133
+        },
+        {
+          "frac": 0.7067669,
+          "numerator": 94,
+          "denominator": 133
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 9575,
+      "2": 958,
+      "3": 105
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 8344,
+        "2": 618,
+        "3": 74
+      },
+      "1": {
+        "1": 1137,
+        "2": 303,
+        "3": 29
+      },
+      "2": {
+        "1": 94,
+        "2": 37,
+        "3": 2
+      }
+    },
+    "totalBallots": 10638,
+    "candidateTotals": {
+      "0": 9036,
+      "1": 1469,
+      "2": 133
+    }
+  },
+  "smithSet": [
+    0
+  ]
+}

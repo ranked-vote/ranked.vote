@@ -7,367 +7,367 @@
       "date": "2025-06-24",
       "contests": [
         {
-          "office": "borough-president-bronx",
-          "officeName": "DEM Borough President - Bronx",
-          "name": "DEM Borough President - Bronx",
-          "winner": "Vanessa L. Gibson",
-          "numCandidates": 2,
+          "office": "mayor",
+          "officeName": "DEM Mayor",
+          "name": "DEM Mayor",
+          "winner": "Zohran Kwame Mamdani",
+          "numCandidates": 12,
           "numRounds": 2,
-          "condorcetWinner": "Vanessa L. Gibson",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "borough-president-brooklyn",
-          "officeName": "DEM Borough President - Brooklyn",
-          "name": "DEM Borough President - Brooklyn",
-          "winner": "Antonio Reynoso",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Antonio Reynoso",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "borough-president-manhattan",
-          "officeName": "DEM Borough President - Manhattan",
-          "name": "DEM Borough President - Manhattan",
-          "winner": "Brad Hoylman-Sigal",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Brad Hoylman-Sigal",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "comptroller",
           "officeName": "DEM Comptroller",
           "name": "DEM Comptroller",
-          "winner": "Mark D. Levine",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Mark D. Levine",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-10th-council-district",
-          "officeName": "DEM Council Member - 10th Council District",
-          "name": "DEM Council Member - 10th Council District",
-          "winner": "Carmen N. De La Rosa",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Carmen N. De La Rosa",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-11th-council-district",
-          "officeName": "DEM Council Member - 11th Council District",
-          "name": "DEM Council Member - 11th Council District",
-          "winner": "Eric Dinowitz",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Eric Dinowitz",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-12th-council-district",
-          "officeName": "DEM Council Member - 12th Council District",
-          "name": "DEM Council Member - 12th Council District",
-          "winner": "Kevin C. Riley",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Kevin C. Riley",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-13th-council-district",
-          "officeName": "DEM Council Member - 13th Council District",
-          "name": "DEM Council Member - 13th Council District",
-          "winner": "Shirley Aldebol",
-          "numCandidates": 6,
-          "numRounds": 5,
-          "condorcetWinner": "Shirley Aldebol",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-14th-council-district",
-          "officeName": "DEM Council Member - 14th Council District",
-          "name": "DEM Council Member - 14th Council District",
-          "winner": "Pierina A. Sanchez",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Pierina A. Sanchez",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-16th-council-district",
-          "officeName": "DEM Council Member - 16th Council District",
-          "name": "DEM Council Member - 16th Council District",
-          "winner": "Althea V. Stevens",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Althea V. Stevens",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-17th-council-district",
-          "officeName": "DEM Council Member - 17th Council District",
-          "name": "DEM Council Member - 17th Council District",
-          "winner": "Justin E. Sanchez",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Justin E. Sanchez",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-19th-council-district",
-          "officeName": "DEM Council Member - 19th Council District",
-          "name": "DEM Council Member - 19th Council District",
-          "winner": "Benjamin Chou ",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Benjamin Chou ",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-1st-council-district",
-          "officeName": "DEM Council Member - 1st Council District",
-          "name": "DEM Council Member - 1st Council District",
-          "winner": "Christopher Marte",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Christopher Marte",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-21st-council-district",
-          "officeName": "DEM Council Member - 21st Council District",
-          "name": "DEM Council Member - 21st Council District",
-          "winner": "Shanel Thomas-Henry",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Shanel Thomas-Henry",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-25th-council-district",
-          "officeName": "DEM Council Member - 25th Council District",
-          "name": "DEM Council Member - 25th Council District",
-          "winner": "Shekar Krishnan",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Shekar Krishnan",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-28th-council-district",
-          "officeName": "DEM Council Member - 28th Council District",
-          "name": "DEM Council Member - 28th Council District",
-          "winner": "Ty Hankerson",
+          "winner": "Justin Brannan",
           "numCandidates": 5,
-          "numRounds": 4,
-          "condorcetWinner": "Ty Hankerson",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-2nd-council-district",
-          "officeName": "DEM Council Member - 2nd Council District",
-          "name": "DEM Council Member - 2nd Council District",
-          "winner": "Harvey D. Epstein",
-          "numCandidates": 5,
-          "numRounds": 3,
-          "condorcetWinner": "Harvey D. Epstein",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-30th-council-district",
-          "officeName": "DEM Council Member - 30th Council District",
-          "name": "DEM Council Member - 30th Council District",
-          "winner": "Phil Wong",
-          "numCandidates": 3,
-          "numRounds": 3,
-          "condorcetWinner": "Phil Wong",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-33rd-council-district",
-          "officeName": "DEM Council Member - 33rd Council District",
-          "name": "DEM Council Member - 33rd Council District",
-          "winner": "Lincoln Restler",
-          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": "Lincoln Restler",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-35th-council-district",
-          "officeName": "DEM Council Member - 35th Council District",
-          "name": "DEM Council Member - 35th Council District",
-          "winner": "Crystal Hudson",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Crystal Hudson",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-36th-council-district",
-          "officeName": "DEM Council Member - 36th Council District",
-          "name": "DEM Council Member - 36th Council District",
-          "winner": "Chi Ajani Osse",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Chi Ajani Osse",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-38th-council-district",
-          "officeName": "DEM Council Member - 38th Council District",
-          "name": "DEM Council Member - 38th Council District",
-          "winner": "Alexa Aviles",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Alexa Aviles",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-39th-council-district",
-          "officeName": "DEM Council Member - 39th Council District",
-          "name": "DEM Council Member - 39th Council District",
-          "winner": "Shahana K. Hanif",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Shahana K. Hanif",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-3rd-council-district",
-          "officeName": "DEM Council Member - 3rd Council District",
-          "name": "DEM Council Member - 3rd Council District",
-          "winner": "Erik D. Bottcher",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Erik D. Bottcher",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-41st-council-district",
-          "officeName": "DEM Council Member - 41st Council District",
-          "name": "DEM Council Member - 41st Council District",
-          "winner": "Darlene Mealy",
-          "numCandidates": 8,
-          "numRounds": 6,
-          "condorcetWinner": "Darlene Mealy",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-46th-council-district",
-          "officeName": "DEM Council Member - 46th Council District",
-          "name": "DEM Council Member - 46th Council District",
-          "winner": "Mercedes Narcisse",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Mercedes Narcisse",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-47th-council-district",
-          "officeName": "DEM Council Member - 47th Council District",
-          "name": "DEM Council Member - 47th Council District",
-          "winner": "Kayla Santosuosso",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Kayla Santosuosso",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-4th-council-district",
-          "officeName": "DEM Council Member - 4th Council District",
-          "name": "DEM Council Member - 4th Council District",
-          "winner": "Virginia Maloney",
-          "numCandidates": 6,
-          "numRounds": 4,
-          "condorcetWinner": "Virginia Maloney",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-5th-council-district",
-          "officeName": "DEM Council Member - 5th Council District",
-          "name": "DEM Council Member - 5th Council District",
-          "winner": "Julie Menin",
-          "numCandidates": 2,
-          "numRounds": 2,
-          "condorcetWinner": "Julie Menin",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-7th-council-district",
-          "officeName": "DEM Council Member - 7th Council District",
-          "name": "DEM Council Member - 7th Council District",
-          "winner": "Shaun Abreu",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Shaun Abreu",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "council-member-8th-council-district",
-          "officeName": "DEM Council Member - 8th Council District",
-          "name": "DEM Council Member - 8th Council District",
-          "winner": "Elsie Encarnacion",
-          "numCandidates": 7,
-          "numRounds": 6,
-          "condorcetWinner": "Elsie Encarnacion",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "mayor",
-          "officeName": "DEM Mayor",
-          "name": "DEM Mayor",
-          "winner": "Zohran Kwame Mamdani",
-          "numCandidates": 11,
-          "numRounds": 2,
-          "condorcetWinner": "Zohran Kwame Mamdani",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "public-advocate",
           "officeName": "DEM Public Advocate",
           "name": "DEM Public Advocate",
           "winner": "Jumaane D. Williams",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "borough-president-bronx",
+          "officeName": "DEM Borough President - Bronx",
+          "name": "DEM Borough President - Bronx",
+          "winner": "Vanessa L. Gibson",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Jumaane D. Williams",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "borough-president-brooklyn",
+          "officeName": "DEM Borough President - Kings",
+          "name": "DEM Borough President - Kings",
+          "winner": "Antonio Reynoso",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "borough-president-manhattan",
+          "officeName": "DEM Borough President - New York",
+          "name": "DEM Borough President - New York",
+          "winner": "Brad Hoylman-Sigal",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-1st-council-district",
+          "officeName": "DEM Council Member - 1st Council District",
+          "name": "DEM Council Member - 1st Council District",
+          "winner": "Christopher Marte",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-2nd-council-district",
+          "officeName": "DEM Council Member - 2nd Council District",
+          "name": "DEM Council Member - 2nd Council District",
+          "winner": "Harvey D. Epstein",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-3rd-council-district",
+          "officeName": "DEM Council Member - 3rd Council District",
+          "name": "DEM Council Member - 3rd Council District",
+          "winner": "Erik D. Bottcher",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-4th-council-district",
+          "officeName": "DEM Council Member - 4th Council District",
+          "name": "DEM Council Member - 4th Council District",
+          "winner": "Virginia Maloney",
+          "numCandidates": 7,
+          "numRounds": 4,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-5th-council-district",
+          "officeName": "DEM Council Member - 5th Council District",
+          "name": "DEM Council Member - 5th Council District",
+          "winner": "Julie Menin",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-7th-council-district",
+          "officeName": "DEM Council Member - 7th Council District",
+          "name": "DEM Council Member - 7th Council District",
+          "winner": "Shaun Abreu",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-8th-council-district",
+          "officeName": "DEM Council Member - 8th Council District",
+          "name": "DEM Council Member - 8th Council District",
+          "winner": "Elsie Encarnacion",
+          "numCandidates": 8,
+          "numRounds": 7,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-10th-council-district",
+          "officeName": "DEM Council Member - 10th Council District",
+          "name": "DEM Council Member - 10th Council District",
+          "winner": "Carmen N. De La Rosa",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-11th-council-district",
+          "officeName": "DEM Council Member - 11th Council District",
+          "name": "DEM Council Member - 11th Council District",
+          "winner": "Eric Dinowitz",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-12th-council-district",
+          "officeName": "DEM Council Member - 12th Council District",
+          "name": "DEM Council Member - 12th Council District",
+          "winner": "Kevin C. Riley",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-13th-council-district",
+          "officeName": "DEM Council Member - 13th Council District",
+          "name": "DEM Council Member - 13th Council District",
+          "winner": "Shirley Aldebol",
+          "numCandidates": 7,
+          "numRounds": 5,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-14th-council-district",
+          "officeName": "DEM Council Member - 14th Council District",
+          "name": "DEM Council Member - 14th Council District",
+          "winner": "Pierina A. Sanchez",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-16th-council-district",
+          "officeName": "DEM Council Member - 16th Council District",
+          "name": "DEM Council Member - 16th Council District",
+          "winner": "Althea V. Stevens",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-17th-council-district",
+          "officeName": "DEM Council Member - 17th Council District",
+          "name": "DEM Council Member - 17th Council District",
+          "winner": "Justin E. Sanchez",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-19th-council-district",
+          "officeName": "DEM Council Member - 19th Council District",
+          "name": "DEM Council Member - 19th Council District",
+          "winner": "Benjamin Chou ",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-21st-council-district",
+          "officeName": "DEM Council Member - 21st Council District",
+          "name": "DEM Council Member - 21st Council District",
+          "winner": "Shanel Thomas-Henry",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-25th-council-district",
+          "officeName": "DEM Council Member - 25th Council District",
+          "name": "DEM Council Member - 25th Council District",
+          "winner": "Shekar Krishnan",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-28th-council-district",
+          "officeName": "DEM Council Member - 28th Council District",
+          "name": "DEM Council Member - 28th Council District",
+          "winner": "Ty Hankerson",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-30th-council-district",
+          "officeName": "DEM Council Member - 30th Council District",
+          "name": "DEM Council Member - 30th Council District",
+          "winner": "Phil Wong",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-33rd-council-district",
+          "officeName": "DEM Council Member - 33rd Council District",
+          "name": "DEM Council Member - 33rd Council District",
+          "winner": "Lincoln Restler",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-35th-council-district",
+          "officeName": "DEM Council Member - 35th Council District",
+          "name": "DEM Council Member - 35th Council District",
+          "winner": "Crystal Hudson",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-36th-council-district",
+          "officeName": "DEM Council Member - 36th Council District",
+          "name": "DEM Council Member - 36th Council District",
+          "winner": "Chi Ajani Osse",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-38th-council-district",
+          "officeName": "DEM Council Member - 38th Council District",
+          "name": "DEM Council Member - 38th Council District",
+          "winner": "Alexa Aviles",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-39th-council-district",
+          "officeName": "DEM Council Member - 39th Council District",
+          "name": "DEM Council Member - 39th Council District",
+          "winner": "Shahana K. Hanif",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-41st-council-district",
+          "officeName": "DEM Council Member - 41st Council District",
+          "name": "DEM Council Member - 41st Council District",
+          "winner": "Darlene Mealy",
+          "numCandidates": 9,
+          "numRounds": 6,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-46th-council-district",
+          "officeName": "DEM Council Member - 46th Council District",
+          "name": "DEM Council Member - 46th Council District",
+          "winner": "Mercedes Narcisse",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "council-member-47th-council-district",
+          "officeName": "DEM Council Member - 47th Council District",
+          "name": "DEM Council Member - 47th Council District",
+          "winner": "Kayla Santosuosso",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -568,291 +568,7 @@
       "jurisdictionName": "Alameda County",
       "electionName": "November 5, 2024 General Election",
       "date": "2024-11-05",
-      "contests": [
-        {
-          "office": "oakland-city-attorney",
-          "officeName": "City Attorney - Oakland",
-          "name": "City Attorney - Oakland",
-          "winner": "Ryan Richardson",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Ryan Richardson",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-council-at-large",
-          "officeName": "City Council, At-Large - Oakland",
-          "name": "City Council, At-Large - Oakland",
-          "winner": "Rowena Brown",
-          "numCandidates": 10,
-          "numRounds": 5,
-          "condorcetWinner": "Rowena Brown",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-council-d1",
-          "officeName": "City Council, District 1 - Oakland",
-          "name": "City Council, District 1 - Oakland",
-          "winner": "Zac Unger",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Zac Unger",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "berkeley-council-d2",
-          "officeName": "City Council, District 2 - Berkeley",
-          "name": "City Council, District 2 - Berkeley",
-          "winner": "Terry Taplin",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Terry Taplin",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "berkeley-council-d3",
-          "officeName": "City Council, District 3 - Berkeley",
-          "name": "City Council, District 3 - Berkeley",
-          "winner": "Ben Bartlett",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Ben Bartlett",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-council-d3",
-          "officeName": "City Council, District 3 - Oakland",
-          "name": "City Council, District 3 - Oakland",
-          "winner": "Carroll Fife",
-          "numCandidates": 6,
-          "numRounds": 2,
-          "condorcetWinner": "Carroll Fife",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "berkeley-council-d5",
-          "officeName": "City Council, District 5 - Berkeley",
-          "name": "City Council, District 5 - Berkeley",
-          "winner": "Shoshana O'Keefe",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Shoshana O'Keefe",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-council-d5",
-          "officeName": "City Council, District 5 - Oakland",
-          "name": "City Council, District 5 - Oakland",
-          "winner": "Noel Gallo",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Noel Gallo",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "berkeley-council-d6",
-          "officeName": "City Council, District 6 - Berkeley",
-          "name": "City Council, District 6 - Berkeley",
-          "winner": "Brent Blackaby",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Brent Blackaby",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-council-d7",
-          "officeName": "City Council, District 7 - Oakland",
-          "name": "City Council, District 7 - Oakland",
-          "winner": "Ken Houston",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Ken Houston",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "berkeley-mayor",
-          "officeName": "Mayor - Berkeley",
-          "name": "Mayor - Berkeley",
-          "winner": "Adena Ishii",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Adena Ishii",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-school-director-d1",
-          "officeName": "School Director, District 1 - Oakland",
-          "name": "School Director, District 1 - Oakland",
-          "winner": "Rachel Latta",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Rachel Latta",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-school-director-d3",
-          "officeName": "School Director, District 3 - Oakland",
-          "name": "School Director, District 3 - Oakland",
-          "winner": "Vancedric Williams",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Vancedric Williams",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-school-director-d5",
-          "officeName": "School Director, District 5 - Oakland",
-          "name": "School Director, District 5 - Oakland",
-          "winner": "Patrice Berry",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Patrice Berry",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "oakland-school-director-d7",
-          "officeName": "School Director, District 7 - Oakland",
-          "name": "School Director, District 7 - Oakland",
-          "winner": "Clifford Thompson",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Clifford Thompson",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        }
-      ]
-    },
-    {
-      "path": "us/ca/sfo/2024/11",
-      "jurisdictionName": "San Francisco",
-      "electionName": "Consolidated General Election",
-      "date": "2024-11-03",
-      "contests": [
-        {
-          "office": "supervisor-d01",
-          "officeName": "Board of Supervisors, District 1",
-          "name": "Board of Supervisors, District 1",
-          "winner": "Connie Chan",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Connie Chan",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d11",
-          "officeName": "Board of Supervisors, District 11",
-          "name": "Board of Supervisors, District 11",
-          "winner": "Chyanne Chen",
-          "numCandidates": 7,
-          "numRounds": 4,
-          "condorcetWinner": "Chyanne Chen",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d03",
-          "officeName": "Board of Supervisors, District 3",
-          "name": "Board of Supervisors, District 3",
-          "winner": "Danny Sauter",
-          "numCandidates": 6,
-          "numRounds": 3,
-          "condorcetWinner": "Danny Sauter",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d05",
-          "officeName": "Board of Supervisors, District 5",
-          "name": "Board of Supervisors, District 5",
-          "winner": "Bilal Mahmood",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Bilal Mahmood",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d07",
-          "officeName": "Board of Supervisors, District 7",
-          "name": "Board of Supervisors, District 7",
-          "winner": "Myrna Melgar",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Myrna Melgar",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d09",
-          "officeName": "Board of Supervisors, District 9",
-          "name": "Board of Supervisors, District 9",
-          "winner": "Jackie Fielder",
-          "numCandidates": 7,
-          "numRounds": 3,
-          "condorcetWinner": "Jackie Fielder",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "city-atty",
-          "officeName": "City Attorney",
-          "name": "City Attorney",
-          "winner": "David Chiu",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "David Chiu",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "da",
-          "officeName": "District Attorney",
-          "name": "District Attorney",
-          "winner": "Brooke Jenkins",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Brooke Jenkins",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "mayor",
-          "officeName": "Mayor",
-          "name": "Mayor",
-          "winner": "Daniel Lurie",
-          "numCandidates": 15,
-          "numRounds": 4,
-          "condorcetWinner": "Daniel Lurie",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "sheriff",
-          "officeName": "Sheriff",
-          "name": "Sheriff",
-          "winner": "Paul Miyamoto",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Paul Miyamoto",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        }
-      ]
+      "contests": []
     },
     {
       "path": "us/mn/2023/05",
@@ -1103,10 +819,10 @@
           "office": "san-leandro-council-d5",
           "officeName": "City Council, District 5 - San Leandro",
           "name": "City Council, District 5 - San Leandro",
-          "winner": "Xouhoa Bowen",
+          "winner": "Monique Tate",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Xouhoa Bowen",
+          "condorcetWinner": "Monique Tate",
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1158,10 +874,10 @@
           "office": "san-leandro-mayor",
           "officeName": "Mayor - San Leandro",
           "name": "Mayor - San Leandro",
-          "winner": "Juan Gonzalez, Iii",
+          "winner": "Bryan Azevedo",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Juan Gonzalez, Iii",
+          "condorcetWinner": "Bryan Azevedo",
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1215,7 +931,7 @@
           "numRounds": 2,
           "condorcetWinner": "Begich, Nick",
           "hasNonCondorcetWinner": true,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1226,6 +942,61 @@
       "date": "2021-11-02",
       "contests": [
         {
+          "office": "ward-1",
+          "officeName": "City Council Ward 1",
+          "name": "City Council Ward 1",
+          "winner": "Elliott Payne",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Elliott Payne",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-10",
+          "officeName": "City Council Ward 10",
+          "name": "City Council Ward 10",
+          "winner": "Aisha Chughtai",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "condorcetWinner": "Aisha Chughtai",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-11",
+          "officeName": "City Council Ward 11",
+          "name": "City Council Ward 11",
+          "winner": "Emily Koski",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": "Emily Koski",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-12",
+          "officeName": "City Council Ward 12",
+          "name": "City Council Ward 12",
+          "winner": "Andrew Johnson",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Andrew Johnson",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-13",
+          "officeName": "City Council Ward 13",
+          "name": "City Council Ward 13",
+          "winner": "Linea Palmisano",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": "Linea Palmisano",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
           "office": "ward-2",
           "officeName": "City Council Ward 2",
           "name": "City Council Ward 2",
@@ -1234,6 +1005,83 @@
           "numRounds": 3,
           "condorcetWinner": null,
           "hasNonCondorcetWinner": true,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-3",
+          "officeName": "City Council Ward 3",
+          "name": "City Council Ward 3",
+          "winner": "Michael Rainville",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Michael Rainville",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-4",
+          "officeName": "City Council Ward 4",
+          "name": "City Council Ward 4",
+          "winner": "LaTrisha Vetaw",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "LaTrisha Vetaw",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-5",
+          "officeName": "City Council Ward 5",
+          "name": "City Council Ward 5",
+          "winner": "Jeremiah Ellison",
+          "numCandidates": 7,
+          "numRounds": 3,
+          "condorcetWinner": "Jeremiah Ellison",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-6",
+          "officeName": "City Council Ward 6",
+          "name": "City Council Ward 6",
+          "winner": "Jamal Osman",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Jamal Osman",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-7",
+          "officeName": "City Council Ward 7",
+          "name": "City Council Ward 7",
+          "winner": "Lisa Goodman",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Lisa Goodman",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-8",
+          "officeName": "City Council Ward 8",
+          "name": "City Council Ward 8",
+          "winner": "Andrea Jenkins",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Andrea Jenkins",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "ward-9",
+          "officeName": "City Council Ward 9",
+          "name": "City Council Ward 9",
+          "winner": "Jason Chavez",
+          "numCandidates": 8,
+          "numRounds": 6,
+          "condorcetWinner": "Jason Chavez",
+          "hasNonCondorcetWinner": false,
           "hasWriteInByName": true
         }
       ]
@@ -1251,9 +1099,9 @@
           "winner": "Eric L. Adams",
           "numCandidates": 13,
           "numRounds": 8,
-          "condorcetWinner": "Eric L. Adams",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1270,18 +1118,7 @@
           "winner": "Connie Chan",
           "numCandidates": 7,
           "numRounds": 2,
-          "condorcetWinner": "Connie Chan",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "supervisor-d11",
-          "officeName": "Board of Supervisors, District 11",
-          "name": "Board of Supervisors, District 11",
-          "winner": "Ahsha Safai",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Ahsha Safai",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1292,7 +1129,7 @@
           "winner": "Aaron Peskin",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Aaron Peskin",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1303,7 +1140,7 @@
           "winner": "Dean Preston",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Dean Preston",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1314,7 +1151,7 @@
           "winner": "Myrna Melgar",
           "numCandidates": 7,
           "numRounds": 5,
-          "condorcetWinner": "Myrna Melgar",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1325,7 +1162,18 @@
           "winner": "Hillary Ronen",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Hillary Ronen",
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d11",
+          "officeName": "Board of Supervisors, District 11",
+          "name": "Board of Supervisors, District 11",
+          "winner": "Ahsha Safai",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1344,51 +1192,7 @@
           "winner": "Dale John Crafts",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Dale John Crafts",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "sr41-dem",
-          "officeName": "State Representative - District 41 (D)",
-          "name": "State Representative - District 41 (D)",
-          "winner": "Samuel Lewis Zager",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Samuel Lewis Zager",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "sr47-dem",
-          "officeName": "State Representative - District 47 (D)",
-          "name": "State Representative - District 47 (D)",
-          "winner": "Arthur L. Bell",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Arthur L. Bell",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "sr49-dem",
-          "officeName": "State Representative - District 49 (D)",
-          "name": "State Representative - District 49 (D)",
-          "winner": "Poppy Arford",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Poppy Arford",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "sr90-dem",
-          "officeName": "State Representative - District 90 (D)",
-          "name": "State Representative - District 90 (D)",
-          "winner": "Lydia V. Crafts",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Lydia V. Crafts",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1399,7 +1203,51 @@
           "winner": "Glenn Chip Curry",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Glenn Chip Curry",
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "sr41-dem",
+          "officeName": "State Representative - District 41 (D)",
+          "name": "State Representative - District 41 (D)",
+          "winner": "Samuel Lewis Zager",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "sr47-dem",
+          "officeName": "State Representative - District 47 (D)",
+          "name": "State Representative - District 47 (D)",
+          "winner": "Arthur L. Bell",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "sr49-dem",
+          "officeName": "State Representative - District 49 (D)",
+          "name": "State Representative - District 49 (D)",
+          "winner": "Poppy Arford",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "sr90-dem",
+          "officeName": "State Representative - District 90 (D)",
+          "name": "State Representative - District 90 (D)",
+          "winner": "Lydia V. Crafts",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1418,9 +1266,9 @@
           "winner": "Joe Biden",
           "numCandidates": 9,
           "numRounds": 2,
-          "condorcetWinner": "Joe Biden",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1431,13 +1279,24 @@
       "date": "2019-11-05",
       "contests": [
         {
+          "office": "mayor",
+          "officeName": "Mayor",
+          "name": "Mayor",
+          "winner": "London N. Breed",
+          "numCandidates": 7,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
           "office": "supervisor-d05",
           "officeName": "Board of Supervisors, District 5",
           "name": "Board of Supervisors, District 5",
           "winner": "Dean Preston",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Dean Preston",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1448,7 +1307,7 @@
           "winner": "Dennis J. Herrera",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "Dennis J. Herrera",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1459,18 +1318,7 @@
           "winner": "Chesa Boudin",
           "numCandidates": 4,
           "numRounds": 3,
-          "condorcetWinner": "Chesa Boudin",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "mayor",
-          "officeName": "Mayor",
-          "name": "Mayor",
-          "winner": "London N. Breed",
-          "numCandidates": 7,
-          "numRounds": 3,
-          "condorcetWinner": "London N. Breed",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1481,7 +1329,7 @@
           "winner": "Manohar “Mano” Raju",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "Manohar “Mano” Raju",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1492,7 +1340,7 @@
           "winner": "Paul Miyamoto",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "Paul Miyamoto",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1503,7 +1351,7 @@
           "winner": "José Cisneros",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "José Cisneros",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1522,7 +1370,7 @@
           "winner": "Jared F. Golden",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Jared F. Golden",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1541,64 +1389,9 @@
           "winner": "Carmen Chu",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Carmen Chu",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d10",
-          "officeName": "Board of Supervisors, District 10",
-          "name": "Board of Supervisors, District 10",
-          "winner": "Shamann Walton",
-          "numCandidates": 6,
-          "numRounds": 3,
-          "condorcetWinner": "Shamann Walton",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d02",
-          "officeName": "Board of Supervisors, District 2",
-          "name": "Board of Supervisors, District 2",
-          "winner": "Catherine Stefani",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Catherine Stefani",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d04",
-          "officeName": "Board of Supervisors, District 4",
-          "name": "Board of Supervisors, District 4",
-          "winner": "Gordon Mar",
-          "numCandidates": 8,
-          "numRounds": 5,
-          "condorcetWinner": "Gordon Mar",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d06",
-          "officeName": "Board of Supervisors, District 6",
-          "name": "Board of Supervisors, District 6",
-          "winner": "Matt Haney",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Matt Haney",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d08",
-          "officeName": "Board of Supervisors, District 8",
-          "name": "Board of Supervisors, District 8",
-          "winner": "Rafael Mandelman",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Rafael Mandelman",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "defender",
@@ -1607,9 +1400,64 @@
           "winner": "Jeff Adachi",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "Jeff Adachi",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d02",
+          "officeName": "Board of Supervisors, District 2",
+          "name": "Board of Supervisors, District 2",
+          "winner": "Catherine Stefani",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d04",
+          "officeName": "Board of Supervisors, District 4",
+          "name": "Board of Supervisors, District 4",
+          "winner": "Gordon Mar",
+          "numCandidates": 8,
+          "numRounds": 5,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d06",
+          "officeName": "Board of Supervisors, District 6",
+          "name": "Board of Supervisors, District 6",
+          "winner": "Matt Haney",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d08",
+          "officeName": "Board of Supervisors, District 8",
+          "name": "Board of Supervisors, District 8",
+          "winner": "Rafael Mandelman",
+          "numCandidates": 2,
+          "numRounds": 1,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d10",
+          "officeName": "Board of Supervisors, District 10",
+          "name": "Board of Supervisors, District 10",
+          "winner": "Shamann Walton",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1626,7 +1474,7 @@
           "winner": "Ed Holder",
           "numCandidates": 14,
           "numRounds": 4,
-          "condorcetWinner": "Ed Holder",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1637,62 +1485,7 @@
           "winner": "Michael Van Holst",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Michael Van Holst",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "cw10",
-          "officeName": "Ward 10 Councilor",
-          "name": "Ward 10 Councilor",
-          "winner": "Paul Van Meerbergen",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Paul Van Meerbergen",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "cw11",
-          "officeName": "Ward 11 Councilor",
-          "name": "Ward 11 Councilor",
-          "winner": "Stephen Turner",
-          "numCandidates": 6,
-          "numRounds": 3,
-          "condorcetWinner": "Stephen Turner",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "cw12",
-          "officeName": "Ward 12 Councilor",
-          "name": "Ward 12 Councilor",
-          "winner": "Elizabeth Peloza",
-          "numCandidates": 6,
-          "numRounds": 3,
-          "condorcetWinner": "Elizabeth Peloza",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "cw13",
-          "officeName": "Ward 13 Councilor",
-          "name": "Ward 13 Councilor",
-          "winner": "Arielle Kayabaga",
-          "numCandidates": 8,
-          "numRounds": 6,
-          "condorcetWinner": "Arielle Kayabaga",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "cw14",
-          "officeName": "Ward 14 Councilor",
-          "name": "Ward 14 Councilor",
-          "winner": "Steve Hillier",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Steve Hillier",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1703,7 +1496,7 @@
           "winner": "Shawn Lewis",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Shawn Lewis",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1714,7 +1507,7 @@
           "winner": "Mo Mohamed Salih",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Mo Mohamed Salih",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1725,7 +1518,7 @@
           "winner": "Jesse Helmer",
           "numCandidates": 5,
           "numRounds": 3,
-          "condorcetWinner": "Jesse Helmer",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1736,7 +1529,7 @@
           "winner": "Maureen Cassidy",
           "numCandidates": 6,
           "numRounds": 4,
-          "condorcetWinner": "Maureen Cassidy",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1747,7 +1540,7 @@
           "winner": "Phil Squire",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Phil Squire",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1758,7 +1551,7 @@
           "winner": "Josh Morgan",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Josh Morgan",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1769,7 +1562,7 @@
           "winner": "Steve Lehman",
           "numCandidates": 9,
           "numRounds": 6,
-          "condorcetWinner": "Steve Lehman",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1780,7 +1573,62 @@
           "winner": "Anna Hopkins",
           "numCandidates": 5,
           "numRounds": 3,
-          "condorcetWinner": "Anna Hopkins",
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "cw10",
+          "officeName": "Ward 10 Councilor",
+          "name": "Ward 10 Councilor",
+          "winner": "Paul Van Meerbergen",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "cw11",
+          "officeName": "Ward 11 Councilor",
+          "name": "Ward 11 Councilor",
+          "winner": "Stephen Turner",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "cw12",
+          "officeName": "Ward 12 Councilor",
+          "name": "Ward 12 Councilor",
+          "winner": "Elizabeth Peloza",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "cw13",
+          "officeName": "Ward 13 Councilor",
+          "name": "Ward 13 Councilor",
+          "winner": "Arielle Kayabaga",
+          "numCandidates": 8,
+          "numRounds": 6,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "cw14",
+          "officeName": "Ward 14 Councilor",
+          "name": "Ward 14 Councilor",
+          "winner": "Steve Hillier",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1799,7 +1647,7 @@
           "winner": "Jared F. Golden",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Jared F. Golden",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1810,9 +1658,9 @@
           "winner": "Janet T. Mills",
           "numCandidates": 8,
           "numRounds": 4,
-          "condorcetWinner": "Janet T. Mills",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1823,26 +1671,26 @@
       "date": "2018-06-05",
       "contests": [
         {
-          "office": "supervisor-d08",
-          "officeName": "Board of Supervisors, District 8",
-          "name": "Board of Supervisors, District 8",
-          "winner": "Rafael Mandelman",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Rafael Mandelman",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
           "office": "mayor",
           "officeName": "Mayor",
           "name": "Mayor",
           "winner": "London Breed",
           "numCandidates": 8,
           "numRounds": 3,
-          "condorcetWinner": "London Breed",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d08",
+          "officeName": "Board of Supervisors, District 8",
+          "name": "Board of Supervisors, District 8",
+          "winner": "Rafael Mandelman",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1853,13 +1701,24 @@
       "date": "2018-03-06",
       "contests": [
         {
+          "office": "mayor",
+          "officeName": "Mayor",
+          "name": "Mayor",
+          "winner": "Alan Webber",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
           "office": "dc1",
           "officeName": "District 1 Councilor",
           "name": "District 1 Councilor",
           "winner": "Signe I. Lindell",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Signe I. Lindell",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1870,7 +1729,7 @@
           "winner": "Carol Romero-Wirth",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Carol Romero-Wirth",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1881,7 +1740,7 @@
           "winner": "Roman “Tiger” Abeyta",
           "numCandidates": 1,
           "numRounds": 1,
-          "condorcetWinner": "Roman “Tiger” Abeyta",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         },
@@ -1892,18 +1751,7 @@
           "winner": "Joanne Vigil Coppler",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Joanne Vigil Coppler",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "mayor",
-          "officeName": "Mayor",
-          "name": "Mayor",
-          "winner": "Alan Webber",
-          "numCandidates": 5,
-          "numRounds": 3,
-          "condorcetWinner": "Alan Webber",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
         }
@@ -1922,20 +1770,9 @@
           "winner": "Sandra Lee Fewer",
           "numCandidates": 10,
           "numRounds": 2,
-          "condorcetWinner": "Sandra Lee Fewer",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d11",
-          "officeName": "Board of Supervisors, District 11",
-          "name": "Board of Supervisors, District 11",
-          "winner": "Ahsha Safai",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Ahsha Safai",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d03",
@@ -1944,9 +1781,9 @@
           "winner": "Aaron Peskin",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Aaron Peskin",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d05",
@@ -1955,9 +1792,9 @@
           "winner": "London Breed",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "London Breed",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d07",
@@ -1966,9 +1803,9 @@
           "winner": "Norman Yee",
           "numCandidates": 5,
           "numRounds": 4,
-          "condorcetWinner": "Norman Yee",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d09",
@@ -1977,9 +1814,20 @@
           "winner": "Hillary Ronen",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Hillary Ronen",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d11",
+          "officeName": "Board of Supervisors, District 11",
+          "name": "Board of Supervisors, District 11",
+          "winner": "Ahsha Safai",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -1990,26 +1838,15 @@
       "date": "2015-11-03",
       "contests": [
         {
-          "office": "supervisor-d03",
-          "officeName": "Board of Supervisors, District 3",
-          "name": "Board of Supervisors, District 3",
-          "winner": "Aaron Peskin",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Aaron Peskin",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
           "office": "mayor",
           "officeName": "Mayor",
           "name": "Mayor",
           "winner": "Ed Lee",
           "numCandidates": 6,
           "numRounds": 4,
-          "condorcetWinner": "Ed Lee",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "sheriff",
@@ -2018,9 +1855,20 @@
           "winner": "Vicki Hennessy",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Vicki Hennessy",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d03",
+          "officeName": "Board of Supervisors, District 3",
+          "name": "Board of Supervisors, District 3",
+          "winner": "Aaron Peskin",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2037,9 +1885,9 @@
           "winner": "Malia Cohen",
           "numCandidates": 5,
           "numRounds": 3,
-          "condorcetWinner": "Malia Cohen",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2056,9 +1904,9 @@
           "winner": "London Breed",
           "numCandidates": 8,
           "numRounds": 5,
-          "condorcetWinner": "London Breed",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d07",
@@ -2067,9 +1915,9 @@
           "winner": "Norman Yee",
           "numCandidates": 9,
           "numRounds": 6,
-          "condorcetWinner": "Norman Yee",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2086,9 +1934,9 @@
           "winner": "George Gascón",
           "numCandidates": 5,
           "numRounds": 3,
-          "condorcetWinner": "George Gascón",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "mayor",
@@ -2097,9 +1945,9 @@
           "winner": "Ed Lee",
           "numCandidates": 16,
           "numRounds": 12,
-          "condorcetWinner": "Ed Lee",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "sheriff",
@@ -2108,9 +1956,9 @@
           "winner": "Ross Mirkarimi",
           "numCandidates": 4,
           "numRounds": 3,
-          "condorcetWinner": "Ross Mirkarimi",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2121,26 +1969,15 @@
       "date": "2010-11-02",
       "contests": [
         {
-          "office": "supervisor-d10",
-          "officeName": "Board of Supervisors, District 10",
-          "name": "Board of Supervisors, District 10",
-          "winner": "Malia Cohen",
-          "numCandidates": 21,
-          "numRounds": 20,
-          "condorcetWinner": "Malia Cohen",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
           "office": "supervisor-d02",
           "officeName": "Board of Supervisors, District 2",
           "name": "Board of Supervisors, District 2",
           "winner": "Mark Farrell",
           "numCandidates": 6,
           "numRounds": 2,
-          "condorcetWinner": "Mark Farrell",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d06",
@@ -2149,9 +1986,9 @@
           "winner": "Jane Kim",
           "numCandidates": 14,
           "numRounds": 12,
-          "condorcetWinner": "Jane Kim",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d08",
@@ -2160,9 +1997,20 @@
           "winner": "Scott Wiener",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Scott Wiener",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d10",
+          "officeName": "Board of Supervisors, District 10",
+          "name": "Board of Supervisors, District 10",
+          "winner": "Malia Cohen",
+          "numCandidates": 21,
+          "numRounds": 20,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2179,9 +2027,9 @@
           "winner": "Bob Kiss",
           "numCandidates": 6,
           "numRounds": 3,
-          "condorcetWinner": "Andy Montroll",
-          "hasNonCondorcetWinner": true,
-          "hasWriteInByName": true
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     },
@@ -2198,20 +2046,9 @@
           "winner": "Eric Mar",
           "numCandidates": 9,
           "numRounds": 2,
-          "condorcetWinner": "Eric Mar",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
-        },
-        {
-          "office": "supervisor-d11",
-          "officeName": "Board of Supervisors, District 11",
-          "name": "Board of Supervisors, District 11",
-          "winner": "John Avalos",
-          "numCandidates": 8,
-          "numRounds": 4,
-          "condorcetWinner": "John Avalos",
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d03",
@@ -2220,9 +2057,9 @@
           "winner": "David Chiu",
           "numCandidates": 9,
           "numRounds": 7,
-          "condorcetWinner": "David Chiu",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d04",
@@ -2231,9 +2068,9 @@
           "winner": "Carmen Chu",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Carmen Chu",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d05",
@@ -2242,9 +2079,9 @@
           "winner": "Ross Mirkarimi",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Ross Mirkarimi",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d07",
@@ -2253,9 +2090,9 @@
           "winner": "Sean R. Elsbernd",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Sean R. Elsbernd",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
         },
         {
           "office": "supervisor-d09",
@@ -2264,9 +2101,20 @@
           "winner": "David Campos",
           "numCandidates": 7,
           "numRounds": 3,
-          "condorcetWinner": "David Campos",
+          "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": true
+          "hasWriteInByName": false
+        },
+        {
+          "office": "supervisor-d11",
+          "officeName": "Board of Supervisors, District 11",
+          "name": "Board of Supervisors, District 11",
+          "winner": "John Avalos",
+          "numCandidates": 8,
+          "numRounds": 4,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
         }
       ]
     }
