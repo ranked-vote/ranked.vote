@@ -1,0 +1,281 @@
+{
+  "info": {
+    "name": "Salt Lake City Council District 1",
+    "date": "2025-11-04",
+    "dataFormat": "nist_sp_1500",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": false
+    },
+    "jurisdictionPath": "us/ut/salt-lake-county",
+    "electionPath": "2025/11",
+    "office": "salt-lake-city-council-d1",
+    "officeName": "Salt Lake City Council District 1",
+    "jurisdictionName": "Salt Lake County",
+    "electionName": "2025 Municipal General Election",
+    "loaderParams": {
+      "contest": "46",
+      "cvr": "."
+    },
+    "website": null
+  },
+  "ballotCount": 3227,
+  "candidates": [
+    {
+      "name": "Yussuf Abdi",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Victoria Petro",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Stephen Otterstrom",
+      "candidate_type": "Regular"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 1601
+        },
+        {
+          "allocatee": 2,
+          "votes": 1500
+        },
+        {
+          "allocatee": 0,
+          "votes": 120
+        },
+        {
+          "allocatee": "X",
+          "votes": 6
+        }
+      ],
+      "undervote": 2,
+      "overvote": 4,
+      "continuingBallots": 3221,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 1664
+        },
+        {
+          "allocatee": 2,
+          "votes": 1551
+        },
+        {
+          "allocatee": "X",
+          "votes": 12
+        }
+      ],
+      "undervote": 7,
+      "overvote": 5,
+      "continuingBallots": 3215,
+      "transfers": [
+        {
+          "from": 0,
+          "to": 1,
+          "count": 63
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "count": 51
+        },
+        {
+          "from": 0,
+          "to": "X",
+          "count": 6
+        }
+      ]
+    }
+  ],
+  "winner": 1,
+  "condorcet": 1,
+  "numCandidates": 3,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 120,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 1601,
+      "transferVotes": 63,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 1500,
+      "transferVotes": 51,
+      "roundEliminated": null
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [0, 1, 2],
+    "cols": [0, 1, 2],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.13376023,
+          "numerator": 376,
+          "denominator": 2811
+        },
+        {
+          "frac": 0.1680791,
+          "numerator": 476,
+          "denominator": 2832
+        }
+      ],
+      [
+        {
+          "frac": 0.8662398,
+          "numerator": 2435,
+          "denominator": 2811
+        },
+        null,
+        {
+          "frac": 0.5175739,
+          "numerator": 1664,
+          "denominator": 3215
+        }
+      ],
+      [
+        {
+          "frac": 0.8319209,
+          "numerator": 2356,
+          "denominator": 2832
+        },
+        {
+          "frac": 0.48242614,
+          "numerator": 1551,
+          "denominator": 3215
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [0, 1, 2],
+    "cols": [0, 1, 2, "X"],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.525,
+          "numerator": 63,
+          "denominator": 120
+        },
+        {
+          "frac": 0.425,
+          "numerator": 51,
+          "denominator": 120
+        },
+        {
+          "frac": 0.05,
+          "numerator": 6,
+          "denominator": 120
+        }
+      ],
+      [
+        {
+          "frac": 0.22236103,
+          "numerator": 356,
+          "denominator": 1601
+        },
+        null,
+        {
+          "frac": 0.5346658,
+          "numerator": 856,
+          "denominator": 1601
+        },
+        {
+          "frac": 0.24297315,
+          "numerator": 389,
+          "denominator": 1601
+        }
+      ],
+      [
+        {
+          "frac": 0.17066666,
+          "numerator": 256,
+          "denominator": 1500
+        },
+        {
+          "frac": 0.556,
+          "numerator": 834,
+          "denominator": 1500
+        },
+        null,
+        {
+          "frac": 0.27333334,
+          "numerator": 410,
+          "denominator": 1500
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [0],
+    "cols": [1, 2, "X"],
+    "entries": [
+      [
+        {
+          "frac": 0.525,
+          "numerator": 63,
+          "denominator": 120
+        },
+        {
+          "frac": 0.425,
+          "numerator": 51,
+          "denominator": 120
+        },
+        {
+          "frac": 0.05,
+          "numerator": 6,
+          "denominator": 120
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 805,
+      "2": 483,
+      "3": 1933
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 6,
+        "2": 7,
+        "3": 107
+      },
+      "1": {
+        "1": 389,
+        "2": 220,
+        "3": 992
+      },
+      "2": {
+        "1": 410,
+        "2": 256,
+        "3": 834
+      }
+    },
+    "totalBallots": 3221,
+    "candidateTotals": {
+      "0": 120,
+      "1": 1601,
+      "2": 1500
+    }
+  },
+  "smithSet": [1]
+}

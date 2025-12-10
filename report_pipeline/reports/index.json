@@ -1,6 +1,58 @@
 {
   "elections": [
     {
+      "path": "us/ut/salt-lake-county/2025/11",
+      "jurisdictionName": "Salt Lake County",
+      "electionName": "2025 Municipal General Election",
+      "date": "2025-11-04",
+      "contests": [
+        {
+          "office": "midvale-mayor",
+          "officeName": "Midvale City Mayor",
+          "name": "Midvale City Mayor",
+          "winner": "Dustin Gettel",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Dustin Gettel",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "salt-lake-city-council-d1",
+          "officeName": "Salt Lake City Council District 1",
+          "name": "Salt Lake City Council District 1",
+          "winner": "Victoria Petro",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Victoria Petro",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "salt-lake-city-council-d3",
+          "officeName": "Salt Lake City Council District 3",
+          "name": "Salt Lake City Council District 3",
+          "winner": "Chris Wharton",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": "Chris Wharton",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        },
+        {
+          "office": "salt-lake-city-council-d5",
+          "officeName": "Salt Lake City Council District 5",
+          "name": "Salt Lake City Council District 5",
+          "winner": "Erika Carlsen",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Erika Carlsen",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": false
+        }
+      ]
+    },
+    {
       "path": "us/ny/nyc/2025/07",
       "jurisdictionName": "New York City",
       "electionName": "Primary Election",

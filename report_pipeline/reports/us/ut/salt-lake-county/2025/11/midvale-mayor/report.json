@@ -1,0 +1,281 @@
+{
+  "info": {
+    "name": "Midvale City Mayor",
+    "date": "2025-11-04",
+    "dataFormat": "nist_sp_1500",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": false
+    },
+    "jurisdictionPath": "us/ut/salt-lake-county",
+    "electionPath": "2025/11",
+    "office": "midvale-mayor",
+    "officeName": "Midvale City Mayor",
+    "jurisdictionName": "Salt Lake County",
+    "electionName": "2025 Municipal General Election",
+    "loaderParams": {
+      "contest": "36",
+      "cvr": "."
+    },
+    "website": null
+  },
+  "ballotCount": 5253,
+  "candidates": [
+    {
+      "name": "Brandee Boyer",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Dustin Gettel",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "David B Fair",
+      "candidate_type": "Regular"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 3193
+        },
+        {
+          "allocatee": 0,
+          "votes": 1075
+        },
+        {
+          "allocatee": 2,
+          "votes": 975
+        },
+        {
+          "allocatee": "X",
+          "votes": 10
+        }
+      ],
+      "undervote": 6,
+      "overvote": 4,
+      "continuingBallots": 5243,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 3521
+        },
+        {
+          "allocatee": 0,
+          "votes": 1387
+        },
+        {
+          "allocatee": "X",
+          "votes": 345
+        }
+      ],
+      "undervote": 340,
+      "overvote": 5,
+      "continuingBallots": 4908,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 1,
+          "count": 328
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 312
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 335
+        }
+      ]
+    }
+  ],
+  "winner": 1,
+  "condorcet": 1,
+  "numCandidates": 3,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 1075,
+      "transferVotes": 312,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 3193,
+      "transferVotes": 328,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 975,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [0, 1, 2],
+    "cols": [0, 1, 2],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.28259984,
+          "numerator": 1387,
+          "denominator": 4908
+        },
+        {
+          "frac": 0.6639344,
+          "numerator": 2997,
+          "denominator": 4514
+        }
+      ],
+      [
+        {
+          "frac": 0.71740013,
+          "numerator": 3521,
+          "denominator": 4908
+        },
+        null,
+        {
+          "frac": 0.76846427,
+          "numerator": 3933,
+          "denominator": 5118
+        }
+      ],
+      [
+        {
+          "frac": 0.33606556,
+          "numerator": 1517,
+          "denominator": 4514
+        },
+        {
+          "frac": 0.23153576,
+          "numerator": 1185,
+          "denominator": 5118
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [0, 1, 2],
+    "cols": [0, 1, 2, "X"],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.6883721,
+          "numerator": 740,
+          "denominator": 1075
+        },
+        {
+          "frac": 0.19534884,
+          "numerator": 210,
+          "denominator": 1075
+        },
+        {
+          "frac": 0.11627907,
+          "numerator": 125,
+          "denominator": 1075
+        }
+      ],
+      [
+        {
+          "frac": 0.60194176,
+          "numerator": 1922,
+          "denominator": 3193
+        },
+        null,
+        {
+          "frac": 0.16974632,
+          "numerator": 542,
+          "denominator": 3193
+        },
+        {
+          "frac": 0.22831193,
+          "numerator": 729,
+          "denominator": 3193
+        }
+      ],
+      [
+        {
+          "frac": 0.32,
+          "numerator": 312,
+          "denominator": 975
+        },
+        {
+          "frac": 0.33641025,
+          "numerator": 328,
+          "denominator": 975
+        },
+        null,
+        {
+          "frac": 0.34358975,
+          "numerator": 335,
+          "denominator": 975
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [2],
+    "cols": [0, 1, "X"],
+    "entries": [
+      [
+        {
+          "frac": 0.32,
+          "numerator": 312,
+          "denominator": 975
+        },
+        {
+          "frac": 0.33641025,
+          "numerator": 328,
+          "denominator": 975
+        },
+        {
+          "frac": 0.34358975,
+          "numerator": 335,
+          "denominator": 975
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 1189,
+      "2": 852,
+      "3": 3202
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 125,
+        "2": 235,
+        "3": 715
+      },
+      "1": {
+        "1": 729,
+        "2": 520,
+        "3": 1944
+      },
+      "2": {
+        "1": 335,
+        "2": 97,
+        "3": 543
+      }
+    },
+    "totalBallots": 5243,
+    "candidateTotals": {
+      "0": 1075,
+      "1": 3193,
+      "2": 975
+    }
+  },
+  "smithSet": [1]
+}

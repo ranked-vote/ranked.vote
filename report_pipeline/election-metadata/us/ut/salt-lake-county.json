@@ -1,0 +1,60 @@
+{
+  "name": "Salt Lake County",
+  "path": "us/ut/salt-lake-county",
+  "kind": "county",
+  "offices": {
+    "midvale-mayor": {
+      "name": "Midvale City Mayor"
+    },
+    "salt-lake-city-council-d1": {
+      "name": "Salt Lake City Council District 1"
+    },
+    "salt-lake-city-council-d3": {
+      "name": "Salt Lake City Council District 3"
+    },
+    "salt-lake-city-council-d5": {
+      "name": "Salt Lake City Council District 5"
+    }
+  },
+  "elections": {
+    "2025/11": {
+      "name": "2025 Municipal General Election",
+      "date": "2025-11-04",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "midvale-mayor",
+          "loaderParams": {
+            "contest": "36",
+            "cvr": "."
+          }
+        },
+        {
+          "office": "salt-lake-city-council-d1",
+          "loaderParams": {
+            "contest": "46",
+            "cvr": "."
+          }
+        },
+        {
+          "office": "salt-lake-city-council-d3",
+          "loaderParams": {
+            "contest": "48",
+            "cvr": "."
+          }
+        },
+        {
+          "office": "salt-lake-city-council-d5",
+          "loaderParams": {
+            "contest": "49",
+            "cvr": "."
+          }
+        }
+      ],
+      "files": {},
+      "website": null
+    }
+  }
+}
