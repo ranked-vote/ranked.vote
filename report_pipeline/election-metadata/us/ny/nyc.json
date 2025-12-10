@@ -125,6 +125,294 @@
             "jurisdictionName": "Citywide",
             "officeName": "DEM Mayor"
           }
+        },
+        {
+          "office": "comptroller",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "Citywide",
+            "officeName": "DEM Comptroller"
+          }
+        },
+        {
+          "office": "public-advocate",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "Citywide",
+            "officeName": "DEM Public Advocate"
+          }
+        },
+        {
+          "office": "borough-president-bronx",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "Bronx",
+            "officeName": "DEM Borough President"
+          }
+        },
+        {
+          "office": "borough-president-brooklyn",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "Kings",
+            "officeName": "DEM Borough President"
+          }
+        },
+        {
+          "office": "borough-president-manhattan",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "New York",
+            "officeName": "DEM Borough President"
+          }
+        },
+        {
+          "office": "council-member-1st-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "1st Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-2nd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "2nd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-3rd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "3rd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-4th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "4th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-5th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "5th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-7th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "7th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-8th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "8th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-10th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "10th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-11th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "11th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-12th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "12th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-13th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "13th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-14th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "14th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-16th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "16th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-17th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "17th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-19th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "19th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-21st-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "21st Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-25th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "25th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-28th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "28th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-30th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "30th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-33rd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "33rd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-35th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "35th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-36th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "36th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-38th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "38th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-39th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "39th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-41st-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "41st Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-46th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "46th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-47th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2021P\\d?V.+\\.xlsx",
+            "jurisdictionName": "47th Council District",
+            "officeName": "DEM Council Member"
+          }
         }
       ],
       "files": {

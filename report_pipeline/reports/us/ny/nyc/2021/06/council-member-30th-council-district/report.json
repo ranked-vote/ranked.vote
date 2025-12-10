@@ -1,0 +1,308 @@
+{
+  "info": {
+    "name": "DEM Council Member - 30th Council District",
+    "date": "2021-06-22",
+    "dataFormat": "us_ny_nyc",
+    "tabulationOptions": {
+      "eager": true,
+      "nycStyle": true
+    },
+    "jurisdictionPath": "us/ny/nyc",
+    "electionPath": "2021/06",
+    "office": "council-member-30th-council-district",
+    "officeName": "DEM Council Member - 30th Council District",
+    "jurisdictionName": "New York City",
+    "electionName": "Democratic Caucus",
+    "loaderParams": {
+      "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
+      "cvrPattern": "2021P\\d?V.+\\.xlsx",
+      "jurisdictionName": "30th Council District",
+      "officeName": "DEM Council Member"
+    },
+    "website": "https://vote.nyc/page/election-results-summary#p0"
+  },
+  "ballotCount": 9612,
+  "candidates": [
+    {
+      "name": "Juan D. Ardila",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Robert F. Holden",
+      "candidate_type": "Regular"
+    },
+    {
+      "name": "Write-in",
+      "candidate_type": "WriteIn"
+    }
+  ],
+  "rounds": [
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 5250
+        },
+        {
+          "allocatee": 0,
+          "votes": 4324
+        },
+        {
+          "allocatee": 2,
+          "votes": 38
+        },
+        {
+          "allocatee": "X",
+          "votes": 0
+        }
+      ],
+      "undervote": 0,
+      "overvote": 0,
+      "continuingBallots": 9612,
+      "transfers": []
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
+          "votes": 5255
+        },
+        {
+          "allocatee": 0,
+          "votes": 4330
+        },
+        {
+          "allocatee": "X",
+          "votes": 27
+        }
+      ],
+      "undervote": 27,
+      "overvote": 0,
+      "continuingBallots": 9585,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 1,
+          "count": 5
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 6
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 27
+        }
+      ]
+    }
+  ],
+  "winner": 1,
+  "condorcet": 1,
+  "numCandidates": 2,
+  "totalVotes": [
+    {
+      "candidate": 0,
+      "firstRoundVotes": 4324,
+      "transferVotes": 6,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 1,
+      "firstRoundVotes": 5250,
+      "transferVotes": 5,
+      "roundEliminated": null
+    },
+    {
+      "candidate": 2,
+      "firstRoundVotes": 38,
+      "transferVotes": 0,
+      "roundEliminated": 1
+    }
+  ],
+  "pairwisePreferences": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.45174754,
+          "numerator": 4330,
+          "denominator": 9585
+        },
+        {
+          "frac": 0.98718804,
+          "numerator": 5933,
+          "denominator": 6010
+        }
+      ],
+      [
+        {
+          "frac": 0.54825246,
+          "numerator": 5255,
+          "denominator": 9585
+        },
+        null,
+        {
+          "frac": 0.9849344,
+          "numerator": 6603,
+          "denominator": 6704
+        }
+      ],
+      [
+        {
+          "frac": 0.01281198,
+          "numerator": 77,
+          "denominator": 6010
+        },
+        {
+          "frac": 0.015065633,
+          "numerator": 101,
+          "denominator": 6704
+        },
+        null
+      ]
+    ]
+  },
+  "firstAlternate": {
+    "rows": [
+      0,
+      1,
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      "X"
+    ],
+    "entries": [
+      [
+        null,
+        {
+          "frac": 0.31290472,
+          "numerator": 1353,
+          "denominator": 4324
+        },
+        {
+          "frac": 0.014569843,
+          "numerator": 63,
+          "denominator": 4324
+        },
+        {
+          "frac": 0.67252547,
+          "numerator": 2908,
+          "denominator": 4324
+        }
+      ],
+      [
+        {
+          "frac": 0.30647618,
+          "numerator": 1609,
+          "denominator": 5250
+        },
+        null,
+        {
+          "frac": 0.0074285716,
+          "numerator": 39,
+          "denominator": 5250
+        },
+        {
+          "frac": 0.68609524,
+          "numerator": 3602,
+          "denominator": 5250
+        }
+      ],
+      [
+        {
+          "frac": 0.15789473,
+          "numerator": 6,
+          "denominator": 38
+        },
+        {
+          "frac": 0.13157895,
+          "numerator": 5,
+          "denominator": 38
+        },
+        null,
+        {
+          "frac": 0.7105263,
+          "numerator": 27,
+          "denominator": 38
+        }
+      ]
+    ]
+  },
+  "firstFinal": {
+    "rows": [
+      2
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
+    "entries": [
+      [
+        {
+          "frac": 0.15789473,
+          "numerator": 6,
+          "denominator": 38
+        },
+        {
+          "frac": 0.13157895,
+          "numerator": 5,
+          "denominator": 38
+        },
+        {
+          "frac": 0.7105263,
+          "numerator": 27,
+          "denominator": 38
+        }
+      ]
+    ]
+  },
+  "rankingDistribution": {
+    "overallDistribution": {
+      "1": 6537,
+      "2": 2929,
+      "3": 146
+    },
+    "candidateDistributions": {
+      "0": {
+        "1": 2908,
+        "2": 1357,
+        "3": 59
+      },
+      "1": {
+        "1": 3602,
+        "2": 1568,
+        "3": 80
+      },
+      "2": {
+        "1": 27,
+        "2": 4,
+        "3": 7
+      }
+    },
+    "totalBallots": 9612,
+    "candidateTotals": {
+      "0": 4324,
+      "1": 5250,
+      "2": 38
+    }
+  },
+  "smithSet": [
+    1
+  ]
+}

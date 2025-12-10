@@ -59,367 +59,367 @@
       "date": "2025-06-24",
       "contests": [
         {
-          "office": "mayor",
-          "officeName": "DEM Mayor",
-          "name": "DEM Mayor",
-          "winner": "Zohran Kwame Mamdani",
-          "numCandidates": 12,
+          "office": "borough-president-bronx",
+          "officeName": "DEM Borough President - Bronx",
+          "name": "DEM Borough President - Bronx",
+          "winner": "Vanessa L. Gibson",
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Vanessa L. Gibson",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
+        },
+        {
+          "office": "borough-president-brooklyn",
+          "officeName": "DEM Borough President - Brooklyn",
+          "name": "DEM Borough President - Brooklyn",
+          "winner": "Antonio Reynoso",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Antonio Reynoso",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "borough-president-manhattan",
+          "officeName": "DEM Borough President - Manhattan",
+          "name": "DEM Borough President - Manhattan",
+          "winner": "Brad Hoylman-Sigal",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Brad Hoylman-Sigal",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         },
         {
           "office": "comptroller",
           "officeName": "DEM Comptroller",
           "name": "DEM Comptroller",
-          "winner": "Justin Brannan",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "public-advocate",
-          "officeName": "DEM Public Advocate",
-          "name": "DEM Public Advocate",
-          "winner": "Jumaane D. Williams",
+          "winner": "Mark D. Levine",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Mark D. Levine",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "borough-president-bronx",
-          "officeName": "DEM Borough President - Bronx",
-          "name": "DEM Borough President - Bronx",
-          "winner": "Vanessa L. Gibson",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "borough-president-brooklyn",
-          "officeName": "DEM Borough President - Kings",
-          "name": "DEM Borough President - Kings",
-          "winner": "Antonio Reynoso",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "borough-president-manhattan",
-          "officeName": "DEM Borough President - New York",
-          "name": "DEM Borough President - New York",
-          "winner": "Brad Hoylman-Sigal",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-1st-council-district",
-          "officeName": "DEM Council Member - 1st Council District",
-          "name": "DEM Council Member - 1st Council District",
-          "winner": "Christopher Marte",
-          "numCandidates": 5,
-          "numRounds": 3,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-2nd-council-district",
-          "officeName": "DEM Council Member - 2nd Council District",
-          "name": "DEM Council Member - 2nd Council District",
-          "winner": "Harvey D. Epstein",
-          "numCandidates": 6,
-          "numRounds": 3,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-3rd-council-district",
-          "officeName": "DEM Council Member - 3rd Council District",
-          "name": "DEM Council Member - 3rd Council District",
-          "winner": "Erik D. Bottcher",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-4th-council-district",
-          "officeName": "DEM Council Member - 4th Council District",
-          "name": "DEM Council Member - 4th Council District",
-          "winner": "Virginia Maloney",
-          "numCandidates": 7,
-          "numRounds": 4,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-5th-council-district",
-          "officeName": "DEM Council Member - 5th Council District",
-          "name": "DEM Council Member - 5th Council District",
-          "winner": "Julie Menin",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-7th-council-district",
-          "officeName": "DEM Council Member - 7th Council District",
-          "name": "DEM Council Member - 7th Council District",
-          "winner": "Shaun Abreu",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
-        },
-        {
-          "office": "council-member-8th-council-district",
-          "officeName": "DEM Council Member - 8th Council District",
-          "name": "DEM Council Member - 8th Council District",
-          "winner": "Elsie Encarnacion",
-          "numCandidates": 8,
-          "numRounds": 7,
-          "condorcetWinner": null,
-          "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-10th-council-district",
           "officeName": "DEM Council Member - 10th Council District",
           "name": "DEM Council Member - 10th Council District",
           "winner": "Carmen N. De La Rosa",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Carmen N. De La Rosa",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-11th-council-district",
           "officeName": "DEM Council Member - 11th Council District",
           "name": "DEM Council Member - 11th Council District",
           "winner": "Eric Dinowitz",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Eric Dinowitz",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-12th-council-district",
           "officeName": "DEM Council Member - 12th Council District",
           "name": "DEM Council Member - 12th Council District",
           "winner": "Kevin C. Riley",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Kevin C. Riley",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-13th-council-district",
           "officeName": "DEM Council Member - 13th Council District",
           "name": "DEM Council Member - 13th Council District",
           "winner": "Shirley Aldebol",
-          "numCandidates": 7,
+          "numCandidates": 6,
           "numRounds": 5,
-          "condorcetWinner": null,
+          "condorcetWinner": "Shirley Aldebol",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-14th-council-district",
           "officeName": "DEM Council Member - 14th Council District",
           "name": "DEM Council Member - 14th Council District",
           "winner": "Pierina A. Sanchez",
-          "numCandidates": 4,
+          "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Pierina A. Sanchez",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-16th-council-district",
           "officeName": "DEM Council Member - 16th Council District",
           "name": "DEM Council Member - 16th Council District",
           "winner": "Althea V. Stevens",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Althea V. Stevens",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-17th-council-district",
           "officeName": "DEM Council Member - 17th Council District",
           "name": "DEM Council Member - 17th Council District",
           "winner": "Justin E. Sanchez",
-          "numCandidates": 5,
+          "numCandidates": 4,
           "numRounds": 3,
-          "condorcetWinner": null,
+          "condorcetWinner": "Justin E. Sanchez",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-19th-council-district",
           "officeName": "DEM Council Member - 19th Council District",
           "name": "DEM Council Member - 19th Council District",
           "winner": "Benjamin Chou ",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Benjamin Chou ",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-1st-council-district",
+          "officeName": "DEM Council Member - 1st Council District",
+          "name": "DEM Council Member - 1st Council District",
+          "winner": "Christopher Marte",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "condorcetWinner": "Christopher Marte",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-21st-council-district",
           "officeName": "DEM Council Member - 21st Council District",
           "name": "DEM Council Member - 21st Council District",
           "winner": "Shanel Thomas-Henry",
-          "numCandidates": 5,
+          "numCandidates": 4,
           "numRounds": 3,
-          "condorcetWinner": null,
+          "condorcetWinner": "Shanel Thomas-Henry",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-25th-council-district",
           "officeName": "DEM Council Member - 25th Council District",
           "name": "DEM Council Member - 25th Council District",
           "winner": "Shekar Krishnan",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Shekar Krishnan",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-28th-council-district",
           "officeName": "DEM Council Member - 28th Council District",
           "name": "DEM Council Member - 28th Council District",
           "winner": "Ty Hankerson",
-          "numCandidates": 6,
+          "numCandidates": 5,
           "numRounds": 4,
-          "condorcetWinner": null,
+          "condorcetWinner": "Ty Hankerson",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-2nd-council-district",
+          "officeName": "DEM Council Member - 2nd Council District",
+          "name": "DEM Council Member - 2nd Council District",
+          "winner": "Harvey D. Epstein",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": "Harvey D. Epstein",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-30th-council-district",
           "officeName": "DEM Council Member - 30th Council District",
           "name": "DEM Council Member - 30th Council District",
           "winner": "Phil Wong",
-          "numCandidates": 4,
+          "numCandidates": 3,
           "numRounds": 3,
-          "condorcetWinner": null,
+          "condorcetWinner": "Phil Wong",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-33rd-council-district",
           "officeName": "DEM Council Member - 33rd Council District",
           "name": "DEM Council Member - 33rd Council District",
           "winner": "Lincoln Restler",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Lincoln Restler",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-35th-council-district",
           "officeName": "DEM Council Member - 35th Council District",
           "name": "DEM Council Member - 35th Council District",
           "winner": "Crystal Hudson",
-          "numCandidates": 5,
+          "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Crystal Hudson",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-36th-council-district",
           "officeName": "DEM Council Member - 36th Council District",
           "name": "DEM Council Member - 36th Council District",
           "winner": "Chi Ajani Osse",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Chi Ajani Osse",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-38th-council-district",
           "officeName": "DEM Council Member - 38th Council District",
           "name": "DEM Council Member - 38th Council District",
           "winner": "Alexa Aviles",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Alexa Aviles",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-39th-council-district",
           "officeName": "DEM Council Member - 39th Council District",
           "name": "DEM Council Member - 39th Council District",
           "winner": "Shahana K. Hanif",
-          "numCandidates": 4,
+          "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Shahana K. Hanif",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-3rd-council-district",
+          "officeName": "DEM Council Member - 3rd Council District",
+          "name": "DEM Council Member - 3rd Council District",
+          "winner": "Erik D. Bottcher",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Erik D. Bottcher",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-41st-council-district",
           "officeName": "DEM Council Member - 41st Council District",
           "name": "DEM Council Member - 41st Council District",
           "winner": "Darlene Mealy",
-          "numCandidates": 9,
+          "numCandidates": 8,
           "numRounds": 6,
-          "condorcetWinner": null,
+          "condorcetWinner": "Darlene Mealy",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-46th-council-district",
           "officeName": "DEM Council Member - 46th Council District",
           "name": "DEM Council Member - 46th Council District",
           "winner": "Mercedes Narcisse",
-          "numCandidates": 3,
+          "numCandidates": 2,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Mercedes Narcisse",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         },
         {
           "office": "council-member-47th-council-district",
           "officeName": "DEM Council Member - 47th Council District",
           "name": "DEM Council Member - 47th Council District",
           "winner": "Kayla Santosuosso",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Kayla Santosuosso",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-4th-council-district",
+          "officeName": "DEM Council Member - 4th Council District",
+          "name": "DEM Council Member - 4th Council District",
+          "winner": "Virginia Maloney",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "condorcetWinner": "Virginia Maloney",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-5th-council-district",
+          "officeName": "DEM Council Member - 5th Council District",
+          "name": "DEM Council Member - 5th Council District",
+          "winner": "Julie Menin",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Julie Menin",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-7th-council-district",
+          "officeName": "DEM Council Member - 7th Council District",
+          "name": "DEM Council Member - 7th Council District",
+          "winner": "Shaun Abreu",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": null,
+          "condorcetWinner": "Shaun Abreu",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-8th-council-district",
+          "officeName": "DEM Council Member - 8th Council District",
+          "name": "DEM Council Member - 8th Council District",
+          "winner": "Elsie Encarnacion",
+          "numCandidates": 7,
+          "numRounds": 6,
+          "condorcetWinner": "Elsie Encarnacion",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "mayor",
+          "officeName": "DEM Mayor",
+          "name": "DEM Mayor",
+          "winner": "Zohran Kwame Mamdani",
+          "numCandidates": 11,
+          "numRounds": 2,
+          "condorcetWinner": "Zohran Kwame Mamdani",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "public-advocate",
+          "officeName": "DEM Public Advocate",
+          "name": "DEM Public Advocate",
+          "winner": "Jumaane D. Williams",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Jumaane D. Williams",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         }
       ]
     },
@@ -1145,15 +1145,356 @@
       "date": "2021-06-22",
       "contests": [
         {
+          "office": "borough-president-bronx",
+          "officeName": "DEM Borough President - Bronx",
+          "name": "DEM Borough President - Bronx",
+          "winner": "Vanessa L. Gibson",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": "Vanessa L. Gibson",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "borough-president-brooklyn",
+          "officeName": "DEM Borough President - Brooklyn",
+          "name": "DEM Borough President - Brooklyn",
+          "winner": "Antonio Reynoso",
+          "numCandidates": 12,
+          "numRounds": 10,
+          "condorcetWinner": "Antonio Reynoso",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "borough-president-manhattan",
+          "officeName": "DEM Borough President - Manhattan",
+          "name": "DEM Borough President - Manhattan",
+          "winner": "Mark D. Levine",
+          "numCandidates": 7,
+          "numRounds": 6,
+          "condorcetWinner": "Mark D. Levine",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "comptroller",
+          "officeName": "DEM Comptroller",
+          "name": "DEM Comptroller",
+          "winner": "Brad Lander",
+          "numCandidates": 10,
+          "numRounds": 9,
+          "condorcetWinner": "Brad Lander",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-10th-council-district",
+          "officeName": "DEM Council Member - 10th Council District",
+          "name": "DEM Council Member - 10th Council District",
+          "winner": "Carmen N. De La Rosa",
+          "numCandidates": 8,
+          "numRounds": 3,
+          "condorcetWinner": "Carmen N. De La Rosa",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-11th-council-district",
+          "officeName": "DEM Council Member - 11th Council District",
+          "name": "DEM Council Member - 11th Council District",
+          "winner": "Eric Dinowitz",
+          "numCandidates": 7,
+          "numRounds": 4,
+          "condorcetWinner": "Eric Dinowitz",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-12th-council-district",
+          "officeName": "DEM Council Member - 12th Council District",
+          "name": "DEM Council Member - 12th Council District",
+          "winner": "Kevin Riley",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Kevin Riley",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-13th-council-district",
+          "officeName": "DEM Council Member - 13th Council District",
+          "name": "DEM Council Member - 13th Council District",
+          "winner": "Marjorie Velazquez",
+          "numCandidates": 5,
+          "numRounds": 2,
+          "condorcetWinner": "Marjorie Velazquez",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-14th-council-district",
+          "officeName": "DEM Council Member - 14th Council District",
+          "name": "DEM Council Member - 14th Council District",
+          "winner": "Pierina Ana Sanchez",
+          "numCandidates": 6,
+          "numRounds": 5,
+          "condorcetWinner": "Pierina Ana Sanchez",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-16th-council-district",
+          "officeName": "DEM Council Member - 16th Council District",
+          "name": "DEM Council Member - 16th Council District",
+          "winner": "Althea V. Stevens",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "condorcetWinner": "Althea V. Stevens",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-17th-council-district",
+          "officeName": "DEM Council Member - 17th Council District",
+          "name": "DEM Council Member - 17th Council District",
+          "winner": "Rafael Salamanca Jr.",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Rafael Salamanca Jr.",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-19th-council-district",
+          "officeName": "DEM Council Member - 19th Council District",
+          "name": "DEM Council Member - 19th Council District",
+          "winner": "Tony Avella",
+          "numCandidates": 6,
+          "numRounds": 3,
+          "condorcetWinner": "Tony Avella",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-1st-council-district",
+          "officeName": "DEM Council Member - 1st Council District",
+          "name": "DEM Council Member - 1st Council District",
+          "winner": "Christopher Marte",
+          "numCandidates": 9,
+          "numRounds": 6,
+          "condorcetWinner": "Christopher Marte",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-21st-council-district",
+          "officeName": "DEM Council Member - 21st Council District",
+          "name": "DEM Council Member - 21st Council District",
+          "winner": "Francisco P. Moya",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": "Francisco P. Moya",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-25th-council-district",
+          "officeName": "DEM Council Member - 25th Council District",
+          "name": "DEM Council Member - 25th Council District",
+          "winner": "Shekar Krishnan",
+          "numCandidates": 8,
+          "numRounds": 6,
+          "condorcetWinner": "Shekar Krishnan",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-28th-council-district",
+          "officeName": "DEM Council Member - 28th Council District",
+          "name": "DEM Council Member - 28th Council District",
+          "winner": "Adrienne E. Adams",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Adrienne E. Adams",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-2nd-council-district",
+          "officeName": "DEM Council Member - 2nd Council District",
+          "name": "DEM Council Member - 2nd Council District",
+          "winner": "Carlina Rivera",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Carlina Rivera",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-30th-council-district",
+          "officeName": "DEM Council Member - 30th Council District",
+          "name": "DEM Council Member - 30th Council District",
+          "winner": "Robert F. Holden",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Robert F. Holden",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-33rd-council-district",
+          "officeName": "DEM Council Member - 33rd Council District",
+          "name": "DEM Council Member - 33rd Council District",
+          "winner": "Lincoln Restler",
+          "numCandidates": 8,
+          "numRounds": 5,
+          "condorcetWinner": "Lincoln Restler",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-35th-council-district",
+          "officeName": "DEM Council Member - 35th Council District",
+          "name": "DEM Council Member - 35th Council District",
+          "winner": "Crystal Hudson",
+          "numCandidates": 7,
+          "numRounds": 2,
+          "condorcetWinner": "Crystal Hudson",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-36th-council-district",
+          "officeName": "DEM Council Member - 36th Council District",
+          "name": "DEM Council Member - 36th Council District",
+          "winner": "Chi A. Osse",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": "Chi A. Osse",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-38th-council-district",
+          "officeName": "DEM Council Member - 38th Council District",
+          "name": "DEM Council Member - 38th Council District",
+          "winner": "Alexa Aviles",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "condorcetWinner": "Alexa Aviles",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-39th-council-district",
+          "officeName": "DEM Council Member - 39th Council District",
+          "name": "DEM Council Member - 39th Council District",
+          "winner": "Shahana K. Hanif",
+          "numCandidates": 7,
+          "numRounds": 5,
+          "condorcetWinner": "Shahana K. Hanif",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-3rd-council-district",
+          "officeName": "DEM Council Member - 3rd Council District",
+          "name": "DEM Council Member - 3rd Council District",
+          "winner": "Erik D. Bottcher",
+          "numCandidates": 6,
+          "numRounds": 5,
+          "condorcetWinner": "Erik D. Bottcher",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-41st-council-district",
+          "officeName": "DEM Council Member - 41st Council District",
+          "name": "DEM Council Member - 41st Council District",
+          "winner": "Darlene Mealy",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Darlene Mealy",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-46th-council-district",
+          "officeName": "DEM Council Member - 46th Council District",
+          "name": "DEM Council Member - 46th Council District",
+          "winner": "Mercedes Narcisse",
+          "numCandidates": 8,
+          "numRounds": 6,
+          "condorcetWinner": "Mercedes Narcisse",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-47th-council-district",
+          "officeName": "DEM Council Member - 47th Council District",
+          "name": "DEM Council Member - 47th Council District",
+          "winner": "Ari Kagan",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Ari Kagan",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-5th-council-district",
+          "officeName": "DEM Council Member - 5th Council District",
+          "name": "DEM Council Member - 5th Council District",
+          "winner": "Julie Menin",
+          "numCandidates": 7,
+          "numRounds": 5,
+          "condorcetWinner": "Julie Menin",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-7th-council-district",
+          "officeName": "DEM Council Member - 7th Council District",
+          "name": "DEM Council Member - 7th Council District",
+          "winner": "Shaun Abreu",
+          "numCandidates": 12,
+          "numRounds": 11,
+          "condorcetWinner": "Shaun Abreu",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-member-8th-council-district",
+          "officeName": "DEM Council Member - 8th Council District",
+          "name": "DEM Council Member - 8th Council District",
+          "winner": "Diana I. Ayala",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Diana I. Ayala",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "public-advocate",
+          "officeName": "DEM Public Advocate",
+          "name": "DEM Public Advocate",
+          "winner": "Jumaane D. Williams",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Jumaane D. Williams",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
           "office": "mayor-primary-dem",
           "officeName": "Mayor Nominee (Dem)",
           "name": "Mayor Nominee (Dem)",
           "winner": "Eric L. Adams",
           "numCandidates": 13,
           "numRounds": 8,
-          "condorcetWinner": null,
+          "condorcetWinner": "Eric L. Adams",
           "hasNonCondorcetWinner": false,
-          "hasWriteInByName": false
+          "hasWriteInByName": true
         }
       ]
     },
