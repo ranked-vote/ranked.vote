@@ -49,9 +49,13 @@
       return getCandidate(this.allocatee).name;
     }
 
-    tooltip(): string {
-      const percentage = this.totalRoundVotes ?
+    percentage(): number | null {
+      return this.totalRoundVotes ?
         Math.round((this.votes / this.totalRoundVotes) * 1000) / 10 : null;
+    }
+
+    tooltip(): string {
+      const percentage = this.percentage();
       const percentageText = percentage ? ` (${percentage}%)` : '';
 
       if (this.isExhausted()) {
@@ -97,6 +101,10 @@
             C ${r2x} ${midY} ${r1x} ${midY} ${r1x} ${r1y} \
             Z \
         `;
+    }
+
+    isExhaustedTransfer(): boolean {
+      return this.fromCandidate === EXHAUSTED || this.toCandidate === EXHAUSTED;
     }
 
     tooltip(): string {
@@ -245,6 +253,16 @@
     opacity: 0.2;
     mix-blend-mode: exclusion;
   }
+
+  .percentageText {
+    font-size: 9px;
+    fill: white;
+    font-weight: 600;
+  }
+
+  .percentageText.exhausted {
+    fill: #555;
+  }
 </style>
 
 <svg width="100%" viewBox={`0 0 ${width} ${height}`}>
@@ -269,6 +287,16 @@
           x={voteBlock.x}
           width={Math.max(1, voteBlock.width)}
           height={voteBlockHeight} />
+        {#if voteBlock.percentage() !== null && voteBlock.width > 20}
+          <text
+            class="percentageText {voteBlock.isExhausted() ? 'exhausted' : ''}"
+            x={voteBlock.x + voteBlock.width / 2}
+            y={voteBlock.y + voteBlockHeight / 2}
+            dominant-baseline="middle"
+            text-anchor="middle">
+            {voteBlock.percentage()}%
+          </text>
+        {/if}
       {/each}
     {/each}
 
