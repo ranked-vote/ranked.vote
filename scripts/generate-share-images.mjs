@@ -3,6 +3,10 @@ import fs from "fs/promises";
 import path from "path";
 import { stat } from "fs/promises";
 import { spawn, execSync } from "child_process";
+import { promisify } from "util";
+import { exec } from "child_process";
+
+const execAsync = promisify(exec);
 
 let detectedPort = 3000;
 let devServerProcess = null;
@@ -49,6 +53,47 @@ function logProgress(current, total, prefix = "Processing") {
   }
 }
 
+// Optimize PNG using oxipng if available, otherwise skip silently
+async function optimizePng(filePath) {
+  try {
+    // Check if oxipng is available by trying to run it
+    try {
+      execSync("oxipng --version", { encoding: "utf8", stdio: "ignore" });
+    } catch {
+      // oxipng not found, skip optimization
+      return;
+    }
+
+    // Get file size before optimization
+    const statsBefore = await stat(filePath);
+    const sizeBefore = statsBefore.size;
+
+    // Run oxipng with optimization level 2 (good balance of speed vs compression)
+    // -o 2: optimization level 2
+    // --strip safe: remove safe-to-remove metadata
+    await execAsync(`oxipng -o 2 --strip safe "${filePath}"`);
+
+    // Get file size after optimization
+    const statsAfter = await stat(filePath);
+    const sizeAfter = statsAfter.size;
+    const saved = sizeBefore - sizeAfter;
+    const percentSaved = ((saved / sizeBefore) * 100).toFixed(1);
+
+    if (saved > 0) {
+      log(
+        logLevels.DEBUG,
+        `Optimized ${path.basename(filePath)}: ${(sizeBefore / 1024).toFixed(1)}KB → ${(sizeAfter / 1024).toFixed(1)}KB (${percentSaved}% saved)`,
+      );
+    }
+  } catch (error) {
+    // Log but don't fail - optimization is optional
+    log(
+      logLevels.DEBUG,
+      `PNG optimization skipped for ${path.basename(filePath)}: ${error.message}`,
+    );
+  }
+}
+
 // Simple page setup helper
 async function setupPage(page) {
   await page.setDefaultTimeout(10000);
@@ -57,6 +102,11 @@ async function setupPage(page) {
     height: 630,
     deviceScaleFactor: 1,
   });
+
+  // Force light mode - never use dark mode for card images
+  await page.emulateMediaFeatures([
+    { name: "prefers-color-scheme", value: "light" },
+  ]);
 
   // Optimize page loading - block unnecessary resources
   await page.setRequestInterception(true);
@@ -251,6 +301,9 @@ async function processReport(report, browser, retries = 1) {
         type: "png",
         omitBackground: false,
       });
+
+      // Optimize PNG immediately after generation
+      await optimizePng(outputPath);
 
       const totalTime = Date.now() - reportStartTime;
       const loadTime = Date.now() - loadStartTime;
