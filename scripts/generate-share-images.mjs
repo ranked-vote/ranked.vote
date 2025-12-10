@@ -451,13 +451,10 @@ async function startDevServer() {
   const env = { ...process.env, RANKED_VOTE_REPORTS: "report_pipeline/reports" };
 
   // Use spawn without shell to avoid security warning
-  // Find npm executable
-  const npmPath = process.platform === "win32" ? "npm.cmd" : "npm";
-
-  devServerProcess = spawn(npmPath, ["run", "dev"], {
+  devServerProcess = spawn("bun", ["run", "dev"], {
     env,
     stdio: "ignore",
-    shell: false, // Avoid shell security warning
+    shell: false,
   });
 
   devServerProcess.on("error", (error) => {

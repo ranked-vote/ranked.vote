@@ -7,7 +7,7 @@ A static site and data pipeline for publishing ranked-choice voting (RCV) electi
 
 ## Prerequisites
 
-- Node.js 18+ (matches CI) and npm
+- Bun (latest version)
 - Rust (stable) if you need to regenerate reports
 - **Git LFS** for downloading election data archives
 
@@ -37,7 +37,7 @@ git clone https://github.com/ranked-vote/ranked.vote.git
 cd ranked.vote
 
 # Extract election data archives to working directory
-npm run report:extract
+bun run report:extract
 
 # This creates raw-data/ from the compressed archives/
 # Time: ~5-10 minutes for 12 GB of data
@@ -47,10 +47,10 @@ npm run report:extract
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start dev server
-npm run dev
+bun run dev
 
 # Open http://localhost:3000
 ```
@@ -62,35 +62,35 @@ The app reads report data from `report_pipeline/reports` via the `RANKED_VOTE_RE
 If you only want to view existing reports without raw data:
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 # open http://localhost:3000
 ```
 
 ## Scripts
 
 ### Web Development
-- `npm run dev`: start SvelteKit dev server (with `RANKED_VOTE_REPORTS` set automatically)
-- `npm run build`: build static site to `build/` directory
-- `npm run preview`: preview the built site locally
-- `npm run check`: run Svelte type checking
+- `bun run dev`: start SvelteKit dev server (with `RANKED_VOTE_REPORTS` set automatically)
+- `bun run build`: build static site to `build/` directory
+- `bun run preview`: preview the built site locally
+- `bun run check`: run Svelte type checking
 
 ### Report Generation
-- `npm run report`: generate reports (automatically generates card images after reports are created)
-- `npm run report:sync`: sync election metadata with raw data files
-- `npm run report:extract`: extract election data from archives to raw-data directory
+- `bun run report`: generate reports (automatically generates card images after reports are created)
+- `bun run report:sync`: sync election metadata with raw data files
+- `bun run report:extract`: extract election data from archives to raw-data directory
 
 ### Card Image Generation
-- `npm run generate-images`: generate share images (automatically starts/stops dev server if needed)
+- `bun run generate-images`: generate share images (automatically starts/stops dev server if needed)
   - Processes images in parallel (default: 5 concurrent, set `CONCURRENCY` env var to adjust)
   - Skips unchanged images (only regenerates if report.json is newer than PNG)
-- Card image validation is included in the test suite (`npm test`)
+- Card image validation is included in the test suite (`bun test`)
 
 ## Build
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 # output: build/
 ```
 
@@ -132,14 +132,14 @@ report_pipeline/
 2. **Generate reports with Rust pipeline**
    ```bash
    # From project root (recommended):
-   npm run report
+   bun run report
 
    # Or from report_pipeline directory:
    cd report_pipeline
    ./report.sh  # See report_pipeline/README.md for details
    ```
 
-   Note: `npm run report` automatically generates card images after reports are created.
+   Note: `bun run report` automatically generates card images after reports are created.
 
 3. **Compress for git**
    ```bash
@@ -181,34 +181,34 @@ See [DATA-WORKFLOW.md](report_pipeline/DATA-WORKFLOW.md) for complete documentat
 
 ```bash
 # First time: Extract election data
-npm run report:extract
+bun run report:extract
 
 # View reports in browser
-npm install && npm run dev
+bun install && bun run dev
 
 # Generate reports and card images
-npm run report
+bun run report
 
 # Generate/update share images
-npm run generate-images
+bun run generate-images
 
 # Run tests (includes card image validation)
-npm test
+bun test
 
 # Add new election data
 cd report_pipeline
 cp -r /source raw-data/us/ca/alameda/2025/06/
-npm run report:sync  # Sync metadata
-npm run report       # Generate reports and images
+bun run report:sync  # Sync metadata
+bun run report       # Generate reports and images
 ./compress-to-archives.sh
 git add archives/ reports/ static/share/
 
 # Update election data
 # Edit files in raw-data/
 cd report_pipeline
-npm run report:sync  # Sync metadata
-npm run report       # Regenerate reports and images
-npm run generate-images  # Regenerate share images
+bun run report:sync  # Sync metadata
+bun run report       # Regenerate reports and images
+bun run generate-images  # Regenerate share images
 ./compress-to-archives.sh  # Detects changes and recompresses
 git add archives/ reports/ static/share/
 ```
@@ -220,7 +220,7 @@ git add archives/ reports/ static/share/
 - Pull LFS files: `git lfs pull`
 
 **"No such file" in raw-data/:**
-- Extract archives: `npm run report:extract`
+- Extract archives: `bun run report:extract`
 
 **Slow clone:**
 - Archives are large (~360 MB). Be patient or use: `GIT_LFS_SKIP_SMUDGE=1 git clone ...`

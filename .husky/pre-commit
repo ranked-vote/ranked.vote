@@ -1,2 +1,2 @@
-npm run generate-images
-npm test
+bun run generate-images
+bun test
