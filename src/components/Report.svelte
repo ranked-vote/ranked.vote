@@ -4,6 +4,7 @@
     Allocatee,
     ICandidate,
     ICandidatePairEntry,
+    ICandidatePairTable,
   } from "../report_types";
   import VoteCounts from "./report_components/VoteCounts.svelte";
   import Sankey from "./report_components/Sankey.svelte";
@@ -59,6 +60,56 @@
       months[date.getUTCMonth()]
     } ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
   }
+
+  function getVoteCount(allocatee: Allocatee): number {
+    if (allocatee === "X") {
+      return 0;
+    }
+    const votes = report.totalVotes.find((v) => v.candidate === allocatee);
+    return votes ? votes.firstRoundVotes + votes.transferVotes : 0;
+  }
+
+  function sortPairwiseTable(table: ICandidatePairTable): ICandidatePairTable {
+    const voteCountMap = new Map<Allocatee, number>();
+    for (const allocatee of [...table.rows, ...table.cols]) {
+      if (!voteCountMap.has(allocatee)) {
+        voteCountMap.set(allocatee, getVoteCount(allocatee));
+      }
+    }
+
+    const sortedRows = [...table.rows].sort(
+      (a, b) => voteCountMap.get(b)! - voteCountMap.get(a)!
+    );
+    const sortedCols = [...table.cols].sort(
+      (a, b) => voteCountMap.get(b)! - voteCountMap.get(a)!
+    );
+
+    const sortedEntries: (ICandidatePairEntry | null)[][] = sortedRows.map(
+      (row) => {
+        const originalRowIdx = table.rows.indexOf(row);
+        return sortedCols.map((col) => {
+          const originalColIdx = table.cols.indexOf(col);
+          return table.entries[originalRowIdx]?.[originalColIdx] ?? null;
+        });
+      }
+    );
+
+    return {
+      rows: sortedRows,
+      cols: sortedCols,
+      entries: sortedEntries,
+    };
+  }
+
+  $: sortedPairwisePreferences = hasCandidates
+    ? sortPairwiseTable(report.pairwisePreferences)
+    : report.pairwisePreferences;
+  $: sortedFirstAlternate = hasCandidates
+    ? sortPairwiseTable(report.firstAlternate)
+    : report.firstAlternate;
+  $: sortedFirstFinal = hasCandidates
+    ? sortPairwiseTable(report.firstFinal)
+    : report.firstFinal;
 </script>
 
 <style>
@@ -169,7 +220,7 @@
 
   <div class="rightCol">
     <CandidatePairTable
-      data={report.pairwisePreferences}
+      data={sortedPairwisePreferences}
       rowLabel="Preferred Candidate"
       colLabel="Less-preferred Candidate"
       generateTooltip={(row: Allocatee, col: Allocatee, entry: ICandidatePairEntry) => `
@@ -204,7 +255,7 @@
         (<strong>${Math.round(entry.frac * 1000) / 10}%</strong>)
         did not rank another candidate.
        `)}
-      data={report.firstAlternate}
+      data={sortedFirstAlternate}
       rowLabel="First Choice"
       colLabel="Second Choice" />
   </div>
@@ -253,7 +304,7 @@
         (<strong>${Math.round(entry.frac * 1000) / 10}%</strong>)
         were exhausted by the final round.
         `)}
-        data={report.firstFinal}
+        data={sortedFirstFinal}
         rowLabel="First Round Choice"
         colLabel="Final Round Choice" />
     </div>
