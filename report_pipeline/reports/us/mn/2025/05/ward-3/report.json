@@ -138,18 +138,8 @@
     }
   ],
   "pairwisePreferences": {
-    "rows": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "cols": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "rows": [0, 1, 2, 3],
+    "cols": [0, 1, 2, 3],
     "entries": [
       [
         null,
@@ -226,19 +216,8 @@
     ]
   },
   "firstAlternate": {
-    "rows": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "cols": [
-      0,
-      1,
-      2,
-      3,
-      "X"
-    ],
+    "rows": [0, 1, 2, 3],
+    "cols": [0, 1, 2, 3, "X"],
     "entries": [
       [
         null,
@@ -315,15 +294,8 @@
     ]
   },
   "firstFinal": {
-    "rows": [
-      2,
-      3
-    ],
-    "cols": [
-      0,
-      1,
-      "X"
-    ],
+    "rows": [2, 3],
+    "cols": [0, 1, "X"],
     "entries": [
       [
         {
@@ -387,7 +359,5 @@
       "3": 1
     }
   },
-  "smithSet": [
-    0
-  ]
+  "smithSet": [0]
 }

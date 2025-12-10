@@ -90,7 +90,9 @@ if (electionsWithoutWebsites.length === 0) {
   for (const [jurisdictionPath, { name, elections }] of Object.entries(
     byJurisdiction,
   )) {
-    console.log(`${name} (${jurisdictionPath}): ${elections.length} election(s)`);
+    console.log(
+      `${name} (${jurisdictionPath}): ${elections.length} election(s)`,
+    );
     for (const election of elections) {
       console.log(`  - ${election.electionName} (${election.date})`);
       console.log(`    Key: ${election.electionKey}`);
@@ -107,4 +109,3 @@ if (electionsWithoutWebsites.length === 0) {
     console.log(`  ${jurisdictionPath}: ${elections.length} election(s)`);
   }
 }
-
