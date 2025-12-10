@@ -44,9 +44,28 @@
     },
     "ward-13": {
       "name": "City Council Ward 13"
+    },
+    "parks-recreation-commissioner": {
+      "name": "Park and Recreation Commissioner At-Large"
     }
   },
   "elections": {
+    "2009/11": {
+      "name": "November 3, 2009 Municipal Election",
+      "date": "2009-11-03",
+      "dataFormat": "preflib",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "parks-recreation-commissioner",
+          "loaderParams": {
+            "file": "tax-assessor.soi"
+          }
+        }
+      ],
+      "files": {}
+    },
     "2025/05": {
       "name": "Municipal Election",
       "date": "2025-05-13",
@@ -155,7 +174,7 @@
         "2025-Ward-12-Cast-Vote-Record.csv": "f8538c14fd36bd4fe8664d58593447f41457fe9a",
         "2025-Ward-13-Cast-Vote-Record.csv": "975048197dee942393d62d244ade9e1b3ff54473"
       },
-      "website": null
+      "website": "https://vote.minneapolismn.gov/results-data/election-results/2025/"
     },
     "2023/05": {
       "name": "Municipal Election",

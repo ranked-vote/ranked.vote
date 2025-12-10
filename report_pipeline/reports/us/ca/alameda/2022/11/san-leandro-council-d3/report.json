@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 24812,
+  "ballotCount": 4176,
   "candidates": [
     {
       "name": "Victor Aguilar",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 18356
+          "votes": 3164
         },
         {
           "allocatee": "X",
-          "votes": 6456
+          "votes": 1012
         }
       ],
-      "undervote": 6426,
-      "overvote": 30,
-      "continuingBallots": 18356,
+      "undervote": 1005,
+      "overvote": 7,
+      "continuingBallots": 3164,
       "transfers": []
     }
   ],
@@ -51,7 +51,7 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 18356,
+      "firstRoundVotes": 3164,
       "transferVotes": 0,
       "roundEliminated": null
     }
@@ -82,8 +82,8 @@
         null,
         {
           "frac": 1.0,
-          "numerator": 18356,
-          "denominator": 18356
+          "numerator": 3164,
+          "denominator": 3164
         }
       ]
     ]
@@ -98,16 +98,16 @@
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 18356
+      "1": 3164
     },
     "candidateDistributions": {
       "0": {
-        "1": 18356
+        "1": 3164
       }
     },
-    "totalBallots": 18356,
+    "totalBallots": 3164,
     "candidateTotals": {
-      "0": 18356
+      "0": 3164
     }
   },
   "smithSet": [

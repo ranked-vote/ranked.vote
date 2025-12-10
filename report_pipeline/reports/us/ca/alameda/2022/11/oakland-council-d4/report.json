@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 32502,
+  "ballotCount": 5733,
   "candidates": [
     {
       "name": "Janani Ramachandran",
@@ -36,20 +36,20 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 19904
+          "votes": 3519
         },
         {
           "allocatee": 1,
-          "votes": 9160
+          "votes": 1589
         },
         {
           "allocatee": "X",
-          "votes": 3438
+          "votes": 625
         }
       ],
-      "undervote": 3341,
-      "overvote": 97,
-      "continuingBallots": 29064,
+      "undervote": 603,
+      "overvote": 22,
+      "continuingBallots": 5108,
       "transfers": []
     }
   ],
@@ -59,13 +59,13 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 19904,
+      "firstRoundVotes": 3519,
       "transferVotes": 0,
       "roundEliminated": null
     },
     {
       "candidate": 1,
-      "firstRoundVotes": 9160,
+      "firstRoundVotes": 1589,
       "transferVotes": 0,
       "roundEliminated": null
     }
@@ -83,16 +83,16 @@
       [
         null,
         {
-          "frac": 0.68483347,
-          "numerator": 19904,
-          "denominator": 29064
+          "frac": 0.68891937,
+          "numerator": 3519,
+          "denominator": 5108
         }
       ],
       [
         {
-          "frac": 0.31516653,
-          "numerator": 9160,
-          "denominator": 29064
+          "frac": 0.31108066,
+          "numerator": 1589,
+          "denominator": 5108
         },
         null
       ]
@@ -112,27 +112,27 @@
       [
         null,
         {
-          "frac": 0.50175846,
-          "numerator": 9987,
-          "denominator": 19904
+          "frac": 0.50980395,
+          "numerator": 1794,
+          "denominator": 3519
         },
         {
-          "frac": 0.49824157,
-          "numerator": 9917,
-          "denominator": 19904
+          "frac": 0.49019608,
+          "numerator": 1725,
+          "denominator": 3519
         }
       ],
       [
         {
-          "frac": 0.5348253,
-          "numerator": 4899,
-          "denominator": 9160
+          "frac": 0.535557,
+          "numerator": 851,
+          "denominator": 1589
         },
         null,
         {
-          "frac": 0.46517467,
-          "numerator": 4261,
-          "denominator": 9160
+          "frac": 0.46444306,
+          "numerator": 738,
+          "denominator": 1589
         }
       ]
     ]
@@ -148,23 +148,23 @@
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 14178,
-      "2": 14886
+      "1": 2463,
+      "2": 2645
     },
     "candidateDistributions": {
       "0": {
-        "1": 9917,
-        "2": 9987
+        "1": 1725,
+        "2": 1794
       },
       "1": {
-        "1": 4261,
-        "2": 4899
+        "1": 738,
+        "2": 851
       }
     },
-    "totalBallots": 29064,
+    "totalBallots": 5108,
     "candidateTotals": {
-      "0": 19904,
-      "1": 9160
+      "0": 3519,
+      "1": 1589
     }
   },
   "smithSet": [

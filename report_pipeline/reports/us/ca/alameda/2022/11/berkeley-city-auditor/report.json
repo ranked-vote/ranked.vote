@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 50241,
+  "ballotCount": 9360,
   "candidates": [
     {
       "name": "Jenny Wong",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 40266
+          "votes": 7516
         },
         {
           "allocatee": "X",
-          "votes": 9975
+          "votes": 1844
         }
       ],
-      "undervote": 9956,
-      "overvote": 19,
-      "continuingBallots": 40266,
+      "undervote": 1838,
+      "overvote": 6,
+      "continuingBallots": 7516,
       "transfers": []
     }
   ],
@@ -51,7 +51,7 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 40266,
+      "firstRoundVotes": 7516,
       "transferVotes": 0,
       "roundEliminated": null
     }
@@ -82,8 +82,8 @@
         null,
         {
           "frac": 1.0,
-          "numerator": 40266,
-          "denominator": 40266
+          "numerator": 7516,
+          "denominator": 7516
         }
       ]
     ]
@@ -98,16 +98,16 @@
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 40266
+      "1": 7516
     },
     "candidateDistributions": {
       "0": {
-        "1": 40266
+        "1": 7516
       }
     },
-    "totalBallots": 40266,
+    "totalBallots": 7516,
     "candidateTotals": {
-      "0": 40266
+      "0": 7516
     }
   },
   "smithSet": [

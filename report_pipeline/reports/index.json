@@ -2343,6 +2343,17 @@
           "hasWriteInByName": true
         },
         {
+          "office": "san-leandro-council-d2",
+          "officeName": "City Council, District 2 - San Leandro",
+          "name": "City Council, District 2 - San Leandro",
+          "winner": "Ursula Reed",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Ursula Reed",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
           "office": "oakland-council-d3",
           "officeName": "City Council, District 3 - Oakland",
           "name": "City Council, District 3 - Oakland",
@@ -2350,6 +2361,17 @@
           "numCandidates": 6,
           "numRounds": 6,
           "condorcetWinner": "Lynette Gibson-Mcelhaney",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "san-leandro-council-d4",
+          "officeName": "City Council, District 4 - San Leandro",
+          "name": "City Council, District 4 - San Leandro",
+          "winner": "Benny Lee",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "condorcetWinner": "Benny Lee",
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": true
         },
@@ -2488,6 +2510,17 @@
           "hasWriteInByName": true
         },
         {
+          "office": "berkeley-council-d7",
+          "officeName": "City Council, District 7 - Berkeley",
+          "name": "City Council, District 7 - Berkeley",
+          "winner": "Kriss Worthington",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Kriss Worthington",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
           "office": "oakland-mayor",
           "officeName": "Mayor - Oakland",
           "name": "Mayor - Oakland",
@@ -2495,6 +2528,55 @@
           "numCandidates": 10,
           "numRounds": 3,
           "condorcetWinner": "Jean Quan",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "san-leandro-mayor",
+          "officeName": "Mayor - San Leandro",
+          "name": "Mayor - San Leandro",
+          "winner": "Stephen H. Cassidy",
+          "numCandidates": 6,
+          "numRounds": 2,
+          "condorcetWinner": "Stephen H. Cassidy",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        }
+      ]
+    },
+    {
+      "path": "us/wa/pierce/2009/11",
+      "jurisdictionName": "Pierce County",
+      "electionName": "November 3, 2009 General Election",
+      "date": "2009-11-03",
+      "contests": [
+        {
+          "office": "auditor",
+          "officeName": "County Auditor",
+          "name": "County Auditor",
+          "winner": "Julie Anderson",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Julie Anderson",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        }
+      ]
+    },
+    {
+      "path": "us/mn/2009/11",
+      "jurisdictionName": "Minneapolis",
+      "electionName": "November 3, 2009 Municipal Election",
+      "date": "2009-11-03",
+      "contests": [
+        {
+          "office": "parks-recreation-commissioner",
+          "officeName": "Park and Recreation Commissioner At-Large",
+          "name": "Park and Recreation Commissioner At-Large",
+          "winner": "Annie Young",
+          "numCandidates": 9,
+          "numRounds": 7,
+          "condorcetWinner": "Annie Young",
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": true
         }
@@ -2516,6 +2598,47 @@
           "condorcetWinner": null,
           "hasNonCondorcetWinner": false,
           "hasWriteInByName": false
+        }
+      ]
+    },
+    {
+      "path": "us/wa/pierce/2008/11",
+      "jurisdictionName": "Pierce County",
+      "electionName": "November 4, 2008 General Election",
+      "date": "2008-11-04",
+      "contests": [
+        {
+          "office": "assessor-treasurer",
+          "officeName": "Assessor-Treasurer",
+          "name": "Assessor-Treasurer",
+          "winner": "Dale Washam",
+          "numCandidates": 6,
+          "numRounds": 4,
+          "condorcetWinner": "Dale Washam",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "council-d2",
+          "officeName": "County Council, District 2",
+          "name": "County Council, District 2",
+          "winner": "Joyce Mcdonald",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Joyce Mcdonald",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        },
+        {
+          "office": "executive",
+          "officeName": "County Executive",
+          "name": "County Executive",
+          "winner": "Pat Mccarthy",
+          "numCandidates": 4,
+          "numRounds": 3,
+          "condorcetWinner": "Pat Mccarthy",
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
         }
       ]
     },

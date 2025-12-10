@@ -208,7 +208,11 @@ pub fn preflib_ballot_reader(path: &Path, params: BTreeMap<String, String>) -> E
                 // Format: # ALTERNATIVE NAME X: Name
                 if let Some((id_str, name)) = rest.split_once(':') {
                     if let Ok(cand_id) = id_str.trim().parse::<u32>() {
-                        let name = name.trim().to_string();
+                        let mut name = name.trim().to_string();
+                        // Remove surrounding quotes if present
+                        if name.starts_with('"') && name.ends_with('"') && name.len() >= 2 {
+                            name = name[1..name.len() - 1].to_string();
+                        }
                         let candidate_type = if name.eq_ignore_ascii_case("Write-In") {
                             CandidateType::WriteIn
                         } else {
