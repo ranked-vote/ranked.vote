@@ -259,6 +259,25 @@
         "2023-Ward-13-Cast-Vote-Record.csv": "269d1d307c6e69fc2472ff4939f90a64c6fe3c19"
       },
       "website": "https://vote.minneapolismn.gov/results-data/election-results/2023/"
+    },
+    "2021/11": {
+      "name": "Municipal Election",
+      "date": "2021-11-02",
+      "dataFormat": "us_mn_mpls",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "ward-2",
+          "loaderParams": {
+            "file": "2021-Ward-2-Cast-Vote-Record.csv"
+          }
+        }
+      ],
+      "files": {
+        "2021-Ward-2-Cast-Vote-Record.csv": "a9565b16d687ce1d837226563020f7392bab4f36"
+      },
+      "website": "https://vote.minneapolismn.gov/results-data/election-results/2021/council-ward-2/"
     }
   }
 }

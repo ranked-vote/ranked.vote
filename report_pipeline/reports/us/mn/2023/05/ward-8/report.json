@@ -16,7 +16,7 @@
     "loaderParams": {
       "file": "2023-Ward-8-Cast-Vote-Record.csv"
     },
-    "website": null
+    "website": "https://vote.minneapolismn.gov/results-data/election-results/2023/"
   },
   "ballotCount": 8068,
   "candidates": [

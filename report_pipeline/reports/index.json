@@ -1220,6 +1220,25 @@
       ]
     },
     {
+      "path": "us/mn/2021/11",
+      "jurisdictionName": "Minneapolis",
+      "electionName": "Municipal Election",
+      "date": "2021-11-02",
+      "contests": [
+        {
+          "office": "ward-2",
+          "officeName": "City Council Ward 2",
+          "name": "City Council Ward 2",
+          "winner": "Robin Wonsley Worlobah",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": null,
+          "hasNonCondorcetWinner": false,
+          "hasWriteInByName": true
+        }
+      ]
+    },
+    {
       "path": "us/ny/nyc/2021/06",
       "jurisdictionName": "New York City",
       "electionName": "Democratic Caucus",

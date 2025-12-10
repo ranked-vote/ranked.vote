@@ -52,7 +52,7 @@
       "September",
       "October",
       "November",
-      "Decemner",
+      "December",
     ];
 
     return `${
@@ -92,7 +92,7 @@
         {:else}
         The winner could not be determined out of
         {/if}
-        <strong>{report.numCandidates}</strong>&nbsp;{#if report.numCandidates == 1}candidate {:else}candidates {/if}{#if report.rounds && report.rounds.length > 1}after
+        <strong>{report.numCandidates}</strong>&nbsp;{#if report.numCandidates == 1}candidate {:else}candidates{/if}{#if report.rounds && report.rounds.length > 1} after
           {" "}<strong>{report.rounds.length - 1}</strong>&nbsp;elimination {#if report.rounds.length == 2}round{:else}rounds{/if}.
         {:else}. No elimination rounds were necessary to determine the outcome.
         {/if}
@@ -111,10 +111,10 @@
         </p>
       {:else if report.condorcet == null && report.winner != null && report.smithSet}
         <p>
-          No Condorcet winner; multiple candidates form the
+          No Condorcet winner exists; multiple candidates form a
           <a href="https://en.wikipedia.org/wiki/Condorcet_paradox">Condorcet cycle</a>:
           {report.smithSet.map(getCandidateNameById).join(", ")}
-          .
+          . This means that among these candidates, each one would beat some others in head-to-head matchups, but no single candidate beats all others. In this situation, the winner depends on the order of eliminations in the ranked-choice voting process, rather than a clear preference.
         </p>
       {/if}
     {/if}
