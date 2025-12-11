@@ -182,15 +182,15 @@ hr {
   border-bottom: 1px dotted #ddd;
 }
 
-/* Non-Condorcet Winner Highlighting */
-.race.non-condorcet {
+/* Interesting Election Highlighting (non-Condorcet winner or exhausted > winner) */
+.race.interesting {
   border-left: 4px solid #aa0d0d;
   background-color: #fdf2f2;
   margin-left: -5px;
   padding-left: 5px;
 }
 
-.non-condorcet-badge {
+.interesting-badge {
   display: inline-block;
   background-color: #aa0d0d;
   color: white;
@@ -252,7 +252,7 @@ hr {
     border-bottom-color: #444;
   }
 
-  .race.non-condorcet {
+  .race.interesting {
     background-color: #2d1f1f;
     border-left-color: #aa0d0d;
   }
@@ -263,11 +263,11 @@ hr {
 
   /* Make links brighter red in dark mode */
   a {
-    color: #FF0000;
+    color: #ff0000;
   }
 
   h3 strong {
-    color: #FF0000;
+    color: #ff0000;
   }
 
   /* Make visited links lighter in dark mode */

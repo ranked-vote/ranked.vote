@@ -28,6 +28,47 @@ fn is_write_in_by_name(name: &str) -> bool {
         || normalized == "uwi"
 }
 
+/// Check if an election is "interesting" based on various criteria:
+/// - Has a non-Condorcet winner (Condorcet winner exists but didn't win under RCV)
+/// - Has a Condorcet cycle (Smith set has more than one candidate)
+/// - Exhausted ballots outnumber the winner's votes
+fn is_interesting(report: &ContestReport) -> bool {
+    use crate::tabulator::Allocatee;
+
+    // Check for non-Condorcet winner
+    let has_non_condorcet_winner = report.condorcet.is_some() && report.condorcet != report.winner;
+
+    // Check for Condorcet cycle (Smith set has more than one candidate)
+    let has_condorcet_cycle = report.smith_set.len() > 1;
+
+    // Check if exhausted ballots > winner's votes
+    let exhausted_exceeds_winner = if let Some(last_round) = report.rounds.last() {
+        let exhausted = last_round
+            .allocations
+            .iter()
+            .find(|a| matches!(a.allocatee, Allocatee::Exhausted))
+            .map(|a| a.votes)
+            .unwrap_or(0);
+
+        let winner_votes = if let Some(winner_id) = report.winner {
+            last_round
+                .allocations
+                .iter()
+                .find(|a| matches!(a.allocatee, Allocatee::Candidate(id) if id == winner_id))
+                .map(|a| a.votes)
+                .unwrap_or(0)
+        } else {
+            0
+        };
+
+        exhausted > winner_votes
+    } else {
+        false
+    };
+
+    has_non_condorcet_winner || has_condorcet_cycle || exhausted_exceeds_winner
+}
+
 /// Process a single contest and return the ContestIndexEntry
 fn process_contest(
     contest: &Contest,
@@ -123,7 +164,7 @@ fn process_contest(
         condorcet_winner: report
             .condorcet
             .map(|c| report.candidates[c.0 as usize].name.clone()),
-        has_non_condorcet_winner: report.condorcet != report.winner,
+        interesting: is_interesting(&report),
         has_write_in_by_name,
     };
 
@@ -249,8 +290,7 @@ fn process_nyc_election_batch(
                 condorcet_winner: report
                     .condorcet
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
-                has_non_condorcet_winner: report.condorcet.is_some()
-                    && report.condorcet != report.winner,
+                interesting: is_interesting(&report),
                 has_write_in_by_name,
             };
 
@@ -390,8 +430,7 @@ fn process_nist_election_batch(
                 condorcet_winner: report
                     .condorcet
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
-                has_non_condorcet_winner: report.condorcet.is_some()
-                    && report.condorcet != report.winner,
+                interesting: is_interesting(&report),
                 has_write_in_by_name,
             };
 
@@ -790,8 +829,7 @@ pub fn rebuild_index(report_dir: &Path) {
                         .get(c.0 as usize)
                         .map(|candidate| candidate.name.clone())
                 }),
-                has_non_condorcet_winner: report.condorcet.is_some()
-                    && report.condorcet != report.winner,
+                interesting: is_interesting(&report),
                 has_write_in_by_name,
             };
 

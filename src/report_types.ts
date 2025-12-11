@@ -23,7 +23,7 @@ export interface IContestIndexEntry {
   numCandidates: number;
   numRounds: number;
   condorcetWinner?: string;
-  hasNonCondorcetWinner: boolean;
+  interesting: boolean;
   hasWriteInByName: boolean;
 }
 

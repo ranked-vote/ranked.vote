@@ -30,7 +30,7 @@ pub struct ContestIndexEntry {
     pub num_rounds: u32,
     pub condorcet_winner: Option<String>,
     #[serde(default)]
-    pub has_non_condorcet_winner: bool,
+    pub interesting: bool,
     #[serde(default)]
     pub has_write_in_by_name: bool,
 }

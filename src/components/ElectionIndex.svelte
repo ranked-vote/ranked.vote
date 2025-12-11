@@ -107,7 +107,7 @@
           </h3>
         </div>
         {#each election.contests as contest}
-          <div class="race" class:non-condorcet={contest.hasNonCondorcetWinner}>
+          <div class="race" class:interesting={contest.interesting}>
             <a href="/report/{election.path}/{contest.office}">
               <div class="title">
                 <strong>{contest.officeName}</strong>

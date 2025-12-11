@@ -23,10 +23,11 @@
     </p>
 
     <p>
-      Some elections are highlighted with a warning badge when the RCV winner
-      differs from the Condorcet winner—the candidate who would beat all others
-      in head-to-head matchups. These cases reveal interesting dynamics in voter
-      preferences and can indicate strategic voting or complex preference patterns.
+      Some elections are highlighted when they exhibit
+      interesting characteristics: the RCV winner differs from the Condorcet
+      winner (the candidate who would beat all others in head-to-head matchups),
+      there is a Condorcet cycle (no single candidate beats all others), or
+      exhausted ballots outnumbering the winner's votes.
     </p>
 
     <p>
