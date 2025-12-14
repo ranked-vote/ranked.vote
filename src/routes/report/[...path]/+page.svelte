@@ -13,18 +13,39 @@
 	const jurisdictionName = hasInfo ? report.info.jurisdictionName : '';
 	const name = hasInfo ? report.info.name : '';
 	const date = hasInfo ? report.info.date : '';
+	const year = date ? date.substring(0, 4) : '';
+	const winner = report?.winner !== undefined && report?.candidates && report.winner !== null
+		? report.candidates[report.winner]?.name || ''
+		: '';
+	const numCandidates = report?.numCandidates || 0;
+	const numRounds = report?.rounds?.length || 0;
+	
+	// Create a more descriptive title (60-95 characters recommended)
+	const ogTitle = `${jurisdictionName} ${name} ${year} - Ranked-Choice Voting Report`;
+	
+	// Create description
+	const description = winner && numRounds > 0
+		? `${winner} won the ${name} election in ${jurisdictionName} (${year}) after ${numRounds} rounds with ${numCandidates} candidates. Detailed ranked-choice voting analysis.`
+		: `Ranked-choice voting report for ${name} in ${jurisdictionName} (${year}). Detailed analysis of voter preferences and election results.`;
 </script>
 
 <svelte:head>
-	<title>ranked.vote: {jurisdictionName} / {name} / {date ? date.substring(0, 4) : ''}</title>
+	<title>ranked.vote: {jurisdictionName} / {name} / {year}</title>
 
-	<meta property="og:title" content="{jurisdictionName} / {name}" />
+	<meta property="og:title" content={ogTitle} />
+	<meta property="og:description" content={description} />
 	<meta property="og:image" content={imageUrl} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:type" content="image/png" />
 	<meta property="og:url" content={canonical} />
+	<meta property="og:type" content="article" />
+	<meta property="og:site_name" content="ranked.vote" />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@paulgb" />
-	<meta name="twitter:title" content="{jurisdictionName} / {name}" />
+	<meta name="twitter:title" content={ogTitle} />
+	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={imageUrl} />
 	<meta name="twitter:url" content={canonical} />
 </svelte:head>
