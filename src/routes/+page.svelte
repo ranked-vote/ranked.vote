@@ -23,11 +23,10 @@
     </p>
 
     <p>
-      Some elections are highlighted when they exhibit
-      interesting characteristics: the RCV winner differs from the Condorcet
-      winner (the candidate who would beat all others in head-to-head matchups),
-      there is a Condorcet cycle (no single candidate beats all others), or
-      exhausted ballots outnumbering the winner's votes.
+      Elections are highlighted when they exhibit
+      interesting characteristics, such as when the winner did not lead in the first round,
+      when the RCV winner differs from the Condorcet winner, there is a Condorcet cycle, 
+      or exhausted ballots outnumber the winner's votes.
     </p>
 
     <p>

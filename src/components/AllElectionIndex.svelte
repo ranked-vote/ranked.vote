@@ -1,7 +1,19 @@
 <script lang="ts">
   import type { IElectionIndexEntry } from "../report_types";
+  import tooltip from "../tooltip";
 
   export let elections: IElectionIndexEntry[];
+
+  function getTooltipText(contest: { interesting: boolean; winnerNotFirstRoundLeader: boolean; condorcetWinner?: string }): string | null {
+    if (contest.interesting && contest.winnerNotFirstRoundLeader) {
+      return `This election is highlighted because:<br>• The RCV winner differs from the Condorcet winner, there is a Condorcet cycle, or exhausted ballots outnumber the winner's votes<br>• The winner did not lead in the first round`;
+    } else if (contest.interesting) {
+      return `This election is highlighted because one of the following:<br>• The RCV winner differs from the Condorcet winner (the candidate who would beat all others in head-to-head matchups)<br>• There is a Condorcet cycle (no single candidate beats all others)<br>• Exhausted ballots outnumber the winner's votes`;
+    } else if (contest.winnerNotFirstRoundLeader) {
+      return `The winner did not lead in the first round of voting.`;
+    }
+    return null;
+  }
 
   // Natural sort function that handles ordinal numbers (1st, 2nd, 3rd, etc.)
   function naturalSort(a: string, b: string): number {
@@ -99,7 +111,12 @@
           </h3>
         </div>
         {#each election.contests as contest}
-          <div class="race" class:interesting={contest.interesting}>
+          <div 
+            class="race" 
+            class:interesting={contest.interesting} 
+            class:winner-not-first={contest.winnerNotFirstRoundLeader}
+            use:tooltip={getTooltipText(contest)}
+          >
             <a href="/report/{election.path}/{contest.office}">
               <div class="title">
                 <strong>{contest.officeName}</strong>

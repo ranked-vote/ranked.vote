@@ -149,6 +149,7 @@ h3 strong {
 
 .race a {
   display: flex;
+  align-items: center;
   color: #937a7a;
   padding: 5px;
   margin: 0 -5px;
@@ -190,6 +191,20 @@ hr {
   padding-left: 5px;
 }
 
+/* Subtle highlight for elections where winner didn't lead in round 1 */
+.race.winner-not-first {
+  border-left: 2px solid #dd8888;
+  background-color: #fef8f8;
+  margin-left: -5px;
+  padding-left: 5px;
+}
+
+/* If both interesting and winner-not-first, use interesting styling */
+.race.interesting.winner-not-first {
+  border-left: 4px solid #aa0d0d;
+  background-color: #fdf2f2;
+}
+
 .interesting-badge {
   display: inline-block;
   background-color: #aa0d0d;
@@ -208,6 +223,7 @@ hr {
   font-style: italic;
   margin-top: 2px;
 }
+
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
@@ -253,6 +269,16 @@ hr {
   }
 
   .race.interesting {
+    background-color: #2d1f1f;
+    border-left-color: #aa0d0d;
+  }
+
+  .race.winner-not-first {
+    background-color: #2d2525;
+    border-left-color: #cc6666;
+  }
+
+  .race.interesting.winner-not-first {
     background-color: #2d1f1f;
     border-left-color: #aa0d0d;
   }

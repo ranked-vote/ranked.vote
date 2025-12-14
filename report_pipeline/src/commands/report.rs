@@ -69,6 +69,45 @@ fn is_interesting(report: &ContestReport) -> bool {
     has_non_condorcet_winner || has_condorcet_cycle || exhausted_exceeds_winner
 }
 
+/// Check if the winner did not get first place in the first round
+fn winner_not_first_round_leader(report: &ContestReport) -> bool {
+    use crate::tabulator::Allocatee;
+
+    let Some(winner_id) = report.winner else {
+        return false;
+    };
+
+    let Some(first_round) = report.rounds.first() else {
+        return false;
+    };
+
+    // Allocations are sorted descending by votes, so the first candidate allocation is the leader
+    // Find the first candidate allocation (the round 1 leader)
+    let first_place_votes = first_round
+        .allocations
+        .iter()
+        .find_map(|a| match a.allocatee {
+            Allocatee::Candidate(_) => Some(a.votes),
+            _ => None,
+        });
+
+    let Some(max_votes) = first_place_votes else {
+        return false;
+    };
+
+    // Find the winner's vote count in the first round
+    let winner_votes = first_round
+        .allocations
+        .iter()
+        .find(|a| matches!(a.allocatee, Allocatee::Candidate(id) if id == winner_id))
+        .map(|a| a.votes)
+        .unwrap_or(0);
+
+    // Show indicator if winner's votes are strictly less than the first-place votes
+    // (ties for first place are not flagged, as the winner did lead/tie for the lead)
+    winner_votes < max_votes
+}
+
 /// Process a single contest and return the ContestIndexEntry
 fn process_contest(
     contest: &Contest,
@@ -166,6 +205,7 @@ fn process_contest(
             .map(|c| report.candidates[c.0 as usize].name.clone()),
         interesting: is_interesting(&report),
         has_write_in_by_name,
+        winner_not_first_round_leader: winner_not_first_round_leader(&report),
     };
 
     // Drop the full report to free memory
@@ -292,6 +332,7 @@ fn process_nyc_election_batch(
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
                 interesting: is_interesting(&report),
                 has_write_in_by_name,
+                winner_not_first_round_leader: winner_not_first_round_leader(&report),
             };
 
             drop(report);
@@ -432,6 +473,7 @@ fn process_nist_election_batch(
                     .map(|c| report.candidates[c.0 as usize].name.clone()),
                 interesting: is_interesting(&report),
                 has_write_in_by_name,
+                winner_not_first_round_leader: winner_not_first_round_leader(&report),
             };
 
             drop(report);
@@ -831,6 +873,7 @@ pub fn rebuild_index(report_dir: &Path) {
                 }),
                 interesting: is_interesting(&report),
                 has_write_in_by_name,
+                winner_not_first_round_leader: winner_not_first_round_leader(&report),
             };
 
             // Get or create election entry

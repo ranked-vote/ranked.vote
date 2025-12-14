@@ -109,3 +109,4 @@ if (electionsWithoutWebsites.length === 0) {
     console.log(`  ${jurisdictionPath}: ${elections.length} election(s)`);
   }
 }
+

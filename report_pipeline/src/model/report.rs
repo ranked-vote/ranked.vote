@@ -33,6 +33,8 @@ pub struct ContestIndexEntry {
     pub interesting: bool,
     #[serde(default)]
     pub has_write_in_by_name: bool,
+    #[serde(default)]
+    pub winner_not_first_round_leader: bool,
 }
 
 #[derive(Serialize, Deserialize)]
