@@ -6,6 +6,7 @@
 
 	const { report, path } = data;
 	const canonical = `https://ranked.vote/report/${path.join('/')}`;
+	const imageUrl = `https://ranked.vote/share/${path.join('/')}.png`;
 
 	// Defensive checks
 	const hasInfo = report && report.info;
@@ -18,13 +19,13 @@
 	<title>ranked.vote: {jurisdictionName} / {name} / {date ? date.substring(0, 4) : ''}</title>
 
 	<meta property="og:title" content="{jurisdictionName} / {name}" />
-	<meta property="og:image" content={"/share/" + path.join("/") + ".png"} />
+	<meta property="og:image" content={imageUrl} />
 	<meta property="og:url" content={canonical} />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:creator" content="@paulgb" />
 	<meta name="twitter:title" content="{jurisdictionName} / {name}" />
-	<meta name="twitter:image" content={"/share/" + path.join("/") + ".png"} />
+	<meta name="twitter:image" content={imageUrl} />
 	<meta name="twitter:url" content={canonical} />
 </svelte:head>
 
