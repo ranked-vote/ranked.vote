@@ -1,0 +1,103 @@
+{
+  "name": "Minnetonka",
+  "path": "us/mn/minnetonka",
+  "kind": "city",
+  "offices": {
+    "council-at-large-seat-a": {
+      "name": "At-Large Councilmember, Seat A"
+    },
+    "council-at-large-seat-b": {
+      "name": "At-Large Councilmember, Seat B"
+    },
+    "mayor": {
+      "name": "Mayor"
+    },
+    "ward-1": {
+      "name": "City Council Ward 1"
+    },
+    "ward-2": {
+      "name": "City Council Ward 2"
+    },
+    "ward-3": {
+      "name": "City Council Ward 3"
+    },
+    "ward-4": {
+      "name": "City Council Ward 4"
+    }
+  },
+  "elections": {
+    "2021/11": {
+      "name": "Municipal Election",
+      "date": "2021-11-02",
+      "dataFormat": "us_me",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "mayor",
+          "loaderParams": {
+            "files": "Mayor - Cast Vote Record (CVR).xlsx"
+          }
+        },
+        {
+          "office": "council-at-large-seat-a",
+          "loaderParams": {
+            "files": "At-Large Councilmember, Seat A - Cast Vote Record (CVR).xlsx"
+          }
+        },
+        {
+          "office": "council-at-large-seat-b",
+          "loaderParams": {
+            "files": "At-Large Councilmember, Seat B - Cast Vote Record (CVR).xlsx"
+          }
+        }
+      ],
+      "files": {
+        "At-Large Councilmember, Seat A - Cast Vote Record (CVR).xlsx": "a41329d2467766f374331c12dbb490232c6e374a",
+        "At-Large Councilmember, Seat B - Cast Vote Record (CVR).xlsx": "fbc46d865a8c45549a0788a14163f9f2c0571b6b",
+        "Mayor - Cast Vote Record (CVR).xlsx": "e27775d4622c66d51b70cb5ef436a4a564b44245"
+      },
+      "website": "https://www.minnetonkamn.gov/Home/Components/News/News/410/"
+    },
+    "2023/11": {
+      "name": "Municipal Election",
+      "date": "2023-11-07",
+      "dataFormat": "us_mn_mpls",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "ward-1",
+          "loaderParams": {
+            "file": "2023 Ward 1 CVR.xlsx"
+          }
+        },
+        {
+          "office": "ward-2",
+          "loaderParams": {
+            "file": "2023 Ward 2 CVR.xlsx"
+          }
+        },
+        {
+          "office": "ward-3",
+          "loaderParams": {
+            "file": "2023 Ward 3 CVR.xlsx"
+          }
+        },
+        {
+          "office": "ward-4",
+          "loaderParams": {
+            "file": "2023 Ward 4 CVR.xlsx"
+          }
+        }
+      ],
+      "files": {
+        "2023 Ward 1 CVR.xlsx": "99e187490e3e0c9db643897db964f589b397797f",
+        "2023 Ward 2 CVR.xlsx": "a4b4dd80df29fd80694d40621d6a100320bb3514",
+        "2023 Ward 3 CVR.xlsx": "0ec6f021dd8d1a098c970af2db8e8c5b5997dcd0",
+        "2023 Ward 4 CVR.xlsx": "aaa23df8987d4d708b2a13c50a6725f1873a5c0e"
+      },
+      "website": "https://www.minnetonkamn.gov/Home/Components/News/News/1054/"
+    }
+  }
+}

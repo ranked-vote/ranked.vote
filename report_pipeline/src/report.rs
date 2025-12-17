@@ -294,7 +294,8 @@ pub fn graph(
             let c2v = preference_map.get(&(*c2, *c1)).unwrap_or(&0);
 
             if c1v > c2v {
-                graph.entry(*c2).or_insert_with(Vec::new).push(*c1);
+                // Directed edge from pairwise winner to pairwise loser.
+                graph.entry(*c1).or_insert_with(Vec::new).push(*c2);
             }
         }
     }
@@ -306,22 +307,99 @@ pub fn smith_set(
     candidates: &[CandidateId],
     graph: &HashMap<CandidateId, Vec<CandidateId>>,
 ) -> HashSet<CandidateId> {
-    let mut last_set: HashSet<CandidateId> = candidates.iter().cloned().collect();
+    // Compute the "top" strongly-connected component(s) in the pairwise dominance graph:
+    // the union of SCCs with zero in-degree in the condensation graph.
+    // (In a tournament graph, this equals the Smith/Schwartz/top-cycle set, and is a
+    // singleton exactly when a Condorcet winner exists.)
 
-    loop {
-        let this_set: HashSet<CandidateId> = last_set
-            .iter()
-            .flat_map(|d| graph.get(d).cloned().unwrap_or_default())
-            .collect();
-
-        if this_set.is_empty() || this_set == last_set {
-            break;
-        }
-
-        last_set = this_set;
+    // Index candidates for SCC algorithm.
+    let mut idx_by_id = HashMap::<CandidateId, usize>::new();
+    for (i, cid) in candidates.iter().enumerate() {
+        idx_by_id.insert(*cid, i);
     }
 
-    last_set
+    let n = candidates.len();
+    let mut adj: Vec<Vec<usize>> = vec![Vec::new(); n];
+    let mut radj: Vec<Vec<usize>> = vec![Vec::new(); n];
+
+    for (from, tos) in graph {
+        let Some(&u) = idx_by_id.get(from) else {
+            continue;
+        };
+        for to in tos {
+            let Some(&v) = idx_by_id.get(to) else {
+                continue;
+            };
+            if u == v {
+                continue;
+            }
+            adj[u].push(v);
+            radj[v].push(u);
+        }
+    }
+
+    // Kosaraju SCC
+    let mut visited = vec![false; n];
+    let mut order: Vec<usize> = Vec::with_capacity(n);
+    fn dfs1(u: usize, adj: &Vec<Vec<usize>>, visited: &mut Vec<bool>, order: &mut Vec<usize>) {
+        visited[u] = true;
+        for &v in &adj[u] {
+            if !visited[v] {
+                dfs1(v, adj, visited, order);
+            }
+        }
+        order.push(u);
+    }
+    for u in 0..n {
+        if !visited[u] {
+            dfs1(u, &adj, &mut visited, &mut order);
+        }
+    }
+
+    let mut comp_id: Vec<usize> = vec![usize::MAX; n];
+    let mut comp_count = 0;
+    fn dfs2(u: usize, radj: &Vec<Vec<usize>>, comp_id: &mut Vec<usize>, cid: usize) {
+        comp_id[u] = cid;
+        for &v in &radj[u] {
+            if comp_id[v] == usize::MAX {
+                dfs2(v, radj, comp_id, cid);
+            }
+        }
+    }
+    for &u in order.iter().rev() {
+        if comp_id[u] == usize::MAX {
+            dfs2(u, &radj, &mut comp_id, comp_count);
+            comp_count += 1;
+        }
+    }
+
+    // Compute in-degrees between SCCs.
+    let mut indeg = vec![0u32; comp_count];
+    for u in 0..n {
+        let cu = comp_id[u];
+        for &v in &adj[u] {
+            let cv = comp_id[v];
+            if cu != cv {
+                indeg[cv] += 1;
+            }
+        }
+    }
+
+    // Top SCCs are those with zero in-degree.
+    let mut top_components = HashSet::<usize>::new();
+    for (cid, d) in indeg.iter().enumerate() {
+        if *d == 0 {
+            top_components.insert(cid);
+        }
+    }
+
+    let mut result = HashSet::<CandidateId>::new();
+    for (i, candidate) in candidates.iter().enumerate() {
+        if top_components.contains(&comp_id[i]) {
+            result.insert(*candidate);
+        }
+    }
+    result
 }
 
 /// Generate a `ContestReport` from preprocessed election data.

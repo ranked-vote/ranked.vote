@@ -985,6 +985,62 @@
       ]
     },
     {
+      "path": "us/mn/minnetonka/2023/11",
+      "jurisdictionName": "Minnetonka",
+      "electionName": "Municipal Election",
+      "date": "2023-11-07",
+      "contests": [
+        {
+          "office": "ward-1",
+          "officeName": "City Council Ward 1",
+          "name": "City Council Ward 1",
+          "winner": "Patsy Foster-Bolton",
+          "numCandidates": 4,
+          "numRounds": 2,
+          "condorcetWinner": "Patsy Foster-Bolton",
+          "interesting": false,
+          "hasWriteInByName": true,
+          "winnerNotFirstRoundLeader": false
+        },
+        {
+          "office": "ward-2",
+          "officeName": "City Council Ward 2",
+          "name": "City Council Ward 2",
+          "winner": "Rebecca Schack",
+          "numCandidates": 2,
+          "numRounds": 2,
+          "condorcetWinner": "Rebecca Schack",
+          "interesting": false,
+          "hasWriteInByName": true,
+          "winnerNotFirstRoundLeader": false
+        },
+        {
+          "office": "ward-3",
+          "officeName": "City Council Ward 3",
+          "name": "City Council Ward 3",
+          "winner": "Paula Ramaley",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Paula Ramaley",
+          "interesting": false,
+          "hasWriteInByName": true,
+          "winnerNotFirstRoundLeader": false
+        },
+        {
+          "office": "ward-4",
+          "officeName": "City Council Ward 4",
+          "name": "City Council Ward 4",
+          "winner": "Kissy C. Coakley",
+          "numCandidates": 3,
+          "numRounds": 2,
+          "condorcetWinner": "Kissy C. Coakley",
+          "interesting": false,
+          "hasWriteInByName": true,
+          "winnerNotFirstRoundLeader": false
+        }
+      ]
+    },
+    {
       "path": "us/ny/nyc/2023/06",
       "jurisdictionName": "New York City",
       "electionName": "Primary Election",
@@ -1672,6 +1728,50 @@
           "condorcetWinner": "Begich, Nick",
           "interesting": true,
           "hasWriteInByName": true,
+          "winnerNotFirstRoundLeader": false
+        }
+      ]
+    },
+    {
+      "path": "us/mn/minnetonka/2021/11",
+      "jurisdictionName": "Minnetonka",
+      "electionName": "Municipal Election",
+      "date": "2021-11-02",
+      "contests": [
+        {
+          "office": "council-at-large-seat-a",
+          "officeName": "At-Large Councilmember, Seat A",
+          "name": "At-Large Councilmember, Seat A",
+          "winner": "Deb Calvert",
+          "numCandidates": 5,
+          "numRounds": 3,
+          "condorcetWinner": "Deb Calvert",
+          "interesting": false,
+          "hasWriteInByName": false,
+          "winnerNotFirstRoundLeader": false
+        },
+        {
+          "office": "council-at-large-seat-b",
+          "officeName": "At-Large Councilmember, Seat B",
+          "name": "At-Large Councilmember, Seat B",
+          "winner": "Kimberly Wilburn",
+          "numCandidates": 5,
+          "numRounds": 4,
+          "condorcetWinner": "Kimberly Wilburn",
+          "interesting": false,
+          "hasWriteInByName": false,
+          "winnerNotFirstRoundLeader": false
+        },
+        {
+          "office": "mayor",
+          "officeName": "Mayor",
+          "name": "Mayor",
+          "winner": "Brad Wiersum",
+          "numCandidates": 2,
+          "numRounds": 1,
+          "condorcetWinner": "Brad Wiersum",
+          "interesting": false,
+          "hasWriteInByName": false,
           "winnerNotFirstRoundLeader": false
         }
       ]

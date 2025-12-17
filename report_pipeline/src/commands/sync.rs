@@ -35,6 +35,13 @@ pub fn sync(meta_dir: &Path, raw_dir: &Path) {
                 if filename.starts_with('.') {
                     continue;
                 };
+                if entry.path().is_dir() {
+                    eprintln!(
+                        "Skipping directory in data dir: {}",
+                        entry.file_name().to_string_lossy().blue()
+                    );
+                    continue;
+                }
                 if !expected_files.remove(&filename) {
                     eprintln!(
                         "Found data file: {}",
