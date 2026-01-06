@@ -84,12 +84,12 @@
       (a, b) => voteCountMap.get(b)! - voteCountMap.get(a)!
     );
 
-    const sortedEntries: (ICandidatePairEntry | null)[][] = sortedRows.map(
+    const sortedEntries: ICandidatePairEntry[][] = sortedRows.map(
       (row) => {
         const originalRowIdx = table.rows.indexOf(row);
         return sortedCols.map((col) => {
           const originalColIdx = table.cols.indexOf(col);
-          return table.entries[originalRowIdx]?.[originalColIdx] ?? null;
+          return table.entries[originalRowIdx][originalColIdx];
         });
       }
     );

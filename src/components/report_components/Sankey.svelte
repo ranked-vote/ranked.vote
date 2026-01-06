@@ -13,6 +13,12 @@
 
   const { getCandidate } = getContext("candidates") as CandidateContext;
 
+  type NodeKey = `${number}:${string}`;
+
+  function nodeKey(roundIndex: number, allocatee: Allocatee): NodeKey {
+    return `${roundIndex}:${allocatee}`;
+  }
+
   const outerHeight = 24;
   const width = 600;
   const roundHeight = 90;
@@ -40,6 +46,14 @@
       private round: number,
       private totalRoundVotes?: number
     ) {}
+
+    roundIndex(): number {
+      return this.round - 1;
+    }
+
+    nodeKey(): NodeKey {
+      return nodeKey(this.roundIndex(), this.allocatee);
+    }
 
     isExhausted(): boolean {
       return this.allocatee === EXHAUSTED;
@@ -78,6 +92,8 @@
       private toCandidate: Allocatee,
       private votes: number,
       private round: number,
+      private fromRoundIndex: number,
+      private toRoundIndex: number,
       private r1x: number,
       private r2x: number,
       private width: number,
@@ -85,6 +101,14 @@
       private r2y: number,
       private sourceVotes?: number
     ) {}
+
+    sourceKey(): NodeKey {
+      return nodeKey(this.fromRoundIndex, this.fromCandidate);
+    }
+
+    targetKey(): NodeKey {
+      return nodeKey(this.toRoundIndex, this.toCandidate);
+    }
 
     toPath(): string {
       let midY = (this.r1y + this.r2y) / 2;
@@ -136,6 +160,25 @@
 
   let transfers: TransferBlock[] = [];
 
+  type HoverState =
+    | { kind: "node"; key: NodeKey }
+    | { kind: "link"; index: number }
+    | null;
+
+  let hover: HoverState = null;
+
+  type TransferMeta = {
+    sourceKey: NodeKey;
+    targetKey: NodeKey;
+  };
+
+  let transferMetas: TransferMeta[] = [];
+  let incoming: Map<NodeKey, number[]> = new Map();
+  let outgoing: Map<NodeKey, number[]> = new Map();
+
+  let activeNodeKeys: Set<NodeKey> = new Set();
+  let activeLinkIndexes: Set<number> = new Set();
+
   interface CandidateState {
     xOffset: number;
     width: number;
@@ -178,6 +221,8 @@
             allocation.allocatee,
             last.votes,
             i + 1,
+            i - 1,
+            i,
             last.xOffset,
             allocation.allocatee === "X" ? offset + width - last.width : offset,
             last.width,
@@ -221,6 +266,8 @@
           transfer.to,
           transfer.count,
           i + 1,
+          i - 1,
+          i,
           last.xOffset + last.accountedOut,
           cur.xOffset + cur.accountedIn,
           width,
@@ -237,6 +284,114 @@
     lastVotes = curVotes;
     return voteBlocks;
   });
+
+  $: {
+    transferMetas = transfers.map((t) => ({
+      sourceKey: t.sourceKey(),
+      targetKey: t.targetKey(),
+    }));
+
+    incoming = new Map();
+    outgoing = new Map();
+    for (let i = 0; i < transferMetas.length; i++) {
+      const meta = transferMetas[i];
+      const inArr = incoming.get(meta.targetKey);
+      if (inArr) inArr.push(i);
+      else incoming.set(meta.targetKey, [i]);
+
+      const outArr = outgoing.get(meta.sourceKey);
+      if (outArr) outArr.push(i);
+      else outgoing.set(meta.sourceKey, [i]);
+    }
+  }
+
+  function computeActiveForLink(index: number): void {
+    activeNodeKeys = new Set();
+    activeLinkIndexes = new Set();
+
+    const meta = transferMetas[index];
+    if (!meta) return;
+
+    const visitedUp = new Set<NodeKey>();
+    const upStack: NodeKey[] = [meta.sourceKey];
+    while (upStack.length) {
+      const key = upStack.pop();
+      if (!key || visitedUp.has(key)) continue;
+      visitedUp.add(key);
+      activeNodeKeys.add(key);
+      const inEdges = incoming.get(key) ?? [];
+      for (const edgeIdx of inEdges) {
+        activeLinkIndexes.add(edgeIdx);
+        const prevKey = transferMetas[edgeIdx]?.sourceKey;
+        if (prevKey) upStack.push(prevKey);
+      }
+    }
+
+    const visitedDown = new Set<NodeKey>();
+    const downStack: NodeKey[] = [meta.targetKey];
+    while (downStack.length) {
+      const key = downStack.pop();
+      if (!key || visitedDown.has(key)) continue;
+      visitedDown.add(key);
+      activeNodeKeys.add(key);
+      const outEdges = outgoing.get(key) ?? [];
+      for (const edgeIdx of outEdges) {
+        activeLinkIndexes.add(edgeIdx);
+        const nextKey = transferMetas[edgeIdx]?.targetKey;
+        if (nextKey) downStack.push(nextKey);
+      }
+    }
+
+    activeLinkIndexes.add(index);
+    activeNodeKeys.add(meta.sourceKey);
+    activeNodeKeys.add(meta.targetKey);
+  }
+
+  function computeActiveForNode(key: NodeKey): void {
+    activeNodeKeys = new Set();
+    activeLinkIndexes = new Set();
+
+    const visitedUp = new Set<NodeKey>();
+    const upStack: NodeKey[] = [key];
+    while (upStack.length) {
+      const curKey = upStack.pop();
+      if (!curKey || visitedUp.has(curKey)) continue;
+      visitedUp.add(curKey);
+      activeNodeKeys.add(curKey);
+      const inEdges = incoming.get(curKey) ?? [];
+      for (const edgeIdx of inEdges) {
+        activeLinkIndexes.add(edgeIdx);
+        const prevKey = transferMetas[edgeIdx]?.sourceKey;
+        if (prevKey) upStack.push(prevKey);
+      }
+    }
+
+    const visitedDown = new Set<NodeKey>();
+    const downStack: NodeKey[] = [key];
+    while (downStack.length) {
+      const curKey = downStack.pop();
+      if (!curKey || visitedDown.has(curKey)) continue;
+      visitedDown.add(curKey);
+      activeNodeKeys.add(curKey);
+      const outEdges = outgoing.get(curKey) ?? [];
+      for (const edgeIdx of outEdges) {
+        activeLinkIndexes.add(edgeIdx);
+        const nextKey = transferMetas[edgeIdx]?.targetKey;
+        if (nextKey) downStack.push(nextKey);
+      }
+    }
+  }
+
+  $: {
+    if (!hover) {
+      activeNodeKeys = new Set();
+      activeLinkIndexes = new Set();
+    } else if (hover.kind === "link") {
+      computeActiveForLink(hover.index);
+    } else {
+      computeActiveForNode(hover.key);
+    }
+  }
 </script>
 
 <style>
@@ -246,16 +401,36 @@
 
   .voteBlock {
     fill: #aa0d0d;
+    cursor: pointer;
   }
 
   .voteBlock.exhausted {
     fill: #ccc;
   }
 
+  .voteBlock.highlight {
+    stroke: #111;
+    stroke-width: 2;
+  }
+
+  .voteBlock.dimmed {
+    opacity: 0.35;
+  }
+
   .transfer {
     fill: #444;
     opacity: 0.2;
     mix-blend-mode: exclusion;
+    cursor: pointer;
+  }
+
+  .transfer.highlight {
+    opacity: 0.85;
+    mix-blend-mode: normal;
+  }
+
+  .transfer.dimmed {
+    opacity: 0.06;
   }
 
   .percentageText {
@@ -275,6 +450,10 @@
       stroke-width: 1;
     }
 
+    .voteBlock.highlight {
+      stroke: #fff;
+    }
+
     .percentageText.exhausted {
       fill: white;
     }
@@ -291,6 +470,10 @@
       mix-blend-mode: normal;
     }
 
+    .transfer.highlight {
+      opacity: 0.85;
+    }
+
     /* Make all text in SVG light colored */
     text {
       fill: #e3e3e3;
@@ -304,7 +487,10 @@
   {/each}
   <g transform={`translate(${edgeMargin} ${labelSpace})`}>
     {#each voteBlockRows[0] as voteBlock}
-      <g transform={`translate(${voteBlock.x + voteBlock.width / 2} -10)`}>
+      <g
+        transform={`translate(${voteBlock.x + voteBlock.width / 2} -10)`}
+        on:pointerenter={() => (hover = { kind: "node", key: voteBlock.nodeKey() })}
+        on:pointerleave={() => (hover = null)}>
         <text font-size="12" dominant-baseline="middle" transform="rotate(-90)">
           {voteBlock.label()}
         </text>
@@ -315,11 +501,16 @@
       {#each voteBlockRow as voteBlock}
         <rect
           use:tooltip={voteBlock.tooltip()}
-          class={voteBlock.isExhausted() ? 'voteBlock exhausted' : 'voteBlock'}
+          class="voteBlock"
+          class:exhausted={voteBlock.isExhausted()}
+          class:highlight={activeNodeKeys.has(voteBlock.nodeKey())}
+          class:dimmed={hover !== null && !activeNodeKeys.has(voteBlock.nodeKey())}
           y={voteBlock.y}
           x={voteBlock.x}
           width={Math.max(1, voteBlock.width)}
-          height={voteBlockHeight} />
+          height={voteBlockHeight}
+          on:pointerenter={() => (hover = { kind: "node", key: voteBlock.nodeKey() })}
+          on:pointerleave={() => (hover = null)} />
         {#if voteBlock.percentage() !== null && voteBlock.width > 20}
           <text
             class="percentageText {voteBlock.isExhausted() ? 'exhausted' : ''}"
@@ -333,16 +524,22 @@
       {/each}
     {/each}
 
-    {#each transfers as transfer}
+    {#each transfers as transfer, i}
       <path
         use:tooltip={transfer.tooltip()}
         class="transfer"
-        d={transfer.toPath()} />
+        class:highlight={activeLinkIndexes.has(i)}
+        class:dimmed={hover !== null && !activeLinkIndexes.has(i)}
+        d={transfer.toPath()}
+        on:pointerenter={() => (hover = { kind: "link", index: i })}
+        on:pointerleave={() => (hover = null)} />
     {/each}
 
     {#each voteBlockRows[voteBlockRows.length - 1] as voteBlock}
       <g
-        transform={`translate(${voteBlock.x + voteBlock.width / 2} ${innerHeight + 10})`}>
+        transform={`translate(${voteBlock.x + voteBlock.width / 2} ${innerHeight + 10})`}
+        on:pointerenter={() => (hover = { kind: "node", key: voteBlock.nodeKey() })}
+        on:pointerleave={() => (hover = null)}>
         <text
           font-size="12"
           dominant-baseline="middle"
