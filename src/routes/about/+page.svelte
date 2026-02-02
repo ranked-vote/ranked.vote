@@ -47,8 +47,8 @@
 </p>
 
 <p>If you enjoy alternate voting systems, you may also enjoy
-  <a href="https://approval.vote">approval.vote</a>,
-  which is a similar project for approval voting elections.
+  <a href="https://approval.vote">approval.vote</a> for approval voting elections
+  and <a href="https://stv.vote">stv.vote</a> for single transferable vote elections.
 </p>
 
 <h2>Learning More</h2>
