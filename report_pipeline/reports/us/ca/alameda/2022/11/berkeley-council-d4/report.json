@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 952,
+  "ballotCount": 3222,
   "candidates": [
     {
       "name": "Kate Harrison",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 695
+          "votes": 3222
         },
         {
           "allocatee": "X",
-          "votes": 257
+          "votes": 0
         }
       ],
-      "undervote": 256,
-      "overvote": 1,
-      "continuingBallots": 695,
+      "undervote": 0,
+      "overvote": 0,
+      "continuingBallots": 3222,
       "transfers": []
     }
   ],
@@ -51,48 +51,66 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 695,
+      "firstRoundVotes": 3222,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0],
-    "cols": [0],
-    "entries": [[null]]
+    "rows": [
+      0
+    ],
+    "cols": [
+      0
+    ],
+    "entries": [
+      [
+        null
+      ]
+    ]
   },
   "firstAlternate": {
-    "rows": [0],
-    "cols": [0, "X"],
+    "rows": [
+      0
+    ],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
           "frac": 1.0,
-          "numerator": 695,
-          "denominator": 695
+          "numerator": 3222,
+          "denominator": 3222
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, "X"],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 695
+      "1": 3222
     },
     "candidateDistributions": {
       "0": {
-        "1": 695
+        "1": 3222
       }
     },
-    "totalBallots": 695,
+    "totalBallots": 3222,
     "candidateTotals": {
-      "0": 695
+      "0": 3222
     }
   },
-  "smithSet": [0]
+  "smithSet": [
+    0
+  ]
 }

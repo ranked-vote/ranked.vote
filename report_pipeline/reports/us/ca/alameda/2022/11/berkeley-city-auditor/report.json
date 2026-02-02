@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 9360,
+  "ballotCount": 37800,
   "candidates": [
     {
       "name": "Jenny Wong",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 7516
+          "votes": 37800
         },
         {
           "allocatee": "X",
-          "votes": 1844
+          "votes": 0
         }
       ],
-      "undervote": 1838,
-      "overvote": 6,
-      "continuingBallots": 7516,
+      "undervote": 0,
+      "overvote": 0,
+      "continuingBallots": 37800,
       "transfers": []
     }
   ],
@@ -51,48 +51,66 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 7516,
+      "firstRoundVotes": 37800,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0],
-    "cols": [0],
-    "entries": [[null]]
+    "rows": [
+      0
+    ],
+    "cols": [
+      0
+    ],
+    "entries": [
+      [
+        null
+      ]
+    ]
   },
   "firstAlternate": {
-    "rows": [0],
-    "cols": [0, "X"],
+    "rows": [
+      0
+    ],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
           "frac": 1.0,
-          "numerator": 7516,
-          "denominator": 7516
+          "numerator": 37800,
+          "denominator": 37800
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, "X"],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 7516
+      "1": 37800
     },
     "candidateDistributions": {
       "0": {
-        "1": 7516
+        "1": 37800
       }
     },
-    "totalBallots": 7516,
+    "totalBallots": 37800,
     "candidateTotals": {
-      "0": 7516
+      "0": 37800
     }
   },
-  "smithSet": [0]
+  "smithSet": [
+    0
+  ]
 }

@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 4176,
+  "ballotCount": 19206,
   "candidates": [
     {
       "name": "Xouhoa Bowen",
@@ -35,120 +35,139 @@
     {
       "allocations": [
         {
-          "allocatee": 1,
-          "votes": 1747
+          "allocatee": 0,
+          "votes": 9574
         },
         {
-          "allocatee": 0,
-          "votes": 1696
+          "allocatee": 1,
+          "votes": 9526
         },
         {
           "allocatee": "X",
-          "votes": 733
+          "votes": 106
         }
       ],
-      "undervote": 708,
-      "overvote": 25,
-      "continuingBallots": 3443,
+      "undervote": 0,
+      "overvote": 106,
+      "continuingBallots": 19100,
       "transfers": []
     }
   ],
-  "winner": 1,
-  "condorcet": 1,
+  "winner": 0,
+  "condorcet": 0,
   "numCandidates": 2,
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 1696,
+      "firstRoundVotes": 9574,
       "transferVotes": 0,
       "roundEliminated": null
     },
     {
       "candidate": 1,
-      "firstRoundVotes": 1747,
+      "firstRoundVotes": 9526,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0, 1],
-    "cols": [0, 1],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.49259368,
-          "numerator": 1696,
-          "denominator": 3443
+          "frac": 0.5012565,
+          "numerator": 9574,
+          "denominator": 19100
         }
       ],
       [
         {
-          "frac": 0.50740635,
-          "numerator": 1747,
-          "denominator": 3443
+          "frac": 0.49874344,
+          "numerator": 9526,
+          "denominator": 19100
         },
         null
       ]
     ]
   },
   "firstAlternate": {
-    "rows": [0, 1],
-    "cols": [0, 1, "X"],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.6645047,
-          "numerator": 1127,
-          "denominator": 1696
+          "frac": 0.66785043,
+          "numerator": 6394,
+          "denominator": 9574
         },
         {
-          "frac": 0.3354953,
-          "numerator": 569,
-          "denominator": 1696
+          "frac": 0.33214957,
+          "numerator": 3180,
+          "denominator": 9574
         }
       ],
       [
         {
-          "frac": 0.6319405,
-          "numerator": 1104,
-          "denominator": 1747
+          "frac": 0.6513752,
+          "numerator": 6205,
+          "denominator": 9526
         },
         null,
         {
-          "frac": 0.36805952,
-          "numerator": 643,
-          "denominator": 1747
+          "frac": 0.34862483,
+          "numerator": 3321,
+          "denominator": 9526
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, 1, "X"],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 1212,
-      "2": 2231
+      "1": 6501,
+      "2": 12599
     },
     "candidateDistributions": {
       "0": {
-        "1": 569,
-        "2": 1127
+        "1": 3180,
+        "2": 6394
       },
       "1": {
-        "1": 643,
-        "2": 1104
+        "1": 3321,
+        "2": 6205
       }
     },
-    "totalBallots": 3443,
+    "totalBallots": 19100,
     "candidateTotals": {
-      "0": 1696,
-      "1": 1747
+      "0": 9574,
+      "1": 9526
     }
   },
-  "smithSet": [1]
+  "smithSet": [
+    0
+  ]
 }

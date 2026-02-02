@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 5733,
+  "ballotCount": 27813,
   "candidates": [
     {
       "name": "Janani Ramachandran",
@@ -36,20 +36,20 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 3519
+          "votes": 18956
         },
         {
           "allocatee": 1,
-          "votes": 1589
+          "votes": 8782
         },
         {
           "allocatee": "X",
-          "votes": 625
+          "votes": 75
         }
       ],
-      "undervote": 603,
-      "overvote": 22,
-      "continuingBallots": 5108,
+      "undervote": 0,
+      "overvote": 75,
+      "continuingBallots": 27738,
       "transfers": []
     }
   ],
@@ -59,96 +59,115 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 3519,
+      "firstRoundVotes": 18956,
       "transferVotes": 0,
       "roundEliminated": null
     },
     {
       "candidate": 1,
-      "firstRoundVotes": 1589,
+      "firstRoundVotes": 8782,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0, 1],
-    "cols": [0, 1],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.68891937,
-          "numerator": 3519,
-          "denominator": 5108
+          "frac": 0.6833946,
+          "numerator": 18956,
+          "denominator": 27738
         }
       ],
       [
         {
-          "frac": 0.31108066,
-          "numerator": 1589,
-          "denominator": 5108
+          "frac": 0.3166054,
+          "numerator": 8782,
+          "denominator": 27738
         },
         null
       ]
     ]
   },
   "firstAlternate": {
-    "rows": [0, 1],
-    "cols": [0, 1, "X"],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.50980395,
-          "numerator": 1794,
-          "denominator": 3519
+          "frac": 0.5017409,
+          "numerator": 9511,
+          "denominator": 18956
         },
         {
-          "frac": 0.49019608,
-          "numerator": 1725,
-          "denominator": 3519
+          "frac": 0.49825913,
+          "numerator": 9445,
+          "denominator": 18956
         }
       ],
       [
         {
-          "frac": 0.535557,
-          "numerator": 851,
-          "denominator": 1589
+          "frac": 0.53313595,
+          "numerator": 4682,
+          "denominator": 8782
         },
         null,
         {
-          "frac": 0.46444306,
-          "numerator": 738,
-          "denominator": 1589
+          "frac": 0.46686405,
+          "numerator": 4100,
+          "denominator": 8782
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, 1, "X"],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 2463,
-      "2": 2645
+      "1": 13545,
+      "2": 14193
     },
     "candidateDistributions": {
       "0": {
-        "1": 1725,
-        "2": 1794
+        "1": 9445,
+        "2": 9511
       },
       "1": {
-        "1": 738,
-        "2": 851
+        "1": 4100,
+        "2": 4682
       }
     },
-    "totalBallots": 5108,
+    "totalBallots": 27738,
     "candidateTotals": {
-      "0": 3519,
-      "1": 1589
+      "0": 18956,
+      "1": 8782
     }
   },
-  "smithSet": [0]
+  "smithSet": [
+    0
+  ]
 }

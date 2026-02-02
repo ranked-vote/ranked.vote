@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 4147,
+  "ballotCount": 15901,
   "candidates": [
     {
       "name": "Harold Lowe",
@@ -36,20 +36,20 @@
       "allocations": [
         {
           "allocatee": 1,
-          "votes": 2375
+          "votes": 10715
         },
         {
           "allocatee": 0,
-          "votes": 1269
+          "votes": 5129
         },
         {
           "allocatee": "X",
-          "votes": 503
+          "votes": 57
         }
       ],
-      "undervote": 484,
-      "overvote": 19,
-      "continuingBallots": 3644,
+      "undervote": 0,
+      "overvote": 57,
+      "continuingBallots": 15844,
       "transfers": []
     }
   ],
@@ -59,96 +59,115 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 1269,
+      "firstRoundVotes": 5129,
       "transferVotes": 0,
       "roundEliminated": null
     },
     {
       "candidate": 1,
-      "firstRoundVotes": 2375,
+      "firstRoundVotes": 10715,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0, 1],
-    "cols": [0, 1],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.34824368,
-          "numerator": 1269,
-          "denominator": 3644
+          "frac": 0.32371876,
+          "numerator": 5129,
+          "denominator": 15844
         }
       ],
       [
         {
-          "frac": 0.6517563,
-          "numerator": 2375,
-          "denominator": 3644
+          "frac": 0.6762812,
+          "numerator": 10715,
+          "denominator": 15844
         },
         null
       ]
     ]
   },
   "firstAlternate": {
-    "rows": [0, 1],
-    "cols": [0, 1, "X"],
+    "rows": [
+      0,
+      1
+    ],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
-          "frac": 0.48778567,
-          "numerator": 619,
-          "denominator": 1269
+          "frac": 0.4560343,
+          "numerator": 2339,
+          "denominator": 5129
         },
         {
-          "frac": 0.51221436,
-          "numerator": 650,
-          "denominator": 1269
+          "frac": 0.5439657,
+          "numerator": 2790,
+          "denominator": 5129
         }
       ],
       [
         {
-          "frac": 0.41094738,
-          "numerator": 976,
-          "denominator": 2375
+          "frac": 0.40475968,
+          "numerator": 4337,
+          "denominator": 10715
         },
         null,
         {
-          "frac": 0.5890526,
-          "numerator": 1399,
-          "denominator": 2375
+          "frac": 0.5952403,
+          "numerator": 6378,
+          "denominator": 10715
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, 1, "X"],
+    "cols": [
+      0,
+      1,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 2049,
-      "2": 1595
+      "1": 9168,
+      "2": 6676
     },
     "candidateDistributions": {
       "0": {
-        "1": 650,
-        "2": 619
+        "1": 2790,
+        "2": 2339
       },
       "1": {
-        "1": 1399,
-        "2": 976
+        "1": 6378,
+        "2": 4337
       }
     },
-    "totalBallots": 3644,
+    "totalBallots": 15844,
     "candidateTotals": {
-      "0": 1269,
-      "1": 2375
+      "0": 5129,
+      "1": 10715
     }
   },
-  "smithSet": [1]
+  "smithSet": [
+    1
+  ]
 }

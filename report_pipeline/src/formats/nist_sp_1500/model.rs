@@ -187,20 +187,29 @@ pub struct Candidate {
 
 // ContestManifest.json
 
-#[allow(dead_code)]
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ContestManifest {
+    #[serde(default)]
     version: String,
-    list: Vec<Contest>,
+    #[serde(default)]
+    pub list: Vec<Contest>,
 }
 
-#[allow(dead_code)]
+impl ContestManifest {
+    pub fn empty() -> Self {
+        ContestManifest {
+            version: String::new(),
+            list: vec![],
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Contest {
-    description: String,
-    id: Option<u32>,
+    pub description: String,
+    pub id: Option<u32>,
     external_id: Option<String>,
     vote_for: u32,
     num_of_ranks: u32,

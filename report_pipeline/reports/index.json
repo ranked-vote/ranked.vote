@@ -641,220 +641,14 @@
       "jurisdictionName": "Alameda County",
       "electionName": "Oakland Special Municipal Election",
       "date": "2025-04-15",
-      "contests": [
-        {
-          "office": "oakland-council-d2",
-          "officeName": "City Council, District 2 - Oakland",
-          "name": "City Council, District 2 - Oakland",
-          "winner": "Charlene Wang",
-          "numCandidates": 6,
-          "numRounds": 2,
-          "condorcetWinner": "Charlene Wang",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-mayor",
-          "officeName": "Mayor - Oakland",
-          "name": "Mayor - Oakland",
-          "winner": "Barbara Lee",
-          "numCandidates": 10,
-          "numRounds": 2,
-          "condorcetWinner": "Barbara Lee",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        }
-      ]
+      "contests": []
     },
     {
       "path": "us/ca/alameda/2024/11",
       "jurisdictionName": "Alameda County",
       "electionName": "November 5, 2024 General Election",
       "date": "2024-11-05",
-      "contests": [
-        {
-          "office": "oakland-city-attorney",
-          "officeName": "City Attorney - Oakland",
-          "name": "City Attorney - Oakland",
-          "winner": "Ryan Richardson",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Ryan Richardson",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-at-large",
-          "officeName": "City Council, At-Large - Oakland",
-          "name": "City Council, At-Large - Oakland",
-          "winner": "Rowena Brown",
-          "numCandidates": 10,
-          "numRounds": 5,
-          "condorcetWinner": "Rowena Brown",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d1",
-          "officeName": "City Council, District 1 - Oakland",
-          "name": "City Council, District 1 - Oakland",
-          "winner": "Zac Unger",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Zac Unger",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-council-d2",
-          "officeName": "City Council, District 2 - Berkeley",
-          "name": "City Council, District 2 - Berkeley",
-          "winner": "Terry Taplin",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Terry Taplin",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-council-d3",
-          "officeName": "City Council, District 3 - Berkeley",
-          "name": "City Council, District 3 - Berkeley",
-          "winner": "Ben Bartlett",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Ben Bartlett",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d3",
-          "officeName": "City Council, District 3 - Oakland",
-          "name": "City Council, District 3 - Oakland",
-          "winner": "Carroll Fife",
-          "numCandidates": 6,
-          "numRounds": 2,
-          "condorcetWinner": "Carroll Fife",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-council-d5",
-          "officeName": "City Council, District 5 - Berkeley",
-          "name": "City Council, District 5 - Berkeley",
-          "winner": "Shoshana O'Keefe",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Shoshana O'Keefe",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d5",
-          "officeName": "City Council, District 5 - Oakland",
-          "name": "City Council, District 5 - Oakland",
-          "winner": "Noel Gallo",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Noel Gallo",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-council-d6",
-          "officeName": "City Council, District 6 - Berkeley",
-          "name": "City Council, District 6 - Berkeley",
-          "winner": "Brent Blackaby",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Brent Blackaby",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d7",
-          "officeName": "City Council, District 7 - Oakland",
-          "name": "City Council, District 7 - Oakland",
-          "winner": "Ken Houston",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Ken Houston",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-mayor",
-          "officeName": "Mayor - Berkeley",
-          "name": "Mayor - Berkeley",
-          "winner": "Adena Ishii",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Adena Ishii",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-school-director-d1",
-          "officeName": "School Director, District 1 - Oakland",
-          "name": "School Director, District 1 - Oakland",
-          "winner": "Rachel Latta",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Rachel Latta",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-school-director-d3",
-          "officeName": "School Director, District 3 - Oakland",
-          "name": "School Director, District 3 - Oakland",
-          "winner": "Vancedric Williams",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Vancedric Williams",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-school-director-d5",
-          "officeName": "School Director, District 5 - Oakland",
-          "name": "School Director, District 5 - Oakland",
-          "winner": "Patrice Berry",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Patrice Berry",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-school-director-d7",
-          "officeName": "School Director, District 7 - Oakland",
-          "name": "School Director, District 7 - Oakland",
-          "winner": "Clifford Thompson",
-          "numCandidates": 2,
-          "numRounds": 1,
-          "condorcetWinner": "Clifford Thompson",
-          "interesting": false,
-          "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
-        }
-      ]
+      "contests": []
     },
     {
       "path": "us/ca/sfo/2024/11",
@@ -1606,10 +1400,10 @@
           "office": "san-leandro-council-d5",
           "officeName": "City Council, District 5 - San Leandro",
           "name": "City Council, District 5 - San Leandro",
-          "winner": "Monique Tate",
+          "winner": "Xouhoa Bowen",
           "numCandidates": 2,
           "numRounds": 1,
-          "condorcetWinner": "Monique Tate",
+          "condorcetWinner": "Xouhoa Bowen",
           "interesting": false,
           "hasWriteInByName": false,
           "winnerNotFirstRoundLeader": false
@@ -1666,13 +1460,13 @@
           "office": "san-leandro-mayor",
           "officeName": "Mayor - San Leandro",
           "name": "Mayor - San Leandro",
-          "winner": "Bryan Azevedo",
+          "winner": "Juan Gonzalez, Iii",
           "numCandidates": 4,
           "numRounds": 2,
-          "condorcetWinner": "Bryan Azevedo",
+          "condorcetWinner": "Juan Gonzalez, Iii",
           "interesting": false,
           "hasWriteInByName": false,
-          "winnerNotFirstRoundLeader": false
+          "winnerNotFirstRoundLeader": true
         },
         {
           "office": "oakland-school-director-d2",
@@ -1693,8 +1487,8 @@
           "winner": "Mike Hutchinson",
           "numCandidates": 3,
           "numRounds": 2,
-          "condorcetWinner": "Mike Hutchinson",
-          "interesting": false,
+          "condorcetWinner": null,
+          "interesting": true,
           "hasWriteInByName": false,
           "winnerNotFirstRoundLeader": true
         },
@@ -3217,92 +3011,7 @@
       "jurisdictionName": "Alameda County",
       "electionName": "November 6, 2012 General Election",
       "date": "2012-11-06",
-      "contests": [
-        {
-          "office": "oakland-council-at-large",
-          "officeName": "City Council, At-Large - Oakland",
-          "name": "City Council, At-Large - Oakland",
-          "winner": "Rebecca Kaplan",
-          "numCandidates": 5,
-          "numRounds": 2,
-          "condorcetWinner": "Rebecca Kaplan",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d1",
-          "officeName": "City Council, District 1 - Oakland",
-          "name": "City Council, District 1 - Oakland",
-          "winner": "Dan Kalb",
-          "numCandidates": 7,
-          "numRounds": 5,
-          "condorcetWinner": "Dan Kalb",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "san-leandro-council-d2",
-          "officeName": "City Council, District 2 - San Leandro",
-          "name": "City Council, District 2 - San Leandro",
-          "winner": "Ursula Reed",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Ursula Reed",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d3",
-          "officeName": "City Council, District 3 - Oakland",
-          "name": "City Council, District 3 - Oakland",
-          "winner": "Lynette Gibson-Mcelhaney",
-          "numCandidates": 6,
-          "numRounds": 6,
-          "condorcetWinner": "Lynette Gibson-Mcelhaney",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": true
-        },
-        {
-          "office": "san-leandro-council-d4",
-          "officeName": "City Council, District 4 - San Leandro",
-          "name": "City Council, District 4 - San Leandro",
-          "winner": "Benny Lee",
-          "numCandidates": 4,
-          "numRounds": 3,
-          "condorcetWinner": "Benny Lee",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-council-d5",
-          "officeName": "City Council, District 5 - Oakland",
-          "name": "City Council, District 5 - Oakland",
-          "winner": "Noel Gallo",
-          "numCandidates": 4,
-          "numRounds": 2,
-          "condorcetWinner": "Noel Gallo",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-school-director-d3",
-          "officeName": "School Director, District 3 - Oakland",
-          "name": "School Director, District 3 - Oakland",
-          "winner": "Jumoke Hinton Hodge",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Jumoke Hinton Hodge",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        }
-      ]
+      "contests": []
     },
     {
       "path": "us/ca/sfo/2011/11",
@@ -3409,56 +3118,7 @@
       "jurisdictionName": "Alameda County",
       "electionName": "November 2, 2010 General Election",
       "date": "2010-11-02",
-      "contests": [
-        {
-          "office": "oakland-council-d4",
-          "officeName": "City Council, District 4 - Oakland",
-          "name": "City Council, District 4 - Oakland",
-          "winner": "Libby Schaaf",
-          "numCandidates": 7,
-          "numRounds": 5,
-          "condorcetWinner": "Libby Schaaf",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "berkeley-council-d7",
-          "officeName": "City Council, District 7 - Berkeley",
-          "name": "City Council, District 7 - Berkeley",
-          "winner": "Kriss Worthington",
-          "numCandidates": 3,
-          "numRounds": 2,
-          "condorcetWinner": "Kriss Worthington",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": false
-        },
-        {
-          "office": "oakland-mayor",
-          "officeName": "Mayor - Oakland",
-          "name": "Mayor - Oakland",
-          "winner": "Jean Quan",
-          "numCandidates": 10,
-          "numRounds": 3,
-          "condorcetWinner": "Jean Quan",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": true
-        },
-        {
-          "office": "san-leandro-mayor",
-          "officeName": "Mayor - San Leandro",
-          "name": "Mayor - San Leandro",
-          "winner": "Stephen H. Cassidy",
-          "numCandidates": 6,
-          "numRounds": 2,
-          "condorcetWinner": "Stephen H. Cassidy",
-          "interesting": false,
-          "hasWriteInByName": true,
-          "winnerNotFirstRoundLeader": true
-        }
-      ]
+      "contests": []
     },
     {
       "path": "us/wa/pierce/2009/11",

@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 129,
+  "ballotCount": 762,
   "candidates": [
     {
       "name": "Rigel Robinson",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 94
+          "votes": 762
         },
         {
           "allocatee": "X",
-          "votes": 35
+          "votes": 0
         }
       ],
-      "undervote": 35,
+      "undervote": 0,
       "overvote": 0,
-      "continuingBallots": 94,
+      "continuingBallots": 762,
       "transfers": []
     }
   ],
@@ -51,48 +51,66 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 94,
+      "firstRoundVotes": 762,
       "transferVotes": 0,
       "roundEliminated": null
     }
   ],
   "pairwisePreferences": {
-    "rows": [0],
-    "cols": [0],
-    "entries": [[null]]
+    "rows": [
+      0
+    ],
+    "cols": [
+      0
+    ],
+    "entries": [
+      [
+        null
+      ]
+    ]
   },
   "firstAlternate": {
-    "rows": [0],
-    "cols": [0, "X"],
+    "rows": [
+      0
+    ],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": [
       [
         null,
         {
           "frac": 1.0,
-          "numerator": 94,
-          "denominator": 94
+          "numerator": 762,
+          "denominator": 762
         }
       ]
     ]
   },
   "firstFinal": {
     "rows": [],
-    "cols": [0, "X"],
+    "cols": [
+      0,
+      "X"
+    ],
     "entries": []
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 94
+      "1": 762
     },
     "candidateDistributions": {
       "0": {
-        "1": 94
+        "1": 762
       }
     },
-    "totalBallots": 94,
+    "totalBallots": 762,
     "candidateTotals": {
-      "0": 94
+      "0": 762
     }
   },
-  "smithSet": [0]
+  "smithSet": [
+    0
+  ]
 }
