@@ -1,0 +1,29 @@
+{
+  "Version": "1.0",
+  "List": [
+    {
+      "Description": "Alice Anderson",
+      "Id": 1,
+      "ContestId": 100,
+      "Type": "Regular"
+    },
+    {
+      "Description": "Bob Brown",
+      "Id": 2,
+      "ContestId": 100,
+      "Type": "Regular"
+    },
+    {
+      "Description": "Charlie Chen",
+      "Id": 3,
+      "ContestId": 100,
+      "Type": "Regular"
+    },
+    {
+      "Description": "Write-in",
+      "Id": 99,
+      "ContestId": 100,
+      "Type": "WriteIn"
+    }
+  ]
+}

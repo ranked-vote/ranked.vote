@@ -1,0 +1,90 @@
+{
+  "Version": "1.0",
+  "ElectionId": "test-election",
+  "Sessions": [
+    {
+      "TabulatorId": 1,
+      "BatchId": 1,
+      "RecordId": "001",
+      "CountingGroupId": 1,
+      "ImageMask": "",
+      "Original": {
+        "PrecinctPortionId": 1,
+        "BallotTypeId": 1,
+        "IsCurrent": true,
+        "Contests": [
+          {
+            "Id": 100,
+            "Marks": [
+              { "CandidateId": 1, "Rank": 1, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true },
+              { "CandidateId": 2, "Rank": 2, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true },
+              { "CandidateId": 3, "Rank": 3, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TabulatorId": 1,
+      "BatchId": 1,
+      "RecordId": "002",
+      "CountingGroupId": 1,
+      "ImageMask": "",
+      "Original": {
+        "PrecinctPortionId": 1,
+        "BallotTypeId": 1,
+        "IsCurrent": true,
+        "Contests": [
+          {
+            "Id": 100,
+            "Marks": [
+              { "CandidateId": 2, "Rank": 1, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true },
+              { "CandidateId": 1, "Rank": 2, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TabulatorId": 1,
+      "BatchId": 1,
+      "RecordId": "003",
+      "CountingGroupId": 1,
+      "ImageMask": "",
+      "Original": {
+        "PrecinctPortionId": 1,
+        "BallotTypeId": 1,
+        "IsCurrent": true,
+        "Contests": [
+          {
+            "Id": 100,
+            "Marks": [
+              { "CandidateId": 3, "Rank": 1, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TabulatorId": 1,
+      "BatchId": 1,
+      "RecordId": "004",
+      "CountingGroupId": 1,
+      "ImageMask": "",
+      "Original": {
+        "PrecinctPortionId": 1,
+        "BallotTypeId": 1,
+        "IsCurrent": true,
+        "Contests": [
+          {
+            "Id": 100,
+            "Marks": [
+              { "CandidateId": 1, "Rank": 1, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true },
+              { "CandidateId": 2, "Rank": 1, "MarkDensity": 100, "IsAmbiguous": false, "IsVote": true }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
