@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: false  # Skip LFS files - archives aren't needed for build
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
