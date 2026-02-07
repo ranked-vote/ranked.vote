@@ -79,10 +79,20 @@ function findReportFiles(dir: string): string[] {
 
 // ---------- Compute index-level flags from report data ----------
 
+/**
+ * Check if any candidate has a write-in name (matching Rust is_write_in_by_name).
+ * This checks the candidate NAME, not the candidate_type field.
+ */
 function isWriteInByName(candidates: ReportJson["candidates"]): boolean {
-  return candidates.some(
-    (c) => c.candidate_type === "QualifiedWriteIn" || c.candidate_type === "WriteIn"
-  );
+  return candidates.some((c) => {
+    const normalized = c.name.toLowerCase();
+    return (
+      normalized === "write-in" ||
+      normalized === "write in" ||
+      normalized === "undeclared write-ins" ||
+      normalized === "uwi"
+    );
+  });
 }
 
 function isWinnerNotFirstRoundLeader(report: ReportJson): boolean {
