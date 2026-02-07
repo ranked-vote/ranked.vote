@@ -4,7 +4,7 @@
     "date": "2019-11-05",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",

@@ -4,7 +4,7 @@
     "date": "2014-11-04",
     "dataFormat": "us_ca_sfo",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -85,6 +85,60 @@
       "allocations": [
         {
           "allocatee": 1,
+          "votes": 7337
+        },
+        {
+          "allocatee": 4,
+          "votes": 3910
+        },
+        {
+          "allocatee": 3,
+          "votes": 2787
+        },
+        {
+          "allocatee": 0,
+          "votes": 1155
+        },
+        {
+          "allocatee": "X",
+          "votes": 1153
+        }
+      ],
+      "undervote": 1040,
+      "overvote": 113,
+      "continuingBallots": 15189,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 1,
+          "count": 161
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "count": 209
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "count": 62
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 160
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 217
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
           "votes": 7719
         },
         {
@@ -107,42 +161,22 @@
         {
           "from": 0,
           "to": 1,
-          "count": 345
-        },
-        {
-          "from": 2,
-          "to": 1,
-          "count": 198
+          "count": 382
         },
         {
           "from": 0,
           "to": 4,
-          "count": 277
-        },
-        {
-          "from": 2,
-          "to": 4,
-          "count": 281
+          "count": 349
         },
         {
           "from": 0,
           "to": 3,
-          "count": 140
-        },
-        {
-          "from": 2,
-          "to": 3,
-          "count": 82
+          "count": 160
         },
         {
           "from": 0,
           "to": "X",
-          "count": 233
-        },
-        {
-          "from": 2,
-          "to": "X",
-          "count": 248
+          "count": 264
         }
       ]
     },
@@ -190,8 +224,8 @@
     {
       "candidate": 0,
       "firstRoundVotes": 995,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 160,
+      "roundEliminated": 2
     },
     {
       "candidate": 1,
@@ -209,7 +243,7 @@
       "candidate": 3,
       "firstRoundVotes": 2725,
       "transferVotes": 222,
-      "roundEliminated": 2
+      "roundEliminated": 3
     },
     {
       "candidate": 4,

@@ -41,7 +41,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 1",
     winner: "Connie Chan",
     numCandidates: 7,
-    numRounds: 2,
+    numRounds: 6,
   },
   {
     year: 2020,
@@ -50,7 +50,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 3",
     winner: "Aaron Peskin",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2020,
@@ -59,7 +59,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 5",
     winner: "Dean Preston",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2020,
@@ -68,7 +68,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 7",
     winner: "Myrna Melgar",
     numCandidates: 7,
-    numRounds: 5,
+    numRounds: 6,
   },
   {
     year: 2020,
@@ -77,7 +77,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 11",
     winner: "Ahsha Safai",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2020,
@@ -150,7 +150,7 @@ const EXPECTED_WINNERS = [
     officeName: "Mayor",
     winner: "London N. Breed",
     numCandidates: 7,
-    numRounds: 3,
+    numRounds: 5,
   },
   {
     year: 2019,
@@ -159,7 +159,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 5",
     winner: "Dean Preston",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2019,
@@ -196,7 +196,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 4",
     winner: "Gordon Mar",
     numCandidates: 8,
-    numRounds: 5,
+    numRounds: 7,
   },
   {
     year: 2018,
@@ -214,7 +214,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 10",
     winner: "Shamann Walton",
     numCandidates: 6,
-    numRounds: 3,
+    numRounds: 6,
   },
   {
     year: 2018,
@@ -349,7 +349,7 @@ const EXPECTED_WINNERS = [
     officeName: "Mayor",
     winner: "London Breed",
     numCandidates: 8,
-    numRounds: 3,
+    numRounds: 8,
   },
   {
     year: 2018,
@@ -395,7 +395,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 1",
     winner: "Sandra Lee Fewer",
     numCandidates: 10,
-    numRounds: 2,
+    numRounds: 9,
   },
   {
     year: 2016,
@@ -413,7 +413,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 9",
     winner: "Hillary Ronen",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2016,
@@ -422,7 +422,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 11",
     winner: "Ahsha Safai",
     numCandidates: 5,
-    numRounds: 2,
+    numRounds: 4,
   },
   // 2015
   {
@@ -432,7 +432,7 @@ const EXPECTED_WINNERS = [
     officeName: "Mayor",
     winner: "Ed Lee",
     numCandidates: 6,
-    numRounds: 4,
+    numRounds: 11,
   },
   {
     year: 2015,
@@ -460,7 +460,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 10",
     winner: "Malia Cohen",
     numCandidates: 5,
-    numRounds: 3,
+    numRounds: 4,
   },
   // 2012
   {
@@ -470,7 +470,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 5",
     winner: "London Breed",
     numCandidates: 8,
-    numRounds: 5,
+    numRounds: 7,
   },
   {
     year: 2012,
@@ -479,7 +479,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 7",
     winner: "Norman Yee",
     numCandidates: 9,
-    numRounds: 6,
+    numRounds: 8,
   },
   // 2011
   {
@@ -489,7 +489,7 @@ const EXPECTED_WINNERS = [
     officeName: "District Attorney",
     winner: "George Gascón",
     numCandidates: 5,
-    numRounds: 3,
+    numRounds: 4,
   },
   {
     year: 2011,
@@ -498,7 +498,7 @@ const EXPECTED_WINNERS = [
     officeName: "Mayor",
     winner: "Ed Lee",
     numCandidates: 16,
-    numRounds: 12,
+    numRounds: 22,
   },
   {
     year: 2011,
@@ -517,7 +517,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 2",
     winner: "Mark Farrell",
     numCandidates: 6,
-    numRounds: 2,
+    numRounds: 6,
   },
   {
     year: 2010,
@@ -526,7 +526,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 6",
     winner: "Jane Kim",
     numCandidates: 14,
-    numRounds: 12,
+    numRounds: 14,
   },
   {
     year: 2010,
@@ -535,7 +535,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 8",
     winner: "Scott Wiener",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 4,
   },
   {
     year: 2010,
@@ -544,7 +544,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 10",
     winner: "Malia Cohen",
     numCandidates: 21,
-    numRounds: 20,
+    numRounds: 21,
   },
   // 2009
   {
@@ -564,7 +564,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 1",
     winner: "Eric Mar",
     numCandidates: 9,
-    numRounds: 2,
+    numRounds: 9,
   },
   {
     year: 2008,
@@ -573,7 +573,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 3",
     winner: "David Chiu",
     numCandidates: 9,
-    numRounds: 7,
+    numRounds: 9,
   },
   {
     year: 2008,
@@ -582,7 +582,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 4",
     winner: "Carmen Chu",
     numCandidates: 3,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2008,
@@ -591,7 +591,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 5",
     winner: "Ross Mirkarimi",
     numCandidates: 3,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2008,
@@ -600,7 +600,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 7",
     winner: "Sean R. Elsbernd",
     numCandidates: 3,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2008,
@@ -609,7 +609,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 9",
     winner: "David Campos",
     numCandidates: 7,
-    numRounds: 3,
+    numRounds: 7,
   },
   {
     year: 2008,
@@ -618,7 +618,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 11",
     winner: "John Avalos",
     numCandidates: 8,
-    numRounds: 4,
+    numRounds: 9,
   },
 ];
 

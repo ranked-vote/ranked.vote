@@ -156,9 +156,14 @@ impl TabulatorState {
         round_number: usize,
     ) -> TabulatorState {
         let allocations = self.allocations(tabulation_options, round_number);
+        let is_eager = tabulation_options.eager.unwrap_or(false);
 
         // Determine which candidates to eliminate.
-        let candidates_to_eliminate: BTreeSet<CandidateId> = {
+        let candidates_to_eliminate: BTreeSet<CandidateId> = if is_eager {
+            // Eager mode: eliminate all candidates that cannot mathematically win.
+            // Walk from top, subtracting votes. When a candidate's votes exceed
+            // the remaining sum below them (and we've passed at least the first),
+            // everyone below is eliminated.
             let mut ai = allocations.votes.iter();
             let mut remaining_votes = allocations.continuing();
 
@@ -173,7 +178,6 @@ impl TabulatorState {
 
             // If no candidates would be eliminated (e.g., all tied), eliminate the last one
             if to_eliminate.is_empty() && !allocations.votes.is_empty() {
-                // Eliminate the candidate with the fewest votes (last in sorted list)
                 allocations
                     .votes
                     .last()
@@ -183,6 +187,14 @@ impl TabulatorState {
             } else {
                 to_eliminate
             }
+        } else {
+            // Non-eager mode: eliminate only the single candidate with the fewest votes.
+            allocations
+                .votes
+                .last()
+                .map(|(id, _)| *id)
+                .into_iter()
+                .collect()
         };
 
         let mut transfers: BTreeSet<Transfer> = BTreeSet::new();

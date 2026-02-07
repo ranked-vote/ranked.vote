@@ -4,7 +4,7 @@
     "date": "2018-11-06",
     "dataFormat": "us_ca_sfo",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -189,6 +189,78 @@
       "allocations": [
         {
           "allocatee": 5,
+          "votes": 10575
+        },
+        {
+          "allocatee": 0,
+          "votes": 7728
+        },
+        {
+          "allocatee": 4,
+          "votes": 3683
+        },
+        {
+          "allocatee": 3,
+          "votes": 2620
+        },
+        {
+          "allocatee": 7,
+          "votes": 2281
+        },
+        {
+          "allocatee": 6,
+          "votes": 1290
+        },
+        {
+          "allocatee": "X",
+          "votes": 3235
+        }
+      ],
+      "undervote": 3054,
+      "overvote": 181,
+      "continuingBallots": 28177,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 5,
+          "count": 187
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 172
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "count": 136
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "count": 107
+        },
+        {
+          "from": 2,
+          "to": 7,
+          "count": 61
+        },
+        {
+          "from": 2,
+          "to": 6,
+          "count": 57
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 178
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 5,
           "votes": 10833
         },
         {
@@ -217,64 +289,34 @@
       "continuingBallots": 27885,
       "transfers": [
         {
-          "from": 2,
-          "to": 5,
-          "count": 194
-        },
-        {
           "from": 6,
           "to": 5,
-          "count": 251
-        },
-        {
-          "from": 2,
-          "to": 0,
-          "count": 179
+          "count": 258
         },
         {
           "from": 6,
           "to": 0,
-          "count": 123
-        },
-        {
-          "from": 2,
-          "to": 4,
-          "count": 145
+          "count": 130
         },
         {
           "from": 6,
           "to": 4,
-          "count": 295
-        },
-        {
-          "from": 2,
-          "to": 3,
-          "count": 109
+          "count": 304
         },
         {
           "from": 6,
           "to": 3,
-          "count": 118
-        },
-        {
-          "from": 2,
-          "to": 7,
-          "count": 74
+          "count": 120
         },
         {
           "from": 6,
           "to": 7,
-          "count": 173
-        },
-        {
-          "from": 2,
-          "to": "X",
-          "count": 197
+          "count": 186
         },
         {
           "from": 6,
           "to": "X",
-          "count": 273
+          "count": 292
         }
       ]
     },
@@ -336,6 +378,51 @@
       "allocations": [
         {
           "allocatee": 5,
+          "votes": 11803
+        },
+        {
+          "allocatee": 0,
+          "votes": 9013
+        },
+        {
+          "allocatee": 4,
+          "votes": 5055
+        },
+        {
+          "allocatee": "X",
+          "votes": 5541
+        }
+      ],
+      "undervote": 5352,
+      "overvote": 189,
+      "continuingBallots": 25871,
+      "transfers": [
+        {
+          "from": 3,
+          "to": 5,
+          "count": 665
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "count": 707
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "count": 585
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 1230
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 5,
           "votes": 13255
         },
         {
@@ -352,34 +439,19 @@
       "continuingBallots": 23320,
       "transfers": [
         {
-          "from": 3,
-          "to": 5,
-          "count": 765
-        },
-        {
           "from": 4,
           "to": 5,
-          "count": 1352
-        },
-        {
-          "from": 3,
-          "to": 0,
-          "count": 770
+          "count": 1452
         },
         {
           "from": 4,
           "to": 0,
-          "count": 989
-        },
-        {
-          "from": 3,
-          "to": "X",
-          "count": 1652
+          "count": 1052
         },
         {
           "from": 4,
           "to": "X",
-          "count": 2129
+          "count": 2551
         }
       ]
     }
@@ -410,13 +482,13 @@
       "candidate": 3,
       "firstRoundVotes": 2441,
       "transferVotes": 746,
-      "roundEliminated": 4
+      "roundEliminated": 5
     },
     {
       "candidate": 4,
       "firstRoundVotes": 3490,
-      "transferVotes": 980,
-      "roundEliminated": 4
+      "transferVotes": 1565,
+      "roundEliminated": 6
     },
     {
       "candidate": 5,
@@ -427,14 +499,14 @@
     {
       "candidate": 6,
       "firstRoundVotes": 1182,
-      "transferVotes": 51,
-      "roundEliminated": 2
+      "transferVotes": 108,
+      "roundEliminated": 3
     },
     {
       "candidate": 7,
       "firstRoundVotes": 2183,
       "transferVotes": 284,
-      "roundEliminated": 3
+      "roundEliminated": 4
     }
   ],
   "pairwisePreferences": {

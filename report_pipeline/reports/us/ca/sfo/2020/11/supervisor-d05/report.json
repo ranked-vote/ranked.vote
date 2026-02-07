@@ -4,7 +4,7 @@
     "date": "2020-11-03",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -72,6 +72,51 @@
       "allocations": [
         {
           "allocatee": 2,
+          "votes": 21783
+        },
+        {
+          "allocatee": 0,
+          "votes": 17072
+        },
+        {
+          "allocatee": 1,
+          "votes": 2846
+        },
+        {
+          "allocatee": "X",
+          "votes": 4716
+        }
+      ],
+      "undervote": 4614,
+      "overvote": 102,
+      "continuingBallots": 41701,
+      "transfers": [
+        {
+          "from": 3,
+          "to": 2,
+          "count": 299
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "count": 295
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "count": 456
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 63
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 2,
           "votes": 22853
         },
         {
@@ -90,32 +135,17 @@
         {
           "from": 1,
           "to": 2,
-          "count": 882
-        },
-        {
-          "from": 3,
-          "to": 2,
-          "count": 487
+          "count": 1070
         },
         {
           "from": 1,
           "to": 0,
-          "count": 1223
-        },
-        {
-          "from": 3,
-          "to": 0,
-          "count": 520
+          "count": 1448
         },
         {
           "from": 1,
           "to": "X",
-          "count": 285
-        },
-        {
-          "from": 3,
-          "to": "X",
-          "count": 106
+          "count": 328
         }
       ]
     }
@@ -133,8 +163,8 @@
     {
       "candidate": 1,
       "firstRoundVotes": 2390,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 456,
+      "roundEliminated": 2
     },
     {
       "candidate": 2,

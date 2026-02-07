@@ -133,11 +133,14 @@ export function tabulate(
     if (roundNumber >= maxRounds) break;
 
     // Determine which candidates to eliminate
-    // Walk from top, subtracting votes. When a candidate's votes exceed
-    // the remaining sum below them (and we've passed at least the first),
-    // everyone below is eliminated.
+    const isEager = options.eager ?? false;
     let candidatesToEliminate: Set<CandidateId>;
-    {
+
+    if (isEager) {
+      // Eager mode: eliminate all candidates that cannot mathematically win.
+      // Walk from top, subtracting votes. When a candidate's votes exceed
+      // the remaining sum below them (and we've passed at least the first),
+      // everyone below is eliminated.
       let remainingVotes = continuing;
       let cutoff = sortedVotes.length; // default: no elimination
 
@@ -159,6 +162,12 @@ export function tabulate(
       }
 
       candidatesToEliminate = toEliminate;
+    } else {
+      // Non-eager mode: eliminate only the single candidate with the fewest votes.
+      candidatesToEliminate = new Set<CandidateId>();
+      if (sortedVotes.length > 0) {
+        candidatesToEliminate.add(sortedVotes[sortedVotes.length - 1][0]);
+      }
     }
 
     // Mark candidates as eliminated

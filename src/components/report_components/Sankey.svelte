@@ -488,6 +488,7 @@
   <g transform={`translate(${edgeMargin} ${labelSpace})`}>
     {#each voteBlockRows[0] as voteBlock}
       <g
+        role="img"
         transform={`translate(${voteBlock.x + voteBlock.width / 2} -10)`}
         on:pointerenter={() => (hover = { kind: "node", key: voteBlock.nodeKey() })}
         on:pointerleave={() => (hover = null)}>
@@ -500,6 +501,7 @@
     {#each voteBlockRows as voteBlockRow}
       {#each voteBlockRow as voteBlock}
         <rect
+          role="img"
           use:tooltip={voteBlock.tooltip()}
           class="voteBlock"
           class:exhausted={voteBlock.isExhausted()}
@@ -526,6 +528,7 @@
 
     {#each transfers as transfer, i}
       <path
+        role="img"
         use:tooltip={transfer.tooltip()}
         class="transfer"
         class:highlight={activeLinkIndexes.has(i)}
@@ -537,6 +540,7 @@
 
     {#each voteBlockRows[voteBlockRows.length - 1] as voteBlock}
       <g
+        role="img"
         transform={`translate(${voteBlock.x + voteBlock.width / 2} ${innerHeight + 10})`}
         on:pointerenter={() => (hover = { kind: "node", key: voteBlock.nodeKey() })}
         on:pointerleave={() => (hover = null)}>

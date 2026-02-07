@@ -4,7 +4,7 @@
     "date": "2020-11-03",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -72,6 +72,51 @@
       "allocations": [
         {
           "allocatee": 0,
+          "votes": 15690
+        },
+        {
+          "allocatee": 1,
+          "votes": 11143
+        },
+        {
+          "allocatee": 2,
+          "votes": 1989
+        },
+        {
+          "allocatee": "X",
+          "votes": 4067
+        }
+      ],
+      "undervote": 3972,
+      "overvote": 95,
+      "continuingBallots": 28822,
+      "transfers": [
+        {
+          "from": 3,
+          "to": 0,
+          "count": 278
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "count": 590
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "count": 499
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 71
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 0,
           "votes": 16199
         },
         {
@@ -90,32 +135,17 @@
         {
           "from": 2,
           "to": 0,
-          "count": 405
-        },
-        {
-          "from": 3,
-          "to": 0,
-          "count": 382
+          "count": 509
         },
         {
           "from": 2,
           "to": 1,
-          "count": 943
-        },
-        {
-          "from": 3,
-          "to": 1,
-          "count": 972
+          "count": 1325
         },
         {
           "from": 2,
           "to": "X",
-          "count": 142
-        },
-        {
-          "from": 3,
-          "to": "X",
-          "count": 84
+          "count": 155
         }
       ]
     }
@@ -139,8 +169,8 @@
     {
       "candidate": 2,
       "firstRoundVotes": 1490,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 499,
+      "roundEliminated": 2
     },
     {
       "candidate": 3,

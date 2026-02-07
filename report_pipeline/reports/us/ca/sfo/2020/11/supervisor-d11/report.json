@@ -4,7 +4,7 @@
     "date": "2020-11-03",
     "dataFormat": "nist_sp_1500",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -72,6 +72,51 @@
       "allocations": [
         {
           "allocatee": 1,
+          "votes": 15142
+        },
+        {
+          "allocatee": 0,
+          "votes": 13413
+        },
+        {
+          "allocatee": 2,
+          "votes": 2794
+        },
+        {
+          "allocatee": "X",
+          "votes": 2913
+        }
+      ],
+      "undervote": 2796,
+      "overvote": 117,
+      "continuingBallots": 31349,
+      "transfers": [
+        {
+          "from": 3,
+          "to": 1,
+          "count": 7
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "count": 1
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "count": 6
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
           "votes": 16367
         },
         {
@@ -90,32 +135,17 @@
         {
           "from": 2,
           "to": 1,
-          "count": 1221
-        },
-        {
-          "from": 3,
-          "to": 1,
-          "count": 11
+          "count": 1225
         },
         {
           "from": 2,
           "to": 0,
-          "count": 1056
-        },
-        {
-          "from": 3,
-          "to": 0,
-          "count": 2
+          "count": 1057
         },
         {
           "from": 2,
           "to": "X",
-          "count": 511
-        },
-        {
-          "from": 3,
-          "to": "X",
-          "count": 2
+          "count": 512
         }
       ]
     }
@@ -139,8 +169,8 @@
     {
       "candidate": 2,
       "firstRoundVotes": 2788,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 6,
+      "roundEliminated": 2
     },
     {
       "candidate": 3,

@@ -4,7 +4,7 @@
     "date": "2008-11-04",
     "dataFormat": "us_ca_sfo",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -73,6 +73,51 @@
       "allocations": [
         {
           "allocatee": 2,
+          "votes": 22127
+        },
+        {
+          "allocatee": 1,
+          "votes": 5891
+        },
+        {
+          "allocatee": 0,
+          "votes": 3003
+        },
+        {
+          "allocatee": "X",
+          "votes": 5648
+        }
+      ],
+      "undervote": 5595,
+      "overvote": 53,
+      "continuingBallots": 31021,
+      "transfers": [
+        {
+          "from": 3,
+          "to": 2,
+          "count": 22
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "count": 37
+        },
+        {
+          "from": 3,
+          "to": 0,
+          "count": 9
+        },
+        {
+          "from": 3,
+          "to": "X",
+          "count": 144
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 2,
           "votes": 22749
         },
         {
@@ -94,29 +139,14 @@
           "count": 622
         },
         {
-          "from": 3,
-          "to": 2,
-          "count": 22
-        },
-        {
           "from": 0,
           "to": 1,
-          "count": 1750
-        },
-        {
-          "from": 3,
-          "to": 1,
-          "count": 45
+          "count": 1758
         },
         {
           "from": 0,
           "to": "X",
-          "count": 622
-        },
-        {
-          "from": 3,
-          "to": "X",
-          "count": 145
+          "count": 623
         }
       ]
     }
@@ -128,8 +158,8 @@
     {
       "candidate": 0,
       "firstRoundVotes": 2994,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 9,
+      "roundEliminated": 2
     },
     {
       "candidate": 1,

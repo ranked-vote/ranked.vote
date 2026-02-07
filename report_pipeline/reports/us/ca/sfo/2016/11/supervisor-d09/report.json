@@ -4,7 +4,7 @@
     "date": "2016-11-08",
     "dataFormat": "us_ca_sfo",
     "tabulationOptions": {
-      "eager": true,
+      "eager": false,
       "nycStyle": false
     },
     "jurisdictionPath": "us/ca/sfo",
@@ -76,6 +76,51 @@
       "allocations": [
         {
           "allocatee": 1,
+          "votes": 18523
+        },
+        {
+          "allocatee": 3,
+          "votes": 9759
+        },
+        {
+          "allocatee": 0,
+          "votes": 3666
+        },
+        {
+          "allocatee": "X",
+          "votes": 2997
+        }
+      ],
+      "undervote": 2870,
+      "overvote": 127,
+      "continuingBallots": 31948,
+      "transfers": [
+        {
+          "from": 2,
+          "to": 1,
+          "count": 127
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "count": 111
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "count": 201
+        },
+        {
+          "from": 2,
+          "to": "X",
+          "count": 106
+        }
+      ]
+    },
+    {
+      "allocations": [
+        {
+          "allocatee": 1,
           "votes": 20314
         },
         {
@@ -94,32 +139,17 @@
         {
           "from": 0,
           "to": 1,
-          "count": 1709
-        },
-        {
-          "from": 2,
-          "to": 1,
-          "count": 209
+          "count": 1791
         },
         {
           "from": 0,
           "to": 3,
-          "count": 1194
-        },
-        {
-          "from": 2,
-          "to": 3,
-          "count": 191
+          "count": 1274
         },
         {
           "from": 0,
           "to": "X",
-          "count": 562
-        },
-        {
-          "from": 2,
-          "to": "X",
-          "count": 145
+          "count": 601
         }
       ]
     }
@@ -131,8 +161,8 @@
     {
       "candidate": 0,
       "firstRoundVotes": 3465,
-      "transferVotes": 0,
-      "roundEliminated": 1
+      "transferVotes": 201,
+      "roundEliminated": 2
     },
     {
       "candidate": 1,

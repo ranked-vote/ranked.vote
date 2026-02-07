@@ -57,7 +57,7 @@ pub struct TabulationOptions {
 impl Default for TabulationOptions {
     fn default() -> Self {
         TabulationOptions {
-            eager: Some(true),
+            eager: Some(false),
             nyc_style: Some(false),
         }
     }
