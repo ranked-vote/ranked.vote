@@ -554,7 +554,7 @@ async function startDevServer() {
 
   const env = {
     ...process.env,
-    RANKED_VOTE_REPORTS: "report_pipeline/reports",
+    RANKED_VOTE_DB: "report_pipeline/reports.sqlite3",
   };
 
   // Use spawn without shell to avoid security warning
