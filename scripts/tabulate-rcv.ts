@@ -65,6 +65,9 @@ export function tabulate(
   ballots: NormalizedBallot[],
   options: TabulationOptions = {}
 ): ITabulatorRound[] {
+  // Empty contest: return no rounds (matching Rust behavior)
+  if (ballots.length === 0) return [];
+
   // Initial allocation: group ballots by top choice
   const candidateBallots = new Map<string, BallotState[]>();
   for (const ballot of ballots) {
