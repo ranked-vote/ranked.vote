@@ -9,3 +9,7 @@ yarn-error.log
 !.env.example
 # Snyk Security Extension - AI Rules (auto-generated)
 .cursor/rules/snyk_rules.mdc
+
+# SQLite WAL/SHM files (temporary, not needed in repo)
+*.sqlite3-wal
+*.sqlite3-shm

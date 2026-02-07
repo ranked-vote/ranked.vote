@@ -33,7 +33,7 @@ jobs:
 
       - name: Validate reports and build
         env:
-          RANKED_VOTE_REPORTS: ${{ github.workspace }}/report_pipeline/reports
+          RANKED_VOTE_DB: ${{ github.workspace }}/report_pipeline/reports.sqlite3
         run: |
           # Run tests (includes election winner validation and card image validation)
           echo "Running tests..."

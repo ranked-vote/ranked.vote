@@ -34,7 +34,7 @@ jobs:
 
       - name: Test and build
         env:
-          RANKED_VOTE_REPORTS: ${{ github.workspace }}/report_pipeline/reports
+          RANKED_VOTE_DB: ${{ github.workspace }}/report_pipeline/reports.sqlite3
         run: |
           bun test
           bun run build
