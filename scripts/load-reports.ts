@@ -88,13 +88,46 @@ function isWriteInByName(candidates: ReportJson["candidates"]): boolean {
 function isWinnerNotFirstRoundLeader(report: ReportJson): boolean {
   if (report.winner == null || report.rounds.length === 0) return false;
   const firstRound = report.rounds[0];
-  const topAllocatee = firstRound.allocations[0]?.allocatee;
-  // The first allocation is the candidate with the most votes (sorted descending by Rust)
-  return topAllocatee !== report.winner && topAllocatee !== "X";
+
+  // Find first candidate allocation (the round 1 leader) -- allocations sorted desc by votes
+  const firstPlace = firstRound.allocations.find((a) => a.allocatee !== "X");
+  if (!firstPlace) return false;
+
+  // Find winner's votes in first round
+  const winnerVotes = firstRound.allocations.find(
+    (a) => a.allocatee === report.winner
+  )?.votes ?? 0;
+
+  // Winner did not lead if their votes are strictly less than the leader's
+  return winnerVotes < firstPlace.votes;
 }
 
+/**
+ * Check if an election is "interesting" based on criteria from the Rust pipeline:
+ * - Non-Condorcet winner (Condorcet winner exists but didn't win under RCV)
+ * - Condorcet cycle (Smith set has more than one candidate)
+ * - Exhausted ballots outnumber the winner's votes in the final round
+ */
 function isInteresting(report: ReportJson): boolean {
-  return report.rounds.length > 2 || isWinnerNotFirstRoundLeader(report);
+  // Non-Condorcet winner
+  const hasNonCondorcetWinner =
+    report.condorcet != null && report.condorcet !== report.winner;
+
+  // Condorcet cycle (Smith set > 1)
+  const hasCondorcetCycle = report.smithSet.length > 1;
+
+  // Exhausted ballots > winner's votes in final round
+  let exhaustedExceedsWinner = false;
+  if (report.rounds.length > 0 && report.winner != null) {
+    const lastRound = report.rounds[report.rounds.length - 1];
+    const exhausted =
+      lastRound.allocations.find((a) => a.allocatee === "X")?.votes ?? 0;
+    const winnerVotes =
+      lastRound.allocations.find((a) => a.allocatee === report.winner)?.votes ?? 0;
+    exhaustedExceedsWinner = exhausted > winnerVotes;
+  }
+
+  return hasNonCondorcetWinner || hasCondorcetCycle || exhaustedExceedsWinner;
 }
 
 // ---------- Main ----------
