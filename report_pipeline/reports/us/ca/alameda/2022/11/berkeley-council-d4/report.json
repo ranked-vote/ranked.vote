@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 3222,
+  "ballotCount": 261,
   "candidates": [
     {
       "name": "Kate Harrison",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 3222
+          "votes": 187
         },
         {
           "allocatee": "X",
-          "votes": 0
+          "votes": 74
         }
       ],
-      "undervote": 0,
+      "undervote": 74,
       "overvote": 0,
-      "continuingBallots": 3222,
+      "continuingBallots": 187,
       "transfers": []
     }
   ],
@@ -51,7 +51,7 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 3222,
+      "firstRoundVotes": 187,
       "transferVotes": 0,
       "roundEliminated": null
     }
@@ -82,8 +82,8 @@
         null,
         {
           "frac": 1.0,
-          "numerator": 3222,
-          "denominator": 3222
+          "numerator": 187,
+          "denominator": 187
         }
       ]
     ]
@@ -98,16 +98,16 @@
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 3222
+      "1": 187
     },
     "candidateDistributions": {
       "0": {
-        "1": 3222
+        "1": 187
       }
     },
-    "totalBallots": 3222,
+    "totalBallots": 187,
     "candidateTotals": {
-      "0": 3222
+      "0": 187
     }
   },
   "smithSet": [

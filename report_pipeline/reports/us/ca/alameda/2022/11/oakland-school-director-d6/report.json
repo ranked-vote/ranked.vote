@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 14604,
+  "ballotCount": 1633,
   "candidates": [
     {
       "name": "Valarie Bachelor",
@@ -40,59 +40,59 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 6977
+          "votes": 705
         },
         {
           "allocatee": 1,
-          "votes": 5857
+          "votes": 521
         },
         {
           "allocatee": 2,
-          "votes": 1644
+          "votes": 169
         },
         {
           "allocatee": "X",
-          "votes": 126
+          "votes": 238
         }
       ],
-      "undervote": 0,
-      "overvote": 126,
-      "continuingBallots": 14478,
+      "undervote": 225,
+      "overvote": 13,
+      "continuingBallots": 1395,
       "transfers": []
     },
     {
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 7572
+          "votes": 760
         },
         {
           "allocatee": 1,
-          "votes": 6397
+          "votes": 578
         },
         {
           "allocatee": "X",
-          "votes": 635
+          "votes": 295
         }
       ],
-      "undervote": 496,
-      "overvote": 139,
-      "continuingBallots": 13969,
+      "undervote": 279,
+      "overvote": 16,
+      "continuingBallots": 1338,
       "transfers": [
         {
           "from": 2,
           "to": 0,
-          "count": 595
+          "count": 55
         },
         {
           "from": 2,
           "to": 1,
-          "count": 540
+          "count": 57
         },
         {
           "from": 2,
           "to": "X",
-          "count": 509
+          "count": 57
         }
       ]
     }
@@ -103,19 +103,19 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 6977,
-      "transferVotes": 595,
+      "firstRoundVotes": 705,
+      "transferVotes": 55,
       "roundEliminated": null
     },
     {
       "candidate": 1,
-      "firstRoundVotes": 5857,
-      "transferVotes": 540,
+      "firstRoundVotes": 521,
+      "transferVotes": 57,
       "roundEliminated": null
     },
     {
       "candidate": 2,
-      "firstRoundVotes": 1644,
+      "firstRoundVotes": 169,
       "transferVotes": 0,
       "roundEliminated": 1
     }
@@ -135,39 +135,39 @@
       [
         null,
         {
-          "frac": 0.5420574,
-          "numerator": 7572,
-          "denominator": 13969
+          "frac": 0.56801194,
+          "numerator": 760,
+          "denominator": 1338
         },
         {
-          "frac": 0.7968329,
-          "numerator": 10064,
-          "denominator": 12630
+          "frac": 0.80371565,
+          "numerator": 995,
+          "denominator": 1238
         }
       ],
       [
         {
-          "frac": 0.45794258,
-          "numerator": 6397,
-          "denominator": 13969
+          "frac": 0.43198803,
+          "numerator": 578,
+          "denominator": 1338
         },
         null,
         {
-          "frac": 0.70440954,
-          "numerator": 8834,
-          "denominator": 12541
+          "frac": 0.67731094,
+          "numerator": 806,
+          "denominator": 1190
         }
       ],
       [
         {
-          "frac": 0.20316707,
-          "numerator": 2566,
-          "denominator": 12630
+          "frac": 0.19628432,
+          "numerator": 243,
+          "denominator": 1238
         },
         {
-          "frac": 0.29559046,
-          "numerator": 3707,
-          "denominator": 12541
+          "frac": 0.3226891,
+          "numerator": 384,
+          "denominator": 1190
         },
         null
       ]
@@ -189,55 +189,55 @@
       [
         null,
         {
-          "frac": 0.4266877,
-          "numerator": 2977,
-          "denominator": 6977
+          "frac": 0.40425533,
+          "numerator": 285,
+          "denominator": 705
         },
         {
-          "frac": 0.29568583,
-          "numerator": 2063,
-          "denominator": 6977
+          "frac": 0.30496454,
+          "numerator": 215,
+          "denominator": 705
         },
         {
-          "frac": 0.27762648,
-          "numerator": 1937,
-          "denominator": 6977
+          "frac": 0.29078013,
+          "numerator": 205,
+          "denominator": 705
         }
       ],
       [
         {
-          "frac": 0.52706164,
-          "numerator": 3087,
-          "denominator": 5857
+          "frac": 0.5566219,
+          "numerator": 290,
+          "denominator": 521
         },
         null,
         {
-          "frac": 0.15741847,
-          "numerator": 922,
-          "denominator": 5857
+          "frac": 0.14203455,
+          "numerator": 74,
+          "denominator": 521
         },
         {
-          "frac": 0.3155199,
-          "numerator": 1848,
-          "denominator": 5857
+          "frac": 0.30134356,
+          "numerator": 157,
+          "denominator": 521
         }
       ],
       [
         {
-          "frac": 0.36192214,
-          "numerator": 595,
-          "denominator": 1644
+          "frac": 0.32544377,
+          "numerator": 55,
+          "denominator": 169
         },
         {
-          "frac": 0.32846716,
-          "numerator": 540,
-          "denominator": 1644
+          "frac": 0.3372781,
+          "numerator": 57,
+          "denominator": 169
         },
         null,
         {
-          "frac": 0.3096107,
-          "numerator": 509,
-          "denominator": 1644
+          "frac": 0.3372781,
+          "numerator": 57,
+          "denominator": 169
         }
       ]
     ]
@@ -254,51 +254,51 @@
     "entries": [
       [
         {
-          "frac": 0.36192214,
-          "numerator": 595,
-          "denominator": 1644
+          "frac": 0.32544377,
+          "numerator": 55,
+          "denominator": 169
         },
         {
-          "frac": 0.32846716,
-          "numerator": 540,
-          "denominator": 1644
+          "frac": 0.3372781,
+          "numerator": 57,
+          "denominator": 169
         },
         {
-          "frac": 0.3096107,
-          "numerator": 509,
-          "denominator": 1644
+          "frac": 0.3372781,
+          "numerator": 57,
+          "denominator": 169
         }
       ]
     ]
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 4294,
-      "2": 3066,
-      "3": 7118
+      "1": 419,
+      "2": 276,
+      "3": 700
     },
     "candidateDistributions": {
       "0": {
-        "1": 1937,
-        "2": 1702,
-        "3": 3338
+        "1": 205,
+        "2": 166,
+        "3": 334
       },
       "1": {
-        "1": 1848,
-        "2": 1055,
-        "3": 2954
+        "1": 157,
+        "2": 86,
+        "3": 278
       },
       "2": {
-        "1": 509,
-        "2": 309,
-        "3": 826
+        "1": 57,
+        "2": 24,
+        "3": 88
       }
     },
-    "totalBallots": 14478,
+    "totalBallots": 1395,
     "candidateTotals": {
-      "0": 6977,
-      "1": 5857,
-      "2": 1644
+      "0": 705,
+      "1": 521,
+      "2": 169
     }
   },
   "smithSet": [

@@ -104,9 +104,6 @@
     },
     "san-leandro-council-d4": {
       "name": "City Council, District 4 - San Leandro"
-    },
-    "berkeley-council-d7": {
-      "name": "City Council, District 7 - Berkeley"
     }
   },
   "elections": {
@@ -127,18 +124,6 @@
           "office": "oakland-council-d4",
           "loaderParams": {
             "file": "oakland/council-d4.toi"
-          }
-        },
-        {
-          "office": "berkeley-council-d7",
-          "loaderParams": {
-            "file": "berkeley/council-d7.toi"
-          }
-        },
-        {
-          "office": "san-leandro-mayor",
-          "loaderParams": {
-            "file": "san-leandro/mayor.toi"
           }
         }
       ],
@@ -179,18 +164,6 @@
           "office": "oakland-school-director-d3",
           "loaderParams": {
             "file": "oakland/school-director-d3.toi"
-          }
-        },
-        {
-          "office": "san-leandro-council-d2",
-          "loaderParams": {
-            "file": "san-leandro/council-d2.toi"
-          }
-        },
-        {
-          "office": "san-leandro-council-d4",
-          "loaderParams": {
-            "file": "san-leandro/council-d4.toi"
           }
         }
       ],
@@ -336,6 +309,24 @@
           "loaderParams": {
             "contest": "96",
             "cvr": "general",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        }
+      ],
+      "files": {}
+    },
+    "2024/05": {
+      "name": "Berkeley District 4 Special Election",
+      "date": "2024-05-28",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "berkeley-council-d4",
+          "loaderParams": {
+            "contest": "1",
+            "cvr": "berkeley-d4-special",
             "dropUnqualifiedWriteIn": "true"
           }
         }

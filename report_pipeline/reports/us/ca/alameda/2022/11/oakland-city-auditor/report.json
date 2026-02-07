@@ -20,7 +20,7 @@
     },
     "website": null
   },
-  "ballotCount": 97796,
+  "ballotCount": 9188,
   "candidates": [
     {
       "name": "Courtney Ruby",
@@ -32,16 +32,16 @@
       "allocations": [
         {
           "allocatee": 0,
-          "votes": 97796
+          "votes": 6684
         },
         {
           "allocatee": "X",
-          "votes": 0
+          "votes": 2504
         }
       ],
-      "undervote": 0,
-      "overvote": 0,
-      "continuingBallots": 97796,
+      "undervote": 2493,
+      "overvote": 11,
+      "continuingBallots": 6684,
       "transfers": []
     }
   ],
@@ -51,7 +51,7 @@
   "totalVotes": [
     {
       "candidate": 0,
-      "firstRoundVotes": 97796,
+      "firstRoundVotes": 6684,
       "transferVotes": 0,
       "roundEliminated": null
     }
@@ -82,8 +82,8 @@
         null,
         {
           "frac": 1.0,
-          "numerator": 97796,
-          "denominator": 97796
+          "numerator": 6684,
+          "denominator": 6684
         }
       ]
     ]
@@ -98,16 +98,16 @@
   },
   "rankingDistribution": {
     "overallDistribution": {
-      "1": 97796
+      "1": 6684
     },
     "candidateDistributions": {
       "0": {
-        "1": 97796
+        "1": 6684
       }
     },
-    "totalBallots": 97796,
+    "totalBallots": 6684,
     "candidateTotals": {
-      "0": 97796
+      "0": 6684
     }
   },
   "smithSet": [

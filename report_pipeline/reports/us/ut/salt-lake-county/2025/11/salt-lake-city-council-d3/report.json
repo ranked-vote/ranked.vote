@@ -17,7 +17,7 @@
       "contest": "48",
       "cvr": "."
     },
-    "website": null
+    "website": "https://www.saltlakecounty.gov/clerk/elections/election-results/"
   },
   "ballotCount": 7179,
   "candidates": [
@@ -213,8 +213,20 @@
     }
   ],
   "pairwisePreferences": {
-    "rows": [0, 1, 2, 3, 4],
-    "cols": [0, 1, 2, 3, 4],
+    "rows": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
     "entries": [
       [
         null,
@@ -334,8 +346,21 @@
     ]
   },
   "firstAlternate": {
-    "rows": [0, 1, 2, 3, 4],
-    "cols": [0, 1, 2, 3, 4, "X"],
+    "rows": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      "X"
+    ],
     "entries": [
       [
         null,
@@ -480,8 +505,16 @@
     ]
   },
   "firstFinal": {
-    "rows": [0, 3, 4],
-    "cols": [1, 2, "X"],
+    "rows": [
+      0,
+      3,
+      4
+    ],
+    "cols": [
+      1,
+      2,
+      "X"
+    ],
     "entries": [
       [
         {
@@ -590,5 +623,7 @@
       "4": 1217
     }
   },
-  "smithSet": [1]
+  "smithSet": [
+    1
+  ]
 }
