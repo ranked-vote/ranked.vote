@@ -326,6 +326,15 @@ function main() {
   let errors = 0;
   const startTime = Date.now();
 
+  // Track problems for end-of-run summary
+  const problems: Array<{
+    election: string;
+    contest: string;
+    reason: string;
+  }> = [];
+  const missingRawData: string[] = [];
+  const skippedFormats: Array<{ election: string; format: string }> = [];
+
   // Count total contests for progress
   let totalContests = 0;
   for (const j of jurisdictions) {
@@ -341,14 +350,20 @@ function main() {
         const dataFormat = election.dataFormat;
         const label = `${jurisdiction.path}/${electionPath}`;
 
-        if (!isFormatSupported(dataFormat) || SKIP_FORMATS.has(dataFormat)) {
+        if (!isFormatSupported(dataFormat)) {
           skipped += election.contests.length;
+          continue;
+        }
+        if (SKIP_FORMATS.has(dataFormat)) {
+          skipped += election.contests.length;
+          skippedFormats.push({ election: label, format: dataFormat });
           continue;
         }
 
         const rawPath = join(rawDir, jurisdiction.path, electionPath);
         if (!existsSync(rawPath)) {
           skipped += election.contests.length;
+          missingRawData.push(label);
           continue;
         }
 
@@ -404,6 +419,9 @@ function main() {
             } catch (e: any) {
               console.error(`    NIST batch error: ${e.message}`);
               errors += election.contests.length;
+              for (const c of election.contests) {
+                problems.push({ election: label, contest: c.office, reason: e.message });
+              }
               continue;
             }
           }
@@ -446,6 +464,9 @@ function main() {
           } catch (e: any) {
             console.error(`    NYC batch error: ${e.message}`);
             errors += election.contests.length;
+            for (const c of election.contests) {
+              problems.push({ election: label, contest: c.office, reason: e.message });
+            }
             continue;
           }
         }
@@ -479,6 +500,7 @@ function main() {
             else skipped++;
           } catch (e: any) {
             errors++;
+            problems.push({ election: label, contest: contest.office, reason: e.message });
             console.error(
               `    Error ${contest.office}: ${e.message}`
             );
@@ -496,10 +518,57 @@ function main() {
   db.close();
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  console.log(`\nDone in ${elapsed}s`);
-  console.log(`  Processed: ${processed}`);
-  console.log(`  Skipped: ${skipped}`);
-  if (errors > 0) console.error(`  Errors: ${errors}`);
+
+  // ---- Summary ----
+  console.log(`\n${"=".repeat(60)}`);
+  console.log(`  Done in ${elapsed}s`);
+  console.log(`  Processed: ${processed} contests`);
+  console.log(`  Skipped:   ${skipped} contests`);
+  console.log(`${"=".repeat(60)}`);
+
+  const hasBroken = problems.length > 0 || missingRawData.length > 0;
+
+  if (hasBroken) {
+    console.error("");
+    console.error("\x1b[1m\x1b[31m" + "!".repeat(60));
+    console.error("!!!  BROKEN ELECTIONS — THESE NEED TO BE FIXED  !!!");
+    console.error("!".repeat(60) + "\x1b[0m");
+
+    if (problems.length > 0) {
+      console.error(`\n\x1b[1m\x1b[31m  ERRORS (${problems.length} contests failed):\x1b[0m`);
+      // Group by election for readability
+      const byElection = new Map<string, Array<{ contest: string; reason: string }>>();
+      for (const p of problems) {
+        if (!byElection.has(p.election)) byElection.set(p.election, []);
+        byElection.get(p.election)!.push({ contest: p.contest, reason: p.reason });
+      }
+      for (const [election, contests] of byElection) {
+        console.error(`\n  \x1b[1m${election}\x1b[0m`);
+        for (const c of contests) {
+          console.error(`    \x1b[31m✗\x1b[0m ${c.contest}: ${c.reason}`);
+        }
+      }
+    }
+
+    if (missingRawData.length > 0) {
+      console.error(`\n\x1b[1m\x1b[31m  MISSING RAW DATA (${missingRawData.length} elections):\x1b[0m`);
+      for (const e of missingRawData) {
+        console.error(`    \x1b[31m✗\x1b[0m ${e}`);
+      }
+    }
+
+    console.error(`\n\x1b[1m\x1b[31m${"!".repeat(60)}\x1b[0m\n`);
+  } else {
+    console.log("\n  All elections processed successfully.\n");
+  }
+
+  if (skippedFormats.length > 0) {
+    console.log(`  Deferred formats (${skippedFormats.length} elections, not yet supported):`);
+    for (const s of skippedFormats) {
+      console.log(`    - ${s.election} [${s.format}]`);
+    }
+    console.log("");
+  }
 }
 
 main();

@@ -28,7 +28,10 @@ export interface TabulationOptions {
 
 // ---------- Internal types ----------
 
-type Choice = { type: "vote"; candidate: CandidateId } | { type: "undervote" } | { type: "overvote" };
+type Choice =
+  | { type: "vote"; candidate: CandidateId }
+  | { type: "undervote" }
+  | { type: "overvote" };
 
 interface BallotState {
   choices: CandidateId[];
@@ -63,7 +66,7 @@ function choiceToAllocatee(c: Choice): Allocatee {
 
 export function tabulate(
   ballots: NormalizedBallot[],
-  options: TabulationOptions = {}
+  options: TabulationOptions = {},
 ): ITabulatorRound[] {
   // Empty contest: return no rounds (matching Rust behavior)
   if (ballots.length === 0) return [];
@@ -71,7 +74,10 @@ export function tabulate(
   // Initial allocation: group ballots by top choice
   const candidateBallots = new Map<string, BallotState[]>();
   for (const ballot of ballots) {
-    const state: BallotState = { choices: [...ballot.choices], overvoted: ballot.overvoted };
+    const state: BallotState = {
+      choices: [...ballot.choices],
+      overvoted: ballot.overvoted,
+    };
     const choice = topVote(state);
     const key = choiceKey(choice);
     if (!candidateBallots.has(key)) candidateBallots.set(key, []);
@@ -106,14 +112,18 @@ export function tabulate(
     }
 
     // Sort candidates descending by votes
-    const sortedVotes = Array.from(voteCounts.entries()).sort((a, b) => b[1] - a[1]);
+    const sortedVotes = Array.from(voteCounts.entries()).sort(
+      (a, b) => b[1] - a[1],
+    );
     const continuing = sortedVotes.reduce((sum, [, v]) => sum + v, 0);
 
     // Build allocations (candidates sorted desc by votes, then exhausted)
-    const allocations: ITabulatorAllocation[] = sortedVotes.map(([cid, votes]) => ({
-      allocatee: cid as Allocatee,
-      votes,
-    }));
+    const allocations: ITabulatorAllocation[] = sortedVotes.map(
+      ([cid, votes]) => ({
+        allocatee: cid as Allocatee,
+        votes,
+      }),
+    );
     allocations.push({ allocatee: "X", votes: exhausted });
 
     // Count undervotes and overvotes for the round
@@ -133,14 +143,11 @@ export function tabulate(
     if (roundNumber >= maxRounds) break;
 
     // Determine which candidates to eliminate
-    const isEager = options.eager ?? false;
+    // Walk from top, subtracting votes. When a candidate's votes exceed
+    // the remaining sum below them (and we've passed at least the first),
+    // everyone below is eliminated.
     let candidatesToEliminate: Set<CandidateId>;
-
-    if (isEager) {
-      // Eager mode: eliminate all candidates that cannot mathematically win.
-      // Walk from top, subtracting votes. When a candidate's votes exceed
-      // the remaining sum below them (and we've passed at least the first),
-      // everyone below is eliminated.
+    {
       let remainingVotes = continuing;
       let cutoff = sortedVotes.length; // default: no elimination
 
@@ -153,7 +160,7 @@ export function tabulate(
       }
 
       const toEliminate = new Set<CandidateId>(
-        sortedVotes.slice(cutoff).map(([cid]) => cid)
+        sortedVotes.slice(cutoff).map(([cid]) => cid),
       );
 
       // If no candidates would be eliminated (e.g. all tied), eliminate the last one
@@ -162,12 +169,6 @@ export function tabulate(
       }
 
       candidatesToEliminate = toEliminate;
-    } else {
-      // Non-eager mode: eliminate only the single candidate with the fewest votes.
-      candidatesToEliminate = new Set<CandidateId>();
-      if (sortedVotes.length > 0) {
-        candidatesToEliminate.add(sortedVotes[sortedVotes.length - 1][0]);
-      }
     }
 
     // Mark candidates as eliminated
@@ -191,7 +192,10 @@ export function tabulate(
         while (true) {
           ballot = popTopVote(ballot);
           newChoice = topVote(ballot);
-          if (newChoice.type === "vote" && eliminated.has(newChoice.candidate)) {
+          if (
+            newChoice.type === "vote" &&
+            eliminated.has(newChoice.candidate)
+          ) {
             continue;
           }
           break;
@@ -215,9 +219,9 @@ export function tabulate(
     // Sort transfers: candidates with more votes first, exhausted last
     allTransfers.sort((a, b) => {
       const aVotes =
-        a.to === "X" ? 0 : candidateBallots.get(`v${a.to}`)?.length ?? 0;
+        a.to === "X" ? 0 : (candidateBallots.get(`v${a.to}`)?.length ?? 0);
       const bVotes =
-        b.to === "X" ? 0 : candidateBallots.get(`v${b.to}`)?.length ?? 0;
+        b.to === "X" ? 0 : (candidateBallots.get(`v${b.to}`)?.length ?? 0);
       return bVotes - aVotes; // descending
     });
 

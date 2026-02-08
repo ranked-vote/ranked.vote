@@ -4,8 +4,8 @@
  * Ported from report_pipeline/src/formats/nist_sp_1500/mod.rs.
  *
  * Reads JSON CvrExport files with CandidateManifest.json.
- * Supports directory format (extracted ZIP) with multiple CvrExport*.json files.
- * Also supports reading from ZIP archives directly.
+ * Supports directory format with multiple CvrExport*.json files.
+ * Files are stored extracted (flat), not as ZIPs.
  *
  * Session ballots may have "Original" or "Modified" records.
  * Uses "Modified" if present, otherwise "Original".
@@ -214,25 +214,22 @@ function resolveCvrPath(basePath: string, cvrName: string): string {
   // Handle "." as current directory
   if (cvrName === ".") return basePath;
 
-  let cvrPath = join(basePath, cvrName);
+  // Strip .zip extension — we store extracted files, not zips
+  const cleanName = cvrName.replace(/\.zip$/, "");
 
-  // If ends with .zip but doesn't exist, try without .zip
-  if (cvrPath.endsWith(".zip") && !existsSync(cvrPath)) {
-    const dirPath = cvrPath.replace(/\.zip$/, "");
-    if (existsSync(dirPath) && statSync(dirPath).isDirectory()) {
-      return dirPath;
-    }
+  // Try the named subdirectory first
+  const subDir = join(basePath, cleanName);
+  if (existsSync(subDir) && statSync(subDir).isDirectory()) {
+    return subDir;
   }
 
-  // If path doesn't exist, check if base path has the files directly
-  if (!existsSync(cvrPath)) {
-    const testFile = join(basePath, "CandidateManifest.json");
-    if (existsSync(testFile)) {
-      return basePath;
-    }
+  // Fall back to base path if files are stored flat there
+  const testFile = join(basePath, "CandidateManifest.json");
+  if (existsSync(testFile)) {
+    return basePath;
   }
 
-  return cvrPath;
+  return subDir;
 }
 
 function readFromDirectory(
