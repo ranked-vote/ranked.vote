@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          lfs: false  # Skip LFS files - archives aren't needed for build
+          lfs: false # Skip LFS files - archives aren't needed for build
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -38,6 +38,8 @@ jobs:
           # Run tests (includes election winner validation and card image validation)
           echo "Running tests..."
           bun test
+          # Copy database to static directory for Datasette Lite access
+          cp report_pipeline/reports.sqlite3 static/reports.sqlite3
           # Build the site
           bun run build
 

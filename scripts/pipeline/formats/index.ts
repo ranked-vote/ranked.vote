@@ -35,12 +35,12 @@ export function getReaderForFormat(format: string): BallotReader {
   if (!reader) {
     if (format === "us_ny_nyc") {
       throw new Error(
-        "NYC format must use batch reader (nycBatchReader), not single-contest reader"
+        "NYC format must use batch reader (nycBatchReader), not single-contest reader",
       );
     }
     throw new Error(
       `Format "${format}" is not implemented in JS. ` +
-        `Available: ${Object.keys(readers).join(", ")}`
+        `Available: ${Object.keys(readers).join(", ")}`,
     );
   }
   return reader;
@@ -49,8 +49,8 @@ export function getReaderForFormat(format: string): BallotReader {
 export function readElection(
   format: string,
   basePath: string,
-  params: Record<string, string>
-): Election {
+  params: Record<string, string>,
+): Election | Promise<Election> {
   return getReaderForFormat(format)(basePath, params);
 }
 

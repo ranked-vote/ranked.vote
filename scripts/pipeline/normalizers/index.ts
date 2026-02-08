@@ -30,7 +30,7 @@ function getNormalizerForFormat(format: string): BallotNormalizer {
 }
 
 function getOptionalNormalizerForFormat(
-  format: string
+  format: string,
 ): OptionalBallotNormalizer | null {
   switch (format) {
     case "nyc":
@@ -42,7 +42,7 @@ function getOptionalNormalizerForFormat(
 
 export function normalizeElection(
   format: string,
-  election: Election
+  election: Election,
 ): NormalizedElection {
   const optionalNormalizer = getOptionalNormalizerForFormat(format);
 

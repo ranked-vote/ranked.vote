@@ -39,7 +39,7 @@ function parseBallotEntry(entry: string): Choice {
 
 export function dominionRcrReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const rcrFile = params.rcr;
   if (!rcrFile) throw new Error("dominion_rcr requires 'rcr' parameter");

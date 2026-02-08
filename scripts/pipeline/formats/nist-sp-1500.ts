@@ -12,12 +12,7 @@
  * Contests can be nested in Cards or directly in the ballot.
  */
 
-import {
-  readFileSync,
-  readdirSync,
-  existsSync,
-  statSync,
-} from "fs";
+import { readFileSync, readdirSync, existsSync, statSync } from "fs";
 import { join, dirname } from "path";
 import { CandidateMap } from "../candidate-map";
 import { normalizeName } from "../normalize-name";
@@ -115,7 +110,7 @@ function parseMarks(rawMarks: MarkJson[] | string): MarkJson[] {
 function getCandidates(
   manifest: CandidateManifestJson,
   contestId: number,
-  dropUnqualifiedWriteIn: boolean
+  dropUnqualifiedWriteIn: boolean,
 ): { candidateMap: CandidateMap<number>; droppedWriteInId: number | null } {
   const candidateMap = new CandidateMap<number>();
   let droppedWriteInId: number | null = null;
@@ -150,7 +145,7 @@ function processJsonCvrFile(
   contestId: number,
   candidates: CandidateMap<number>,
   droppedWriteInId: number | null,
-  ballots: Ballot[]
+  ballots: Ballot[],
 ): number {
   let count = 0;
   const cvr: CvrExportJson = JSON.parse(content);
@@ -182,7 +177,10 @@ function processJsonCvrFile(
         if (validMarks.length === 0) {
           choice = { type: "undervote" };
         } else if (validMarks.length === 1) {
-          if (droppedWriteInId !== null && validMarks[0].CandidateId === droppedWriteInId) {
+          if (
+            droppedWriteInId !== null &&
+            validMarks[0].CandidateId === droppedWriteInId
+          ) {
             choice = { type: "undervote" };
           } else {
             choice = candidates.idToChoice(validMarks[0].CandidateId);
@@ -235,7 +233,7 @@ function resolveCvrPath(basePath: string, cvrName: string): string {
 function readFromDirectory(
   dirPath: string,
   contestId: number,
-  dropUnqualifiedWriteIn: boolean
+  dropUnqualifiedWriteIn: boolean,
 ): Election {
   const manifestPath = join(dirPath, "CandidateManifest.json");
   if (!existsSync(manifestPath)) {
@@ -244,12 +242,12 @@ function readFromDirectory(
   }
 
   const manifest: CandidateManifestJson = JSON.parse(
-    readFileSync(manifestPath, "utf-8")
+    readFileSync(manifestPath, "utf-8"),
   );
   const { candidateMap, droppedWriteInId } = getCandidates(
     manifest,
     contestId,
-    dropUnqualifiedWriteIn
+    dropUnqualifiedWriteIn,
   );
 
   // Find all CvrExport JSON files
@@ -257,7 +255,7 @@ function readFromDirectory(
     .filter(
       (f) =>
         (f.startsWith("CvrExport") && f.endsWith(".json")) ||
-        (f.startsWith("CVR_Export") && f.endsWith(".csv"))
+        (f.startsWith("CVR_Export") && f.endsWith(".csv")),
     )
     .sort();
 
@@ -277,7 +275,7 @@ function readFromDirectory(
       contestId,
       candidateMap,
       droppedWriteInId,
-      ballots
+      ballots,
     );
   }
 
@@ -286,10 +284,11 @@ function readFromDirectory(
 
 export function nistReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const contestId = parseInt(params.contest, 10);
-  if (isNaN(contestId)) throw new Error("nist_sp_1500 requires numeric 'contest' param");
+  if (isNaN(contestId))
+    throw new Error("nist_sp_1500 requires numeric 'contest' param");
   const cvr = params.cvr;
   if (!cvr) throw new Error("nist_sp_1500 requires 'cvr' param");
   const dropUnqualifiedWriteIn = params.dropUnqualifiedWriteIn === "true";
@@ -300,7 +299,9 @@ export function nistReader(
     return readFromDirectory(cvrPath, contestId, dropUnqualifiedWriteIn);
   }
 
-  console.warn(`CVR path ${cvrPath} is not a directory, returning empty election`);
+  console.warn(
+    `CVR path ${cvrPath} is not a directory, returning empty election`,
+  );
   return { candidates: [], ballots: [] };
 }
 
@@ -313,7 +314,7 @@ export function nistBatchReader(
     office: string;
     contestId: number;
     params: Record<string, string>;
-  }>
+  }>,
 ): Map<string, Election> {
   const results = new Map<string, Election>();
   if (contests.length === 0) return results;
@@ -335,7 +336,7 @@ export function nistBatchReader(
   }
 
   const manifest: CandidateManifestJson = JSON.parse(
-    readFileSync(manifestPath, "utf-8")
+    readFileSync(manifestPath, "utf-8"),
   );
 
   // Set up per-contest data
@@ -354,7 +355,7 @@ export function nistBatchReader(
     const { candidateMap, droppedWriteInId } = getCandidates(
       manifest,
       contestId,
-      dropUnqualifiedWriteIn
+      dropUnqualifiedWriteIn,
     );
     contestData.set(contestId, {
       office,
@@ -398,7 +399,10 @@ export function nistBatchReader(
           if (validMarks.length === 0) {
             choice = { type: "undervote" };
           } else if (validMarks.length === 1) {
-            if (data.droppedWriteInId !== null && validMarks[0].CandidateId === data.droppedWriteInId) {
+            if (
+              data.droppedWriteInId !== null &&
+              validMarks[0].CandidateId === data.droppedWriteInId
+            ) {
               choice = { type: "undervote" };
             } else {
               choice = data.candidateMap.idToChoice(validMarks[0].CandidateId);

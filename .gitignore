@@ -13,3 +13,6 @@ yarn-error.log
 # SQLite WAL/SHM files (temporary, not needed in repo)
 *.sqlite3-wal
 *.sqlite3-shm
+
+# Database copy for Datasette Lite (generated during CI build)
+static/reports.sqlite3

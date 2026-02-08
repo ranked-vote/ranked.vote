@@ -125,6 +125,18 @@
           "loaderParams": {
             "file": "oakland/council-d4.toi"
           }
+        },
+        {
+          "office": "berkeley-council-d7",
+          "loaderParams": {
+            "file": "berkeley/council-d7.toi"
+          }
+        },
+        {
+          "office": "san-leandro-mayor",
+          "loaderParams": {
+            "file": "san-leandro/mayor.toi"
+          }
         }
       ],
       "files": {}
@@ -164,6 +176,18 @@
           "office": "oakland-school-director-d3",
           "loaderParams": {
             "file": "oakland/school-director-d3.toi"
+          }
+        },
+        {
+          "office": "san-leandro-council-d2",
+          "loaderParams": {
+            "file": "san-leandro/council-d2.toi"
+          }
+        },
+        {
+          "office": "san-leandro-council-d4",
+          "loaderParams": {
+            "file": "san-leandro/council-d4.toi"
           }
         }
       ],

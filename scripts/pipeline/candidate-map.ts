@@ -20,14 +20,11 @@ export class CandidateMap<ExternalId extends string | number> {
    * Map an external candidate ID to a Choice, creating the candidate if needed.
    * If a candidate with the same name already exists, reuses that index.
    */
-  addIdToChoice(
-    externalId: ExternalId,
-    candidate: Candidate
-  ): Choice {
+  addIdToChoice(externalId: ExternalId, candidate: Candidate): Choice {
     if (!this.idToIndex.has(externalId)) {
       // Check if a candidate with the same name already exists
       const existingIndex = this.candidates.findIndex(
-        (c) => c.name === candidate.name
+        (c) => c.name === candidate.name,
       );
       if (existingIndex >= 0) {
         this.idToIndex.set(externalId, existingIndex);
@@ -42,7 +39,7 @@ export class CandidateMap<ExternalId extends string | number> {
     const index = this.idToIndex.get(externalId);
     if (index === undefined) {
       throw new Error(
-        `Candidate on ballot but not in master lookup: ${externalId}`
+        `Candidate on ballot but not in master lookup: ${externalId}`,
       );
     }
     return { type: "vote", candidate: index };

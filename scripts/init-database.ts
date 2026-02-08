@@ -95,4 +95,6 @@ db.exec(`
 db.close();
 
 console.log(`Database initialized at ${dbPath}`);
-console.log("Tables created: reports, candidates, rounds, allocations, transfers");
+console.log(
+  "Tables created: reports, candidates, rounds, allocations, transfers",
+);

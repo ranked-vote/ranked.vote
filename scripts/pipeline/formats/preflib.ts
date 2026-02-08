@@ -17,7 +17,7 @@ import type { Ballot, Candidate, Choice, Election } from "../types";
 
 function parsePreferenceList(
   prefStr: string,
-  candidateMap: CandidateMap<number>
+  candidateMap: CandidateMap<number>,
 ): Choice[] {
   const choices: Choice[] = [];
 
@@ -61,7 +61,7 @@ function parsePreferenceList(
 
 export function preflibReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const file = params.file;
   if (!file) throw new Error("preflib requires 'file' parameter");
@@ -89,7 +89,9 @@ export function preflibReader(
           name = name.slice(1, -1);
         }
         const candidateType =
-          name.toLowerCase() === "write-in" ? "WriteIn" as const : "Regular" as const;
+          name.toLowerCase() === "write-in"
+            ? ("WriteIn" as const)
+            : ("Regular" as const);
         const candidate: Candidate = {
           name: normalizeName(name, false),
           candidate_type: candidateType,

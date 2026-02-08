@@ -11,14 +11,14 @@
  */
 
 import { join } from "path";
-import XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { CandidateMap } from "../candidate-map";
 import { normalizeName } from "../normalize-name";
 import type { Ballot, Choice, Election } from "../types";
 
 function parseChoice(
   candidate: string,
-  candidateMap: CandidateMap<string>
+  candidateMap: CandidateMap<string>,
 ): Choice {
   if (candidate === "overvote") return { type: "overvote" };
   if (candidate === "undervote") return { type: "undervote" };
@@ -34,10 +34,10 @@ function parseChoice(
   });
 }
 
-export function maineReader(
+export async function maineReader(
   basePath: string,
-  params: Record<string, string>
-): Election {
+  params: Record<string, string>,
+): Promise<Election> {
   const files = params.files;
   if (!files) throw new Error("us_me requires 'files' parameter");
 
@@ -47,23 +47,29 @@ export function maineReader(
 
   for (const file of fileList) {
     const filePath = join(basePath, file);
-    const workbook = XLSX.readFile(filePath);
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    const rows: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(filePath);
+    const sheet = workbook.worksheets[0];
+    if (!sheet) continue;
 
-    // Skip header row
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r];
-      if (!row || row.length === 0) continue;
+    let rowIndex = 0;
+    sheet.eachRow((row, rowNumber) => {
+      // Skip header row
+      if (rowNumber === 1) return;
+      rowIndex++;
 
+      const values = row.values as any[];
+      // ExcelJS row.values is 1-indexed
+      const rawId = values[1];
       const id =
-        row[0] !== undefined && row[0] !== null ? String(Math.floor(Number(row[0]))) : String(r);
+        rawId !== undefined && rawId !== null
+          ? String(Math.floor(Number(rawId)))
+          : String(rowIndex);
 
       const choices: Choice[] = [];
-      // Process columns 3-9 (rank columns)
-      for (let i = 3; i < 10; i++) {
-        const cell = i < row.length ? row[i] : undefined;
+      // Process columns 4-10 (1-indexed, originally columns 3-9 in 0-indexed)
+      for (let i = 4; i <= 10; i++) {
+        const cell = values[i];
         const cand =
           cell !== undefined && cell !== null && String(cell).trim()
             ? String(cell).trim()
@@ -72,7 +78,7 @@ export function maineReader(
       }
 
       ballots.push({ id, choices });
-    }
+    });
   }
 
   return { candidates: candidateMap.intoCandidates(), ballots };

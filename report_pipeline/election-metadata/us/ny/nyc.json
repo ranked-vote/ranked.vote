@@ -104,6 +104,48 @@
     },
     "council-member-47th-council-district": {
       "name": "DEM Council Member - 47th Council District"
+    },
+    "council-member-9th-council-district": {
+      "name": "DEM Council Member - 9th Council District"
+    },
+    "council-member-20th-council-district": {
+      "name": "REP Council Member - 20th Council District"
+    },
+    "council-member-22nd-council-district": {
+      "name": "DEM Council Member - 22nd Council District"
+    },
+    "council-member-23rd-council-district": {
+      "name": "DEM Council Member - 23rd Council District"
+    },
+    "council-member-26th-council-district": {
+      "name": "DEM Council Member - 26th Council District"
+    },
+    "council-member-29th-council-district": {
+      "name": "DEM Council Member - 29th Council District"
+    },
+    "council-member-34th-council-district": {
+      "name": "DEM Council Member - 34th Council District"
+    },
+    "council-member-42nd-council-district": {
+      "name": "DEM Council Member - 42nd Council District"
+    },
+    "council-member-43rd-council-district": {
+      "name": "DEM Council Member - 43rd Council District"
+    },
+    "council-member-44th-council-district": {
+      "name": "REP Council Member - 44th Council District"
+    },
+    "council-member-48th-council-district": {
+      "name": "REP Council Member - 48th Council District"
+    },
+    "council-member-13th-council-district-conservative": {
+      "name": "CON Council Member - 13th Council District"
+    },
+    "council-member-13th-council-district-republican": {
+      "name": "REP Council Member - 13th Council District"
+    },
+    "council-member-43rd-council-district-republican": {
+      "name": "REP Council Member - 43rd Council District"
     }
   },
   "elections": {
@@ -444,6 +486,236 @@
         "2021P_CandidacyID_To_Name.xlsx": "210db9a877b0710d77f5770ea27529915aba90df"
       },
       "website": "https://vote.nyc/page/election-results-summary#p0"
+    },
+    "2023/06": {
+      "name": "Primary Election",
+      "date": "2023-06-27",
+      "dataFormat": "us_ny_nyc",
+      "tabulationOptions": {
+        "eager": true,
+        "nycStyle": true
+      },
+      "normalization": "nyc",
+      "contests": [
+        {
+          "office": "council-member-1st-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "1st Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-2nd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "2nd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-9th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "9th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-10th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "10th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-12th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "12th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-13th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "13th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-13th-council-district-conservative",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "13th Council District",
+            "officeName": "CON Council Member"
+          }
+        },
+        {
+          "office": "council-member-13th-council-district-republican",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "13th Council District",
+            "officeName": "REP Council Member"
+          }
+        },
+        {
+          "office": "council-member-14th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "14th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-19th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "19th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-20th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "20th Council District",
+            "officeName": "REP Council Member"
+          }
+        },
+        {
+          "office": "council-member-22nd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "22nd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-23rd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "23rd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-25th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "25th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-26th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "26th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-29th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "29th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-34th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "34th Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-41st-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "41st Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-42nd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "42nd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-43rd-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "43rd Council District",
+            "officeName": "DEM Council Member"
+          }
+        },
+        {
+          "office": "council-member-43rd-council-district-republican",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "43rd Council District",
+            "officeName": "REP Council Member"
+          }
+        },
+        {
+          "office": "council-member-44th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "44th Council District",
+            "officeName": "REP Council Member"
+          }
+        },
+        {
+          "office": "council-member-47th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "47th Council District",
+            "officeName": "REP Council Member"
+          }
+        },
+        {
+          "office": "council-member-48th-council-district",
+          "loaderParams": {
+            "candidatesFile": "2023P_CandidacyID_To_Name.xlsx",
+            "cvrPattern": "2023P\\d?V.+\\.xlsx",
+            "jurisdictionName": "48th Council District",
+            "officeName": "REP Council Member"
+          }
+        }
+      ],
+      "files": {},
+      "website": "https://www.vote.nyc/page/election-results-summary-2023"
     },
     "2025/07": {
       "name": "Primary Election",

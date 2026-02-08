@@ -28,7 +28,7 @@ interface RawBallots {
 
 function parseChoice(
   candidateName: string,
-  candidateMap: CandidateMap<string>
+  candidateMap: CandidateMap<string>,
 ): Choice {
   if (candidateName === "over") return { type: "overvote" };
   if (candidateName === "under") return { type: "undervote" };
@@ -40,7 +40,7 @@ function parseChoice(
 
 export function jsonReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const file = params.file;
   if (!file) throw new Error("simple_json requires 'file' parameter");

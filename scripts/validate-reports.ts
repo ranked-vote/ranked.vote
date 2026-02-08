@@ -79,7 +79,7 @@ function floatClose(a: number, b: number, tolerance = 0.001): boolean {
 function validate(
   rustReport: RustReport,
   db: Database,
-  key: string
+  key: string,
 ): ValidationResult {
   const failures: string[] = [];
   const info = rustReport.info;
@@ -91,66 +91,78 @@ function validate(
     .get(path, info.office) as any;
 
   if (!jsRow) {
-    return { key, passed: false, failures: ["Report not found in JS database"] };
+    return {
+      key,
+      passed: false,
+      failures: ["Report not found in JS database"],
+    };
   }
 
   // Ballot count
   if (jsRow.ballotCount !== rustReport.ballotCount) {
     failures.push(
-      `ballotCount: JS=${jsRow.ballotCount}, Rust=${rustReport.ballotCount}`
+      `ballotCount: JS=${jsRow.ballotCount}, Rust=${rustReport.ballotCount}`,
     );
   }
 
   // Winner
   if (jsRow.winner_candidate_index !== rustReport.winner) {
     failures.push(
-      `winner: JS=${jsRow.winner_candidate_index}, Rust=${rustReport.winner}`
+      `winner: JS=${jsRow.winner_candidate_index}, Rust=${rustReport.winner}`,
     );
   }
 
   // Condorcet
   const rustCondorcet = rustReport.condorcet ?? null;
   if (jsRow.condorcet !== rustCondorcet) {
-    failures.push(
-      `condorcet: JS=${jsRow.condorcet}, Rust=${rustCondorcet}`
-    );
+    failures.push(`condorcet: JS=${jsRow.condorcet}, Rust=${rustCondorcet}`);
   }
 
   // Number of candidates
   if (jsRow.numCandidates !== rustReport.numCandidates) {
     failures.push(
-      `numCandidates: JS=${jsRow.numCandidates}, Rust=${rustReport.numCandidates}`
+      `numCandidates: JS=${jsRow.numCandidates}, Rust=${rustReport.numCandidates}`,
     );
   }
 
   // Round count
   const jsRoundCount = (
-    db.prepare("SELECT COUNT(*) as cnt FROM rounds WHERE report_id = ?").get(jsRow.id) as any
+    db
+      .prepare("SELECT COUNT(*) as cnt FROM rounds WHERE report_id = ?")
+      .get(jsRow.id) as any
   ).cnt;
   if (jsRoundCount !== rustReport.rounds.length) {
     failures.push(
-      `rounds: JS=${jsRoundCount}, Rust=${rustReport.rounds.length}`
+      `rounds: JS=${jsRoundCount}, Rust=${rustReport.rounds.length}`,
     );
   }
 
   // Candidate count
   const jsCandCount = (
-    db.prepare("SELECT COUNT(*) as cnt FROM candidates WHERE report_id = ?").get(jsRow.id) as any
+    db
+      .prepare("SELECT COUNT(*) as cnt FROM candidates WHERE report_id = ?")
+      .get(jsRow.id) as any
   ).cnt;
   if (jsCandCount !== rustReport.candidates.length) {
     failures.push(
-      `candidates: JS=${jsCandCount}, Rust=${rustReport.candidates.length}`
+      `candidates: JS=${jsCandCount}, Rust=${rustReport.candidates.length}`,
     );
   }
 
   // Candidate names
   const jsCandidates = db
-    .prepare("SELECT * FROM candidates WHERE report_id = ? ORDER BY candidate_index")
+    .prepare(
+      "SELECT * FROM candidates WHERE report_id = ? ORDER BY candidate_index",
+    )
     .all(jsRow.id) as any[];
-  for (let i = 0; i < Math.min(jsCandidates.length, rustReport.candidates.length); i++) {
+  for (
+    let i = 0;
+    i < Math.min(jsCandidates.length, rustReport.candidates.length);
+    i++
+  ) {
     if (jsCandidates[i].name !== rustReport.candidates[i].name) {
       failures.push(
-        `candidate[${i}] name: JS="${jsCandidates[i].name}", Rust="${rustReport.candidates[i].name}"`
+        `candidate[${i}] name: JS="${jsCandidates[i].name}", Rust="${rustReport.candidates[i].name}"`,
       );
     }
   }
@@ -158,20 +170,22 @@ function validate(
   // Total votes per candidate
   for (const rustVote of rustReport.totalVotes) {
     const jsCandidate = jsCandidates.find(
-      (c: any) => c.candidate_index === rustVote.candidate
+      (c: any) => c.candidate_index === rustVote.candidate,
     );
     if (!jsCandidate) {
-      failures.push(`totalVotes: candidate ${rustVote.candidate} not found in JS`);
+      failures.push(
+        `totalVotes: candidate ${rustVote.candidate} not found in JS`,
+      );
       continue;
     }
     if (jsCandidate.firstRoundVotes !== rustVote.firstRoundVotes) {
       failures.push(
-        `totalVotes[${rustVote.candidate}] firstRound: JS=${jsCandidate.firstRoundVotes}, Rust=${rustVote.firstRoundVotes}`
+        `totalVotes[${rustVote.candidate}] firstRound: JS=${jsCandidate.firstRoundVotes}, Rust=${rustVote.firstRoundVotes}`,
       );
     }
     if (jsCandidate.transferVotes !== rustVote.transferVotes) {
       failures.push(
-        `totalVotes[${rustVote.candidate}] transfer: JS=${jsCandidate.transferVotes}, Rust=${rustVote.transferVotes}`
+        `totalVotes[${rustVote.candidate}] transfer: JS=${jsCandidate.transferVotes}, Rust=${rustVote.transferVotes}`,
       );
     }
   }
@@ -188,7 +202,7 @@ function validate(
 
       if (jsRound.continuingBallots !== rustRound.continuingBallots) {
         failures.push(
-          `round[${r}] continuingBallots: JS=${jsRound.continuingBallots}, Rust=${rustRound.continuingBallots}`
+          `round[${r}] continuingBallots: JS=${jsRound.continuingBallots}, Rust=${rustRound.continuingBallots}`,
         );
       }
 
@@ -199,10 +213,10 @@ function validate(
 
       // Sort both by allocatee for comparison
       const jsSorted = jsAllocs.sort((a: any, b: any) =>
-        String(a.allocatee).localeCompare(String(b.allocatee))
+        String(a.allocatee).localeCompare(String(b.allocatee)),
       );
       const rustSorted = [...rustRound.allocations].sort((a, b) =>
-        String(a.allocatee).localeCompare(String(b.allocatee))
+        String(a.allocatee).localeCompare(String(b.allocatee)),
       );
 
       for (let a = 0; a < Math.max(jsSorted.length, rustSorted.length); a++) {
@@ -211,20 +225,20 @@ function validate(
 
         if (!jsAlloc || !rustAlloc) {
           failures.push(
-            `round[${r}] alloc count mismatch: JS=${jsSorted.length}, Rust=${rustSorted.length}`
+            `round[${r}] alloc count mismatch: JS=${jsSorted.length}, Rust=${rustSorted.length}`,
           );
           break;
         }
 
         if (String(jsAlloc.allocatee) !== String(rustAlloc.allocatee)) {
           failures.push(
-            `round[${r}] alloc[${a}] allocatee: JS=${jsAlloc.allocatee}, Rust=${rustAlloc.allocatee}`
+            `round[${r}] alloc[${a}] allocatee: JS=${jsAlloc.allocatee}, Rust=${rustAlloc.allocatee}`,
           );
         }
 
         if (jsAlloc.votes !== rustAlloc.votes) {
           failures.push(
-            `round[${r}] alloc ${jsAlloc.allocatee} votes: JS=${jsAlloc.votes}, Rust=${rustAlloc.votes}`
+            `round[${r}] alloc ${jsAlloc.allocatee} votes: JS=${jsAlloc.votes}, Rust=${rustAlloc.votes}`,
           );
         }
       }
@@ -237,7 +251,7 @@ function validate(
   jsSmithSet.sort((a, b) => a - b);
   if (JSON.stringify(jsSmithSet) !== JSON.stringify(rustSmithSet)) {
     failures.push(
-      `smithSet: JS=${JSON.stringify(jsSmithSet)}, Rust=${JSON.stringify(rustSmithSet)}`
+      `smithSet: JS=${JSON.stringify(jsSmithSet)}, Rust=${JSON.stringify(rustSmithSet)}`,
     );
   }
 
@@ -261,17 +275,17 @@ function validate(
 
         if (jsEntry.numerator !== rustEntry.numerator) {
           failures.push(
-            `pairwise[${i}][${j}] numerator: JS=${jsEntry.numerator}, Rust=${rustEntry.numerator}`
+            `pairwise[${i}][${j}] numerator: JS=${jsEntry.numerator}, Rust=${rustEntry.numerator}`,
           );
         }
         if (jsEntry.denominator !== rustEntry.denominator) {
           failures.push(
-            `pairwise[${i}][${j}] denominator: JS=${jsEntry.denominator}, Rust=${rustEntry.denominator}`
+            `pairwise[${i}][${j}] denominator: JS=${jsEntry.denominator}, Rust=${rustEntry.denominator}`,
           );
         }
         if (!floatClose(jsEntry.frac, rustEntry.frac)) {
           failures.push(
-            `pairwise[${i}][${j}] frac: JS=${jsEntry.frac}, Rust=${rustEntry.frac}`
+            `pairwise[${i}][${j}] frac: JS=${jsEntry.frac}, Rust=${rustEntry.frac}`,
           );
         }
       }
@@ -302,7 +316,9 @@ function main() {
   console.log(`Found ${reportFiles.length} Rust report.json files`);
 
   // Check how many reports are in the JS DB
-  const jsCount = (db.prepare("SELECT COUNT(*) as cnt FROM reports").get() as any).cnt;
+  const jsCount = (
+    db.prepare("SELECT COUNT(*) as cnt FROM reports").get() as any
+  ).cnt;
   console.log(`JS database contains ${jsCount} reports`);
 
   let passed = 0;
@@ -341,7 +357,9 @@ function main() {
             console.error(`  - ${f}`);
           }
           if (result.failures.length > 5) {
-            console.error(`  ... and ${result.failures.length - 5} more failures`);
+            console.error(
+              `  ... and ${result.failures.length - 5} more failures`,
+            );
           }
         }
       }
@@ -360,7 +378,9 @@ function main() {
   console.log(`Total Rust reports: ${reportFiles.length}`);
 
   if (failed > 0) {
-    console.error(`\n${failed} reports have differences between JS and Rust output.`);
+    console.error(
+      `\n${failed} reports have differences between JS and Rust output.`,
+    );
     process.exit(1);
   } else {
     console.log(`\nAll comparable reports match.`);

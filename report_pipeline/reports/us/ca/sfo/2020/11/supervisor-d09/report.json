@@ -71,14 +71,8 @@
     }
   ],
   "pairwisePreferences": {
-    "rows": [
-      0,
-      1
-    ],
-    "cols": [
-      0,
-      1
-    ],
+    "rows": [0, 1],
+    "cols": [0, 1],
     "entries": [
       [
         null,
@@ -99,15 +93,8 @@
     ]
   },
   "firstAlternate": {
-    "rows": [
-      0,
-      1
-    ],
-    "cols": [
-      0,
-      1,
-      "X"
-    ],
+    "rows": [0, 1],
+    "cols": [0, 1, "X"],
     "entries": [
       [
         null,
@@ -139,11 +126,7 @@
   },
   "firstFinal": {
     "rows": [],
-    "cols": [
-      0,
-      1,
-      "X"
-    ],
+    "cols": [0, 1, "X"],
     "entries": []
   },
   "rankingDistribution": {
@@ -167,7 +150,5 @@
       "1": 63
     }
   },
-  "smithSet": [
-    0
-  ]
+  "smithSet": [0]
 }

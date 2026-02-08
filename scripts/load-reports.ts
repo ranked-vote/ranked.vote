@@ -6,7 +6,13 @@
  */
 
 import { Database } from "bun:sqlite";
-import { readFileSync, readdirSync, statSync, existsSync, unlinkSync } from "fs";
+import {
+  readFileSync,
+  readdirSync,
+  statSync,
+  existsSync,
+  unlinkSync,
+} from "fs";
 import { join, resolve } from "path";
 
 const REPORTS_DIR = process.argv[2] || "report_pipeline/reports";
@@ -104,9 +110,9 @@ function isWinnerNotFirstRoundLeader(report: ReportJson): boolean {
   if (!firstPlace) return false;
 
   // Find winner's votes in first round
-  const winnerVotes = firstRound.allocations.find(
-    (a) => a.allocatee === report.winner
-  )?.votes ?? 0;
+  const winnerVotes =
+    firstRound.allocations.find((a) => a.allocatee === report.winner)?.votes ??
+    0;
 
   // Winner did not lead if their votes are strictly less than the leader's
   return winnerVotes < firstPlace.votes;
@@ -133,7 +139,8 @@ function isInteresting(report: ReportJson): boolean {
     const exhausted =
       lastRound.allocations.find((a) => a.allocatee === "X")?.votes ?? 0;
     const winnerVotes =
-      lastRound.allocations.find((a) => a.allocatee === report.winner)?.votes ?? 0;
+      lastRound.allocations.find((a) => a.allocatee === report.winner)?.votes ??
+      0;
     exhaustedExceedsWinner = exhausted > winnerVotes;
   }
 
@@ -254,7 +261,9 @@ function main() {
           $winner: report.winner ?? null,
           $condorcet: report.condorcet ?? null,
           $interesting: isInteresting(report) ? 1 : 0,
-          $winnerNotFirstRoundLeader: isWinnerNotFirstRoundLeader(report) ? 1 : 0,
+          $winnerNotFirstRoundLeader: isWinnerNotFirstRoundLeader(report)
+            ? 1
+            : 0,
           $hasWriteInByName: isWriteInByName(report.candidates) ? 1 : 0,
           $smithSet: JSON.stringify(report.smithSet),
           $pairwisePreferences: JSON.stringify(report.pairwisePreferences),
@@ -272,7 +281,8 @@ function main() {
           const c = report.candidates[i];
           const tv = voteMap.get(i);
           const isWriteIn =
-            c.candidate_type === "WriteIn" || c.candidate_type === "QualifiedWriteIn";
+            c.candidate_type === "WriteIn" ||
+            c.candidate_type === "QualifiedWriteIn";
 
           insertCandidate.run({
             $reportId: reportId,
@@ -360,10 +370,15 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
       // Query report back from DB
       const row = db
         .prepare("SELECT * FROM reports WHERE path = ? AND office = ?")
-        .get(`${info.jurisdictionPath}/${info.electionPath}`, info.office) as any;
+        .get(
+          `${info.jurisdictionPath}/${info.electionPath}`,
+          info.office,
+        ) as any;
 
       if (!row) {
-        console.error(`  FAIL: Report not found in DB: ${info.jurisdictionPath}/${info.electionPath}/${info.office}`);
+        console.error(
+          `  FAIL: Report not found in DB: ${info.jurisdictionPath}/${info.electionPath}/${info.office}`,
+        );
         failed++;
         continue;
       }
@@ -382,7 +397,7 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
       for (const [field, got, expected] of checks) {
         if (got !== expected) {
           console.error(
-            `  FAIL: ${info.office} - ${field}: got ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`
+            `  FAIL: ${info.office} - ${field}: got ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`,
           );
           reportOk = false;
         }
@@ -397,7 +412,7 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
 
       if (candidateCount !== original.candidates.length) {
         console.error(
-          `  FAIL: ${info.office} - candidate count: got ${candidateCount}, expected ${original.candidates.length}`
+          `  FAIL: ${info.office} - candidate count: got ${candidateCount}, expected ${original.candidates.length}`,
         );
         reportOk = false;
       }
@@ -411,7 +426,7 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
 
       if (roundCount !== original.rounds.length) {
         console.error(
-          `  FAIL: ${info.office} - round count: got ${roundCount}, expected ${original.rounds.length}`
+          `  FAIL: ${info.office} - round count: got ${roundCount}, expected ${original.rounds.length}`,
         );
         reportOk = false;
       }
@@ -422,7 +437,9 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
         JSON.stringify(dbPairwise.rows) !==
         JSON.stringify(original.pairwisePreferences.rows)
       ) {
-        console.error(`  FAIL: ${info.office} - pairwisePreferences rows mismatch`);
+        console.error(
+          `  FAIL: ${info.office} - pairwisePreferences rows mismatch`,
+        );
         reportOk = false;
       }
 
@@ -439,7 +456,9 @@ function validate(dbPath: string, reportsDir: string, reportFiles: string[]) {
 
   db.close();
 
-  console.log(`\nValidation: ${passed} passed, ${failed} failed out of ${reportFiles.length}`);
+  console.log(
+    `\nValidation: ${passed} passed, ${failed} failed out of ${reportFiles.length}`,
+  );
   if (failed > 0) {
     process.exit(1);
   }

@@ -11,20 +11,43 @@
  */
 
 import { Database } from "bun:sqlite";
-import { readdirSync, readFileSync, existsSync, unlinkSync, statSync } from "fs";
+import {
+  readdirSync,
+  readFileSync,
+  existsSync,
+  unlinkSync,
+  statSync,
+} from "fs";
 import { join, resolve } from "path";
 
-import { readElection, isFormatSupported, nistBatchReader, nycBatchReader } from "./pipeline/formats/index";
+import {
+  readElection,
+  isFormatSupported,
+  nistBatchReader,
+  nycBatchReader,
+} from "./pipeline/formats/index";
 import { normalizeElection } from "./pipeline/normalizers/index";
-import { tabulate, type NormalizedBallot, type TabulationOptions } from "./tabulate-rcv";
+import {
+  tabulate,
+  type NormalizedBallot,
+  type TabulationOptions,
+} from "./tabulate-rcv";
 import { analyzeElection } from "./compute-rcv-analysis";
-import type { Jurisdiction, ElectionMetadata, Contest, Election, NormalizedElection } from "./pipeline/types";
+import type {
+  Jurisdiction,
+  ElectionMetadata,
+  Contest,
+  Election,
+  NormalizedElection,
+} from "./pipeline/types";
 import type { CandidateId } from "../src/report_types";
 
 const METADATA_DIR = process.argv[2] || "report_pipeline/election-metadata";
 const RAW_DATA_DIR = process.argv[3] || "report_pipeline/raw-data";
 const DB_PATH = process.argv[4] || "report_pipeline/reports.sqlite3";
-const SKIP_FORMATS = new Set((process.env.SKIP_FORMATS ?? "").split(",").filter(Boolean));
+const SKIP_FORMATS = new Set(
+  (process.env.SKIP_FORMATS ?? "").split(",").filter(Boolean),
+);
 
 // ---------- Metadata loading ----------
 
@@ -54,7 +77,12 @@ function loadJurisdictions(metaDir: string): Jurisdiction[] {
 
 function isWriteInByName(name: string): boolean {
   const n = name.toLowerCase();
-  return n === "write-in" || n === "write in" || n === "undeclared write-ins" || n === "uwi";
+  return (
+    n === "write-in" ||
+    n === "write in" ||
+    n === "undeclared write-ins" ||
+    n === "uwi"
+  );
 }
 
 interface ReportData {
@@ -87,7 +115,9 @@ function winnerNotFirstRoundLeader(r: ReportData): boolean {
   const firstRound = r.rounds[0];
 
   // Find first candidate allocation (the leader)
-  const firstCandAlloc = firstRound.allocations.find((a) => a.allocatee !== "X");
+  const firstCandAlloc = firstRound.allocations.find(
+    (a) => a.allocatee !== "X",
+  );
   if (!firstCandAlloc) return false;
   const maxVotes = firstCandAlloc.votes;
 
@@ -110,11 +140,13 @@ function processContest(
   insertCandidate: any,
   insertRound: any,
   insertAllocation: any,
-  insertTransfer: any
+  insertTransfer: any,
 ): boolean {
   const office = jurisdiction.offices[contest.office];
   if (!office) {
-    console.warn(`Office ${contest.office} not found in jurisdiction ${jurisdiction.path}`);
+    console.warn(
+      `Office ${contest.office} not found in jurisdiction ${jurisdiction.path}`,
+    );
     return false;
   }
 
@@ -196,7 +228,8 @@ function processContest(
   for (let i = 0; i < candidates.length; i++) {
     const c = candidates[i];
     const tv = voteMap.get(i);
-    const isWriteIn = c.candidate_type === "WriteIn" || c.candidate_type === "QualifiedWriteIn";
+    const isWriteIn =
+      c.candidate_type === "WriteIn" || c.candidate_type === "QualifiedWriteIn";
 
     insertCandidate.run({
       $reportId: reportId,
@@ -246,7 +279,7 @@ function processContest(
 
 // ---------- Main ----------
 
-function main() {
+async function main() {
   const metaDir = resolve(METADATA_DIR);
   const rawDir = resolve(RAW_DATA_DIR);
   const dbPath = resolve(DB_PATH);
@@ -335,6 +368,26 @@ function main() {
   const missingRawData: string[] = [];
   const skippedFormats: Array<{ election: string; format: string }> = [];
 
+  // Deferred elections (async readers: NYC, ME, MPLS)
+  const nycDeferred: Array<{
+    jurisdiction: Jurisdiction;
+    election: ElectionMetadata;
+    electionPath: string;
+    label: string;
+    rawPath: string;
+    electionStart: number;
+  }> = [];
+
+  // Deferred per-contest async results (ME, MPLS readers are async due to ExcelJS)
+  const asyncDeferred: Array<{
+    electionPromise: Promise<Election>;
+    jurisdiction: Jurisdiction;
+    election: ElectionMetadata;
+    electionPath: string;
+    contest: Contest;
+    label: string;
+  }> = [];
+
   // Count total contests for progress
   let totalContests = 0;
   for (const j of jurisdictions) {
@@ -346,7 +399,9 @@ function main() {
 
   const processAll = db.transaction(() => {
     for (const jurisdiction of jurisdictions) {
-      for (const [electionPath, election] of Object.entries(jurisdiction.elections)) {
+      for (const [electionPath, election] of Object.entries(
+        jurisdiction.elections,
+      )) {
         const dataFormat = election.dataFormat;
         const label = `${jurisdiction.path}/${electionPath}`;
 
@@ -368,14 +423,16 @@ function main() {
         }
 
         const electionStart = Date.now();
-        console.log(`  ${label} [${dataFormat}, ${election.contests.length} contests]`);
+        console.log(
+          `  ${label} [${dataFormat}, ${election.contests.length} contests]`,
+        );
 
         // Batch processing for NIST and NYC formats
         if (dataFormat === "nist_sp_1500" && election.contests.length > 1) {
           // Check if all contests share the same CVR
           const firstCvr = election.contests[0]?.loaderParams?.cvr;
           const sameCvr = election.contests.every(
-            (c) => c.loaderParams?.cvr === firstCvr
+            (c) => c.loaderParams?.cvr === firstCvr,
           );
 
           if (sameCvr && firstCvr) {
@@ -397,7 +454,10 @@ function main() {
                   continue;
                 }
 
-                const normalized = normalizeElection(election.normalization, rawElection);
+                const normalized = normalizeElection(
+                  election.normalization,
+                  rawElection,
+                );
                 const ok = processContest(
                   normalized,
                   jurisdiction,
@@ -408,19 +468,25 @@ function main() {
                   insertCandidate,
                   insertRound,
                   insertAllocation,
-                  insertTransfer
+                  insertTransfer,
                 );
                 if (ok) processed++;
                 else skipped++;
               }
               const ms = Date.now() - electionStart;
-              console.log(`    -> ${election.contests.length} contests (${ms}ms)`);
+              console.log(
+                `    -> ${election.contests.length} contests (${ms}ms)`,
+              );
               continue; // Skip per-contest processing
             } catch (e: any) {
               console.error(`    NIST batch error: ${e.message}`);
               errors += election.contests.length;
               for (const c of election.contests) {
-                problems.push({ election: label, contest: c.office, reason: e.message });
+                problems.push({
+                  election: label,
+                  contest: c.office,
+                  reason: e.message,
+                });
               }
               continue;
             }
@@ -428,61 +494,50 @@ function main() {
         }
 
         if (dataFormat === "us_ny_nyc") {
-          try {
-            const batchContests = election.contests
-              .filter((c) => c.loaderParams)
-              .map((c) => ({ office: c.office, params: c.loaderParams! }));
-
-            const electionResults = nycBatchReader(rawPath, batchContests);
-
-            for (const contest of election.contests) {
-              const rawElection = electionResults.get(contest.office);
-              if (!rawElection || rawElection.ballots.length === 0) {
-                skipped++;
-                continue;
-              }
-
-              const normalized = normalizeElection(election.normalization, rawElection);
-              const ok = processContest(
-                normalized,
-                jurisdiction,
-                election,
-                electionPath,
-                contest,
-                insertReport,
-                insertCandidate,
-                insertRound,
-                insertAllocation,
-                insertTransfer
-              );
-              if (ok) processed++;
-              else skipped++;
-            }
-            const ms = Date.now() - electionStart;
-            console.log(`    -> ${election.contests.length} contests (${ms}ms)`);
-            continue;
-          } catch (e: any) {
-            console.error(`    NYC batch error: ${e.message}`);
-            errors += election.contests.length;
-            for (const c of election.contests) {
-              problems.push({ election: label, contest: c.office, reason: e.message });
-            }
-            continue;
-          }
+          // NYC reader is async (streams XLSX), so we collect results
+          // here and mark them for deferred insertion after the loop.
+          nycDeferred.push({
+            jurisdiction,
+            election,
+            electionPath,
+            label,
+            rawPath,
+            electionStart,
+          });
+          continue;
         }
 
         // Per-contest processing for other formats
         for (const contest of election.contests) {
           try {
             const params = contest.loaderParams ?? {};
-            const rawElection = readElection(dataFormat, rawPath, params);
+            const result = readElection(dataFormat, rawPath, params);
+
+            // If the reader returns a Promise (async readers like ME, MPLS),
+            // defer processing to after the synchronous transaction
+            if (result instanceof Promise) {
+              asyncDeferred.push({
+                electionPromise: result,
+                jurisdiction,
+                election,
+                electionPath,
+                contest,
+                label,
+              });
+              continue;
+            }
+
+            const rawElection = result;
 
             if (rawElection.ballots.length === 0) {
               skipped++;
               continue;
             }
 
-            const normalized = normalizeElection(election.normalization, rawElection);
+            const normalized = normalizeElection(
+              election.normalization,
+              rawElection,
+            );
             const ok = processContest(
               normalized,
               jurisdiction,
@@ -493,17 +548,19 @@ function main() {
               insertCandidate,
               insertRound,
               insertAllocation,
-              insertTransfer
+              insertTransfer,
             );
 
             if (ok) processed++;
             else skipped++;
           } catch (e: any) {
             errors++;
-            problems.push({ election: label, contest: contest.office, reason: e.message });
-            console.error(
-              `    Error ${contest.office}: ${e.message}`
-            );
+            problems.push({
+              election: label,
+              contest: contest.office,
+              reason: e.message,
+            });
+            console.error(`    Error ${contest.office}: ${e.message}`);
           }
         }
         const ms = Date.now() - electionStart;
@@ -513,6 +570,119 @@ function main() {
   });
 
   processAll();
+
+  // Process deferred async elections (ME, MPLS — ExcelJS is async)
+  if (asyncDeferred.length > 0) {
+    console.log(
+      `\nProcessing ${asyncDeferred.length} deferred async contests (ME/MPLS)...`,
+    );
+    for (const deferred of asyncDeferred) {
+      const {
+        electionPromise,
+        jurisdiction,
+        election,
+        electionPath,
+        contest,
+        label,
+      } = deferred;
+      try {
+        const rawElection = await electionPromise;
+
+        if (rawElection.ballots.length === 0) {
+          skipped++;
+          continue;
+        }
+
+        const normalized = normalizeElection(
+          election.normalization,
+          rawElection,
+        );
+        const insertAsync = db.transaction(() => {
+          const ok = processContest(
+            normalized,
+            jurisdiction,
+            election,
+            electionPath,
+            contest,
+            insertReport,
+            insertCandidate,
+            insertRound,
+            insertAllocation,
+            insertTransfer,
+          );
+          if (ok) processed++;
+          else skipped++;
+        });
+        insertAsync();
+      } catch (e: any) {
+        errors++;
+        problems.push({
+          election: label,
+          contest: contest.office,
+          reason: e.message,
+        });
+        console.error(`    Error ${contest.office}: ${e.message}`);
+      }
+    }
+  }
+
+  // Process deferred NYC elections (async streaming)
+  for (const nyc of nycDeferred) {
+    const { jurisdiction, election, electionPath, label, rawPath } = nyc;
+    const electionStart = Date.now();
+    console.log(`  ${label} [us_ny_nyc, ${election.contests.length} contests]`);
+
+    try {
+      const batchContests = election.contests
+        .filter((c) => c.loaderParams)
+        .map((c) => ({ office: c.office, params: c.loaderParams! }));
+
+      const electionResults = await nycBatchReader(rawPath, batchContests);
+
+      const insertNyc = db.transaction(() => {
+        for (const contest of election.contests) {
+          const rawElection = electionResults.get(contest.office);
+          if (!rawElection || rawElection.ballots.length === 0) {
+            skipped++;
+            continue;
+          }
+
+          const normalized = normalizeElection(
+            election.normalization,
+            rawElection,
+          );
+          const ok = processContest(
+            normalized,
+            jurisdiction,
+            election,
+            electionPath,
+            contest,
+            insertReport,
+            insertCandidate,
+            insertRound,
+            insertAllocation,
+            insertTransfer,
+          );
+          if (ok) processed++;
+          else skipped++;
+        }
+      });
+      insertNyc();
+
+      const ms = Date.now() - electionStart;
+      console.log(`    -> ${election.contests.length} contests (${ms}ms)`);
+    } catch (e: any) {
+      console.error(`    NYC batch error: ${e.message}`);
+      errors += election.contests.length;
+      for (const c of election.contests) {
+        problems.push({
+          election: label,
+          contest: c.office,
+          reason: e.message,
+        });
+      }
+    }
+  }
 
   db.exec("PRAGMA wal_checkpoint(TRUNCATE)");
   db.close();
@@ -535,12 +705,19 @@ function main() {
     console.error("!".repeat(60) + "\x1b[0m");
 
     if (problems.length > 0) {
-      console.error(`\n\x1b[1m\x1b[31m  ERRORS (${problems.length} contests failed):\x1b[0m`);
+      console.error(
+        `\n\x1b[1m\x1b[31m  ERRORS (${problems.length} contests failed):\x1b[0m`,
+      );
       // Group by election for readability
-      const byElection = new Map<string, Array<{ contest: string; reason: string }>>();
+      const byElection = new Map<
+        string,
+        Array<{ contest: string; reason: string }>
+      >();
       for (const p of problems) {
         if (!byElection.has(p.election)) byElection.set(p.election, []);
-        byElection.get(p.election)!.push({ contest: p.contest, reason: p.reason });
+        byElection
+          .get(p.election)!
+          .push({ contest: p.contest, reason: p.reason });
       }
       for (const [election, contests] of byElection) {
         console.error(`\n  \x1b[1m${election}\x1b[0m`);
@@ -551,7 +728,9 @@ function main() {
     }
 
     if (missingRawData.length > 0) {
-      console.error(`\n\x1b[1m\x1b[31m  MISSING RAW DATA (${missingRawData.length} elections):\x1b[0m`);
+      console.error(
+        `\n\x1b[1m\x1b[31m  MISSING RAW DATA (${missingRawData.length} elections):\x1b[0m`,
+      );
       for (const e of missingRawData) {
         console.error(`    \x1b[31m✗\x1b[0m ${e}`);
       }
@@ -563,7 +742,9 @@ function main() {
   }
 
   if (skippedFormats.length > 0) {
-    console.log(`  Deferred formats (${skippedFormats.length} elections, not yet supported):`);
+    console.log(
+      `  Deferred formats (${skippedFormats.length} elections, not yet supported):`,
+    );
     for (const s of skippedFormats) {
       console.log(`    - ${s.election} [${s.format}]`);
     }

@@ -27,7 +27,7 @@ const RANKED_VOTE_DB = process.env.RANKED_VOTE_DB
   ? resolve(process.env.RANKED_VOTE_DB)
   : resolve("./report_pipeline/reports.sqlite3");
 
-function getDatabase(): Database {
+function getDatabase(): Database.Database {
   return new Database(RANKED_VOTE_DB, { readonly: true });
 }
 
@@ -105,7 +105,7 @@ function parseAllocatee(value: string): Allocatee {
 // ---------- Public API ----------
 
 export function getIndex(): IReportIndex {
-  let db: Database;
+  let db: Database.Database;
   try {
     db = getDatabase();
   } catch {
@@ -119,7 +119,7 @@ export function getIndex(): IReportIndex {
          FROM reports r
          LEFT JOIN candidates c ON r.id = c.report_id
          GROUP BY r.id
-         ORDER BY r.date DESC, r.jurisdictionName ASC`
+         ORDER BY r.date DESC, r.jurisdictionName ASC`,
       )
       .all() as (ReportRow & { candidateCount: number })[];
 
@@ -130,7 +130,7 @@ export function getIndex(): IReportIndex {
       // Get winner name
       const winnerRow = db
         .prepare(
-          "SELECT name FROM candidates WHERE report_id = ? AND winner = 1 LIMIT 1"
+          "SELECT name FROM candidates WHERE report_id = ? AND winner = 1 LIMIT 1",
         )
         .get(row.id) as { name: string } | undefined;
 
@@ -139,7 +139,7 @@ export function getIndex(): IReportIndex {
       if (row.condorcet != null) {
         const condorcetRow = db
           .prepare(
-            "SELECT name FROM candidates WHERE report_id = ? AND candidate_index = ?"
+            "SELECT name FROM candidates WHERE report_id = ? AND candidate_index = ?",
           )
           .get(row.id, row.condorcet) as { name: string } | undefined;
         condorcetWinnerName = condorcetRow?.name;
@@ -185,7 +185,7 @@ export function getIndex(): IReportIndex {
 }
 
 export function getReport(path: string): IContestReport | null {
-  let db: Database;
+  let db: Database.Database;
   try {
     db = getDatabase();
   } catch {
@@ -210,7 +210,7 @@ export function getReport(path: string): IContestReport | null {
     // Get candidates ordered by index
     const candidateRows = db
       .prepare(
-        "SELECT * FROM candidates WHERE report_id = ? ORDER BY candidate_index"
+        "SELECT * FROM candidates WHERE report_id = ? ORDER BY candidate_index",
       )
       .all(reportRow.id) as CandidateRow[];
 
@@ -228,9 +228,7 @@ export function getReport(path: string): IContestReport | null {
 
     // Get rounds
     const roundRows = db
-      .prepare(
-        "SELECT * FROM rounds WHERE report_id = ? ORDER BY round_number"
-      )
+      .prepare("SELECT * FROM rounds WHERE report_id = ? ORDER BY round_number")
       .all(reportRow.id) as RoundRow[];
 
     const rounds: ITabulatorRound[] = roundRows.map((roundRow) => {
@@ -263,9 +261,10 @@ export function getReport(path: string): IContestReport | null {
     });
 
     // Parse JSON blob fields
-    const pairwisePreferences: ICandidatePairTable = reportRow.pairwisePreferences
-      ? JSON.parse(reportRow.pairwisePreferences)
-      : { rows: [], cols: [], entries: [] };
+    const pairwisePreferences: ICandidatePairTable =
+      reportRow.pairwisePreferences
+        ? JSON.parse(reportRow.pairwisePreferences)
+        : { rows: [], cols: [], entries: [] };
     const firstAlternate: ICandidatePairTable = reportRow.firstAlternate
       ? JSON.parse(reportRow.firstAlternate)
       : { rows: [], cols: [], entries: [] };

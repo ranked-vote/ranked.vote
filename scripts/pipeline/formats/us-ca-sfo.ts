@@ -78,7 +78,7 @@ function parseBallotRecord(line: string): BallotRecord {
 
 function readCandidates(
   masterContent: string,
-  contestId: number
+  contestId: number,
 ): CandidateMap<number> {
   const candidates = new CandidateMap<number>();
   for (const line of masterContent.split("\n")) {
@@ -108,7 +108,7 @@ function readCandidates(
 function readBallots(
   ballotContent: string,
   candidates: CandidateMap<number>,
-  contestId: number
+  contestId: number,
 ): Ballot[] {
   // Parse and filter records for this contest
   let records: BallotRecord[] = [];
@@ -155,7 +155,7 @@ function readBallots(
 
 export function sfoReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const contestId = parseInt(params.contest, 10);
   if (isNaN(contestId)) throw new Error("SFO requires numeric 'contest' param");

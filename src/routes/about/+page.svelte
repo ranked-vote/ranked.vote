@@ -61,6 +61,15 @@
   which promotes evidence-based voting methods.
 </p>
 
+<h2>Database Access</h2>
+
+<p>
+  The election data is stored in a SQLite database. You can explore it using the
+  <a href="/data">Database Explorer</a>, which uses Datasette Lite and runs entirely in
+  your browser. The database file is also available directly from
+  <a href="https://github.com/ranked-vote/rcv.report">GitHub</a>.
+</p>
+
 <h2>Contributing</h2>
 
 <p>

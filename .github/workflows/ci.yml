@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          lfs: false  # Skip LFS files - archives aren't needed for build
+          lfs: false # Skip LFS files - archives aren't needed for build
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -38,4 +38,3 @@ jobs:
         run: |
           bun test
           bun run build
-

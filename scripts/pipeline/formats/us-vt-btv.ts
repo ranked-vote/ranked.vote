@@ -37,7 +37,7 @@ function parseBallot(source: string): Choice[] {
 
 export function btvReader(
   basePath: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ): Election {
   const ballotsFile = params.ballots;
   if (!ballotsFile) throw new Error("BTV requires 'ballots' parameter");
@@ -78,7 +78,7 @@ export function btvReader(
       const name = candMatch[2];
       if (id - 1 !== candidates.length) {
         throw new Error(
-          `Expected candidate ${candidates.length + 1}, got ${id}`
+          `Expected candidate ${candidates.length + 1}, got ${id}`,
         );
       }
       candidates.push({ name, candidate_type: "Regular" });

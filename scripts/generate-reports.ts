@@ -12,11 +12,21 @@
  */
 
 import { Database } from "bun:sqlite";
-import { readdirSync, statSync, existsSync, unlinkSync } from "fs";
+import {
+  readdirSync,
+  readFileSync,
+  statSync,
+  existsSync,
+  unlinkSync,
+} from "fs";
 import { join, resolve } from "path";
 import { gunzipSync } from "zlib";
 
-import { tabulate, type NormalizedBallot, type TabulationOptions } from "./tabulate-rcv";
+import {
+  tabulate,
+  type NormalizedBallot,
+  type TabulationOptions,
+} from "./tabulate-rcv";
 import { analyzeElection } from "./compute-rcv-analysis";
 import type { CandidateId } from "../src/report_types";
 
@@ -151,17 +161,18 @@ function main() {
     for (const filePath of normalizedFiles) {
       try {
         // Read and decompress
-        const compressed = Bun.file(filePath).stream();
-        const raw = gunzipSync(require("fs").readFileSync(filePath));
+        const raw = gunzipSync(readFileSync(filePath));
         const election: PreprocessedElection = JSON.parse(raw.toString());
         const info = election.info;
 
         // Convert ballots to tabulator format
-        const ballots: NormalizedBallot[] = election.ballots.ballots.map((b) => ({
-          id: b.id,
-          choices: b.choices,
-          overvoted: b.overvoted,
-        }));
+        const ballots: NormalizedBallot[] = election.ballots.ballots.map(
+          (b) => ({
+            id: b.id,
+            choices: b.choices,
+            overvoted: b.overvoted,
+          }),
+        );
 
         const tabulationOptions: TabulationOptions = {
           eager: info.tabulationOptions?.eager,
@@ -181,7 +192,7 @@ function main() {
 
         // All candidates for pairwise analysis
         const allCandidateIds: CandidateId[] = election.ballots.candidates.map(
-          (_, i) => i
+          (_, i) => i,
         );
 
         // Determine candidate list for totalVotes (from rounds, sorted)
@@ -200,19 +211,52 @@ function main() {
         const numCandidates = nonWriteInCandidates.length;
 
         // Compute index-level flags
-        const hasWriteInByName = election.ballots.candidates.some(
-          (c) => c.candidate_type === "QualifiedWriteIn" || c.candidate_type === "WriteIn"
-        );
+
+        // hasWriteInByName: check candidate name (not type), matching Rust logic
+        const hasWriteInByName = election.ballots.candidates.some((c) => {
+          const normalized = c.name.toLowerCase();
+          return (
+            normalized === "write-in" ||
+            normalized === "write in" ||
+            normalized === "undeclared write-ins" ||
+            normalized === "uwi"
+          );
+        });
+
         const winnerNotFirstRoundLeader =
           analysis.winner != null &&
           rounds.length > 0 &&
           rounds[0].allocations.length > 0 &&
           rounds[0].allocations[0].allocatee !== analysis.winner &&
           rounds[0].allocations[0].allocatee !== "X";
-        const interesting = rounds.length > 2 || winnerNotFirstRoundLeader;
+
+        // interesting: matches Rust is_interesting() logic
+        // 1. Non-Condorcet winner (Condorcet winner exists but didn't win under RCV)
+        const hasNonCondorcetWinner =
+          analysis.condorcet != null && analysis.condorcet !== analysis.winner;
+        // 2. Condorcet cycle (Smith set has more than one candidate)
+        const hasCondorcetCycle = analysis.smithSet.length > 1;
+        // 3. Exhausted ballots outnumber the winner's votes in the final round
+        let exhaustedExceedsWinner = false;
+        if (rounds.length > 0) {
+          const lastRound = rounds[rounds.length - 1];
+          const exhaustedVotes =
+            lastRound.allocations.find((a) => a.allocatee === "X")?.votes ?? 0;
+          const winnerVotes =
+            analysis.winner != null
+              ? (lastRound.allocations.find(
+                  (a) => a.allocatee === analysis.winner,
+                )?.votes ?? 0)
+              : 0;
+          exhaustedExceedsWinner = exhaustedVotes > winnerVotes;
+        }
+        const interesting =
+          hasNonCondorcetWinner || hasCondorcetCycle || exhaustedExceedsWinner;
 
         // Build vote lookup
-        const voteMap = new Map(analysis.totalVotes.map((tv) => [tv.candidate, tv]));
+        const voteMap = new Map(
+          analysis.totalVotes.map((tv) => [tv.candidate, tv]),
+        );
 
         // Insert report
         const result = insertReport.run({
@@ -248,7 +292,8 @@ function main() {
           const c = election.ballots.candidates[i];
           const tv = voteMap.get(i);
           const isWriteIn =
-            c.candidate_type === "WriteIn" || c.candidate_type === "QualifiedWriteIn";
+            c.candidate_type === "WriteIn" ||
+            c.candidate_type === "QualifiedWriteIn";
 
           insertCandidate.run({
             $reportId: reportId,

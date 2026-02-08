@@ -100,10 +100,10 @@ export interface ElectionPreprocessed {
 
 export type BallotReader = (
   basePath: string,
-  params: Record<string, string>
-) => Election;
+  params: Record<string, string>,
+) => Election | Promise<Election>;
 
 export type BatchBallotReader = (
   basePath: string,
-  contests: Array<{ office: string; params: Record<string, string> }>
+  contests: Array<{ office: string; params: Record<string, string> }>,
 ) => Map<string, Election>;

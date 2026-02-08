@@ -12,13 +12,13 @@
 
 import { readFileSync } from "fs";
 import { join, extname } from "path";
-import XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { CandidateMap } from "../candidate-map";
 import type { Ballot, Choice, Election } from "../types";
 
 function parseChoice(
   candidate: string,
-  candidateMap: CandidateMap<string>
+  candidateMap: CandidateMap<string>,
 ): Choice {
   const trimmed = candidate.trim();
   if (trimmed.toLowerCase() === "undervote") return { type: "undervote" };
@@ -44,7 +44,7 @@ function appendBallots(
   choice2: string,
   choice3: string,
   count: number,
-  ballotId: { value: number }
+  ballotId: { value: number },
 ): void {
   const choices: Choice[] = [];
 
@@ -59,17 +59,17 @@ function appendBallots(
     choices.push(
       !choice1 || choice1.toLowerCase() === "undervote"
         ? { type: "undervote" }
-        : parseChoice(choice1, candidateMap)
+        : parseChoice(choice1, candidateMap),
     );
     choices.push(
       !choice2 || choice2.toLowerCase() === "undervote"
         ? { type: "undervote" }
-        : parseChoice(choice2, candidateMap)
+        : parseChoice(choice2, candidateMap),
     );
     choices.push(
       !choice3 || choice3.toLowerCase() === "undervote"
         ? { type: "undervote" }
-        : parseChoice(choice3, candidateMap)
+        : parseChoice(choice3, candidateMap),
     );
   }
 
@@ -159,36 +159,38 @@ function readCsv(filePath: string): Election {
       choice2,
       choice3,
       count,
-      ballotId
+      ballotId,
     );
   }
 
   return { candidates: candidateMap.intoCandidates(), ballots };
 }
 
-function readXlsx(filePath: string): Election {
-  const workbook = XLSX.readFile(filePath);
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
-  const rows: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+async function readXlsx(filePath: string): Promise<Election> {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const sheet = workbook.worksheets[0];
+  if (!sheet) return { candidates: [], ballots: [] };
 
   const candidateMap = new CandidateMap<string>();
   const ballots: Ballot[] = [];
   const ballotId = { value: 0 };
 
-  // Skip header
-  for (let r = 1; r < rows.length; r++) {
-    const row = rows[r];
-    if (!row || row.length < 5) continue;
+  sheet.eachRow((row, rowNumber) => {
+    // Skip header
+    if (rowNumber === 1) return;
 
-    const precinct = cellToString(row[0]);
-    const choice1 = cellToString(row[1]);
-    const choice2 = cellToString(row[2]);
-    const choice3 = cellToString(row[3]);
+    const values = row.values as any[];
+    if (!values || values.length < 6) return;
 
-    // Parse count cell
+    // ExcelJS row.values is 1-indexed
+    const precinct = cellToString(values[1]);
+    const choice1 = cellToString(values[2]);
+    const choice2 = cellToString(values[3]);
+    const choice3 = cellToString(values[4]);
+
     let count = 1;
-    const countVal = row[4];
+    const countVal = values[5];
     if (typeof countVal === "number") {
       count = Math.max(1, Math.floor(countVal));
     } else if (typeof countVal === "string") {
@@ -203,17 +205,17 @@ function readXlsx(filePath: string): Election {
       choice2,
       choice3,
       count,
-      ballotId
+      ballotId,
     );
-  }
+  });
 
   return { candidates: candidateMap.intoCandidates(), ballots };
 }
 
-export function mplsReader(
+export async function mplsReader(
   basePath: string,
-  params: Record<string, string>
-): Election {
+  params: Record<string, string>,
+): Promise<Election> {
   const file = params.file;
   if (!file) throw new Error("us_mn_mpls requires 'file' parameter");
 

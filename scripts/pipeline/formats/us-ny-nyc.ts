@@ -3,7 +3,8 @@
  *
  * Ported from report_pipeline/src/formats/us_ny_nyc/efficient_reader.rs.
  *
- * Reads Excel files with a specific header column pattern:
+ * Streams Excel files using ExcelJS to avoid loading entire files into memory.
+ * Header columns follow the pattern:
  *   "Office Choice N of M Jurisdiction (CandidateId)"
  * Example: "Mayor Choice 1 of 5 Manhattan (1234)"
  *
@@ -16,7 +17,7 @@
 
 import { readdirSync } from "fs";
 import { join } from "path";
-import XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { CandidateMap } from "../candidate-map";
 import type { Ballot, Choice, Election } from "../types";
 
@@ -30,133 +31,100 @@ interface RaceBallotVote {
 
 // ---- Helper functions ----
 
-function readCandidateIds(
-  candidatesPath: string
-): Map<number, string> {
+async function readCandidateIds(
+  candidatesPath: string,
+): Promise<Map<number, string>> {
   const candidates = new Map<number, string>();
-  const workbook = XLSX.readFile(candidatesPath);
-  const sheetName = workbook.SheetNames[0];
-  const rows: any[][] = XLSX.utils.sheet_to_json(
-    workbook.Sheets[sheetName],
-    { header: 1 }
-  );
+  const reader = new ExcelJS.stream.xlsx.WorkbookReader(candidatesPath);
 
-  // Skip header row
-  for (let r = 1; r < rows.length; r++) {
-    const row = rows[r];
-    if (!row || row.length < 2) continue;
+  for await (const ws of reader) {
+    let isHeader = true;
+    for await (const row of ws) {
+      if (isHeader) {
+        isHeader = false;
+        continue;
+      }
+      const values = row.values as any[];
+      if (!values || values.length < 3) continue;
 
-    const id =
-      typeof row[0] === "number"
-        ? Math.floor(row[0])
-        : typeof row[0] === "string"
-          ? parseInt(row[0], 10)
-          : NaN;
-    const name = row[1] != null ? String(row[1]) : "";
+      // ExcelJS row.values is 1-indexed (index 0 is undefined)
+      const rawId = values[1];
+      const rawName = values[2];
 
-    if (!isNaN(id) && name) {
-      candidates.set(id, name);
+      const id =
+        typeof rawId === "number"
+          ? Math.floor(rawId)
+          : typeof rawId === "string"
+            ? parseInt(rawId, 10)
+            : NaN;
+      const name = rawName != null ? String(rawName) : "";
+
+      if (!isNaN(id) && name) {
+        candidates.set(id, name);
+      }
     }
+    break; // Only read first sheet
   }
 
   return candidates;
 }
 
-export function nycBatchReader(
-  basePath: string,
-  contests: Array<{ office: string; params: Record<string, string> }>
-): Map<string, Election> {
-  const results = new Map<string, Election>();
-  if (contests.length === 0) return results;
-
-  const firstParams = contests[0].params;
-  const candidatesFile = firstParams.candidatesFile;
-  const cvrPattern = firstParams.cvrPattern;
-
-  if (!candidatesFile || !cvrPattern) {
-    throw new Error("us_ny_nyc requires 'candidatesFile' and 'cvrPattern'");
-  }
-
-  // Step 1: Load candidate ID -> name mapping
-  const candidatesPath = join(basePath, candidatesFile);
-  const candidateIds = readCandidateIds(candidatesPath);
-
-  if (candidateIds.size === 0) {
-    throw new Error(
-      `No candidates loaded from ${candidatesFile}`
-    );
-  }
-
-  // Step 2: Find matching CVR files
-  const fileRx = new RegExp(`^${cvrPattern}$`);
+async function processFile(
+  filePath: string,
+  filename: string,
+  candidateIds: Map<number, string>,
+  raceCandidateMaps: Map<string, CandidateMap<number>>,
+  ballotsByRace: Map<string, RaceBallotVote[]>,
+): Promise<void> {
   const columnRx = /^(.+) Choice (\d+) of (\d+) (.+) \((\d+)\)$/;
+  const reader = new ExcelJS.stream.xlsx.WorkbookReader(filePath);
 
-  const filePaths: Array<{ path: string; name: string }> = [];
-  for (const name of readdirSync(basePath)) {
-    if (fileRx.test(name)) {
-      filePaths.push({ path: join(basePath, name), name });
-    }
-  }
-
-  if (filePaths.length === 0) {
-    console.warn(`No files matching ${cvrPattern} in ${basePath}`);
-    return results;
-  }
-
-  // Step 3: Process files with on-the-fly race discovery
-  const raceCandidateMaps = new Map<string, CandidateMap<number>>();
-  const ballotsByRace = new Map<string, RaceBallotVote[]>();
-
-  for (let fileIdx = 0; fileIdx < filePaths.length; fileIdx++) {
-    const { path: filePath, name: filename } = filePaths[fileIdx];
-
-    const workbook = XLSX.readFile(filePath);
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    const rows: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-    if (rows.length === 0) continue;
-
-    // Parse header row to discover races and column mappings
-    const headerRow = rows[0];
+  for await (const ws of reader) {
+    let headerParsed = false;
     let cvrIdCol: number | null = null;
     const fileRaceColumns = new Map<string, number[]>();
 
-    for (let colIdx = 0; colIdx < headerRow.length; colIdx++) {
-      const colName = String(headerRow[colIdx] ?? "");
-      if (colName === "Cast Vote Record") {
-        cvrIdCol = colIdx;
+    for await (const row of ws) {
+      const values = row.values as any[];
+      if (!values) continue;
+
+      // Parse header on first row
+      if (!headerParsed) {
+        headerParsed = true;
+        for (let colIdx = 1; colIdx < values.length; colIdx++) {
+          const colName = String(values[colIdx] ?? "");
+          if (colName === "Cast Vote Record") {
+            cvrIdCol = colIdx;
+            continue;
+          }
+
+          const match = columnRx.exec(colName);
+          if (match) {
+            const officeName = match[1];
+            const jurisdictionName = match[4];
+            const raceKey = `${officeName}|${jurisdictionName}`;
+
+            if (!raceCandidateMaps.has(raceKey)) {
+              raceCandidateMaps.set(raceKey, new CandidateMap<number>());
+              ballotsByRace.set(raceKey, []);
+            }
+
+            const cols = fileRaceColumns.get(raceKey) ?? [];
+            cols.push(colIdx);
+            fileRaceColumns.set(raceKey, cols);
+          }
+        }
+
+        if (cvrIdCol === null) {
+          console.warn(`No CVR ID column found in ${filename}, skipping`);
+          return;
+        }
         continue;
       }
 
-      const match = columnRx.exec(colName);
-      if (match) {
-        const officeName = match[1];
-        const jurisdictionName = match[4];
-        const raceKey = `${officeName}|${jurisdictionName}`;
-
-        if (!raceCandidateMaps.has(raceKey)) {
-          raceCandidateMaps.set(raceKey, new CandidateMap<number>());
-          ballotsByRace.set(raceKey, []);
-        }
-
-        const cols = fileRaceColumns.get(raceKey) ?? [];
-        cols.push(colIdx);
-        fileRaceColumns.set(raceKey, cols);
-      }
-    }
-
-    if (cvrIdCol === null) {
-      console.warn(`No CVR ID column found in ${filename}, skipping`);
-      continue;
-    }
-
-    // Process data rows
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r];
-      if (!row) continue;
-
-      const ballotId = row[cvrIdCol] != null ? String(row[cvrIdCol]) : "";
+      // Process data row
+      const ballotId =
+        values[cvrIdCol!] != null ? String(values[cvrIdCol!]) : "";
       if (!ballotId) continue;
 
       for (const [raceKey, raceCols] of fileRaceColumns) {
@@ -165,7 +133,7 @@ export function nycBatchReader(
         let hasVotes = false;
 
         for (const colIdx of raceCols) {
-          const cell = row[colIdx];
+          const cell = values[colIdx];
           let choice: Choice;
 
           if (cell == null || cell === "") {
@@ -220,6 +188,66 @@ export function nycBatchReader(
           });
         }
       }
+    }
+    break; // Only read first sheet
+  }
+}
+
+export async function nycBatchReader(
+  basePath: string,
+  contests: Array<{ office: string; params: Record<string, string> }>,
+): Promise<Map<string, Election>> {
+  const results = new Map<string, Election>();
+  if (contests.length === 0) return results;
+
+  const firstParams = contests[0].params;
+  const candidatesFile = firstParams.candidatesFile;
+  const cvrPattern = firstParams.cvrPattern;
+
+  if (!candidatesFile || !cvrPattern) {
+    throw new Error("us_ny_nyc requires 'candidatesFile' and 'cvrPattern'");
+  }
+
+  // Step 1: Load candidate ID -> name mapping
+  const candidatesPath = join(basePath, candidatesFile);
+  const candidateIds = await readCandidateIds(candidatesPath);
+
+  if (candidateIds.size === 0) {
+    throw new Error(`No candidates loaded from ${candidatesFile}`);
+  }
+
+  // Step 2: Find matching CVR files
+  const fileRx = new RegExp(`^${cvrPattern}$`);
+
+  const filePaths: Array<{ path: string; name: string }> = [];
+  for (const name of readdirSync(basePath)) {
+    if (fileRx.test(name)) {
+      filePaths.push({ path: join(basePath, name), name });
+    }
+  }
+
+  if (filePaths.length === 0) {
+    console.warn(`No files matching ${cvrPattern} in ${basePath}`);
+    return results;
+  }
+
+  // Step 3: Stream each file
+  const raceCandidateMaps = new Map<string, CandidateMap<number>>();
+  const ballotsByRace = new Map<string, RaceBallotVote[]>();
+
+  for (let i = 0; i < filePaths.length; i++) {
+    const { path: filePath, name: filename } = filePaths[i];
+    const start = Date.now();
+    await processFile(
+      filePath,
+      filename,
+      candidateIds,
+      raceCandidateMaps,
+      ballotsByRace,
+    );
+    const ms = Date.now() - start;
+    if (ms > 1000) {
+      console.log(`      ${filename} (${ms}ms)`);
     }
   }
 

@@ -28,39 +28,33 @@ export interface TabulationOptions {
 
 // ---------- Internal types ----------
 
-type Choice =
-  | { type: "vote"; candidate: CandidateId }
-  | { type: "undervote" }
-  | { type: "overvote" };
-
+/**
+ * BallotState uses an index pointer into the original choices array
+ * instead of copying via slice(). This avoids O(K) allocation per pop.
+ */
 interface BallotState {
   choices: CandidateId[];
+  idx: number; // current position in the choices array
   overvoted: boolean;
 }
 
-function topVote(ballot: BallotState): Choice {
-  if (ballot.choices.length > 0) {
-    return { type: "vote", candidate: ballot.choices[0] };
+/** Get the current top choice for a ballot. */
+function topChoice(ballot: BallotState): CandidateId | -1 | -2 {
+  // Returns candidateId for a vote, -1 for undervote, -2 for overvote
+  if (ballot.idx < ballot.choices.length) {
+    return ballot.choices[ballot.idx];
   }
-  return ballot.overvoted ? { type: "overvote" } : { type: "undervote" };
+  return ballot.overvoted ? -2 : -1;
 }
 
-function popTopVote(ballot: BallotState): BallotState {
-  return {
-    choices: ballot.choices.slice(1),
-    overvoted: ballot.overvoted,
-  };
+/** Advance to the next choice (mutates idx). */
+function advanceChoice(ballot: BallotState): void {
+  ballot.idx++;
 }
 
-function choiceKey(c: Choice): string {
-  if (c.type === "vote") return `v${c.candidate}`;
-  return c.type;
-}
-
-function choiceToAllocatee(c: Choice): Allocatee {
-  if (c.type === "vote") return c.candidate;
-  return "X";
-}
+// Map keys: candidate IDs stored directly as numbers, plus sentinels
+const KEY_UNDERVOTE = -1;
+const KEY_OVERVOTE = -2;
 
 // ---------- Tabulator ----------
 
@@ -72,16 +66,21 @@ export function tabulate(
   if (ballots.length === 0) return [];
 
   // Initial allocation: group ballots by top choice
-  const candidateBallots = new Map<string, BallotState[]>();
+  // Use a Map<number, BallotState[]> with numeric keys to avoid string ops
+  const candidateBallots = new Map<number, BallotState[]>();
   for (const ballot of ballots) {
     const state: BallotState = {
-      choices: [...ballot.choices],
+      choices: ballot.choices,
+      idx: 0,
       overvoted: ballot.overvoted,
     };
-    const choice = topVote(state);
-    const key = choiceKey(choice);
-    if (!candidateBallots.has(key)) candidateBallots.set(key, []);
-    candidateBallots.get(key)!.push(state);
+    const key = topChoice(state);
+    let bucket = candidateBallots.get(key);
+    if (!bucket) {
+      bucket = [];
+      candidateBallots.set(key, bucket);
+    }
+    bucket.push(state);
   }
 
   const eliminated = new Set<CandidateId>();
@@ -96,18 +95,16 @@ export function tabulate(
 
     for (const [key, ballotList] of candidateBallots) {
       const count = ballotList.length;
-      if (key === "undervote") {
+      if (key === KEY_UNDERVOTE) {
         if (!(options.nycStyle && roundNumber === 0)) {
           exhausted += count;
         }
-      } else if (key === "overvote") {
+      } else if (key === KEY_OVERVOTE) {
         if (!(options.nycStyle && roundNumber === 0)) {
           exhausted += count;
         }
       } else {
-        // key is "v{candidateId}"
-        const candidateId = parseInt(key.slice(1), 10);
-        voteCounts.set(candidateId, count);
+        voteCounts.set(key as CandidateId, count);
       }
     }
 
@@ -127,8 +124,8 @@ export function tabulate(
     allocations.push({ allocatee: "X", votes: exhausted });
 
     // Count undervotes and overvotes for the round
-    const undervote = candidateBallots.get("undervote")?.length ?? 0;
-    const overvote = candidateBallots.get("overvote")?.length ?? 0;
+    const undervote = candidateBallots.get(KEY_UNDERVOTE)?.length ?? 0;
+    const overvote = candidateBallots.get(KEY_OVERVOTE)?.length ?? 0;
 
     rounds.push({
       allocations,
@@ -143,11 +140,14 @@ export function tabulate(
     if (roundNumber >= maxRounds) break;
 
     // Determine which candidates to eliminate
-    // Walk from top, subtracting votes. When a candidate's votes exceed
-    // the remaining sum below them (and we've passed at least the first),
-    // everyone below is eliminated.
     let candidatesToEliminate: Set<CandidateId>;
-    {
+    const isEager = options.eager ?? false;
+
+    if (isEager) {
+      // Eager mode: eliminate all candidates that cannot mathematically win.
+      // Walk from top, subtracting votes. When a candidate's votes exceed
+      // the remaining sum below them (and we've passed at least the first),
+      // everyone below is eliminated.
       let remainingVotes = continuing;
       let cutoff = sortedVotes.length; // default: no elimination
 
@@ -169,6 +169,12 @@ export function tabulate(
       }
 
       candidatesToEliminate = toEliminate;
+    } else {
+      // Non-eager mode: eliminate only the single candidate with the fewest votes.
+      candidatesToEliminate = new Set<CandidateId>();
+      if (sortedVotes.length > 0) {
+        candidatesToEliminate.add(sortedVotes[sortedVotes.length - 1][0]);
+      }
     }
 
     // Mark candidates as eliminated
@@ -180,38 +186,36 @@ export function tabulate(
     const allTransfers: Transfer[] = [];
 
     for (const eliminatedCid of candidatesToEliminate) {
-      const key = `v${eliminatedCid}`;
-      const eliminatedBallots = candidateBallots.get(key) ?? [];
-      candidateBallots.delete(key);
+      const eliminatedBallots = candidateBallots.get(eliminatedCid) ?? [];
+      candidateBallots.delete(eliminatedCid);
 
-      const transferMap = new Map<string, number>(); // allocatee key -> count
+      const transferMap = new Map<number, number>(); // key -> count
 
-      for (let ballot of eliminatedBallots) {
-        // Pop choices until we find a non-eliminated candidate, or exhaust
-        let newChoice: Choice;
+      for (const ballot of eliminatedBallots) {
+        // Advance past eliminated candidates
+        let newKey: number;
         while (true) {
-          ballot = popTopVote(ballot);
-          newChoice = topVote(ballot);
-          if (
-            newChoice.type === "vote" &&
-            eliminated.has(newChoice.candidate)
-          ) {
+          advanceChoice(ballot);
+          const choice = topChoice(ballot);
+          if (choice >= 0 && eliminated.has(choice as CandidateId)) {
             continue;
           }
+          newKey = choice;
           break;
         }
 
-        const newKey = choiceKey(newChoice);
-        if (!candidateBallots.has(newKey)) candidateBallots.set(newKey, []);
-        candidateBallots.get(newKey)!.push(ballot);
+        let bucket = candidateBallots.get(newKey);
+        if (!bucket) {
+          bucket = [];
+          candidateBallots.set(newKey, bucket);
+        }
+        bucket.push(ballot);
 
-        const allocKey =
-          newChoice.type === "vote" ? String(newChoice.candidate) : "X";
-        transferMap.set(allocKey, (transferMap.get(allocKey) ?? 0) + 1);
+        transferMap.set(newKey, (transferMap.get(newKey) ?? 0) + 1);
       }
 
       for (const [toKey, count] of transferMap) {
-        const to: Allocatee = toKey === "X" ? "X" : parseInt(toKey, 10);
+        const to: Allocatee = toKey < 0 ? "X" : (toKey as CandidateId);
         allTransfers.push({ from: eliminatedCid, to, count });
       }
     }
@@ -219,9 +223,9 @@ export function tabulate(
     // Sort transfers: candidates with more votes first, exhausted last
     allTransfers.sort((a, b) => {
       const aVotes =
-        a.to === "X" ? 0 : (candidateBallots.get(`v${a.to}`)?.length ?? 0);
+        a.to === "X" ? 0 : (candidateBallots.get(a.to as number)?.length ?? 0);
       const bVotes =
-        b.to === "X" ? 0 : (candidateBallots.get(`v${b.to}`)?.length ?? 0);
+        b.to === "X" ? 0 : (candidateBallots.get(b.to as number)?.length ?? 0);
       return bVotes - aVotes; // descending
     });
 

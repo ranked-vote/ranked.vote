@@ -27,57 +27,97 @@ import type { NormalizedBallot } from "./tabulate-rcv";
 // ---------- Pairwise Preferences ----------
 
 /**
+ * Flat 2D array for pairwise counts, indexed by candidate index.
+ * Avoids string key allocation in the hot loop.
+ */
+export interface PairwiseCounts {
+  /** Flat array of size maxId * maxId. counts[a * stride + b] = ballots ranking a above b */
+  data: Uint32Array;
+  /** Stride for indexing (= maxCandidateId + 1) */
+  stride: number;
+}
+
+/**
  * Generate pairwise preference counts.
  *
  * For each pair (A, B): count of ballots that ranked A above B.
  * Unranked candidates are implicitly ranked below all ranked candidates
  * (matching the Rust implementation).
+ *
+ * Uses a flat Uint32Array indexed by candidate IDs to avoid string
+ * allocation in the inner loop.
  */
 function generatePairwiseCounts(
   candidates: CandidateId[],
-  ballots: NormalizedBallot[]
-): Map<string, number> {
-  const counts = new Map<string, number>();
-  const candidateSet = new Set(candidates);
+  ballots: NormalizedBallot[],
+): PairwiseCounts {
+  // Determine stride from max candidate ID
+  let maxId = 0;
+  for (const c of candidates) {
+    if (c > maxId) maxId = c;
+  }
+  const stride = maxId + 1;
+  const data = new Uint32Array(stride * stride);
+
+  // Build a boolean lookup for which IDs are candidates
+  const isCand = new Uint8Array(stride);
+  for (const c of candidates) isCand[c] = 1;
+
+  // Reusable boolean array instead of per-ballot Set
+  const ranked = new Uint8Array(stride);
+  // Track which IDs were ranked so we can clear efficiently
+  const rankedList: CandidateId[] = [];
 
   for (const ballot of ballots) {
-    const ranked = new Set<CandidateId>();
+    const choices = ballot.choices;
+    let rankedCount = 0;
 
-    // For each ranked candidate, it beats all candidates ranked below
-    for (const vote of ballot.choices) {
-      for (const above of ranked) {
-        const key = `${above},${vote}`;
-        counts.set(key, (counts.get(key) ?? 0) + 1);
+    // For each ranked candidate, it beats all candidates ranked below it
+    for (let ci = 0; ci < choices.length; ci++) {
+      const vote = choices[ci];
+      // vote beats all previously ranked? No — previously ranked beat vote
+      // (they were ranked higher on this ballot)
+      const voteOffset = vote * stride;
+      for (let ri = 0; ri < rankedCount; ri++) {
+        // rankedList[ri] was ranked above vote
+        data[rankedList[ri] * stride + vote]++;
       }
-      ranked.add(vote);
+      ranked[vote] = 1;
+      rankedList[rankedCount++] = vote;
     }
 
     // All ranked candidates beat all unranked candidates
-    for (const candidate of candidateSet) {
-      if (!ranked.has(candidate)) {
-        for (const above of ranked) {
-          const key = `${above},${candidate}`;
-          counts.set(key, (counts.get(key) ?? 0) + 1);
+    for (let c = 0; c < stride; c++) {
+      if (isCand[c] && !ranked[c]) {
+        for (let ri = 0; ri < rankedCount; ri++) {
+          data[rankedList[ri] * stride + c]++;
         }
       }
     }
+
+    // Clear ranked flags
+    for (let ri = 0; ri < rankedCount; ri++) {
+      ranked[rankedList[ri]] = 0;
+    }
+    rankedList.length = 0;
   }
 
-  return counts;
+  return { data, stride };
 }
 
 export function generatePairwisePreferences(
   candidates: CandidateId[],
-  pairwiseCounts: Map<string, number>
+  pairwiseCounts: PairwiseCounts,
 ): ICandidatePairTable {
+  const { data, stride } = pairwiseCounts;
   const axis: Allocatee[] = candidates.map((c) => c);
   const entries: (ICandidatePairEntry | null)[][] = [];
 
   for (const c1 of candidates) {
     const row: (ICandidatePairEntry | null)[] = [];
     for (const c2 of candidates) {
-      const m1 = pairwiseCounts.get(`${c1},${c2}`) ?? 0;
-      const m2 = pairwiseCounts.get(`${c2},${c1}`) ?? 0;
+      const m1 = data[c1 * stride + c2];
+      const m2 = data[c2 * stride + c1];
       const total = m1 + m2;
 
       if (total === 0) {
@@ -100,7 +140,7 @@ export function generatePairwisePreferences(
 
 export function generateFirstAlternate(
   candidates: CandidateId[],
-  ballots: NormalizedBallot[]
+  ballots: NormalizedBallot[],
 ): ICandidatePairTable {
   const firstChoiceCount = new Map<CandidateId, number>();
   // alternateMap[first][second] = count
@@ -113,8 +153,7 @@ export function generateFirstAlternate(
     const first = choices[0];
     firstChoiceCount.set(first, (firstChoiceCount.get(first) ?? 0) + 1);
 
-    const second: Allocatee =
-      choices.length > 1 ? choices[1] : "X";
+    const second: Allocatee = choices.length > 1 ? choices[1] : "X";
     const key = `${first},${second}`;
     alternateMap.set(key, (alternateMap.get(key) ?? 0) + 1);
   }
@@ -133,7 +172,11 @@ export function generateFirstAlternate(
       if (num === 0) {
         row.push(null);
       } else {
-        row.push({ frac: denom > 0 ? num / denom : 0, numerator: num, denominator: denom });
+        row.push({
+          frac: denom > 0 ? num / denom : 0,
+          numerator: num,
+          denominator: denom,
+        });
       }
     }
     entries.push(row);
@@ -147,7 +190,7 @@ export function generateFirstAlternate(
 export function generateFirstFinal(
   candidates: CandidateId[],
   ballots: NormalizedBallot[],
-  finalRoundCandidates: Set<CandidateId>
+  finalRoundCandidates: Set<CandidateId>,
 ): ICandidatePairTable {
   const firstFinal = new Map<string, number>();
   const firstTotal = new Map<CandidateId, number>();
@@ -172,7 +215,9 @@ export function generateFirstFinal(
     .filter((c) => !finalRoundCandidates.has(c))
     .map((c) => c);
   const cols: Allocatee[] = [
-    ...candidates.filter((c) => finalRoundCandidates.has(c)).map((c) => c as Allocatee),
+    ...candidates
+      .filter((c) => finalRoundCandidates.has(c))
+      .map((c) => c as Allocatee),
     "X",
   ];
   const entries: (ICandidatePairEntry | null)[][] = [];
@@ -188,7 +233,11 @@ export function generateFirstFinal(
       if (num === 0) {
         row.push(null);
       } else {
-        row.push({ frac: total > 0 ? num / total : 0, numerator: num, denominator: total });
+        row.push({
+          frac: total > 0 ? num / total : 0,
+          numerator: num,
+          denominator: total,
+        });
       }
     }
     entries.push(row);
@@ -200,7 +249,7 @@ export function generateFirstFinal(
 // ---------- Ranking Distribution ----------
 
 export function generateRankingDistribution(
-  ballots: NormalizedBallot[]
+  ballots: NormalizedBallot[],
 ): IRankingDistribution {
   const overallDistribution: Record<string, number> = {};
   const candidateDistributions: Record<string, Record<string, number>> = {};
@@ -218,41 +267,22 @@ export function generateRankingDistribution(
 
     const first = choices[0];
     const firstStr = String(first);
-    if (!candidateDistributions[firstStr]) candidateDistributions[firstStr] = {};
+    if (!candidateDistributions[firstStr])
+      candidateDistributions[firstStr] = {};
     candidateDistributions[firstStr][countStr] =
       (candidateDistributions[firstStr][countStr] ?? 0) + 1;
     candidateTotals[firstStr] = (candidateTotals[firstStr] ?? 0) + 1;
   }
 
-  return { overallDistribution, candidateDistributions, totalBallots, candidateTotals };
+  return {
+    overallDistribution,
+    candidateDistributions,
+    totalBallots,
+    candidateTotals,
+  };
 }
 
 // ---------- Smith Set / Condorcet ----------
-
-/**
- * Build a directed graph of pairwise dominance.
- * Edge from A to B means A beats B in pairwise comparison.
- */
-function buildGraph(
-  candidates: CandidateId[],
-  pairwiseCounts: Map<string, number>
-): Map<CandidateId, CandidateId[]> {
-  const graph = new Map<CandidateId, CandidateId[]>();
-
-  for (const c1 of candidates) {
-    for (const c2 of candidates) {
-      if (c1 === c2) continue;
-      const c1v = pairwiseCounts.get(`${c1},${c2}`) ?? 0;
-      const c2v = pairwiseCounts.get(`${c2},${c1}`) ?? 0;
-      if (c1v > c2v) {
-        if (!graph.has(c1)) graph.set(c1, []);
-        graph.get(c1)!.push(c2);
-      }
-    }
-  }
-
-  return graph;
-}
 
 /**
  * Compute the Smith set using Kosaraju's SCC algorithm.
@@ -260,25 +290,24 @@ function buildGraph(
  */
 export function computeSmithSet(
   candidates: CandidateId[],
-  pairwiseCounts: Map<string, number>
+  pairwiseCounts: PairwiseCounts,
 ): Set<CandidateId> {
-  const graph = buildGraph(candidates, pairwiseCounts);
+  const { data, stride } = pairwiseCounts;
   const n = candidates.length;
-  const idxById = new Map<CandidateId, number>();
-  candidates.forEach((cid, i) => idxById.set(cid, i));
 
-  // Build adjacency lists
+  // Build adjacency lists directly from the counts array
   const adj: number[][] = Array.from({ length: n }, () => []);
   const radj: number[][] = Array.from({ length: n }, () => []);
 
-  for (const [from, tos] of graph) {
-    const u = idxById.get(from);
-    if (u === undefined) continue;
-    for (const to of tos) {
-      const v = idxById.get(to);
-      if (v === undefined || u === v) continue;
-      adj[u].push(v);
-      radj[v].push(u);
+  for (let i = 0; i < n; i++) {
+    const c1 = candidates[i];
+    for (let j = 0; j < n; j++) {
+      if (i === j) continue;
+      const c2 = candidates[j];
+      if (data[c1 * stride + c2] > data[c2 * stride + c1]) {
+        adj[i].push(j);
+        radj[j].push(i);
+      }
     }
   }
 
@@ -344,7 +373,9 @@ export function computeSmithSet(
 
 // ---------- Total Votes ----------
 
-export function computeTotalVotes(rounds: ITabulatorRound[]): ICandidateVotes[] {
+export function computeTotalVotes(
+  rounds: ITabulatorRound[],
+): ICandidateVotes[] {
   if (rounds.length === 0) return [];
 
   // First round votes (excluding exhausted)
@@ -415,10 +446,13 @@ export interface AnalysisResult {
 export function analyzeElection(
   candidates: CandidateId[],
   ballots: NormalizedBallot[],
-  rounds: ITabulatorRound[]
+  rounds: ITabulatorRound[],
 ): AnalysisResult {
   const pairwiseCounts = generatePairwiseCounts(candidates, ballots);
-  const pairwisePreferences = generatePairwisePreferences(candidates, pairwiseCounts);
+  const pairwisePreferences = generatePairwisePreferences(
+    candidates,
+    pairwiseCounts,
+  );
   const firstAlternate = generateFirstAlternate(candidates, ballots);
   const rankingDistribution = generateRankingDistribution(ballots);
   const totalVotes = computeTotalVotes(rounds);
@@ -434,7 +468,11 @@ export function analyzeElection(
       }
     }
   }
-  const firstFinal = generateFirstFinal(candidates, ballots, finalRoundCandidates);
+  const firstFinal = generateFirstFinal(
+    candidates,
+    ballots,
+    finalRoundCandidates,
+  );
 
   // Smith set
   const smithSetSet = computeSmithSet(candidates, pairwiseCounts);
