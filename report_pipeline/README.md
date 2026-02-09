@@ -1,26 +1,26 @@
 # ranked.vote Report Pipeline
 
-A Rust-based system for processing and analyzing ranked-choice voting (RCV) election data. This pipeline converts raw ballot data from various formats into standardized reports.
+A TypeScript/Bun pipeline for processing and analyzing ranked-choice voting (RCV) election data. The pipeline converts raw ballot data from various formats into a normalized SQLite database used by the web application.
 
-## Project Structure
+## Directory Structure
 
-- `election-metadata/` - Election configuration files (committed to git)
-- `reports/` - Generated election reports (committed to git)
+- `election-metadata/` - Election configuration JSON files (committed to git)
 - `archives/` - Compressed raw ballot data (committed to git via Git LFS)
 - `raw-data/` - Uncompressed working directory (gitignored, extracted from archives)
-- `preprocessed/` - Processed ballot data (generated, gitignored)
+- `reports.sqlite3` - SQLite database with all report data (committed to git)
 
 ## Setup
 
 1. Install dependencies:
-   - Rust (latest stable)
+   - [Bun](https://bun.sh/) (latest version)
    - Git LFS (for downloading compressed archives)
 
-2. Clone the repository:
+2. Clone the repository and install:
 
 ```bash
 git clone https://github.com/ranked-vote/ranked.vote.git
 cd ranked.vote
+bun install
 ```
 
 3. Extract election data from archives:
@@ -38,39 +38,114 @@ This extracts compressed archives from `archives/` (managed by Git LFS) into the
 
 ## Usage
 
-### Processing Election Data
+### Running the Pipeline
 
-1. Extract raw data from archives (if not already done):
+The TypeScript pipeline processes raw ballot data end-to-end: reading raw files, parsing ballots, normalizing, running RCV tabulation, computing analysis, and writing results to SQLite.
 
 ```bash
 # From project root:
-bun run report:extract
+bun scripts/preprocess.ts [metadata-dir] [raw-data-dir] [db-path]
 
-# Or from report_pipeline directory:
-./extract-from-archives.sh
+# With defaults (recommended):
+bun scripts/preprocess.ts
 ```
 
-2. Sync raw data with metadata:
+Default paths:
+- `metadata-dir`: `report_pipeline/election-metadata`
+- `raw-data-dir`: `report_pipeline/raw-data`
+- `db-path`: `report_pipeline/reports.sqlite3`
+
+You can skip specific formats with the `SKIP_FORMATS` environment variable:
 
 ```bash
-# From project root (recommended):
-bun run report:sync
-
-# Or from report_pipeline directory:
-./sync.sh
+SKIP_FORMATS=us_ny_nyc,us_me bun scripts/preprocess.ts
 ```
 
-3. Generate reports:
+### Other Pipeline Scripts
 
-```bash
-# From project root (recommended):
-bun run report
+- `bun scripts/init-database.ts` — Create the SQLite schema (called automatically by `preprocess.ts`)
 
-# Or from report_pipeline directory:
-./report.sh
+## Pipeline Architecture
+
+### Data Flow
+
+```
+Raw Data Files (raw-data/)
+    ↓
+Format Readers (scripts/pipeline/formats/)
+    ↓
+Raw Ballots (Choice[] per ballot — votes, undervotes, overvotes)
+    ↓
+Normalizers (scripts/pipeline/normalizers/)
+    ↓
+Normalized Ballots (ordered candidate IDs per ballot)
+    ↓
+RCV Tabulator (scripts/tabulate-rcv.ts)
+    ↓
+Round-by-round results and transfers
+    ↓
+Analysis (scripts/compute-rcv-analysis.ts)
+    - Pairwise preferences (Condorcet matrix)
+    - Smith set / Condorcet winner detection
+    - First-alternate and first-final preferences
+    - Ranking distribution
+    ↓
+SQLite Database (reports.sqlite3)
+    ↓
+Web Application (src/lib/server/db.ts)
 ```
 
-Note: When run from the project root with `bun run report`, card images are automatically generated after reports are created.
+### Key Source Files
+
+| File | Purpose |
+|---|---|
+| `scripts/preprocess.ts` | Full pipeline entry point (raw data → SQLite) |
+| `scripts/pipeline/formats/` | Format readers for each data source |
+| `scripts/pipeline/normalizers/` | Ballot normalization strategies |
+| `scripts/pipeline/types.ts` | Core type definitions |
+| `scripts/tabulate-rcv.ts` | RCV tabulation engine |
+| `scripts/compute-rcv-analysis.ts` | Post-tabulation analysis |
+| `scripts/init-database.ts` | SQLite schema definition |
+
+### Format Readers
+
+Located in `scripts/pipeline/formats/`:
+
+| Format | File | Description |
+|---|---|---|
+| `nist_sp_1500` | `nist-sp-1500.ts` | NIST SP 1500-103 standard (used by SF, Alameda, and others) |
+| `us_ca_sfo` | `us-ca-sfo.ts` | San Francisco legacy format |
+| `us_ny_nyc` | `us-ny-nyc.ts` | NYC Board of Elections (Excel-based) |
+| `us_me` | `us-me.ts` | Maine state format (Excel-based) |
+| `us_mn_mpls` | `us-mn-mpls.ts` | Minneapolis format |
+| `us_vt_btv` | `us-vt-btv.ts` | Burlington, VT format |
+| `dominion_rcr` | `dominion-rcr.ts` | Dominion RCV format (CSV) |
+| `simple_json` | `simple-json.ts` | Simple JSON for testing and small elections |
+| `preflib` | `preflib.ts` | PrefLib ordinal preference format (TOI/SOI) |
+
+### Normalizers
+
+Located in `scripts/pipeline/normalizers/`:
+
+| Normalizer | Behavior |
+|---|---|
+| **simple** | Removes duplicate candidates, stops at first overvote, ignores undervotes. Used by most formats. |
+| **maine** | Removes duplicates, exhausts ballot after two sequential undervotes, stops at first overvote. |
+| **nyc** | Removes duplicates, stops at first overvote, filters out fully-inactive ballots. |
+
+The normalizer is selected automatically based on the data format specified in the election metadata.
+
+### SQLite Details
+
+Pipeline scripts (`scripts/*.ts`) use Bun's built-in `bun:sqlite` for writing to the database. The SvelteKit web app uses `better-sqlite3` for reading, since Vite's SSR bundler does not handle `bun:sqlite` during prerendering.
+
+The database (`reports.sqlite3`) contains these tables:
+
+- **reports** — Election contest metadata, analysis results, and computed flags
+- **candidates** — Candidate info per report (name, write-in status, vote counts)
+- **rounds** — Tabulation rounds (threshold, continuing ballots)
+- **allocations** — Vote allocations per candidate per round
+- **transfers** — Vote transfers between candidates between rounds
 
 ## Adding Election Data
 
@@ -81,22 +156,16 @@ Create or modify the jurisdiction metadata file in `election-metadata/` followin
 - US jurisdictions: `us/{state}/{city}.json` (e.g., `us/ca/sfo.json`)
 - Other locations: `{country}/{region}/{city}.json`
 
-The metadata file must specify:
+The metadata file specifies:
 
-- Data format (see supported formats below)
+- Data format (see format table above)
 - Election date
 - Offices and contests
 - Loader parameters specific to the format
 
 ### 2. Prepare Raw Data
 
-1. Create the corresponding directory structure in `raw-data/` matching your metadata path
-2. Add your raw ballot data files in the correct format:
-   - San Francisco (NIST SP 1500): ZIP containing CVR exports
-   - Maine: Excel workbooks
-   - NYC: Excel workbooks with candidate mapping
-   - Dominion RCR: CSV files
-   - Simple JSON: JSON files following the schema
+Create the corresponding directory structure in `raw-data/` matching your metadata path and add the raw ballot data files.
 
 Example structure:
 
@@ -115,57 +184,29 @@ raw-data/
 
 ### 3. Process and Verify
 
-1. Run `./sync.sh` to:
-   - Verify directory structure
-   - Generate file hashes
-   - Update metadata
+```bash
+# From project root:
+bun scripts/preprocess.ts
 
-2. Run `./report.sh` to:
-   - Convert raw data to normalized format
-   - Generate analysis reports
-   - Verify data integrity
+# Run tests to validate results
+bun test
+```
 
-3. Check generated files:
-   - Preprocessed data: `preprocessed/{jurisdiction_path}/normalized.json.gz`
-   - Reports: `reports/{jurisdiction_path}/report.json`
+### 4. Compress and Commit
 
-### 4. Compress and Commit Changes
+```bash
+cd report_pipeline
+./compress-to-archives.sh
 
-1. Compress raw data to archives:
+cd ..
+git add report_pipeline/election-metadata/
+git add report_pipeline/reports.sqlite3
+git add report_pipeline/archives/
+git commit -m "Add {jurisdiction} {date} election"
+git push
+```
 
-   ```bash
-   ./compress-to-archives.sh
-   ```
-
-   This creates compressed `.tar.xz` files in `archives/` from `raw-data/`.
-
-2. Commit changes:
-
-   ```bash
-   git add election-metadata/
-   git add reports/
-   git add archives/
-   git commit -m "Add {jurisdiction} {date} election"
-   git push
-   ```
-
-   Note: Archives are managed by Git LFS and will be automatically handled when you push.
-
-### Supported Data Formats
-
-The pipeline supports the following data formats:
-
-- `us_ca_sfo`: San Francisco format (legacy)
-- `nist_sp_1500`: NIST SP 1500-103 standard format (used by San Francisco and others)
-- `us_me`: Maine state format (Excel-based)
-- `us_vt_btv`: Burlington, VT format
-- `us_mn_mpls`: Minneapolis format
-- `dominion_rcr`: Dominion RCV format
-- `us_ny_nyc`: NYC Board of Elections format (Excel-based)
-- `simple_json`: Simple JSON format for testing and small elections
-- `preflib`: PrefLib ordinal preference format (TOI/SOI)
-
-For format-specific requirements and examples, see the source code in `src/formats/`.
+Archives are managed by Git LFS and will be automatically handled when you push.
 
 ### NYC Data Ingestion Process
 
@@ -191,54 +232,25 @@ For NYC elections, follow this specific process:
 
 4. **Update Election Metadata**:
    - Edit `election-metadata/us/ny/nyc.json`
-   - Add the new election entry with:
-     - Election date and name
-     - Contest definitions for all offices (Mayor, Comptroller, Public Advocate, Borough Presidents, Council Members)
-     - Loader parameters specifying the candidate file and CVR pattern
-     - File hashes (see next step)
+   - Add the new election entry with contest definitions and loader parameters
 
-5. **Generate File Hashes**:
+5. **Process Data**:
 
    ```bash
-   cd raw-data/us/ny/nyc/2023/06
-   mkdir -p hashfiles
-   for file in *.xlsx; do
-     certutil -hashfile "$file" SHA256 > "hashfiles/${file}_SHA256.txt"
-   done
+   # From project root:
+   bun scripts/preprocess.ts
    ```
 
-   Extract SHA256 hashes and update the `files` section in `election-metadata/us/ny/nyc.json` with filename-to-hash mappings.
-
-6. **Process Data**:
-
+6. **Compress and Commit**:
    ```bash
-   # From project root (recommended):
-   bun run report:sync    # Verify metadata and file hashes
-   bun run report         # Generate reports and card images
-
-   # Or from report_pipeline directory:
-   ./sync.sh    # Verify metadata and file hashes
-   ./report.sh  # Generate reports and card images
-   ```
-
-7. **Compress and Commit**:
-   ```bash
+   cd report_pipeline
    ./compress-to-archives.sh
-   git add archives/us/ny/nyc/2023/06/
-   git add reports/us/ny/nyc/2023/06/
+   cd ..
+   git add report_pipeline/archives/us/ny/nyc/2023/06/
+   git add report_pipeline/reports.sqlite3
    git commit -m "Add NYC June 2023 election"
    git push
    ```
-
-The NYC format uses Excel workbooks with specific naming patterns that the loader recognizes automatically based on the `cvrPattern` specified in the metadata.
-
-## Data Flow
-
-1. Compressed archives (Git LFS) → `archives/` (committed to git)
-2. Extract archives → `raw-data/` (working directory, gitignored)
-3. Processing pipeline converts to standardized format → `preprocessed/` (generated)
-4. Report generation creates detailed analysis → `reports/` (committed to git)
-5. Web interface displays results
 
 ## Managing Archives
 
@@ -269,39 +281,33 @@ This creates compressed `.tar.xz` files in `archives/` from `raw-data/`. The scr
 
 Archives are managed by Git LFS and should be committed to the repository.
 
+## Tests
+
+Tests live in the project root `tests/` directory:
+
+- `tests/normalizers.test.ts` — Unit tests for all three normalizers
+- `tests/validate-db-flags.test.ts` — Regression test comparing SQLite DB flags against expected values
+- `tests/validate-winners.test.mjs` — Validates winners in the database
+
+Run tests with:
+
+```bash
+bun test
+```
+
+## Migration History
+
+The pipeline was originally written in Rust. It was migrated to TypeScript/Bun in three stages:
+
+1. **Stage 1** — Created a SQLite database and loader scripts to import Rust-generated JSON reports. Switched SvelteKit to read from SQLite instead of JSON files.
+2. **Stage 2** — Ported the RCV tabulator, pairwise/Condorcet analysis, and report generation from Rust to TypeScript. Validated all 282 contests against Rust output.
+3. **Stage 3** — Ported all format parsers (NIST, NYC, Maine, etc.) and normalizers from Rust to TypeScript. The full pipeline now runs end-to-end in TypeScript via `preprocess.ts`.
+
+The Rust source code was removed after the migration was complete. It can be found in git history if needed.
+
 ## License
 
 Website content and generated reports may be freely distributed with attribution under the CC-BY license.
-
-## Analysis Tools
-
-For analyzing large Excel files (especially NYC Board of Elections data), we recommend using the [`sxl`](https://github.com/ktr/sxl) Python library instead of pandas or openpyxl. The `sxl` library uses streaming parsing to handle very large Excel files without loading them entirely into memory, providing much better performance characteristics.
-
-### Installing sxl
-
-```bash
-pip install sxl
-```
-
-### Example Usage
-
-```python
-from sxl import Workbook
-
-# Open a large Excel file efficiently
-wb = Workbook("path/to/large_file.xlsx")
-ws = wb.sheets['Sheet1']  # Access sheet by name or index
-
-# Stream through rows without loading entire file into memory
-for row in ws.rows:
-    print(row)
-
-# Or just examine the first few rows
-head = ws.head(10)
-print(head)
-```
-
-This is particularly beneficial when working with NYC election data files, which can be very large and contain hundreds of thousands of ballots.
 
 ## Contributing
 

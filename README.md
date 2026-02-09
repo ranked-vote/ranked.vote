@@ -2,13 +2,12 @@
 
 A static site and data pipeline for publishing ranked-choice voting (RCV) election reports.
 
-- Web UI: SvelteKit (Svelte 5) app in `src/` that renders published reports
-- Data pipeline: Rust project in `report_pipeline/` that normalizes raw data and generates `report.json`
+- **Web UI**: SvelteKit (Svelte 5) app in `src/` that renders reports from a SQLite database
+- **Data pipeline**: TypeScript/Bun scripts in `scripts/` that parse raw ballot data, run RCV tabulation, and write results to SQLite
 
 ## Prerequisites
 
-- Bun (latest version)
-- Rust (stable) if you need to regenerate reports
+- [Bun](https://bun.sh/) (latest version)
 - **Git LFS** for downloading election data archives
 
 ## First-Time Setup
@@ -55,7 +54,7 @@ bun run dev
 # Open http://localhost:3000
 ```
 
-The app reads report data from `report_pipeline/reports` via the `RANKED_VOTE_REPORTS` environment variable (set automatically in the dev script).
+The app reads report data from `report_pipeline/reports.sqlite3` via the `RANKED_VOTE_DB` environment variable (set automatically in the dev and build scripts).
 
 ## Quick Start (without election data)
 
@@ -70,20 +69,19 @@ bun run dev
 ## Scripts
 
 ### Web Development
-- `bun run dev`: start SvelteKit dev server (with `RANKED_VOTE_REPORTS` set automatically)
+- `bun run dev`: start SvelteKit dev server (with `RANKED_VOTE_DB` set automatically)
 - `bun run build`: build static site to `build/` directory
 - `bun run preview`: preview the built site locally
 - `bun run check`: run Svelte type checking
 
-### Report Generation
-- `bun run report`: generate reports (automatically generates card images after reports are created)
-- `bun run report:sync`: sync election metadata with raw data files
-- `bun run report:extract`: extract election data from archives to raw-data directory
+### Pipeline & Report Generation
+- `bun run report` (or `bun scripts/preprocess.ts`): full pipeline — reads raw data, parses ballots, normalizes, tabulates, and writes results to SQLite
+- `bun run report:extract`: extract election data from archives to `raw-data/`
 
 ### Card Image Generation
 - `bun run generate-images`: generate share images (automatically starts/stops dev server if needed)
   - Processes images in parallel (default: 5 concurrent, set `CONCURRENCY` env var to adjust)
-  - Skips unchanged images (only regenerates if report.json is newer than PNG)
+  - Skips unchanged images (only regenerates when source data is newer than PNG)
 - Card image validation is included in the test suite (`bun test`)
 
 ## Build
@@ -94,14 +92,13 @@ bun run build
 # output: build/
 ```
 
-The build script automatically sets `RANKED_VOTE_REPORTS` to `report_pipeline/reports`.
+The build script automatically sets `RANKED_VOTE_DB` to `report_pipeline/reports.sqlite3`.
 
 ## Deployment
 
 Deploys are handled by GitHub Pages via `.github/workflows/deploy-rcv-report.yml`:
 
 - On push to `main`/`master`, CI installs dependencies, builds, and publishes `build/` to Pages
-- CI sets `RANKED_VOTE_REPORTS` to `${{ github.workspace }}/report_pipeline/reports`
 
 ## Working with Election Data
 
@@ -112,12 +109,14 @@ report_pipeline/
 ├── archives/          # Compressed data (committed to git via LFS)
 │   └── us/ca/alameda/2024/11/
 │       └── nov-05-general.tar.xz
+├── election-metadata/ # Election configuration JSON (committed to git)
+│   └── us/ca/alameda.json
 ├── raw-data/          # Uncompressed working data (gitignored)
 │   └── us/ca/alameda/2024/11/
 │       └── nov-05-general/
 │           ├── CvrExport_*.json
 │           └── *Manifest.json
-└── reports/           # Generated reports (committed to git)
+└── reports.sqlite3    # Generated report database (committed to git)
 ```
 
 ### Adding New Election Data
@@ -129,29 +128,27 @@ report_pipeline/
    cp -r /path/to/new-data raw-data/us/ca/alameda/2025/06/
    ```
 
-2. **Generate reports with Rust pipeline**
-   ```bash
-   # From project root (recommended):
-   bun run report
+2. **Add or update election metadata** in `election-metadata/` (e.g. `us/ca/alameda.json`)
 
-   # Or from report_pipeline directory:
-   cd report_pipeline
-   ./report.sh  # See report_pipeline/README.md for details
+3. **Run the pipeline**
+   ```bash
+   # From project root:
+   bun scripts/preprocess.ts
    ```
 
-   Note: `bun run report` automatically generates card images after reports are created.
-
-3. **Compress for git**
+4. **Compress for git**
    ```bash
+   cd report_pipeline
    ./compress-to-archives.sh
    # Creates archives/ from raw-data/ (~33:1 compression)
    ```
 
-4. **Commit archives and generated files (not raw-data)**
+5. **Commit archives and database (not raw-data)**
    ```bash
    cd ..
    git add report_pipeline/archives/us/ca/alameda/2025/06/
-   git add report_pipeline/reports/us/ca/alameda/2025/06/
+   git add report_pipeline/election-metadata/us/ca/alameda.json
+   git add report_pipeline/reports.sqlite3
    git add static/share/us/ca/alameda/2025/06/
    git commit -m "Add Alameda June 2025 election"
    git push
@@ -161,21 +158,30 @@ See [DATA-WORKFLOW.md](report_pipeline/DATA-WORKFLOW.md) for complete documentat
 
 ## Project Structure
 
-- `src/`: SvelteKit app (Svelte 5 components, routes, API endpoints)
+- `src/`: SvelteKit app (Svelte 5 components, routes, server-side DB access)
+  - `src/lib/server/db.ts`: SQLite database access layer
+- `scripts/`: TypeScript pipeline and utilities
+  - `scripts/preprocess.ts`: Full pipeline (raw data → SQLite)
+  - `scripts/pipeline/formats/`: Format readers (NIST SP 1500, NYC, Maine, etc.)
+  - `scripts/pipeline/normalizers/`: Ballot normalizers (simple, Maine, NYC)
+  - `scripts/tabulate-rcv.ts`: RCV tabulation engine
+  - `scripts/compute-rcv-analysis.ts`: Analysis (pairwise, Condorcet, Smith set, etc.)
+  - `scripts/init-database.ts`: SQLite schema
 - `static/`: static assets copied to build
   - `static/share/`: Generated card images for social media sharing (committed)
-- `report_pipeline/`: Rust data processing and report generation
+- `report_pipeline/`: Election data and configuration
+  - `election-metadata/`: Election configuration JSON files (committed)
   - `archives/`: Compressed election data (git LFS, committed)
   - `raw-data/`: Uncompressed working data (gitignored)
-  - `reports/`: Generated JSON reports (committed)
+  - `reports.sqlite3`: SQLite database with all report data (committed)
+- `tests/`: Pipeline and data validation tests
 - `build/`: static site build output (gitignored)
-- `.svelte-kit/`: SvelteKit build cache (gitignored)
 
 ## Documentation
 
 - [GIT-LFS-SETUP.md](GIT-LFS-SETUP.md) - Complete Git LFS setup and troubleshooting
 - [DATA-WORKFLOW.md](report_pipeline/DATA-WORKFLOW.md) - Data management workflow
-- [report_pipeline/README.md](report_pipeline/README.md) - Rust pipeline details
+- [report_pipeline/README.md](report_pipeline/README.md) - Pipeline details and format reference
 
 ## Common Tasks
 
@@ -186,31 +192,26 @@ bun run report:extract
 # View reports in browser
 bun install && bun run dev
 
-# Generate reports and card images
-bun run report
+# Run the full pipeline (raw data → SQLite)
+bun scripts/preprocess.ts
 
 # Generate/update share images
 bun run generate-images
 
-# Run tests (includes card image validation)
+# Run tests
 bun test
 
 # Add new election data
 cd report_pipeline
 cp -r /source raw-data/us/ca/alameda/2025/06/
-bun run report:sync  # Sync metadata
-bun run report       # Generate reports and images
-./compress-to-archives.sh
-git add archives/ reports/ static/share/
-
-# Update election data
-# Edit files in raw-data/
+# Edit election-metadata/us/ca/alameda.json
+cd ..
+bun scripts/preprocess.ts   # Generate reports
+bun run generate-images     # Generate share images
 cd report_pipeline
-bun run report:sync  # Sync metadata
-bun run report       # Regenerate reports and images
-bun run generate-images  # Regenerate share images
-./compress-to-archives.sh  # Detects changes and recompresses
-git add archives/ reports/ static/share/
+./compress-to-archives.sh
+cd ..
+git add report_pipeline/archives/ report_pipeline/reports.sqlite3 static/share/
 ```
 
 ## Troubleshooting

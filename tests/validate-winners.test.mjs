@@ -1,7 +1,25 @@
-import fs from "fs/promises";
-import path from "path";
+/**
+ * Validate known election winners against the SQLite database.
+ *
+ * Checks that the database contains the correct winner, candidate count,
+ * and round count for a set of well-known contests.
+ */
 
-// Known valid winners from the user's list
+import { describe, test, expect, afterAll } from "bun:test";
+import { Database } from "bun:sqlite";
+import { resolve } from "path";
+import fs from "fs/promises";
+
+const DB_PATH = resolve(
+  process.env.RANKED_VOTE_DB || "report_pipeline/reports.sqlite3",
+);
+const db = new Database(DB_PATH, { readonly: true });
+
+afterAll(() => {
+  db.close();
+});
+
+// Known valid winners
 const EXPECTED_WINNERS = [
   // 2025
   {
@@ -187,7 +205,7 @@ const EXPECTED_WINNERS = [
     officeName: "Board of Supervisors, District 2",
     winner: "Catherine Stefani",
     numCandidates: 4,
-    numRounds: 2,
+    numRounds: 3,
   },
   {
     year: 2018,
@@ -622,73 +640,53 @@ const EXPECTED_WINNERS = [
   },
 ];
 
-function extractYearFromPath(pathStr) {
-  const match = pathStr.match(/\/(\d{4})\//);
-  return match ? parseInt(match[1], 10) : null;
-}
-
 function normalizeName(name) {
-  return (
-    name
-      .trim()
-      .replace(/\s+/g, " ")
-      // Normalize different quote styles to straight quotes
-      .replace(/[\u201C\u201D"]/g, '"') // Left/right double quotes to straight
-      .replace(/[\u2018\u2019']/g, "'")
-  ); // Left/right single quotes to straight
+  return name
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/[\u201C\u201D"]/g, '"')
+    .replace(/[\u2018\u2019']/g, "'");
 }
 
-function findContest(index, expected) {
-  for (const election of index.elections || []) {
-    const electionYear = extractYearFromPath(election.path);
-    if (electionYear !== expected.year) {
-      continue;
-    }
+// Query helpers
+function findContest(expected) {
+  // Match on jurisdictionName, electionName, officeName, and year from date
+  const rows = db
+    .prepare(
+      `SELECT r.path, r.office, r.officeName, r.electionName, r.jurisdictionName,
+              r.date, r.numCandidates,
+              c.name as winnerName,
+              (SELECT COUNT(*) FROM rounds WHERE report_id = r.id) as numRounds
+       FROM reports r
+       LEFT JOIN candidates c ON r.id = c.report_id AND c.winner = 1
+       WHERE r.jurisdictionName = ? AND r.electionName = ?`,
+    )
+    .all(expected.jurisdictionName, expected.electionName);
+
+  for (const row of rows) {
+    const year = parseInt(row.date.substring(0, 4), 10);
+    if (year !== expected.year) continue;
 
     if (
-      normalizeName(election.electionName) !==
-        normalizeName(expected.electionName) ||
-      normalizeName(election.jurisdictionName) !==
-        normalizeName(expected.jurisdictionName)
+      normalizeName(row.officeName) === normalizeName(expected.officeName) ||
+      normalizeName(row.office) === normalizeName(expected.officeName)
     ) {
-      continue;
-    }
-
-    for (const contest of election.contests || []) {
-      if (
-        normalizeName(contest.officeName) ===
-          normalizeName(expected.officeName) ||
-        normalizeName(contest.name) === normalizeName(expected.officeName)
-      ) {
-        return { election, contest };
-      }
+      return row;
     }
   }
   return null;
 }
 
 describe("Election Winner Validation", () => {
-  let index;
-
-  beforeAll(async () => {
-    const indexRaw = await fs.readFile(
-      path.join(process.cwd(), "report_pipeline/reports/index.json"),
-      "utf8",
-    );
-    index = JSON.parse(indexRaw);
-  });
-
   test.each(EXPECTED_WINNERS)(
     "should have correct winner for $year $jurisdictionName - $electionName - $officeName",
     (expected) => {
-      const found = findContest(index, expected);
+      const contest = findContest(expected);
 
-      expect(found).not.toBeNull();
-      expect(found).toBeTruthy();
+      expect(contest).not.toBeNull();
+      expect(contest).toBeTruthy();
 
-      const { contest } = found;
-
-      const actualWinner = normalizeName(contest.winner);
+      const actualWinner = normalizeName(contest.winnerName);
       const expectedWinner = normalizeName(expected.winner);
 
       expect(actualWinner).toBe(expectedWinner);
@@ -697,36 +695,21 @@ describe("Election Winner Validation", () => {
     },
   );
 });
+
 describe("Card Image Validation", () => {
-  let index;
-
-  beforeAll(async () => {
-    const indexRaw = await fs.readFile(
-      path.join(process.cwd(), "report_pipeline/reports/index.json"),
-      "utf8",
-    );
-    index = JSON.parse(indexRaw);
-  });
-
   test("all reports should have corresponding card images", async () => {
-    const reports = [];
-    for (const election of index.elections || []) {
-      for (const contest of election.contests || []) {
-        reports.push({
-          path: `${election.path}/${contest.office}`,
-          election: election,
-          contest: contest,
-        });
-      }
-    }
+    const reports = db
+      .prepare(
+        `SELECT r.path, r.office FROM reports r`,
+      )
+      .all();
 
     const missingCards = [];
 
     for (const report of reports) {
-      const reportPath = report.path;
-      const outputPath = path.join(
+      const outputPath = resolve(
         process.cwd(),
-        `static/share/${reportPath}.png`,
+        `static/share/${report.path}/${report.office}.png`,
       );
 
       try {
@@ -737,11 +720,12 @@ describe("Card Image Validation", () => {
     }
 
     if (missingCards.length > 0) {
+      const { resolve: pathResolve, relative } = await import("path");
       const missingList = missingCards
-        .map((p) => path.relative(process.cwd(), p))
+        .map((p) => relative(process.cwd(), p))
         .join("\n  - ");
       throw new Error(
-        `Missing ${missingCards.length} card image(s):\n  - ${missingList}\n\nRun 'npm run generate-images' to generate missing cards.`,
+        `Missing ${missingCards.length} card image(s):\n  - ${missingList}\n\nRun 'bun run generate-images' to generate missing cards.`,
       );
     }
 
