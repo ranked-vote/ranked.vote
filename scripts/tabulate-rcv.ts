@@ -141,7 +141,7 @@ export function tabulate(
 
     // Determine which candidates to eliminate
     let candidatesToEliminate: Set<CandidateId>;
-    const isEager = options.eager ?? false;
+    const isEager = options.eager ?? true;
 
     if (isEager) {
       // Eager mode: eliminate all candidates that cannot mathematically win.

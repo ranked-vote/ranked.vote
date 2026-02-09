@@ -41,8 +41,8 @@ function readCandidateIds(csvPath: string): Map<number, string> {
 
   // Skip header (first line)
   for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
+    const line = lines[i];
+    if (!line || !line.trim()) continue;
 
     const fields = parseCsvLine(line);
     if (fields.length < 2) continue;

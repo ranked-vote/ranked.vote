@@ -1,9 +1,9 @@
 /**
  * Minneapolis election format reader.
  *
- * Ported from report_pipeline/src/formats/us_mn_mpls/mod.rs.
- *
  * Reads CSV or Excel files with aggregated ballot data.
+ * XLSX files are converted to CSV on first use via the xlsx-to-csv cache layer.
+ *
  * Format: Precinct, 1st Choice, 2nd Choice, 3rd Choice, Count
  * Special values: "undervote", "overvote" (case-insensitive).
  * "UWI" maps to "Undeclared Write-ins" with WriteIn candidate type.
@@ -12,8 +12,8 @@
 
 import { readFileSync } from "fs";
 import { join, extname } from "path";
-import ExcelJS from "exceljs";
 import { CandidateMap } from "../candidate-map";
+import { ensureCsv } from "../xlsx-to-csv";
 import type { Ballot, Choice, Election } from "../types";
 
 function parseChoice(
@@ -80,11 +80,6 @@ function appendBallots(
       choices: [...choices],
     });
   }
-}
-
-function cellToString(cell: any): string {
-  if (cell === null || cell === undefined) return "";
-  return String(cell).trim();
 }
 
 /**
@@ -166,52 +161,6 @@ function readCsv(filePath: string): Election {
   return { candidates: candidateMap.intoCandidates(), ballots };
 }
 
-async function readXlsx(filePath: string): Promise<Election> {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheet = workbook.worksheets[0];
-  if (!sheet) return { candidates: [], ballots: [] };
-
-  const candidateMap = new CandidateMap<string>();
-  const ballots: Ballot[] = [];
-  const ballotId = { value: 0 };
-
-  sheet.eachRow((row, rowNumber) => {
-    // Skip header
-    if (rowNumber === 1) return;
-
-    const values = row.values as any[];
-    if (!values || values.length < 6) return;
-
-    // ExcelJS row.values is 1-indexed
-    const precinct = cellToString(values[1]);
-    const choice1 = cellToString(values[2]);
-    const choice2 = cellToString(values[3]);
-    const choice3 = cellToString(values[4]);
-
-    let count = 1;
-    const countVal = values[5];
-    if (typeof countVal === "number") {
-      count = Math.max(1, Math.floor(countVal));
-    } else if (typeof countVal === "string") {
-      count = parseInt(countVal, 10) || 1;
-    }
-
-    appendBallots(
-      candidateMap,
-      ballots,
-      precinct,
-      choice1,
-      choice2,
-      choice3,
-      count,
-      ballotId,
-    );
-  });
-
-  return { candidates: candidateMap.intoCandidates(), ballots };
-}
-
 export async function mplsReader(
   basePath: string,
   params: Record<string, string>,
@@ -223,7 +172,9 @@ export async function mplsReader(
   const ext = extname(filePath).toLowerCase();
 
   if (ext === ".xlsx" || ext === ".xlsm" || ext === ".xls") {
-    return readXlsx(filePath);
+    // Convert to CSV via cache layer, then read as CSV
+    const csvPath = await ensureCsv(filePath);
+    return readCsv(csvPath);
   }
   return readCsv(filePath);
 }

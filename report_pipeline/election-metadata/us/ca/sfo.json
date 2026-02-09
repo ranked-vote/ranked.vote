@@ -63,7 +63,9 @@
       "name": "Consolidated General Election",
       "date": "2008-11-04",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -139,7 +141,9 @@
       "name": "Consolidated General Election",
       "date": "2010-11-02",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -191,7 +195,9 @@
       "name": "Consolidated Municipal Election",
       "date": "2011-11-08",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -233,7 +239,9 @@
       "name": "Consolidated General Election",
       "date": "2012-11-06",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -265,7 +273,9 @@
       "name": "Consolidated General Election",
       "date": "2014-11-04",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -287,7 +297,9 @@
       "name": "Consolidated Municipal Election",
       "date": "2015-11-03",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -325,7 +337,9 @@
       "name": "Consolidated General Election",
       "date": "2016-11-08",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -388,7 +402,9 @@
       "name": "Consolidated Statewide Primary Election",
       "date": "2018-06-05",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -419,7 +435,6 @@
       "name": "General Election",
       "date": "2018-11-06",
       "dataFormat": "us_ca_sfo",
-      "tabulationOptions": null,
       "normalization": "simple",
       "contests": [
         {
@@ -490,13 +505,18 @@
         "20181127_masterlookup.txt": "a8e909a7cea653eea6ed3e450fa83cd41d0e11ed",
         "20181127_sha512.csv": "858f6e0280e079a065711844b068470b71db2d69"
       },
-      "website": "https://sfelections.sfgov.org/november-6-2018-election-results-detailed-reports"
+      "website": "https://sfelections.sfgov.org/november-6-2018-election-results-detailed-reports",
+      "tabulationOptions": {
+        "eager": false
+      }
     },
     "2019/11": {
       "name": "Consolidated Municipal Election",
       "date": "2019-11-05",
       "dataFormat": "nist_sp_1500",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -565,7 +585,9 @@
       "name": "Consolidated General Election",
       "date": "2020-11-03",
       "dataFormat": "nist_sp_1500",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": false
+      },
       "normalization": "simple",
       "contests": [
         {
@@ -626,7 +648,9 @@
       "name": "Consolidated General Election",
       "date": "2024-11-03",
       "dataFormat": "nist_sp_1500",
-      "tabulationOptions": null,
+      "tabulationOptions": {
+        "eager": true
+      },
       "normalization": "simple",
       "contests": [
         {

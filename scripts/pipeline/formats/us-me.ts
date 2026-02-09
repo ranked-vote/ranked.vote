@@ -1,19 +1,20 @@
 /**
  * Maine state election format reader.
  *
- * Ported from report_pipeline/src/formats/us_me/mod.rs.
+ * Reads ranked choice ballots from cached CSV files.
+ * XLSX files are converted to CSV on first use via the xlsx-to-csv cache layer.
  *
- * Reads Excel files with ranked choice ballots.
  * Multiple files can be specified (semicolon-separated).
- * Format: ballot_id in column 0, choices in columns 3-9.
+ * Format (0-indexed CSV columns): ballot_id in column 0, choices in columns 3-9.
  * Special values: "overvote", "undervote".
  * Candidate names may have party prefixes (DEM/REP) and parenthetical numbers.
  */
 
-import { join } from "path";
-import ExcelJS from "exceljs";
+import { readFileSync } from "fs";
+import { join, extname } from "path";
 import { CandidateMap } from "../candidate-map";
 import { normalizeName } from "../normalize-name";
+import { ensureCsv, parseCsvLine } from "../xlsx-to-csv";
 import type { Ballot, Choice, Election } from "../types";
 
 function parseChoice(
@@ -47,38 +48,44 @@ export async function maineReader(
 
   for (const file of fileList) {
     const filePath = join(basePath, file);
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(filePath);
-    const sheet = workbook.worksheets[0];
-    if (!sheet) continue;
+    const ext = extname(filePath).toLowerCase();
+
+    // For XLSX files, convert to CSV first via cache layer
+    let csvPath: string;
+    if (ext === ".xlsx" || ext === ".xlsm" || ext === ".xls") {
+      csvPath = await ensureCsv(filePath);
+    } else {
+      csvPath = filePath;
+    }
+
+    const raw = readFileSync(csvPath, "utf-8");
+    const lines = raw.split("\n");
 
     let rowIndex = 0;
-    sheet.eachRow((row, rowNumber) => {
-      // Skip header row
-      if (rowNumber === 1) return;
+    // Skip header (first line)
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i];
+      if (!line || !line.trim()) continue;
       rowIndex++;
 
-      const values = row.values as any[];
-      // ExcelJS row.values is 1-indexed
-      const rawId = values[1];
-      const id =
-        rawId !== undefined && rawId !== null
-          ? String(Math.floor(Number(rawId)))
-          : String(rowIndex);
+      const fields = parseCsvLine(line);
+
+      // CSV is 0-indexed. Original ExcelJS was 1-indexed:
+      //   values[1] = ballot ID  ->  fields[0]
+      //   values[4..10] = choices ->  fields[3..9]
+      const rawId = fields[0] || "";
+      const id = rawId ? String(Math.floor(Number(rawId))) : String(rowIndex);
 
       const choices: Choice[] = [];
-      // Process columns 4-10 (1-indexed, originally columns 3-9 in 0-indexed)
-      for (let i = 4; i <= 10; i++) {
-        const cell = values[i];
-        const cand =
-          cell !== undefined && cell !== null && String(cell).trim()
-            ? String(cell).trim()
-            : "undervote";
+      // Process columns 3-9 (0-indexed)
+      for (let c = 3; c <= 9; c++) {
+        const cell = fields[c];
+        const cand = cell && cell.trim() ? cell.trim() : "undervote";
         choices.push(parseChoice(cand, candidateMap));
       }
 
       ballots.push({ id, choices });
-    });
+    }
   }
 
   return { candidates: candidateMap.intoCandidates(), ballots };

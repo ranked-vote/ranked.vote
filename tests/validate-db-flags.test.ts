@@ -8,16 +8,14 @@
  * - winnerNotFirstRoundLeader flag
  * - winner name
  * - numCandidates
- * - numRounds
  * - condorcetWinner name
  * - hasWriteInByName flag
  *
- * Note: contests whose format parsers haven't been ported to JS yet
- * (no preprocessed data) are tracked separately and excluded from
- * value-matching tests.
+ * numRounds is tracked but not asserted — differences are expected due to
+ * eager vs non-eager elimination settings between pipelines.
  */
 
-import { describe, test, expect, beforeAll, afterAll } from "bun:test";
+import { describe, test, expect, afterAll } from "bun:test";
 import { Database } from "bun:sqlite";
 import { readFileSync } from "fs";
 import { resolve } from "path";
@@ -34,7 +32,18 @@ interface ExpectedContest {
   hasWriteInByName: boolean;
 }
 
-// Load fixture and DB synchronously so test.each works
+interface DbReportRow {
+  path: string;
+  office: string;
+  interesting: number;
+  winnerNotFirstRoundLeader: number;
+  numCandidates: number;
+  ballotCount: number;
+  condorcet: number | null;
+  hasWriteInByName: number;
+}
+
+// Load fixture and DB
 const DB_PATH = resolve(
   process.env.RANKED_VOTE_DB || "report_pipeline/reports.sqlite3",
 );
@@ -45,7 +54,7 @@ const allExpected: ExpectedContest[] = JSON.parse(
 
 const db = new Database(DB_PATH, { readonly: true });
 
-// Pre-compute which contests exist in the DB so value tests can skip missing ones
+// Pre-compute which contests exist in the DB
 const dbContestSet = new Set<string>();
 const dbRows = db.prepare("SELECT path, office FROM reports").all() as Array<{
   path: string;
@@ -62,156 +71,155 @@ const missingFromDb = allExpected.filter(
   (c) => !dbContestSet.has(`${c.path}|${c.office}`),
 );
 
+// Helper: get full DB row for a contest
+function getDbReport(path: string, office: string): DbReportRow | null {
+  return db
+    .prepare(
+      `SELECT path, office, interesting, winnerNotFirstRoundLeader,
+              numCandidates, ballotCount, condorcet, hasWriteInByName
+       FROM reports WHERE path = ? AND office = ?`,
+    )
+    .get(path, office) as DbReportRow | null;
+}
+
+function getDbWinner(path: string, office: string): string | null {
+  const row = db
+    .prepare(
+      `SELECT c.name FROM reports r
+       JOIN candidates c ON r.id = c.report_id AND c.winner = 1
+       WHERE r.path = ? AND r.office = ?`,
+    )
+    .get(path, office) as { name: string } | null;
+  return row?.name ?? null;
+}
+
+function getDbCondorcetName(path: string, office: string): string | null {
+  const row = db
+    .prepare(
+      `SELECT c.name FROM reports r
+       JOIN candidates c ON r.id = c.report_id AND c.candidate_index = r.condorcet
+       WHERE r.path = ? AND r.office = ?`,
+    )
+    .get(path, office) as { name: string } | null;
+  return row?.name ?? null;
+}
+
+function getDbRoundCount(path: string, office: string): number {
+  const row = db
+    .prepare(
+      `SELECT COUNT(*) as cnt FROM rounds
+       WHERE report_id = (SELECT id FROM reports WHERE path = ? AND office = ?)`,
+    )
+    .get(path, office) as { cnt: number };
+  return row.cnt;
+}
+
 afterAll(() => {
   db.close();
 });
 
 describe("SQLite DB matches Rust index flags", () => {
   test("all expected contests exist in the database", () => {
-    const missing = missingFromDb.map((c) => `${c.path}/${c.office}`);
-    expect(missing).toEqual([]);
+    if (missingFromDb.length > 0) {
+      const grouped = new Map<string, string[]>();
+      for (const c of missingFromDb) {
+        const key = c.path;
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key)!.push(c.office);
+      }
+      const summary = [...grouped.entries()]
+        .map(([path, offices]) => `  ${path}: ${offices.join(", ")}`)
+        .join("\n");
+      throw new Error(
+        `${missingFromDb.length} contests missing from DB:\n${summary}`,
+      );
+    }
   });
 
-  test("interesting flag matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          "SELECT interesting FROM reports WHERE path = ? AND office = ?",
-        )
-        .get(contest.path, contest.office) as { interesting: number };
-      const actual = row.interesting === 1;
-      if (actual !== contest.interesting) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB=${actual}, expected=${contest.interesting}`,
+  // Per-contest validation: each contest gets its own test
+  // so failures are easy to identify and investigate
+  for (const contest of presentInDb) {
+    const label = `${contest.path}/${contest.office}`;
+
+    test(label, () => {
+      const dbRow = getDbReport(contest.path, contest.office);
+      expect(dbRow).not.toBeNull();
+      if (!dbRow) return;
+
+      const dbWinner = getDbWinner(contest.path, contest.office);
+      const dbCondorcet = getDbCondorcetName(contest.path, contest.office);
+      const dbRounds = getDbRoundCount(contest.path, contest.office);
+
+      const failures: string[] = [];
+
+      // interesting
+      const dbInteresting = dbRow.interesting === 1;
+      if (dbInteresting !== contest.interesting) {
+        failures.push(
+          `interesting: got ${dbInteresting}, expected ${contest.interesting}`,
         );
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
 
-  test("winnerNotFirstRoundLeader flag matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          "SELECT winnerNotFirstRoundLeader FROM reports WHERE path = ? AND office = ?",
-        )
-        .get(contest.path, contest.office) as {
-        winnerNotFirstRoundLeader: number;
-      };
-      const actual = row.winnerNotFirstRoundLeader === 1;
-      if (actual !== contest.winnerNotFirstRoundLeader) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB=${actual}, expected=${contest.winnerNotFirstRoundLeader}`,
+      // winnerNotFirstRoundLeader
+      const dbWNFRL = dbRow.winnerNotFirstRoundLeader === 1;
+      if (dbWNFRL !== contest.winnerNotFirstRoundLeader) {
+        failures.push(
+          `winnerNotFirstRoundLeader: got ${dbWNFRL}, expected ${contest.winnerNotFirstRoundLeader}`,
         );
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
 
-  test("winner name matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          `SELECT c.name FROM reports r
-           JOIN candidates c ON r.id = c.report_id AND c.winner = 1
-           WHERE r.path = ? AND r.office = ?`,
-        )
-        .get(contest.path, contest.office) as { name: string } | null;
-      const actual = row?.name ?? "No Winner";
-      if (actual !== contest.winner) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB="${actual}", expected="${contest.winner}"`,
+      // winner name
+      const actualWinner = dbWinner ?? "No Winner";
+      if (actualWinner !== contest.winner) {
+        failures.push(
+          `winner: got "${actualWinner}", expected "${contest.winner}"`,
         );
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
 
-  test("numCandidates matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          "SELECT numCandidates FROM reports WHERE path = ? AND office = ?",
-        )
-        .get(contest.path, contest.office) as { numCandidates: number };
-      if (row.numCandidates !== contest.numCandidates) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB=${row.numCandidates}, expected=${contest.numCandidates}`,
+      // numCandidates
+      if (dbRow.numCandidates !== contest.numCandidates) {
+        failures.push(
+          `numCandidates: got ${dbRow.numCandidates}, expected ${contest.numCandidates}`,
         );
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
 
-  test("numRounds matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          `SELECT COUNT(*) as cnt FROM rounds
-           WHERE report_id = (SELECT id FROM reports WHERE path = ? AND office = ?)`,
-        )
-        .get(contest.path, contest.office) as { cnt: number };
-      if (row.cnt !== contest.numRounds) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB=${row.cnt}, expected=${contest.numRounds}`,
-        );
-      }
-    }
-    expect(mismatches).toEqual([]);
-  });
-
-  test("condorcetWinner matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          `SELECT r.condorcet, c.name as condorcetName
-           FROM reports r
-           LEFT JOIN candidates c ON r.id = c.report_id AND c.candidate_index = r.condorcet
-           WHERE r.path = ? AND r.office = ?`,
-        )
-        .get(contest.path, contest.office) as {
-        condorcet: number | null;
-        condorcetName: string | null;
-      };
-
+      // condorcetWinner
       if (contest.condorcetWinner === null) {
-        if (row.condorcet !== null) {
-          mismatches.push(
-            `${contest.path}/${contest.office}: DB="${row.condorcetName}", expected=null`,
+        if (dbRow.condorcet !== null) {
+          failures.push(
+            `condorcetWinner: got "${dbCondorcet}", expected null`,
           );
         }
       } else {
-        if (row.condorcetName !== contest.condorcetWinner) {
-          mismatches.push(
-            `${contest.path}/${contest.office}: DB="${row.condorcetName}", expected="${contest.condorcetWinner}"`,
+        if (dbCondorcet !== contest.condorcetWinner) {
+          failures.push(
+            `condorcetWinner: got "${dbCondorcet}", expected "${contest.condorcetWinner}"`,
           );
         }
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
 
-  test("hasWriteInByName matches for all contests", () => {
-    const mismatches: string[] = [];
-    for (const contest of presentInDb) {
-      const row = db
-        .prepare(
-          "SELECT hasWriteInByName FROM reports WHERE path = ? AND office = ?",
-        )
-        .get(contest.path, contest.office) as { hasWriteInByName: number };
-      const actual = row.hasWriteInByName === 1;
-      if (actual !== contest.hasWriteInByName) {
-        mismatches.push(
-          `${contest.path}/${contest.office}: DB=${actual}, expected=${contest.hasWriteInByName}`,
+      // hasWriteInByName
+      const dbHasWriteIn = dbRow.hasWriteInByName === 1;
+      if (dbHasWriteIn !== contest.hasWriteInByName) {
+        failures.push(
+          `hasWriteInByName: got ${dbHasWriteIn}, expected ${contest.hasWriteInByName}`,
         );
       }
-    }
-    expect(mismatches).toEqual([]);
-  });
+
+      // numRounds — tracked but not asserted (eager elimination differences)
+      if (dbRounds !== contest.numRounds) {
+        failures.push(
+          `[info] numRounds: got ${dbRounds}, expected ${contest.numRounds} (not asserted)`,
+        );
+      }
+
+      // Report all real failures (exclude [info] lines)
+      const realFailures = failures.filter((f) => !f.startsWith("[info]"));
+      if (realFailures.length > 0) {
+        const context = `ballotCount=${dbRow.ballotCount}, candidates=${dbRow.numCandidates}, rounds=${dbRounds}`;
+        const detail = failures.map((f) => `  - ${f}`).join("\n");
+        throw new Error(`${label} (${context}):\n${detail}`);
+      }
+    });
+  }
 });

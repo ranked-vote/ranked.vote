@@ -89,12 +89,15 @@ interface CandidateEntry {
 // ---- Helper functions ----
 
 function getSessionContests(session: SessionJson): ContestMarksJson[] {
-  // Use Modified if present, otherwise Original
+  // Match Rust behavior:
+  // If Original has Contests directly, use those (even if Modified exists).
+  // Only fall back to Modified (via ballot()) for the Cards path.
+  if (session.Original.Contests) {
+    return session.Original.Contests;
+  }
+
+  // Contests nested in Cards — use Modified if present, otherwise Original
   const ballot = session.Modified ?? session.Original;
-
-  if (ballot.Contests) return ballot.Contests;
-
-  // Contests nested in Cards
   if (ballot.Cards) {
     return ballot.Cards.flatMap((card) => card.Contests);
   }
@@ -250,12 +253,13 @@ function readFromDirectory(
     dropUnqualifiedWriteIn,
   );
 
-  // Find all CvrExport JSON files
+  // Find all CvrExport JSON files (exclude _old backups)
   const files = readdirSync(dirPath)
     .filter(
       (f) =>
-        (f.startsWith("CvrExport") && f.endsWith(".json")) ||
-        (f.startsWith("CVR_Export") && f.endsWith(".csv")),
+        !f.includes("_old") &&
+        ((f.startsWith("CvrExport") && f.endsWith(".json")) ||
+          (f.startsWith("CVR_Export") && f.endsWith(".csv"))),
     )
     .sort();
 
@@ -365,9 +369,14 @@ export function nistBatchReader(
     });
   }
 
-  // Find all CvrExport JSON files
+  // Find all CvrExport JSON files (exclude _old backups)
   const files = readdirSync(cvrPath)
-    .filter((f) => f.startsWith("CvrExport") && f.endsWith(".json"))
+    .filter(
+      (f) =>
+        !f.includes("_old") &&
+        f.startsWith("CvrExport") &&
+        f.endsWith(".json"),
+    )
     .sort();
 
   // Process each file once for all contests

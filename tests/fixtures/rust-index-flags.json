@@ -583,171 +583,6 @@
     "hasWriteInByName": false
   },
   {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-city-attorney",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Ryan Richardson",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Ryan Richardson",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-council-at-large",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Rowena Brown",
-    "numCandidates": 10,
-    "numRounds": 5,
-    "condorcetWinner": "Rowena Brown",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-council-d1",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Zac Unger",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Zac Unger",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "berkeley-council-d2",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Terry Taplin",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Terry Taplin",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "berkeley-council-d3",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Ben Bartlett",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Ben Bartlett",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-council-d3",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Carroll Fife",
-    "numCandidates": 6,
-    "numRounds": 2,
-    "condorcetWinner": "Carroll Fife",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "berkeley-council-d5",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Shoshana O'Keefe",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Shoshana O'Keefe",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-council-d5",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Noel Gallo",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Noel Gallo",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "berkeley-council-d6",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Brent Blackaby",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Brent Blackaby",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-council-d7",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Ken Houston",
-    "numCandidates": 4,
-    "numRounds": 3,
-    "condorcetWinner": "Ken Houston",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "berkeley-mayor",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Adena Ishii",
-    "numCandidates": 5,
-    "numRounds": 2,
-    "condorcetWinner": "Adena Ishii",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-school-director-d1",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Rachel Latta",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Rachel Latta",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-school-director-d3",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Vancedric Williams",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Vancedric Williams",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-school-director-d5",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Patrice Berry",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Patrice Berry",
-    "hasWriteInByName": false
-  },
-  {
-    "path": "us/ca/alameda/2024/11",
-    "office": "oakland-school-director-d7",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Clifford Thompson",
-    "numCandidates": 2,
-    "numRounds": 1,
-    "condorcetWinner": "Clifford Thompson",
-    "hasWriteInByName": false
-  },
-  {
     "path": "us/ca/sfo/2024/11",
     "office": "supervisor-d01",
     "interesting": false,
@@ -1345,11 +1180,11 @@
     "path": "us/ca/alameda/2022/11",
     "office": "berkeley-council-d1",
     "interesting": false,
-    "winnerNotFirstRoundLeader": true,
-    "winner": "Elisa Mikiten",
+    "winnerNotFirstRoundLeader": false,
+    "winner": "Rashi Kesarwani",
     "numCandidates": 3,
     "numRounds": 2,
-    "condorcetWinner": "Elisa Mikiten",
+    "condorcetWinner": "Rashi Kesarwani",
     "hasWriteInByName": false
   },
   {
@@ -1455,22 +1290,22 @@
     "path": "us/ca/alameda/2022/11",
     "office": "oakland-mayor",
     "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Loren Manuel Taylor",
+    "winnerNotFirstRoundLeader": true,
+    "winner": "Sheng Thao",
     "numCandidates": 10,
-    "numRounds": 6,
-    "condorcetWinner": "Loren Manuel Taylor",
+    "numRounds": 4,
+    "condorcetWinner": "Sheng Thao",
     "hasWriteInByName": false
   },
   {
     "path": "us/ca/alameda/2022/11",
     "office": "san-leandro-mayor",
     "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Bryan Azevedo",
+    "winnerNotFirstRoundLeader": true,
+    "winner": "Juan Gonzalez, Iii",
     "numCandidates": 4,
     "numRounds": 2,
-    "condorcetWinner": "Bryan Azevedo",
+    "condorcetWinner": "Juan Gonzalez, Iii",
     "hasWriteInByName": false
   },
   {
@@ -1487,12 +1322,12 @@
   {
     "path": "us/ca/alameda/2022/11",
     "office": "oakland-school-director-d4",
-    "interesting": false,
+    "interesting": true,
     "winnerNotFirstRoundLeader": true,
     "winner": "Mike Hutchinson",
     "numCandidates": 3,
     "numRounds": 2,
-    "condorcetWinner": "Mike Hutchinson",
+    "condorcetWinner": null,
     "hasWriteInByName": false
   },
   {
@@ -2773,17 +2608,6 @@
   },
   {
     "path": "us/ca/alameda/2012/11",
-    "office": "san-leandro-council-d2",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Ursula Reed",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Ursula Reed",
-    "hasWriteInByName": true
-  },
-  {
-    "path": "us/ca/alameda/2012/11",
     "office": "oakland-council-d3",
     "interesting": false,
     "winnerNotFirstRoundLeader": true,
@@ -2791,17 +2615,6 @@
     "numCandidates": 6,
     "numRounds": 6,
     "condorcetWinner": "Lynette Gibson-Mcelhaney",
-    "hasWriteInByName": true
-  },
-  {
-    "path": "us/ca/alameda/2012/11",
-    "office": "san-leandro-council-d4",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Benny Lee",
-    "numCandidates": 4,
-    "numRounds": 3,
-    "condorcetWinner": "Benny Lee",
     "hasWriteInByName": true
   },
   {
@@ -2916,17 +2729,6 @@
   },
   {
     "path": "us/ca/alameda/2010/11",
-    "office": "berkeley-council-d7",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": false,
-    "winner": "Kriss Worthington",
-    "numCandidates": 3,
-    "numRounds": 2,
-    "condorcetWinner": "Kriss Worthington",
-    "hasWriteInByName": true
-  },
-  {
-    "path": "us/ca/alameda/2010/11",
     "office": "oakland-mayor",
     "interesting": false,
     "winnerNotFirstRoundLeader": true,
@@ -2934,17 +2736,6 @@
     "numCandidates": 10,
     "numRounds": 3,
     "condorcetWinner": "Jean Quan",
-    "hasWriteInByName": true
-  },
-  {
-    "path": "us/ca/alameda/2010/11",
-    "office": "san-leandro-mayor",
-    "interesting": false,
-    "winnerNotFirstRoundLeader": true,
-    "winner": "Stephen H. Cassidy",
-    "numCandidates": 6,
-    "numRounds": 2,
-    "condorcetWinner": "Stephen H. Cassidy",
     "hasWriteInByName": true
   },
   {

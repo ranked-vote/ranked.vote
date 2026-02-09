@@ -20,6 +20,28 @@ import ExcelJS from "exceljs";
 
 const CACHE_DIR = ".csv-cache";
 
+// ---- Global concurrency limiter ----
+// Prevents too many simultaneous ExcelJS readers from overwhelming disk I/O
+// and file descriptors, regardless of how many callers invoke ensureCsv().
+
+const MAX_CONCURRENT_CONVERSIONS = 4;
+let activeConversions = 0;
+const waitQueue: Array<() => void> = [];
+
+async function withConversionLimit<T>(fn: () => Promise<T>): Promise<T> {
+  while (activeConversions >= MAX_CONCURRENT_CONVERSIONS) {
+    await new Promise<void>((resolve) => waitQueue.push(resolve));
+  }
+  activeConversions++;
+  try {
+    return await fn();
+  } finally {
+    activeConversions--;
+    const next = waitQueue.shift();
+    if (next) next();
+  }
+}
+
 // ---- CSV helpers ----
 
 /**
@@ -159,38 +181,37 @@ async function convertXlsxToCsv(
  * Ensure a CSV cache exists for the given XLSX file.
  * Returns the path to the cached CSV. If the cache is fresh, returns
  * immediately without re-converting.
+ *
+ * Conversions are throttled by a process-wide limiter to avoid
+ * overwhelming disk I/O when many callers convert simultaneously.
  */
 export async function ensureCsv(xlsxPath: string): Promise<string> {
   const csvPath = getCachePath(xlsxPath);
   if (isCacheFresh(xlsxPath, csvPath)) {
     return csvPath;
   }
-  const start = Date.now();
-  await convertXlsxToCsv(xlsxPath, csvPath);
-  const ms = Date.now() - start;
-  console.log(`      ${basename(xlsxPath)} -> CSV (${ms}ms)`);
-  return csvPath;
+  return withConversionLimit(async () => {
+    // Re-check after acquiring the semaphore — another caller may
+    // have converted the same file while we were waiting.
+    if (isCacheFresh(xlsxPath, csvPath)) {
+      return csvPath;
+    }
+    const start = Date.now();
+    await convertXlsxToCsv(xlsxPath, csvPath);
+    const ms = Date.now() - start;
+    console.log(`      ${basename(xlsxPath)} -> CSV (${ms}ms)`);
+    return csvPath;
+  });
 }
 
 /**
- * Ensure CSV caches exist for multiple XLSX files, converting in parallel.
+ * Ensure CSV caches exist for multiple XLSX files.
+ * All conversions are submitted concurrently but throttled by the
+ * process-wide limiter (max 4 simultaneous ExcelJS readers).
  * Returns an array of CSV paths in the same order as the input paths.
  */
 export async function ensureCsvBatch(
   xlsxPaths: string[],
-  concurrency: number = 8,
 ): Promise<string[]> {
-  const results: string[] = new Array(xlsxPaths.length);
-
-  for (let start = 0; start < xlsxPaths.length; start += concurrency) {
-    const chunk = xlsxPaths.slice(start, start + concurrency);
-    const chunkResults = await Promise.all(
-      chunk.map((path) => ensureCsv(path)),
-    );
-    for (let i = 0; i < chunkResults.length; i++) {
-      results[start + i] = chunkResults[i];
-    }
-  }
-
-  return results;
+  return Promise.all(xlsxPaths.map((path) => ensureCsv(path)));
 }
