@@ -44,6 +44,10 @@
     <p>
       For more information, see the <a href="/about">about page</a>.
     </p>
+
+    <p>
+      Browse the underlying database on the <a href="/data">data page</a>.
+    </p>
   </div>
 
   <div class="rightCol">

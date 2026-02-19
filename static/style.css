@@ -1,23 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=fallback");
 body {
   margin: 0;
   padding: 0;
-  border-top: 5px solid #aa0d0d;
+  border-top: 0.5rem solid #aa0d0d;
   font-family: "Source Sans Pro", sans-serif;
   color: #555;
-  font-size: 11pt;
 }
 
 /* Layout */
 
 .container {
-  margin: 20px auto;
-  max-width: 600px;
-  padding: 0 12px;
+  margin: 1.25rem auto;
+  max-width: 37.5rem;
+  padding: 0 0.75rem;
 }
 
 .yearSection h2 {
-  padding-right: 20px;
+  padding-right: 1.25rem;
 }
 
 .title strong {
@@ -25,16 +23,16 @@ body {
 }
 
 .row {
-  margin-bottom: 60px;
+  margin-bottom: 3.75rem;
 }
 
 .row:last-child {
   margin-bottom: 0;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 68.75rem) {
   .container.wide {
-    max-width: 1000px;
+    max-width: 62.5rem;
   }
 
   .row {
@@ -43,7 +41,7 @@ body {
   }
 
   .leftCol {
-    width: 350px;
+    width: 21.875rem;
   }
 
   .leftCol p {
@@ -51,8 +49,8 @@ body {
   }
 
   .rightCol {
-    width: 650px;
-    margin-left: 40px;
+    width: 40.625rem;
+    margin-left: 2.5rem;
   }
 
   .title strong {
@@ -60,7 +58,7 @@ body {
   }
 
   .yearSection h2 {
-    padding-left: 30px;
+    padding-left: 1.875rem;
   }
 }
 
@@ -70,24 +68,24 @@ body {
 }
 
 li {
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 /* Style */
 
 p {
-  margin: 16px 0;
+  margin: 1rem 0;
   line-height: 1.4;
 }
 
 .description {
-  font-size: 16pt;
+  font-size: 2rem;
   color: black;
 }
 
 .description h1 {
   display: inline;
-  font-size: 16pt;
+  font-size: 2rem;
 }
 
 a {
@@ -97,13 +95,13 @@ a {
 
 h2 {
   margin: 0;
-  font-size: 16pt;
+  font-size: 1.75rem;
   color: #937a7a;
 }
 
 h3 {
   margin: 0;
-  font-size: 16pt;
+  font-size: 1.75rem;
   font-weight: normal;
   color: #937a7a;
 }
@@ -126,8 +124,8 @@ h3 strong {
 }
 
 .rightCol .electionHeader {
-  margin-bottom: 10px;
-  margin-top: 22px;
+  margin-bottom: 0.625rem;
+  margin-top: 1.375rem;
   padding: 0;
 }
 
@@ -136,7 +134,7 @@ h3 strong {
 }
 
 .yearSection {
-  margin-top: 22px;
+  margin-top: 1.375rem;
 }
 
 .yearSection:first-child {
@@ -151,8 +149,8 @@ h3 strong {
   display: flex;
   align-items: center;
   color: #937a7a;
-  padding: 5px;
-  margin: 0 -5px;
+  padding: 0.3125rem;
+  margin: 0 -0.3125rem;
   text-decoration: none;
 }
 
@@ -175,33 +173,33 @@ h3 strong {
 .race a .meta {
   text-align: right;
   flex: 0 0 auto; /* Don't grow or shrink, maintain natural size */
-  margin-left: 10px;
+  margin-left: 0.625rem;
 }
 
 hr {
   border: none;
-  border-bottom: 1px dotted #ddd;
+  border-bottom: 0.0625rem dotted #ddd;
 }
 
 /* Interesting Election Highlighting (non-Condorcet winner or exhausted > winner) */
 .race.interesting {
-  border-left: 4px solid #aa0d0d;
+  border-left: 0.25rem solid #aa0d0d;
   background-color: #fdf2f2;
-  margin-left: -5px;
-  padding-left: 5px;
+  margin-left: -0.3125rem;
+  padding-left: 0.3125rem;
 }
 
 /* Subtle highlight for elections where winner didn't lead in round 1 */
 .race.winner-not-first {
-  border-left: 2px solid #dd8888;
+  border-left: 0.125rem solid #dd8888;
   background-color: #fef8f8;
-  margin-left: -5px;
-  padding-left: 5px;
+  margin-left: -0.3125rem;
+  padding-left: 0.3125rem;
 }
 
 /* If both interesting and winner-not-first, use interesting styling */
 .race.interesting.winner-not-first {
-  border-left: 4px solid #aa0d0d;
+  border-left: 0.25rem solid #aa0d0d;
   background-color: #fdf2f2;
 }
 
@@ -210,9 +208,9 @@ hr {
   background-color: #aa0d0d;
   color: white;
   font-size: 0.8em;
-  padding: 2px 6px;
-  border-radius: 3px;
-  margin-left: 8px;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.1875rem;
+  margin-left: 0.5rem;
   font-weight: 600;
 }
 
@@ -221,7 +219,7 @@ hr {
   font-size: 0.9em;
   color: #666;
   font-style: italic;
-  margin-top: 2px;
+  margin-top: 0.125rem;
 }
 
 

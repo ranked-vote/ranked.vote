@@ -8,7 +8,7 @@ html, body {
 }
 
 .card {
-  border-top: 10px solid #aa0d0d;
+  border-top: 0.5rem solid #aa0d0d;
   width: 1200px;
   height: 630px;
   display: flex;
@@ -17,7 +17,7 @@ html, body {
 }
 
 h3 {
-  padding: 30px;
+  padding: 1.875rem;
   font-size: 30pt;
   margin: 0;
   flex-shrink: 0;
@@ -26,8 +26,8 @@ h3 {
 .card-content {
   display: flex;
   flex: 1;
-  gap: 20px;
-  padding: 0 30px 30px 30px;
+  gap: 1.25rem;
+  padding: 0 1.875rem 1.875rem 1.875rem;
   align-items: flex-start;
   min-height: 0;
   overflow: hidden;
