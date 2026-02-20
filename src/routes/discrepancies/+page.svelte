@@ -32,9 +32,9 @@
 
 <p>
   These result in the same winner, but the count at each round may differ.
-  For consistency and information density, we tabulate all elections the same
-  way: all candidates who are unable to win are removed at each round, and
-  we continue until two candidates remain.
+  Some reports use round-by-round eliminations, while others remove all
+  candidates who are mathematically unable to win in a single step. We still
+  continue tabulation until two candidates remain.
 </p>
 
 <p>
