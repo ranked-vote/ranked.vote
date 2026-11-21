@@ -64,6 +64,7 @@ SKIP_FORMATS=us_ny_nyc,us_me bun scripts/preprocess.ts
 ### Other Pipeline Scripts
 
 - `bun scripts/init-database.ts` — Create the SQLite schema (called automatically by `preprocess.ts`)
+- `bun run report:notes` (`bun scripts/sync-report-notes.ts`) — Copy `notes` from the metadata into an existing `reports.sqlite3` without rebuilding it
 
 ## Pipeline Architecture
 
@@ -162,6 +163,15 @@ The metadata file specifies:
 - Election date
 - Offices and contests
 - Loader parameters specific to the format
+- Optional `notes`: plain-text context shown on the report after the winner sentence, such as a special election or a preliminary count. Set it on an election to apply to every contest, or on a contest for that contest alone; when both are set, the election's notes come first.
+
+```json
+"2026/06": {
+  "name": "Consolidated Statewide Direct Primary Election",
+  "notes": "This was a special election to fill the rest of the term ending in January 2027.",
+  "contests": [{ "office": "supervisor-d02", "notes": "…", "loaderParams": { … } }]
+}
+```
 
 ### 2. Prepare Raw Data
 

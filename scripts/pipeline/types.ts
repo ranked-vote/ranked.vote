@@ -67,11 +67,15 @@ export interface ElectionMetadata {
   contests: Contest[];
   files: Record<string, string>;
   website?: string | null;
+  /** Context shown on every report in this election. */
+  notes?: string | null;
 }
 
 export interface Contest {
   office: string;
   loaderParams?: Record<string, string>;
+  /** Context shown on this contest's report, after any election notes. */
+  notes?: string | null;
 }
 
 // ---------- Preprocessed output ----------

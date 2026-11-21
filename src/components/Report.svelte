@@ -158,6 +158,7 @@
       {:else}
         No candidate data available for this election.
       {/if}
+      {#if report.info.notes}{" "}{report.info.notes}{/if}
     </p>
     {#if hasCandidates}
       {#if report.condorcet != null && report.winner != null}
