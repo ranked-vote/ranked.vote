@@ -738,6 +738,108 @@
         "CVR_Export_20241202143051.zip": "abc753451fd791908b819de87b8765543445f0fc"
       },
       "website": "https://sfelections.org/results/20241105w/index.html"
+    },
+    "2026/06": {
+      "name": "Consolidated Statewide Direct Primary Election",
+      "date": "2026-06-02",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": {
+        "eager": true
+      },
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "supervisor-d02",
+          "loaderParams": {
+            "contest": "19",
+            "cvr": "CVR_Export_20260625123337.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d04",
+          "loaderParams": {
+            "contest": "20",
+            "cvr": "CVR_Export_20260625123337.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        }
+      ],
+      "files": {
+        "CVR_Export_20260625123337.zip": "a7b7d11b9c3da59422f73424f5e8834f078f29ba"
+      },
+      "website": "https://sfelections.org/results/20260602w/index.html"
+    },
+    "2026/11": {
+      "name": "Consolidated General Election",
+      "date": "2026-11-03",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": {
+        "eager": true
+      },
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "assessor",
+          "loaderParams": {
+            "contest": "34",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "defender",
+          "loaderParams": {
+            "contest": "35",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d02",
+          "loaderParams": {
+            "contest": "36",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d04",
+          "loaderParams": {
+            "contest": "37",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d06",
+          "loaderParams": {
+            "contest": "38",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d08",
+          "loaderParams": {
+            "contest": "39",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "supervisor-d10",
+          "loaderParams": {
+            "contest": "40",
+            "cvr": "CVR_Export_20261117135435.zip",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        }
+      ],
+      "files": {
+        "CVR_Export_20261117135435.zip": "b4f3b782cd4b911a40ba7e6a21fdb9c8176c08e5"
+      },
+      "website": "https://sfelections.org/results/20261103w/index.html"
     }
   }
 }
