@@ -747,6 +747,7 @@
         "eager": true
       },
       "normalization": "simple",
+      "notes": "This was a special election to fill the rest of the term ending in January 2027. The full four-year term was on the November 2026 ballot.",
       "contests": [
         {
           "office": "supervisor-d02",
@@ -778,6 +779,7 @@
         "eager": true
       },
       "normalization": "simple",
+      "notes": "These results use San Francisco's preliminary count of November 17, 2026, before certification; the final count may differ slightly.",
       "contests": [
         {
           "office": "assessor",
@@ -801,7 +803,8 @@
             "contest": "36",
             "cvr": "CVR_Export_20261117135435.zip",
             "dropUnqualifiedWriteIn": "true"
-          }
+          },
+          "notes": "This was the regular election for the four-year term starting in January 2027. A special election for the rest of the previous term was held in June 2026."
         },
         {
           "office": "supervisor-d04",
@@ -809,7 +812,8 @@
             "contest": "37",
             "cvr": "CVR_Export_20261117135435.zip",
             "dropUnqualifiedWriteIn": "true"
-          }
+          },
+          "notes": "This was the regular election for the four-year term starting in January 2027. A special election for the rest of the previous term was held in June 2026."
         },
         {
           "office": "supervisor-d06",

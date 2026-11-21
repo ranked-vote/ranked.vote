@@ -14,6 +14,7 @@
     "report": "bun scripts/preprocess.ts",
     "report:migrate-strict": "bun scripts/migrate-db-to-strict.ts",
     "report:extract": "cd report_pipeline && ./extract-from-archives.sh",
+    "report:notes": "bun scripts/sync-report-notes.ts",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "test:ci": "bun test --coverage",

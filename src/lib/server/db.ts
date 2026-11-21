@@ -44,6 +44,7 @@ interface ReportRow {
   jurisdictionName: string;
   electionName: string;
   website: string | null;
+  notes: string | null;
   ballotCount: number;
   path: string;
   dataFormat: string | null;
@@ -293,6 +294,7 @@ export function getReport(path: string): IContestReport | null {
         officeName: reportRow.officeName,
         electionName: reportRow.electionName,
         website: reportRow.website || undefined,
+        notes: reportRow.notes || undefined,
       },
       ballotCount: reportRow.ballotCount,
       candidates,

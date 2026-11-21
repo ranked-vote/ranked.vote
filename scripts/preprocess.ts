@@ -33,6 +33,7 @@ import {
   type TabulationOptions,
 } from "./tabulate-rcv";
 import { analyzeElection } from "./compute-rcv-analysis";
+import { reportNotes } from "./pipeline/notes";
 import type {
   Jurisdiction,
   ElectionMetadata,
@@ -205,6 +206,7 @@ function processContest(
     $jurisdictionName: jurisdiction.name,
     $electionName: election.name,
     $website: election.website ?? null,
+    $notes: reportNotes(election, contest),
     $ballotCount: ballots.length,
     $path: path,
     $dataFormat: election.dataFormat,
@@ -312,13 +314,13 @@ async function main() {
   const insertReport = db.prepare(`
     INSERT INTO reports (
       name, date, jurisdictionPath, electionPath, office, officeName,
-      jurisdictionName, electionName, website, ballotCount, path, dataFormat,
+      jurisdictionName, electionName, website, notes, ballotCount, path, dataFormat,
       numCandidates, winner_candidate_index, condorcet,
       interesting, winnerNotFirstRoundLeader, hasWriteInByName,
       smithSet, pairwisePreferences, firstAlternate, firstFinal, rankingDistribution
     ) VALUES (
       $name, $date, $jurisdictionPath, $electionPath, $office, $officeName,
-      $jurisdictionName, $electionName, $website, $ballotCount, $path, $dataFormat,
+      $jurisdictionName, $electionName, $website, $notes, $ballotCount, $path, $dataFormat,
       $numCandidates, $winner, $condorcet,
       $interesting, $winnerNotFirstRoundLeader, $hasWriteInByName,
       $smithSet, $pairwisePreferences, $firstAlternate, $firstFinal, $rankingDistribution

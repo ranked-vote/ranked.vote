@@ -20,6 +20,7 @@ db.exec(`
     jurisdictionName TEXT NOT NULL,
     electionName TEXT NOT NULL,
     website TEXT,
+    notes TEXT,
     ballotCount INTEGER NOT NULL DEFAULT 0,
     path TEXT NOT NULL,
     dataFormat TEXT,
