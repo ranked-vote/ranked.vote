@@ -1,0 +1,34 @@
+{
+  "name": "Portland",
+  "path": "us/or/pdx",
+  "kind": "municipal",
+  "offices": {
+    "mayor": {
+      "name": "Mayor"
+    }
+  },
+  "elections": {
+    "2024/11": {
+      "name": "General Election",
+      "date": "2024-11-05",
+      "dataFormat": "clear_ballot",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "mayor",
+          "loaderParams": {
+            "file": "City_of_Portland__Mayor_2024_11_29_17_26_12.cvr.csv",
+            "contestName": "City of Portland, Mayor",
+            "overvote": "skip"
+          }
+        }
+      ],
+      "files": {
+        "City_of_Portland__Mayor_2024_11_29_17_26_12.cvr.csv": "2810eaa50477395a1368e6f7cdec0d211dd2513b"
+      },
+      "website": "https://multco.us/info/turnout-and-statistics-november-2024-general-election",
+      "notes": "First-round totals differ from the official count by up to about 200 votes per candidate, because the cast vote record doesn't show how election officials resolved individual write-ins. The final round matches the official result exactly."
+    }
+  }
+}

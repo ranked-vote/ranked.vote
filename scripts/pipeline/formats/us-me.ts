@@ -5,7 +5,10 @@
  * XLSX files are converted to CSV on first use via the xlsx-to-csv cache layer.
  *
  * Multiple files can be specified (semicolon-separated).
- * Format (0-indexed CSV columns): ballot_id in column 0, choices in columns 3-9.
+ * Columns are found from the header row: the ballot ID is the "Cast Vote
+ * Record" column and the choices are the columns whose header contains
+ * "Choice". Older exports without those headers use column 0 for the ID and
+ * columns 3-9 for choices.
  * Special values: "overvote", "undervote".
  * Candidate names may have party prefixes (DEM/REP) and parenthetical numbers.
  */
@@ -35,6 +38,20 @@ function parseChoice(
   });
 }
 
+export function columnLayout(header: string[]): {
+  idCol: number;
+  choiceCols: number[];
+} {
+  const choiceCols = header
+    .map((h, i) => (/choice/i.test(h) ? i : -1))
+    .filter((i) => i >= 0);
+  if (choiceCols.length === 0) {
+    return { idCol: 0, choiceCols: [3, 4, 5, 6, 7, 8, 9] };
+  }
+  const idCol = header.findIndex((h) => /^cast vote record$/i.test(h.trim()));
+  return { idCol: idCol >= 0 ? idCol : 0, choiceCols };
+}
+
 export async function maineReader(
   basePath: string,
   params: Record<string, string>,
@@ -61,6 +78,8 @@ export async function maineReader(
     const raw = readFileSync(csvPath, "utf-8");
     const lines = raw.split("\n");
 
+    const { idCol, choiceCols } = columnLayout(parseCsvLine(lines[0] ?? ""));
+
     let rowIndex = 0;
     // Skip header (first line)
     for (let i = 1; i < lines.length; i++) {
@@ -70,15 +89,11 @@ export async function maineReader(
 
       const fields = parseCsvLine(line);
 
-      // CSV is 0-indexed. Original ExcelJS was 1-indexed:
-      //   values[1] = ballot ID  ->  fields[0]
-      //   values[4..10] = choices ->  fields[3..9]
-      const rawId = fields[0] || "";
+      const rawId = fields[idCol] || "";
       const id = rawId ? String(Math.floor(Number(rawId))) : String(rowIndex);
 
       const choices: Choice[] = [];
-      // Process columns 3-9 (0-indexed)
-      for (let c = 3; c <= 9; c++) {
+      for (const c of choiceCols) {
         const cell = fields[c];
         const cand = cell && cell.trim() ? cell.trim() : "undervote";
         choices.push(parseChoice(cand, candidateMap));
