@@ -85,6 +85,7 @@ export interface IElectionInfo {
   officeName: string;
   electionName: string;
   website?: string;
+  notes?: string;
 }
 
 export interface ICandidate {
