@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
-	export let status: number;
-	export let error: Error;
-
+	const status = $derived(page.status);
+	const error = $derived(page.error as (App.Error & { stack?: string }) | null);
 	const dev = import.meta.env.DEV;
 </script>
 
