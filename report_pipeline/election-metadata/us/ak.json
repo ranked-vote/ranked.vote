@@ -6,41 +6,98 @@
     "cd": {
       "name": "At-large Congressional District"
     },
-    "us-senate": {
-      "name": "U.S. Senate"
-    },
     "governor": {
       "name": "Governor and Lieutenant Governor"
+    },
+    "president": {
+      "name": "President and Vice President"
+    },
+    "us-senate": {
+      "name": "U.S. Senate"
     },
     "sd-c": {
       "name": "State Senate District C"
     },
+    "sd-d": {
+      "name": "State Senate District D"
+    },
     "sd-e": {
       "name": "State Senate District E"
+    },
+    "sd-f": {
+      "name": "State Senate District F"
+    },
+    "sd-j": {
+      "name": "State Senate District J"
+    },
+    "sd-l": {
+      "name": "State Senate District L"
     },
     "sd-m": {
       "name": "State Senate District M"
     },
+    "sd-n": {
+      "name": "State Senate District N"
+    },
     "sd-o": {
       "name": "State Senate District O"
+    },
+    "sd-p": {
+      "name": "State Senate District P"
+    },
+    "sd-q": {
+      "name": "State Senate District Q"
+    },
+    "sd-r": {
+      "name": "State Senate District R"
     },
     "sd-s": {
       "name": "State Senate District S"
     },
+    "hd-01": {
+      "name": "State House District 1"
+    },
     "hd-02": {
       "name": "State House District 2"
+    },
+    "hd-06": {
+      "name": "State House District 6"
     },
     "hd-08": {
       "name": "State House District 8"
     },
+    "hd-10": {
+      "name": "State House District 10"
+    },
+    "hd-11": {
+      "name": "State House District 11"
+    },
+    "hd-15": {
+      "name": "State House District 15"
+    },
     "hd-16": {
       "name": "State House District 16"
+    },
+    "hd-18": {
+      "name": "State House District 18"
+    },
+    "hd-19": {
+      "name": "State House District 19"
+    },
+    "hd-20": {
+      "name": "State House District 20"
     },
     "hd-23": {
       "name": "State House District 23"
     },
+    "hd-24": {
+      "name": "State House District 24"
+    },
     "hd-25": {
       "name": "State House District 25"
+    },
+    "hd-27": {
+      "name": "State House District 27"
     },
     "hd-28": {
       "name": "State House District 28"
@@ -54,8 +111,20 @@
     "hd-31": {
       "name": "State House District 31"
     },
+    "hd-32": {
+      "name": "State House District 32"
+    },
     "hd-33": {
       "name": "State House District 33"
+    },
+    "hd-34": {
+      "name": "State House District 34"
+    },
+    "hd-35": {
+      "name": "State House District 35"
+    },
+    "hd-36": {
+      "name": "State House District 36"
     },
     "hd-37": {
       "name": "State House District 37"
@@ -65,6 +134,9 @@
     },
     "hd-39": {
       "name": "State House District 39"
+    },
+    "hd-40": {
+      "name": "State House District 40"
     }
   },
   "elections": {
@@ -73,7 +145,7 @@
       "date": "2026-11-03",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,
-      "normalization": "simple",
+      "normalization": "maine",
       "contests": [
         {
           "office": "us-senate",
@@ -250,12 +322,360 @@
       "website": "https://www.elections.alaska.gov/election-results/e/?id=26genr",
       "notes": "These results use the cast vote record exported on November 18, 2026 for the ranked-choice tabulation, before the election was certified."
     },
+    "2024/11": {
+      "name": "General Election",
+      "date": "2024-11-05",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "maine",
+      "files": {
+        "CVR_Export_20241130154411.zip": "ed054f5b01c60ea696a7cf733b08cbcf3099d09d"
+      },
+      "website": "https://www.elections.alaska.gov/election-results/e/?id=24genr",
+      "notes": "Alaska's official reports count only first-choice marks in round 1 and apply the skipped-ranking rule from round 2. This report applies it from the start, so its first round lines up with the official round 2. The final round of the U.S. House race matches the certified result to within ten votes.",
+      "contests": [
+        {
+          "office": "president",
+          "loaderParams": {
+            "contest": "4",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "cd",
+          "loaderParams": {
+            "contest": "7",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-d",
+          "loaderParams": {
+            "contest": "11",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-f",
+          "loaderParams": {
+            "contest": "13",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-l",
+          "loaderParams": {
+            "contest": "19",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-n",
+          "loaderParams": {
+            "contest": "21",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-r",
+          "loaderParams": {
+            "contest": "25",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-01",
+          "loaderParams": {
+            "contest": "28",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-06",
+          "loaderParams": {
+            "contest": "33",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-15",
+          "loaderParams": {
+            "contest": "42",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-19",
+          "loaderParams": {
+            "contest": "46",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-28",
+          "loaderParams": {
+            "contest": "55",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-36",
+          "loaderParams": {
+            "contest": "63",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-38",
+          "loaderParams": {
+            "contest": "65",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-40",
+          "loaderParams": {
+            "contest": "67",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        }
+      ]
+    },
+    "2022/11": {
+      "name": "General Election",
+      "date": "2022-11-08",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "maine",
+      "files": {
+        "CVR_Export.zip": "9c06849903c9687c46839f91ef33e4d027945871"
+      },
+      "website": "https://www.elections.alaska.gov/election-results/e/?id=22genr",
+      "notes": "Alaska's official reports count only first-choice marks in round 1 and apply the skipped-ranking rule from round 2. This report applies it from the start, so its first round lines up with the official round 2. The final round of the U.S. House race matches the certified result to within ten votes.",
+      "contests": [
+        {
+          "office": "us-senate",
+          "loaderParams": {
+            "contest": "3",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "cd",
+          "loaderParams": {
+            "contest": "4",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "governor",
+          "loaderParams": {
+            "contest": "5",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-c",
+          "loaderParams": {
+            "contest": "8",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-d",
+          "loaderParams": {
+            "contest": "9",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-e",
+          "loaderParams": {
+            "contest": "10",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-j",
+          "loaderParams": {
+            "contest": "15",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-n",
+          "loaderParams": {
+            "contest": "19",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-p",
+          "loaderParams": {
+            "contest": "21",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-q",
+          "loaderParams": {
+            "contest": "22",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-r",
+          "loaderParams": {
+            "contest": "23",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-06",
+          "loaderParams": {
+            "contest": "30",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-10",
+          "loaderParams": {
+            "contest": "34",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-11",
+          "loaderParams": {
+            "contest": "35",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-15",
+          "loaderParams": {
+            "contest": "39",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-18",
+          "loaderParams": {
+            "contest": "42",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-20",
+          "loaderParams": {
+            "contest": "44",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-24",
+          "loaderParams": {
+            "contest": "48",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-27",
+          "loaderParams": {
+            "contest": "51",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-28",
+          "loaderParams": {
+            "contest": "52",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-30",
+          "loaderParams": {
+            "contest": "54",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-31",
+          "loaderParams": {
+            "contest": "55",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-32",
+          "loaderParams": {
+            "contest": "56",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-34",
+          "loaderParams": {
+            "contest": "58",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-35",
+          "loaderParams": {
+            "contest": "59",
+            "cvr": "CVR_Export",
+            "nameStyle": "asIs"
+          }
+        }
+      ]
+    },
     "2022/08": {
       "name": "Special Election",
       "date": "2022-08-16",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,
-      "normalization": "simple",
+      "normalization": "maine",
       "contests": [
         {
           "office": "cd",

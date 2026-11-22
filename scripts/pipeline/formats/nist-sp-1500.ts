@@ -60,6 +60,7 @@ interface CardJson {
 interface ContestMarksJson {
   Id: number;
   Marks: MarkJson[] | string; // string for "*** REDACTED ***"
+  OutstackConditionIds?: number[];
 }
 
 interface MarkJson {
@@ -108,6 +109,64 @@ function getSessionContests(session: SessionJson): ContestMarksJson[] {
 function parseMarks(rawMarks: MarkJson[] | string): MarkJson[] {
   if (typeof rawMarks === "string") return []; // "*** REDACTED ***"
   return rawMarks;
+}
+
+/**
+ * Outstack condition IDs that mean the tabulator did not count the contest
+ * on this ballot ("InvalidContest"). Alaska's exports flag a few thousand
+ * contest records this way, and the official count leaves them out.
+ */
+export function invalidContestConditionIds(dirPath: string): Set<number> {
+  const path = join(dirPath, "OutstackConditionManifest.json");
+  if (!existsSync(path)) return new Set();
+  const manifest: { List: Array<{ Id: number; Description: string }> } =
+    JSON.parse(readFileSync(path, "utf-8"));
+  return new Set(
+    manifest.List.filter((c) => c.Description === "InvalidContest").map(
+      (c) => c.Id,
+    ),
+  );
+}
+
+export function isInvalidContest(
+  contest: ContestMarksJson,
+  invalidIds: Set<number>,
+): boolean {
+  return (contest.OutstackConditionIds ?? []).some((id) => invalidIds.has(id));
+}
+
+/**
+ * Turn a contest's marks into one choice per rank, from rank 1 to the last
+ * rank marked. Ranks with no unambiguous mark become undervotes, so
+ * normalizers that act on skipped rankings (e.g. "maine") can see them.
+ */
+export function marksToChoices(
+  marks: MarkJson[],
+  candidates: CandidateMap<number>,
+  droppedWriteInId: number | null,
+): Choice[] {
+  const byRank = new Map<number, MarkJson[]>();
+  for (const mark of marks) {
+    if (mark.IsAmbiguous) continue;
+    const atRank = byRank.get(mark.Rank) ?? [];
+    atRank.push(mark);
+    byRank.set(mark.Rank, atRank);
+  }
+  const lastRank = Math.max(0, ...marks.map((m) => m.Rank));
+  const choices: Choice[] = [];
+  for (let rank = 1; rank <= lastRank; rank++) {
+    const atRank = byRank.get(rank) ?? [];
+    if (atRank.length === 0) {
+      choices.push({ type: "undervote" });
+    } else if (atRank.length > 1) {
+      choices.push({ type: "overvote" });
+    } else if (atRank[0].CandidateId === droppedWriteInId) {
+      choices.push({ type: "undervote" });
+    } else {
+      choices.push(candidates.idToChoice(atRank[0].CandidateId));
+    }
+  }
+  return choices;
 }
 
 /**
@@ -170,6 +229,7 @@ function processJsonCvrFile(
   candidates: CandidateMap<number>,
   droppedWriteInId: number | null,
   ballots: Ballot[],
+  invalidIds: Set<number>,
 ): number {
   let count = 0;
   const cvr: CvrExportJson = JSON.parse(content);
@@ -179,42 +239,12 @@ function processJsonCvrFile(
     for (const contest of contests) {
       if (contest.Id !== contestId) continue;
 
-      const marks = parseMarks(contest.Marks);
-      const choices: Choice[] = [];
-
-      // Sort marks by rank, then group by rank
-      const sorted = [...marks].sort((a, b) => a.Rank - b.Rank);
-
-      let i = 0;
-      while (i < sorted.length) {
-        const rank = sorted[i].Rank;
-        const marksAtRank: MarkJson[] = [];
-        while (i < sorted.length && sorted[i].Rank === rank) {
-          marksAtRank.push(sorted[i]);
-          i++;
-        }
-
-        // Filter ambiguous marks
-        const validMarks = marksAtRank.filter((m) => !m.IsAmbiguous);
-
-        let choice: Choice;
-        if (validMarks.length === 0) {
-          choice = { type: "undervote" };
-        } else if (validMarks.length === 1) {
-          if (
-            droppedWriteInId !== null &&
-            validMarks[0].CandidateId === droppedWriteInId
-          ) {
-            choice = { type: "undervote" };
-          } else {
-            choice = candidates.idToChoice(validMarks[0].CandidateId);
-          }
-        } else {
-          choice = { type: "overvote" };
-        }
-
-        choices.push(choice);
-      }
+      if (isInvalidContest(contest, invalidIds)) continue;
+      const choices = marksToChoices(
+        parseMarks(contest.Marks),
+        candidates,
+        droppedWriteInId,
+      );
 
       const recordId =
         typeof session.RecordId === "number"
@@ -287,6 +317,7 @@ function readFromDirectory(
     .sort();
 
   const ballots: Ballot[] = [];
+  const invalidIds = invalidContestConditionIds(dirPath);
 
   for (const filename of files) {
     if (filename.endsWith(".csv")) {
@@ -303,6 +334,7 @@ function readFromDirectory(
       candidateMap,
       droppedWriteInId,
       ballots,
+      invalidIds,
     );
   }
 
@@ -406,6 +438,8 @@ export function nistBatchReader(
     )
     .sort();
 
+  const invalidIds = invalidContestConditionIds(cvrPath);
+
   // Process each file once for all contests
   for (const filename of files) {
     const content = readFileSync(join(cvrPath, filename), "utf-8");
@@ -417,37 +451,12 @@ export function nistBatchReader(
         const data = contestData.get(contest.Id);
         if (!data) continue;
 
-        const marks = parseMarks(contest.Marks);
-        const choices: Choice[] = [];
-        const sorted = [...marks].sort((a, b) => a.Rank - b.Rank);
-
-        let i = 0;
-        while (i < sorted.length) {
-          const rank = sorted[i].Rank;
-          const marksAtRank: MarkJson[] = [];
-          while (i < sorted.length && sorted[i].Rank === rank) {
-            marksAtRank.push(sorted[i]);
-            i++;
-          }
-          const validMarks = marksAtRank.filter((m) => !m.IsAmbiguous);
-
-          let choice: Choice;
-          if (validMarks.length === 0) {
-            choice = { type: "undervote" };
-          } else if (validMarks.length === 1) {
-            if (
-              data.droppedWriteInId !== null &&
-              validMarks[0].CandidateId === data.droppedWriteInId
-            ) {
-              choice = { type: "undervote" };
-            } else {
-              choice = data.candidateMap.idToChoice(validMarks[0].CandidateId);
-            }
-          } else {
-            choice = { type: "overvote" };
-          }
-          choices.push(choice);
-        }
+        if (isInvalidContest(contest, invalidIds)) continue;
+        const choices = marksToChoices(
+          parseMarks(contest.Marks),
+          data.candidateMap,
+          data.droppedWriteInId,
+        );
 
         const recordId =
           typeof session.RecordId === "number"
