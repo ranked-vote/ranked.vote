@@ -50,6 +50,29 @@
     }
   },
   "elections": {
+    "2026/11": {
+      "name": "General Election",
+      "date": "2026-11-03",
+      "dataFormat": "us_me",
+      "tabulationOptions": null,
+      "normalization": "maine",
+      "contests": [
+        {
+          "office": "cd02",
+          "loaderParams": {
+            "files": "CVR Export 20261110_3.xlsx;CVR Export 20261110 - 1_0.xlsx;CVR Export 20261110 - 2_1.xlsx;CVR Export 20261110 - 3.xlsx"
+          }
+        }
+      ],
+      "files": {
+        "CVR Export 20261110 - 1_0.xlsx": "66b684233dd5e7422374c75a437793826ee7d23e",
+        "CVR Export 20261110 - 2_1.xlsx": "a8023ddda3bd8a1420c8746833dc5eaa3cd0b09c",
+        "CVR Export 20261110 - 3.xlsx": "23ae9fa286bf99f234291fea93a53e80a1e9b81b",
+        "CVR Export 20261110_3.xlsx": "c401681121e164ed2970f776738b99a52ddbd8b5"
+      },
+      "website": "https://www.maine.gov/sos/elections-voting/election-results-data",
+      "notes": "The cast vote records Maine has posted hold 338,580 ballots, about 2,900 fewer than the 341,526 in the state's official ranked-choice tabulation, so the totals here differ slightly from the official ones. The winner is the same."
+    },
     "2026/06": {
       "name": "Primary Election",
       "date": "2026-06-09",

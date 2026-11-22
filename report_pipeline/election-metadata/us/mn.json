@@ -66,9 +66,9 @@
       ],
       "files": {}
     },
-    "2025/05": {
+    "2025/11": {
       "name": "Municipal Election",
-      "date": "2025-05-13",
+      "date": "2025-11-04",
       "dataFormat": "us_mn_mpls",
       "tabulationOptions": null,
       "normalization": "simple",
@@ -176,9 +176,9 @@
       },
       "website": "https://vote.minneapolismn.gov/results-data/election-results/2025/"
     },
-    "2023/05": {
+    "2023/11": {
       "name": "Municipal Election",
-      "date": "2023-05-13",
+      "date": "2023-11-07",
       "dataFormat": "us_mn_mpls",
       "tabulationOptions": null,
       "normalization": "simple",

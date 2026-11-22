@@ -13,6 +13,7 @@ import { dominionRcrReader } from "./dominion-rcr";
 import { maineReader } from "./us-me";
 import { mplsReader } from "./us-mn-mpls";
 import { nistReader } from "./nist-sp-1500";
+import { clearBallotReader } from "./clear-ballot";
 
 // Batch readers are exported separately since they have different signatures
 export { nistBatchReader } from "./nist-sp-1500";
@@ -27,6 +28,7 @@ const readers: Record<string, BallotReader> = {
   us_me: maineReader,
   us_mn_mpls: mplsReader,
   nist_sp_1500: nistReader,
+  clear_ballot: clearBallotReader,
   // us_ny_nyc uses batch reader exclusively
 };
 

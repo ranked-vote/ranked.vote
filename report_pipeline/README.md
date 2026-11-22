@@ -120,6 +120,7 @@ Located in `scripts/pipeline/formats/`:
 | `us_me` | `us-me.ts` | Maine state format (Excel-based) |
 | `us_mn_mpls` | `us-mn-mpls.ts` | Minneapolis format |
 | `us_vt_btv` | `us-vt-btv.ts` | Burlington, VT format |
+| `clear_ballot` | `clear-ballot.ts` | Clear Ballot CVR (CSV, one column per candidate and rank; used by Portland, OR). Set `overvote: "skip"` to skip overvoted ranks. |
 | `dominion_rcr` | `dominion-rcr.ts` | Dominion RCV format (CSV) |
 | `simple_json` | `simple-json.ts` | Simple JSON for testing and small elections |
 | `preflib` | `preflib.ts` | PrefLib ordinal preference format (TOI/SOI) |
