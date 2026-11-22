@@ -5,9 +5,251 @@
   "offices": {
     "cd": {
       "name": "At-large Congressional District"
+    },
+    "us-senate": {
+      "name": "U.S. Senate"
+    },
+    "governor": {
+      "name": "Governor and Lieutenant Governor"
+    },
+    "sd-c": {
+      "name": "State Senate District C"
+    },
+    "sd-e": {
+      "name": "State Senate District E"
+    },
+    "sd-m": {
+      "name": "State Senate District M"
+    },
+    "sd-o": {
+      "name": "State Senate District O"
+    },
+    "sd-s": {
+      "name": "State Senate District S"
+    },
+    "hd-02": {
+      "name": "State House District 2"
+    },
+    "hd-08": {
+      "name": "State House District 8"
+    },
+    "hd-16": {
+      "name": "State House District 16"
+    },
+    "hd-23": {
+      "name": "State House District 23"
+    },
+    "hd-25": {
+      "name": "State House District 25"
+    },
+    "hd-28": {
+      "name": "State House District 28"
+    },
+    "hd-29": {
+      "name": "State House District 29"
+    },
+    "hd-30": {
+      "name": "State House District 30"
+    },
+    "hd-31": {
+      "name": "State House District 31"
+    },
+    "hd-33": {
+      "name": "State House District 33"
+    },
+    "hd-37": {
+      "name": "State House District 37"
+    },
+    "hd-38": {
+      "name": "State House District 38"
+    },
+    "hd-39": {
+      "name": "State House District 39"
     }
   },
   "elections": {
+    "2026/11": {
+      "name": "General Election",
+      "date": "2026-11-03",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "contests": [
+        {
+          "office": "us-senate",
+          "loaderParams": {
+            "contest": "6",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "cd",
+          "loaderParams": {
+            "contest": "7",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "governor",
+          "loaderParams": {
+            "contest": "5",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-c",
+          "loaderParams": {
+            "contest": "10",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-e",
+          "loaderParams": {
+            "contest": "12",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-m",
+          "loaderParams": {
+            "contest": "20",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-o",
+          "loaderParams": {
+            "contest": "22",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "sd-s",
+          "loaderParams": {
+            "contest": "26",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-02",
+          "loaderParams": {
+            "contest": "29",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-08",
+          "loaderParams": {
+            "contest": "35",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-16",
+          "loaderParams": {
+            "contest": "43",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-23",
+          "loaderParams": {
+            "contest": "50",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-25",
+          "loaderParams": {
+            "contest": "52",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-28",
+          "loaderParams": {
+            "contest": "55",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-29",
+          "loaderParams": {
+            "contest": "56",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-30",
+          "loaderParams": {
+            "contest": "57",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-31",
+          "loaderParams": {
+            "contest": "58",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-33",
+          "loaderParams": {
+            "contest": "60",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-37",
+          "loaderParams": {
+            "contest": "64",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-38",
+          "loaderParams": {
+            "contest": "65",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        },
+        {
+          "office": "hd-39",
+          "loaderParams": {
+            "contest": "66",
+            "cvr": "CVR_Export.zip",
+            "nameStyle": "asIs"
+          }
+        }
+      ],
+      "files": {
+        "CVR_Export.zip": "ce02f851e3ea5a9cb7a8554daa17fa3bb6cf4df0"
+      },
+      "website": "https://www.elections.alaska.gov/election-results/e/?id=26genr",
+      "notes": "These results use the cast vote record exported on November 18, 2026 for the ranked-choice tabulation, before the election was certified."
+    },
     "2022/08": {
       "name": "Special Election",
       "date": "2022-08-16",

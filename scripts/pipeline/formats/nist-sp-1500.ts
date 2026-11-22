@@ -110,10 +110,31 @@ function parseMarks(rawMarks: MarkJson[] | string): MarkJson[] {
   return rawMarks;
 }
 
+/**
+ * Display name for a manifest entry. By default names go through
+ * normalizeName, which title-cases all-caps names. With nameStyle "asIs" the
+ * source capitalization is kept (for mixed-case manifests such as Alaska's)
+ * and "Last, First" is shown as "First Last", with a suffix like "Jr." kept
+ * at the end.
+ */
+export function candidateName(description: string, nameStyle?: string): string {
+  if (nameStyle !== "asIs") return normalizeName(description, false);
+  const match = description.match(/^([^,/]+), ([^/]+)$/);
+  let name = description;
+  if (match) {
+    const [, last, rest] = match;
+    const suffix = rest.match(/^(.*?)\s+(Jr\.?|Sr\.?|II|III|IV)$/);
+    name = suffix ? `${suffix[1]} ${last} ${suffix[2]}` : `${rest} ${last}`;
+  }
+  let open = true;
+  return name.replace(/"/g, () => ((open = !open) ? "\u201d" : "\u201c"));
+}
+
 function getCandidates(
   manifest: CandidateManifestJson,
   contestId: number,
   dropUnqualifiedWriteIn: boolean,
+  nameStyle?: string,
 ): { candidateMap: CandidateMap<number>; droppedWriteInId: number | null } {
   const candidateMap = new CandidateMap<number>();
   let droppedWriteInId: number | null = null;
@@ -134,7 +155,7 @@ function getCandidates(
     }
 
     candidateMap.add(entry.Id, {
-      name: normalizeName(entry.Description, false),
+      name: candidateName(entry.Description, nameStyle),
       candidate_type: candidateType,
     });
   }
@@ -237,6 +258,7 @@ function readFromDirectory(
   dirPath: string,
   contestId: number,
   dropUnqualifiedWriteIn: boolean,
+  nameStyle?: string,
 ): Election {
   const manifestPath = join(dirPath, "CandidateManifest.json");
   if (!existsSync(manifestPath)) {
@@ -251,6 +273,7 @@ function readFromDirectory(
     manifest,
     contestId,
     dropUnqualifiedWriteIn,
+    nameStyle,
   );
 
   // Find all CvrExport JSON files (exclude _old backups)
@@ -300,7 +323,12 @@ export function nistReader(
   const cvrPath = resolveCvrPath(basePath, cvr);
 
   if (existsSync(cvrPath) && statSync(cvrPath).isDirectory()) {
-    return readFromDirectory(cvrPath, contestId, dropUnqualifiedWriteIn);
+    return readFromDirectory(
+      cvrPath,
+      contestId,
+      dropUnqualifiedWriteIn,
+      params.nameStyle,
+    );
   }
 
   console.warn(
@@ -360,6 +388,7 @@ export function nistBatchReader(
       manifest,
       contestId,
       dropUnqualifiedWriteIn,
+      params.nameStyle,
     );
     contestData.set(contestId, {
       office,
@@ -373,9 +402,7 @@ export function nistBatchReader(
   const files = readdirSync(cvrPath)
     .filter(
       (f) =>
-        !f.includes("_old") &&
-        f.startsWith("CvrExport") &&
-        f.endsWith(".json"),
+        !f.includes("_old") && f.startsWith("CvrExport") && f.endsWith(".json"),
     )
     .sort();
 
