@@ -58,4 +58,17 @@ describe("nist ballot marks", () => {
     ).toBe(false);
     expect(isInvalidContest({ Id: 1, Marks: [] }, invalid)).toBe(false);
   });
+
+  test("redacted contests are not treated as invalid", () => {
+    expect(
+      isInvalidContest(
+        {
+          Id: 1,
+          Marks: "*** REDACTED ***",
+          OutstackConditionIds: "*** REDACTED ***",
+        },
+        new Set([7]),
+      ),
+    ).toBe(false);
+  });
 });

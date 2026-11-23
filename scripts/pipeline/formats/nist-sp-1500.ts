@@ -60,7 +60,7 @@ interface CardJson {
 interface ContestMarksJson {
   Id: number;
   Marks: MarkJson[] | string; // string for "*** REDACTED ***"
-  OutstackConditionIds?: number[];
+  OutstackConditionIds?: number[] | string; // string for "*** REDACTED ***"
 }
 
 interface MarkJson {
@@ -132,7 +132,10 @@ export function isInvalidContest(
   contest: ContestMarksJson,
   invalidIds: Set<number>,
 ): boolean {
-  return (contest.OutstackConditionIds ?? []).some((id) => invalidIds.has(id));
+  const ids = contest.OutstackConditionIds;
+  // Redacted contests carry "*** REDACTED ***" here instead of a list.
+  if (!Array.isArray(ids)) return false;
+  return ids.some((id) => invalidIds.has(id));
 }
 
 /**
