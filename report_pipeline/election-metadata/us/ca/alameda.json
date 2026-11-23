@@ -482,6 +482,120 @@
         }
       ],
       "files": {}
+    },
+    "2026/11": {
+      "name": "November 3, 2026 General Election",
+      "date": "2026-11-03",
+      "dataFormat": "nist_sp_1500",
+      "tabulationOptions": null,
+      "normalization": "simple",
+      "notes": "These results use Alameda County's preliminary count of November 16, 2026 (Post Election Update #4), before certification; the final count may differ slightly. The county redacted the marks on a few ballots for voter privacy (no more than four in any contest here); they count as blank.",
+      "contests": [
+        {
+          "office": "berkeley-council-d1",
+          "loaderParams": {
+            "contest": "104",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "berkeley-council-d4",
+          "loaderParams": {
+            "contest": "105",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "berkeley-council-d7",
+          "loaderParams": {
+            "contest": "106",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "berkeley-council-d8",
+          "loaderParams": {
+            "contest": "107",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "berkeley-city-auditor",
+          "loaderParams": {
+            "contest": "108",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-mayor",
+          "loaderParams": {
+            "contest": "109",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-council-d2",
+          "loaderParams": {
+            "contest": "110",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-council-d4",
+          "loaderParams": {
+            "contest": "111",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-council-d6",
+          "loaderParams": {
+            "contest": "112",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-city-auditor",
+          "loaderParams": {
+            "contest": "113",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-school-director-d2",
+          "loaderParams": {
+            "contest": "114",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-school-director-d4",
+          "loaderParams": {
+            "contest": "115",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        },
+        {
+          "office": "oakland-school-director-d6",
+          "loaderParams": {
+            "contest": "116",
+            "cvr": "CVR_Export_20261116173643",
+            "dropUnqualifiedWriteIn": "true"
+          }
+        }
+      ]
     }
   }
 }
