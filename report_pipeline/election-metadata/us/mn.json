@@ -51,7 +51,7 @@
   },
   "elections": {
     "2009/11": {
-      "name": "November 3, 2009 Municipal Election",
+      "name": "Municipal Election",
       "date": "2009-11-03",
       "dataFormat": "preflib",
       "tabulationOptions": null,

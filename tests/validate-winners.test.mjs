@@ -44,7 +44,7 @@ const EXPECTED_WINNERS = [
   // 2021
   {
     year: 2021,
-    electionName: "Democratic Caucus",
+    electionName: "Primary Election",
     jurisdictionName: "New York City",
     officeName: "Mayor Nominee (Dem)",
     winner: "Eric L. Adams",

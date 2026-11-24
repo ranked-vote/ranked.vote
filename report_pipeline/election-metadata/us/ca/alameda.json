@@ -102,7 +102,7 @@
   },
   "elections": {
     "2010/11": {
-      "name": "November 2, 2010 General Election",
+      "name": "General Election",
       "date": "2010-11-02",
       "dataFormat": "preflib",
       "tabulationOptions": null,
@@ -124,7 +124,7 @@
       "files": {}
     },
     "2012/11": {
-      "name": "November 6, 2012 General Election",
+      "name": "General Election",
       "date": "2012-11-06",
       "dataFormat": "preflib",
       "tabulationOptions": null,
@@ -164,7 +164,7 @@
       "files": {}
     },
     "2022/11": {
-      "name": "November 8, 2022 General Election",
+      "name": "General Election",
       "date": "2022-11-08",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,
@@ -354,7 +354,7 @@
       "files": {}
     },
     "2024/11": {
-      "name": "November 5, 2024 General Election",
+      "name": "General Election",
       "date": "2024-11-05",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,
@@ -484,7 +484,7 @@
       "files": {}
     },
     "2026/11": {
-      "name": "November 3, 2026 General Election",
+      "name": "General Election",
       "date": "2026-11-03",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,

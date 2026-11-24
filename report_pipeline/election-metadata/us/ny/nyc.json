@@ -150,7 +150,7 @@
   },
   "elections": {
     "2021/06": {
-      "name": "Democratic Caucus",
+      "name": "Primary Election",
       "date": "2021-06-22",
       "dataFormat": "us_ny_nyc",
       "tabulationOptions": {
