@@ -44,7 +44,7 @@ const EXPECTED_WINNERS = [
   // 2021
   {
     year: 2021,
-    electionName: "Democratic Caucus",
+    electionName: "Primary Election",
     jurisdictionName: "New York City",
     officeName: "Mayor Nominee (Dem)",
     winner: "Eric L. Adams",
@@ -54,7 +54,7 @@ const EXPECTED_WINNERS = [
   // 2020
   {
     year: 2020,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 1",
     winner: "Connie Chan",
@@ -63,7 +63,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2020,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 3",
     winner: "Aaron Peskin",
@@ -72,7 +72,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2020,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 5",
     winner: "Dean Preston",
@@ -81,7 +81,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2020,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 7",
     winner: "Myrna Melgar",
@@ -90,7 +90,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2020,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 11",
     winner: "Ahsha Safai",
@@ -163,7 +163,7 @@ const EXPECTED_WINNERS = [
   // 2019
   {
     year: 2019,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Mayor",
     winner: "London N. Breed",
@@ -172,7 +172,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2019,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 5",
     winner: "Dean Preston",
@@ -181,7 +181,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2019,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "District Attorney",
     winner: "Chesa Boudin",
@@ -362,7 +362,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2018,
-    electionName: "Consolidated Statewide Primary Election",
+    electionName: "Primary Election",
     jurisdictionName: "San Francisco",
     officeName: "Mayor",
     winner: "London Breed",
@@ -371,7 +371,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2018,
-    electionName: "Consolidated Statewide Primary Election",
+    electionName: "Primary Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 8",
     winner: "Rafael Mandelman",
@@ -380,7 +380,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2018,
-    electionName: "Regular Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "Santa Fe",
     officeName: "Mayor",
     winner: "Alan Webber",
@@ -389,7 +389,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2018,
-    electionName: "Regular Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "Santa Fe",
     officeName: "District 2 Councilor",
     winner: "Carol Romero-Wirth",
@@ -398,7 +398,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2018,
-    electionName: "Regular Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "Santa Fe",
     officeName: "District 4 Councilor",
     winner: "Joanne Vigil Coppler",
@@ -408,7 +408,7 @@ const EXPECTED_WINNERS = [
   // 2016
   {
     year: 2016,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 1",
     winner: "Sandra Lee Fewer",
@@ -417,7 +417,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2016,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 7",
     winner: "Norman Yee",
@@ -426,7 +426,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2016,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 9",
     winner: "Hillary Ronen",
@@ -435,7 +435,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2016,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 11",
     winner: "Ahsha Safai",
@@ -445,7 +445,7 @@ const EXPECTED_WINNERS = [
   // 2015
   {
     year: 2015,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Mayor",
     winner: "Ed Lee",
@@ -454,7 +454,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2015,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Sheriff",
     winner: "Vicki Hennessy",
@@ -463,7 +463,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2015,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 3",
     winner: "Aaron Peskin",
@@ -473,7 +473,7 @@ const EXPECTED_WINNERS = [
   // 2014
   {
     year: 2014,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 10",
     winner: "Malia Cohen",
@@ -483,7 +483,7 @@ const EXPECTED_WINNERS = [
   // 2012
   {
     year: 2012,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 5",
     winner: "London Breed",
@@ -492,7 +492,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2012,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 7",
     winner: "Norman Yee",
@@ -502,7 +502,7 @@ const EXPECTED_WINNERS = [
   // 2011
   {
     year: 2011,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "District Attorney",
     winner: "George Gascón",
@@ -511,7 +511,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2011,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Mayor",
     winner: "Ed Lee",
@@ -520,7 +520,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2011,
-    electionName: "Consolidated Municipal Election",
+    electionName: "Municipal Election",
     jurisdictionName: "San Francisco",
     officeName: "Sheriff",
     winner: "Ross Mirkarimi",
@@ -530,7 +530,7 @@ const EXPECTED_WINNERS = [
   // 2010
   {
     year: 2010,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 2",
     winner: "Mark Farrell",
@@ -539,7 +539,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2010,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 6",
     winner: "Jane Kim",
@@ -548,7 +548,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2010,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 8",
     winner: "Scott Wiener",
@@ -557,7 +557,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2010,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 10",
     winner: "Malia Cohen",
@@ -567,7 +567,7 @@ const EXPECTED_WINNERS = [
   // 2009
   {
     year: 2009,
-    electionName: "Mayoral Election",
+    electionName: "Municipal Election",
     jurisdictionName: "Burlington",
     officeName: "Mayor",
     winner: "Bob Kiss",
@@ -577,7 +577,7 @@ const EXPECTED_WINNERS = [
   // 2008
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 1",
     winner: "Eric Mar",
@@ -586,7 +586,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 3",
     winner: "David Chiu",
@@ -595,7 +595,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 4",
     winner: "Carmen Chu",
@@ -604,7 +604,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 5",
     winner: "Ross Mirkarimi",
@@ -613,7 +613,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 7",
     winner: "Sean R. Elsbernd",
@@ -622,7 +622,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 9",
     winner: "David Campos",
@@ -631,7 +631,7 @@ const EXPECTED_WINNERS = [
   },
   {
     year: 2008,
-    electionName: "Consolidated General Election",
+    electionName: "General Election",
     jurisdictionName: "San Francisco",
     officeName: "Board of Supervisors, District 11",
     winner: "John Avalos",

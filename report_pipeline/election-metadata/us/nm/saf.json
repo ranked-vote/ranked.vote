@@ -21,7 +21,8 @@
   },
   "elections": {
     "2018/03": {
-      "name": "Regular Municipal Election",
+      "name": "Municipal Election",
+      "officialName": "Regular Municipal Election",
       "date": "2018-03-06",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": null,

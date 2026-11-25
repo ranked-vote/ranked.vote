@@ -9,7 +9,7 @@
   },
   "elections": {
     "2009/03": {
-      "name": "Mayoral Election",
+      "name": "Municipal Election",
       "date": "2009-03-03",
       "dataFormat": "us_vt_btv",
       "tabulationOptions": null,

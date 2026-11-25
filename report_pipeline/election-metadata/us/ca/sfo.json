@@ -60,7 +60,8 @@
   },
   "elections": {
     "2008/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2008-11-04",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -138,7 +139,8 @@
       "website": "https://sfelections.sfgov.org/election-summary-november-4-2008"
     },
     "2010/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2010-11-02",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -192,7 +194,8 @@
       "website": "https://sfelections.org/results/20101102/"
     },
     "2011/11": {
-      "name": "Consolidated Municipal Election",
+      "name": "Municipal Election",
+      "officialName": "Consolidated Municipal Election",
       "date": "2011-11-08",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -236,7 +239,8 @@
       "website": "https://sfelections.org/results/20111108/"
     },
     "2012/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2012-11-06",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -270,7 +274,8 @@
       "website": "https://sfelections.org/results/20121106/index.php#english_detail"
     },
     "2014/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2014-11-04",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -294,7 +299,8 @@
       "website": "https://www.sfelections.org/results/20141104/#english_detail"
     },
     "2015/11": {
-      "name": "Consolidated Municipal Election",
+      "name": "Municipal Election",
+      "officialName": "Consolidated Municipal Election",
       "date": "2015-11-03",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -334,7 +340,8 @@
       "website": "https://sfelections.org/results/20151103/#english_detail"
     },
     "2016/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2016-11-08",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -399,7 +406,8 @@
       "website": "https://sfelections.sfgov.org/november-8-2016-election-results-detailed-reports"
     },
     "2018/06": {
-      "name": "Consolidated Statewide Primary Election",
+      "name": "Primary Election",
+      "officialName": "Consolidated Statewide Primary Election",
       "date": "2018-06-05",
       "dataFormat": "us_ca_sfo",
       "tabulationOptions": {
@@ -511,7 +519,8 @@
       }
     },
     "2019/11": {
-      "name": "Consolidated Municipal Election",
+      "name": "Municipal Election",
+      "officialName": "Consolidated Municipal Election",
       "date": "2019-11-05",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": {
@@ -582,7 +591,8 @@
       "website": "https://sfelections.sfgov.org/november-5-2019-election-results-detailed-reports"
     },
     "2020/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2020-11-03",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": {
@@ -645,7 +655,8 @@
       "website": "https://sfelections.sfgov.org/november-3-2020-election-results-summary"
     },
     "2024/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2024-11-03",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": {
@@ -740,7 +751,8 @@
       "website": "https://sfelections.org/results/20241105w/index.html"
     },
     "2026/06": {
-      "name": "Consolidated Statewide Direct Primary Election",
+      "name": "Primary Election",
+      "officialName": "Consolidated Statewide Direct Primary Election",
       "date": "2026-06-02",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": {
@@ -772,7 +784,8 @@
       "website": "https://sfelections.org/results/20260602w/index.html"
     },
     "2026/11": {
-      "name": "Consolidated General Election",
+      "name": "General Election",
+      "officialName": "Consolidated General Election",
       "date": "2026-11-03",
       "dataFormat": "nist_sp_1500",
       "tabulationOptions": {
