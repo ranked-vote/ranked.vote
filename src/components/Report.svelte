@@ -8,6 +8,7 @@
   } from "../report_types";
   import VoteCounts from "./report_components/VoteCounts.svelte";
   import Sankey from "./report_components/Sankey.svelte";
+  import CandidateRankCounts from "./report_components/CandidateRankCounts.svelte";
   import CandidatePairTable from "./report_components/CandidatePairTable.svelte";
   import RankingDistribution from "./report_components/RankingDistribution.svelte";
   import { EXHAUSTED } from "./candidates";
@@ -237,8 +238,8 @@
   <div class="leftCol">
     <h2>First Alternate</h2>
     <p>
-      For every pair of candidates, this table shows the fraction of voters who
-      ranked one candidate first ranked the other candidate second.
+      Among voters who ranked the row candidate first, this table shows the fraction
+      who ranked the column candidate second.
     </p>
   </div>
 
@@ -279,6 +280,18 @@
   </div>
 </div>
 {/if}
+{/if}
+
+{#if report.rankingDistribution?.rankCounts}
+  <div class="row">
+    <div class="leftCol">
+      <h2>Votes by Rank</h2>
+      <p>Counts of how often each candidate appeared at each position in the ballot rankings used for this report.</p>
+    </div>
+    <div class="rightCol" style:min-width="0">
+      <CandidateRankCounts candidates={report.candidates} rankCounts={report.rankingDistribution.rankCounts} />
+    </div>
+  </div>
 {/if}
 
 {#if hasCandidates && report.rounds && report.rounds.length > 1}

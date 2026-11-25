@@ -65,8 +65,7 @@
   }
 
   .colLabel div {
-    transform: rotate(180deg);
-    writing-mode: vertical-lr;
+    writing-mode: sideways-lr;
     margin: auto;
   }
 
