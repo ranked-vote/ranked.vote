@@ -59,7 +59,10 @@ export interface Jurisdiction {
 }
 
 export interface ElectionMetadata {
+  /** Short label shown on the site: "General Election", "Primary Election", ... */
   name: string;
+  /** The election's name as the jurisdiction gives it, when it differs. */
+  officialName?: string;
   date: string;
   dataFormat: string;
   tabulationOptions?: { eager?: boolean; nycStyle?: boolean } | null;
