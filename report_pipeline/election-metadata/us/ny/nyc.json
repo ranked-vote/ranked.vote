@@ -241,15 +241,6 @@
           }
         },
         {
-          "office": "council-member-4th-council-district",
-          "loaderParams": {
-            "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
-            "cvrPattern": "2021P\\d?V.+\\.xlsx",
-            "jurisdictionName": "4th Council District",
-            "officeName": "DEM Council Member"
-          }
-        },
-        {
           "office": "council-member-5th-council-district",
           "loaderParams": {
             "candidatesFile": "2021P_CandidacyID_To_Name.xlsx",
