@@ -254,6 +254,7 @@ export function generateRankingDistribution(
   const overallDistribution: Record<string, number> = {};
   const candidateDistributions: Record<string, Record<string, number>> = {};
   const candidateTotals: Record<string, number> = {};
+  const rankCounts: Record<number, number[]> = {};
   let totalBallots = 0;
 
   for (const ballot of ballots) {
@@ -261,6 +262,10 @@ export function generateRankingDistribution(
     if (choices.length === 0) continue;
 
     totalBallots++;
+    for (const [rank, candidate] of choices.entries()) {
+      const counts = rankCounts[candidate] ??= [];
+      counts[rank] = (counts[rank] ?? 0) + 1;
+    }
     const rankCount = choices.length;
     const countStr = String(rankCount);
     overallDistribution[countStr] = (overallDistribution[countStr] ?? 0) + 1;
@@ -275,6 +280,7 @@ export function generateRankingDistribution(
   }
 
   return {
+    rankCounts,
     overallDistribution,
     candidateDistributions,
     totalBallots,

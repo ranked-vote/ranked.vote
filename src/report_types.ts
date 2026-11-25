@@ -47,6 +47,8 @@ export interface IContestReport {
 }
 
 export interface IRankingDistribution {
+  /** Counts by candidate index, with first choice at array index zero. */
+  rankCounts?: Record<number, number[]>;
   overallDistribution: Record<string, number>;
   candidateDistributions: Record<string, Record<string, number>>;
   totalBallots: number;
