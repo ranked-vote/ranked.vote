@@ -75,8 +75,7 @@
       if (this.isExhausted()) {
         return `
         <strong>${this.votes.toLocaleString()}</strong> votes${percentageText}
-        were exhausted
-        in round <strong>${this.round}</strong>`;
+        were exhausted by round <strong>${this.round}</strong>`;
       } else {
         return `
         <strong>${getCandidate(this.allocatee).name}</strong> received
@@ -250,7 +249,20 @@
 
     // Compute transfers.
 
-    for (let transfer of round.transfers) {
+    // The tabulator can emit separate transfers for undervotes and overvotes.
+    // Draw their combined count when they have the same source and destination.
+    const combinedTransfers = new Map<string, (typeof round.transfers)[number]>();
+    for (const transfer of round.transfers) {
+      const key = `${transfer.from}:${transfer.to}`;
+      const combined = combinedTransfers.get(key);
+      if (combined) {
+        combined.count += transfer.count;
+      } else {
+        combinedTransfers.set(key, { ...transfer });
+      }
+    }
+
+    for (const transfer of combinedTransfers.values()) {
       let last = lastVotes.get(transfer.from);
       let cur = curVotes.get(transfer.to);
 
